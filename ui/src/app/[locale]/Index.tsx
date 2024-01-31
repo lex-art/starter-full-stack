@@ -15,9 +15,10 @@ export default function Index({ session }: Props) {
 	const locale = useLocale()
 
 	function onLogoutClick() {
-		signOut()
+		signOut({
+			callbackUrl: locale + '/auth/login'
+		})
 	}
-
 	return (
 		<PageLayout title={t('title')}>
 			{session ? (

@@ -17,7 +17,12 @@ const auth: AuthOptions = {
 				return null
 			}
 		})
-	]
+	],
+	pages: {
+		signIn: '/',
+		signOut: '/auth/login'
+	},
+	callbacks: {}
 }
 
 export default auth

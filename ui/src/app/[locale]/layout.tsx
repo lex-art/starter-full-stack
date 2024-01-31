@@ -6,7 +6,6 @@ type Props = {
 	children: ReactNode
 	params: { locale: string }
 }
-const publicPages = ['/auth/*']
 
 export default function LocaleLayout({ children, params: { locale } }: Props) {
 	const messages = useMessages()

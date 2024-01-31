@@ -1,5 +1,7 @@
 import common from './common.json'
 
-export default {
-    common
+const en = {
+	common
 }
+
+export default en

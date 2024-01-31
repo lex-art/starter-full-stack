@@ -3,7 +3,7 @@ import { withAuth } from 'next-auth/middleware'
 import createIntlMiddleware from 'next-intl/middleware'
 import { locales } from './navigation'
 
-const publicPages = ['/auth/login']
+const publicPages = ['/auth/*']
 
 const intlMiddleware = createIntlMiddleware({
 	locales,
@@ -18,7 +18,7 @@ const authMiddleware = withAuth(
 	(req) => intlMiddleware(req),
 	{
 		callbacks: {
-			authorized: ({ token }) => true//token != null
+			authorized: ({ token }) => true //token != null
 		},
 		pages: {
 			signIn: '/auth/login'
@@ -29,16 +29,16 @@ const authMiddleware = withAuth(
 export default function middleware(request: NextRequest) {
 	const publicPathnameRegex = RegExp(
 		`^(/(${locales.join('|')}))?(${publicPages
-            .map((p) => p.replace(/\*/g, '.*')) // Reemplazar * con .* en los patrones
-            .join('|')})$`,
-          'i'
+			.map((p) => p.replace(/\*/g, '.*')) // Reemplazar * con .* en los patrones
+			.join('|')})$`,
+		'i'
 	)
 	const isPublicPage = publicPathnameRegex.test(request.nextUrl.pathname)
-    const requestHeaders = new Headers(request.headers)
-    requestHeaders.set('x-url', request.nextUrl.pathname)
-    const newRequest = new NextRequest(request, {
-        headers: requestHeaders
-    })
+	const requestHeaders = new Headers(request.headers)
+	requestHeaders.set('x-url', request.nextUrl.pathname)
+	const newRequest = new NextRequest(request, {
+		headers: requestHeaders
+	})
 
 	if (isPublicPage) {
 		return intlMiddleware(newRequest)
