@@ -41,7 +41,7 @@ export default function PageLayout({ children }: Props) {
 			display="grid"
 			className={styles.AppGrid}
 		>
-			{/* <Aside /> */}
+			<Aside />
 			<Header />
 
 			<main className={styles.main}>

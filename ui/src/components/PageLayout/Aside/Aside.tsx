@@ -26,7 +26,7 @@ export default function Aside() {
 					</span>
 				</AppGrid>
 				<AppGrid item width="100%" height="100%" className={asideStyles.container}>
-					<ul>
+					{/* <ul>
 						{MENU_ROUTES.filter((route: IMenuRoute) => {
 							//TODO: Apply filter route depending role user
 							return route
@@ -58,7 +58,7 @@ export default function Aside() {
 								<MenuItem key={route.text} link={route.link} icon={route.icon} text={route.text} />
 							)
 						)}
-					</ul>
+					</ul> */}
 				</AppGrid>
 			</AppGrid>
 		</aside>

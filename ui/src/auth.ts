@@ -1,7 +1,7 @@
-import { AuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import type { NextAuthOptions } from 'next-auth'
 
-const auth: AuthOptions = {
+const auth = {
 	providers: [
 		CredentialsProvider({
 			name: 'Credentials',
@@ -22,7 +22,16 @@ const auth: AuthOptions = {
 		signIn: '/',
 		signOut: '/auth/login'
 	},
-	callbacks: {}
-}
+	/* jwt: {
+		encode({ secret, token }: { secret: string; token: string }) {
+			return jwt.sign(token, secret)
+		},
+		decode({ secret, token }: { secret: string; token: string }) {
+			return jwt.verify(token, secret)
+		}
+	}, */
+	callbacks: {},
+	secret: process.env.NEXTAUTH_SECRET
+} satisfies NextAuthOptions
 
 export default auth
