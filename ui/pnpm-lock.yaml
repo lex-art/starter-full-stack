@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@emotion/cache':
+    specifier: ^11.11.0
+    version: 11.11.0
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.11.3(@types/react@18.0.0)(react@18.0.0)
@@ -17,6 +20,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.6
     version: 5.15.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.0.0)(react-dom@18.0.0)(react@18.0.0)
+  '@mui/material-nextjs':
+    specifier: ^5.15.6
+    version: 5.15.6(@emotion/cache@11.11.0)(@mui/material@5.15.6)(@types/react@18.0.0)(next@14.1.0)(react@18.0.0)
   '@mui/x-date-pickers':
     specifier: ^6.19.2
     version: 6.19.2(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.6)(@mui/system@5.15.6)(@types/react@18.0.0)(dayjs@1.11.10)(react-dom@18.0.0)(react@18.0.0)
@@ -44,6 +50,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.49.3
     version: 7.49.3(react@18.0.0)
+  user-agent:
+    specifier: ^1.0.4
+    version: 1.0.4
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -412,6 +421,31 @@ packages:
       '@babel/runtime': 7.23.9
       '@mui/material': 5.15.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.0.0)(react-dom@18.0.0)(react@18.0.0)
       '@types/react': 18.0.0
+      react: 18.0.0
+    dev: false
+
+  /@mui/material-nextjs@5.15.6(@emotion/cache@11.11.0)(@mui/material@5.15.6)(@types/react@18.0.0)(next@14.1.0)(react@18.0.0):
+    resolution: {integrity: sha512-lVMstlHb1cWwdf3LeIxxa1wd2UiUCSRXdFVlopCiifhADFgNK3d05vDyDnwbOj82ZypPz+PxV8I53rp6MmeM3w==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/cache': ^11.11.0
+      '@emotion/server': ^11.11.0
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      next: ^13.0.0 || ^14.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/cache':
+        optional: true
+      '@emotion/server':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@emotion/cache': 11.11.0
+      '@mui/material': 5.15.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.0.0)(react-dom@18.0.0)(react@18.0.0)
+      '@types/react': 18.0.0
+      next: 14.1.0(react-dom@18.0.0)(react@18.0.0)
       react: 18.0.0
     dev: false
 
@@ -3128,6 +3162,10 @@ packages:
       '@formatjs/ecma402-abstract': 1.18.2
       intl-messageformat: 9.13.0
       react: 18.0.0
+    dev: false
+
+  /user-agent@1.0.4:
+    resolution: {integrity: sha512-NPTnJ89e6ttUK+Q3ZQ6aMFo4+4HAdvsb39IypyRw/bPjE/F8TjeVpB8uqFPnUCVbI6247qPryd8OLpkEYuOwWg==}
     dev: false
 
   /uuid@8.3.2:

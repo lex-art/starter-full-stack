@@ -1,13 +1,16 @@
 import { ReactNode } from 'react'
-import LocaleSwitcher from './LocaleSwitcher'
+import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher'
+import { AppGrid } from '../Common/Grid/Grid'
+import styles from './styles.module.css'
+import Aside from './Aside/Aside'
+import Header from './header/Header'
 
 type Props = {
 	children?: ReactNode
-	title: string
 }
 
-export default function PageLayout({ children, title }: Props) {
-	return (
+export default function PageLayout({ children }: Props) {
+	/* return (
 		<div
 			style={{
 				padding: 24,
@@ -27,5 +30,25 @@ export default function PageLayout({ children, title }: Props) {
 				</div>
 			</div>
 		</div>
+	) */
+	return (
+		<AppGrid
+			container
+			minHeight="100vh"
+			height="100%"
+			position="relative"
+			zIndex={0}
+			display="grid"
+			className={styles.AppGrid}
+		>
+			{/* <Aside /> */}
+			<Header />
+
+			<main className={styles.main}>
+				<AppGrid item width="100%" height="100%" className={styles.mainContainer}>
+					{children}
+				</AppGrid>
+			</main>
+		</AppGrid>
 	)
 }

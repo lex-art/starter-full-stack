@@ -20,21 +20,23 @@ export default function Index({ session }: Props) {
 		})
 	}
 	return (
-		<PageLayout title={t('title')}>
+		<PageLayout>
 			{session ? (
 				<>
-					<p>{t('loggedIn', { username: session.user?.name })}</p>
+					{/* <p>{t('loggedIn', { username: session.user?.name })}</p>
 					<p>
 						<Link href={locale + '/secret'}>{t('secret')}</Link>
 					</p>
 					<button onClick={onLogoutClick} type="button">
 						{t('logout')}
-					</button>
+					</button> */}
+					<h1>Logueado</h1>
 				</>
 			) : (
 				<>
-					<p>{t('loggedOut')}</p>
-					<Link href={locale + '/login'}>{t('login')}</Link>
+					{/* <p>{t('loggedOut')}</p>
+					<Link href={locale + '/login'}>{t('login')}</Link> */}
+					<h1>No logueado</h1>
 				</>
 			)}
 		</PageLayout>

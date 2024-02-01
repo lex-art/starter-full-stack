@@ -1,0 +1,7 @@
+.container{
+    overflow: auto;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}

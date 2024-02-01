@@ -4,11 +4,11 @@ import PageLayout from '@/components/PageLayout/PageLayout'
 import { useTranslations } from 'next-intl'
 
 export default function Secret() {
-	const t = useTranslations('common.Secret')
+	const t = useTranslations('common')
 
 	return (
-		<PageLayout title={t('title')}>
-			<p>{t('description')}</p>
+		<PageLayout>
+			<p>{t('home')}</p>
 		</PageLayout>
 	)
 }
