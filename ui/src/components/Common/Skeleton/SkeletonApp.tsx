@@ -2,7 +2,7 @@
 import { Avatar, Skeleton, Typography, useMediaQuery } from '@mui/material'
 import { FC } from 'react'
 import styles from './styles.module.css'
-import { AppGrid } from '../Grid/Grid'
+import AppGrid from '../Grid/Grid'
 
 export const SkeletonApp: FC = () => {
 	const isMobile: boolean = useMediaQuery('(min-width: 960px)')

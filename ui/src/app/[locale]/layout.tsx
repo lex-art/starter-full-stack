@@ -3,6 +3,7 @@ import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { ReactNode, StrictMode, Suspense } from 'react'
 import { SkeletonApp } from '@/components/Common/Skeleton/SkeletonApp'
 import { Roboto } from 'next/font/google'
+import PageLayout from '@/components/PageLayout/PageLayout'
 
 type Props = {
 	children: ReactNode
@@ -24,7 +25,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 					<AppThemeMUI>
 						<Suspense fallback={<SkeletonApp />}>
 							<NextIntlClientProvider locale={locale} messages={messages}>
-								{children}
+								<PageLayout>{children}</PageLayout>
 							</NextIntlClientProvider>
 						</Suspense>
 					</AppThemeMUI>

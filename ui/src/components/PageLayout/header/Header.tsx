@@ -1,30 +1,36 @@
 import React from 'react'
-import styles from '../styles.module.css'
-import headerStyles from './header.module.css'
-import { AppGrid } from '@/components/Common/Grid/Grid'
+import { AppBar, Toolbar, IconButton, Typography } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
 
-export default function Header() {
+interface HeaderProps {
+	drawerWidth: number
+	handleDrawerToggle(): void
+}
+
+export default function Header({ drawerWidth, handleDrawerToggle }: HeaderProps) {
 	return (
-		<header className={styles.header}>
-			<AppGrid container className={headerStyles.container}>
-				<AppGrid item display="flex" gap="1rem"></AppGrid>
-				<AppGrid item display="flex" gap="1rem">
-					<span
-						style={{
-							padding: '2.5rem',
-							background: '#262626',
-							borderRadius: '50%'
-						}}
-					></span>
-					<span
-						style={{
-							padding: '2.5rem',
-							background: '#262626',
-							borderRadius: '50%'
-						}}
-					></span>
-				</AppGrid>
-			</AppGrid>
-		</header>
+		<AppBar
+			position="fixed"
+			sx={{
+				width: { sm: `calc(100% - ${drawerWidth}rem)` },
+				ml: { sm: `${drawerWidth}rem` }
+			}}
+			variant="elevation"
+		>
+			<Toolbar>
+				<IconButton
+					color="inherit"
+					aria-label="open drawer"
+					edge="start"
+					onClick={handleDrawerToggle}
+					sx={{ mr: 2, display: { sm: 'none' } }}
+				>
+					<MenuIcon />
+				</IconButton>
+				<Typography variant="h6" noWrap component="div">
+					Responsive drawer
+				</Typography>
+			</Toolbar>
+		</AppBar>
 	)
 }

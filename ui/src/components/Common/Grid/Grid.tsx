@@ -22,8 +22,10 @@ export const TBGridThemeOptions: ThemeOptions = {
 	}
 }
 
-export const AppGrid: FC<GridProps> = ({ children, ...rest }) => {
+const AppGrid: FC<GridProps> = ({ children, ...rest }) => {
 	return <Grid {...rest}>{children}</Grid>
 }
 
 AppGrid.displayName = 'AppGrid'
+
+export default AppGrid

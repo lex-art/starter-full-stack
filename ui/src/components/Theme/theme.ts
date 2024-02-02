@@ -17,35 +17,35 @@ const PaletteThemeOptions: ThemeOptions & PaletteOptions = {
 			main: colors.primary,
 			light: colors.primaryLight,
 			dark: colors.primaryDark,
-			contrastText: colors.textSecondary
+			contrastText: colors.white
 		},
 		secondary: {
 			main: colors.secondary,
 			light: colors.secondaryLight,
 			dark: colors.secondaryDark,
-			contrastText: colors.textSecondary
+			contrastText: colors.white
 		},
 		success: {
 			main: colors.success,
 			light: colors.successLight,
 			dark: colors.successDark,
-			contrastText: colors.textSecondary
+			contrastText: colors.white
 		},
 		error: {
 			main: colors.error,
 			light: colors.errorLight,
 			dark: colors.errorDark,
-			contrastText: colors.textSecondary
+			contrastText: colors.white
 		},
 		warning: {
 			main: colors.warning,
 			light: colors.warningLight,
 			dark: colors.warningDark,
-			contrastText: colors.textSecondary
+			contrastText: colors.white
 		}
 	},
 	text: {
-		primary: colors.text,
+		primary: colors.white,
 		secondary: colors.textSecondary
 	},
 	typography: {

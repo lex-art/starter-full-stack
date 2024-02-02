@@ -14,7 +14,8 @@ import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { useLocale, useTranslations } from 'next-intl'
 import PageLayout from '@/components/PageLayout/PageLayout'
-import { Button, Typography } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
+import AppGrid from '@/components/Common/Grid/Grid'
 
 type Props = {
 	session: Session | null
@@ -30,7 +31,7 @@ export default async function Index() {
 		})
 	}
 	return (
-		<PageLayout>
+		<AppGrid width="100%" height="100%">
 			{session ? (
 				<>
 					{/* <p>{t('loggedIn', { username: session.user?.name })}</p>
@@ -53,6 +54,6 @@ export default async function Index() {
 					</Button>
 				</>
 			)}
-		</PageLayout>
+		</AppGrid>
 	)
 }
