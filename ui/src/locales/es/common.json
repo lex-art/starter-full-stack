@@ -1,5 +1,6 @@
 {
   "home": "Inicio",
   "user": "Usuarios",
-  "switchLng": "Cambiar idioma a {locale, select, de {Español} en {Inglés} other {Unknown}}"
+  "switchLng": "Cambiar idioma a {locale, select, de {Español} en {Inglés} other {Unknown}}",
+  "item":"Item"
 }

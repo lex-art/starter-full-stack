@@ -48,3 +48,4 @@ export const AppIconsTheme: ThemeOptions = {
 }
 
 export const AppIcons = icons
+export default AppIcons

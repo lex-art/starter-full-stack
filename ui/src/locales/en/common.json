@@ -1,5 +1,6 @@
 {
-    "home": "Home",
-    "user": "User",
-    "switchLng": "Switch to {locale, select, de {Spanish} en {English} other {Unknown}}"
-  }
+  "home": "Home",
+  "user": "User",
+  "switchLng": "Switch to {locale, select, de {Spanish} en {English} other {Unknown}}",
+  "item": "Item"
+}

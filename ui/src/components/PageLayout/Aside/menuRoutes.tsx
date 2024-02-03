@@ -3,24 +3,24 @@ import { IMenuRoute } from '@/lib/types/MenuRoute'
 
 export const MENU_ROUTES: Array<IMenuRoute> = [
 	{
-		text: 'home',
+		text: 'item',
 		rol: [],
 		link: '#',
 		icon: <AppIcons.Home />
 	},
 	{
-		text: 'user',
+		text: 'item',
 		rol: [],
-		icon: <AppIcons.Home />,
+		icon: <AppIcons.Send />,
 		subMenu: [
 			{
-				text: 'home',
+				text: 'item',
 				rol: [],
 				icon: <AppIcons.Settings />,
 				link: '#'
 			},
 			{
-				text: 'home',
+				text: 'item',
 				rol: [],
 				icon: <AppIcons.Pages />,
 				link: '#'
