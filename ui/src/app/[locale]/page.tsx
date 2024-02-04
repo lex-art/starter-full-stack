@@ -8,13 +8,12 @@ export default async function IndexPage() {
 }
  */
 
-import auth from '../../auth'
+import configAuth from '../api/auth/configAuth'
 import { getServerSession } from 'next-auth'
 import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
-import { useLocale, useTranslations } from 'next-intl'
-import PageLayout from '@/components/PageLayout/PageLayout'
-import { Button, Grid, Typography } from '@mui/material'
+import { useLocale } from 'next-intl'
+import { Button, Typography } from '@mui/material'
 import AppGrid from '@/components/Common/Grid/Grid'
 
 type Props = {
@@ -22,11 +21,11 @@ type Props = {
 }
 
 export default async function Index() {
-	const session = await getServerSession(auth)
+	const session = await getServerSession(configAuth)
 	const locale = useLocale()
 
-	function onLogoutClick() {
-		signOut({
+	async function onLogoutClick() {
+		await signOut({
 			callbackUrl: locale + '/auth/login'
 		})
 	}
@@ -48,6 +47,9 @@ export default async function Index() {
 					{/* <p>{t('loggedOut')}</p>
 					<Link href={locale + '/login'}>{t('login')}</Link> */}
 					<h1>No logueado</h1>
+					{/* <button onClick={onLogoutClick} type="button">
+						logout
+					</button> */}
 					<Typography variant="h1">holaaaaaaaaaaaaa</Typography>
 					<Button sx={{ fontSize: '3rem' }} variant="contained" color="secondary">
 						holaaaaaaaaaaaaa

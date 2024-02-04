@@ -4,6 +4,8 @@ import { ReactNode, StrictMode, Suspense } from 'react'
 import { SkeletonApp } from '@/components/Common/Skeleton/SkeletonApp'
 import { Roboto } from 'next/font/google'
 import PageLayout from '@/components/PageLayout/PageLayout'
+import { headers } from 'next/headers'
+import { locales } from '@/navigation'
 
 type Props = {
 	children: ReactNode
@@ -18,6 +20,15 @@ const roboto = Roboto({
 
 export default function LocaleLayout({ children, params: { locale } }: Props) {
 	const messages = useMessages()
+	const header = headers()
+	const currentPath = header.get('x-url') || ''
+	const excludePaths = ['/auth/*']
+	const isExcludeLayout = RegExp(
+		`^(/(${locales.join('|')}))?(${excludePaths
+			.map((p) => p.replace(/\*/g, '.*')) // Reemplazar * con .* en los patrones
+			.join('|')})$`,
+		'i'
+	).test(currentPath)
 	return (
 		<html lang={locale}>
 			<body className={roboto.className}>
@@ -25,7 +36,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 					<AppThemeMUI>
 						<Suspense fallback={<SkeletonApp />}>
 							<NextIntlClientProvider locale={locale} messages={messages}>
-								<PageLayout>{children}</PageLayout>
+								{isExcludeLayout ? <main>{children}</main> : <PageLayout>{children}</PageLayout>}
 							</NextIntlClientProvider>
 						</Suspense>
 					</AppThemeMUI>

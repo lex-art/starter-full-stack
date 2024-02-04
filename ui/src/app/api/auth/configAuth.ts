@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import type { NextAuthOptions } from 'next-auth'
 
-const auth = {
+const configAuth = {
 	providers: [
 		CredentialsProvider({
 			name: 'Credentials',
@@ -19,7 +19,7 @@ const auth = {
 		})
 	],
 	pages: {
-		signIn: '/',
+		signIn: '/auth/login',
 		signOut: '/auth/login'
 	},
 	/* jwt: {
@@ -30,8 +30,21 @@ const auth = {
 			return jwt.verify(token, secret)
 		}
 	}, */
-	callbacks: {},
+	callbacks: {
+		//custom data user reponse
+		jwt({ account, token, profile, user, session }) {
+			if (user) {
+				token.user = user
+			}
+			return token
+		},
+		session({ session, token }) {
+			//TODO: add type user to session
+			session.user = token.user as any
+			return session
+		}
+	},
 	secret: process.env.NEXTAUTH_SECRET
 } satisfies NextAuthOptions
 
-export default auth
+export default configAuth
