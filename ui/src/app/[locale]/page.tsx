@@ -1,13 +1,3 @@
-/* import { getServerSession } from 'next-auth'
-import auth from '../../auth'
-import Index from './Index'
-
-export default async function IndexPage() {
-	const session = await getServerSession(auth)
-	return <Index session={session} />
-}
- */
-
 import configAuth from '../api/auth/configAuth'
 import { getServerSession } from 'next-auth'
 import { Session } from 'next-auth'
@@ -29,6 +19,7 @@ export default async function Index() {
 			callbackUrl: locale + '/auth/login'
 		})
 	}
+
 	return (
 		<AppGrid width="100%" height="100%">
 			{session ? (
@@ -50,7 +41,7 @@ export default async function Index() {
 					{/* <button onClick={onLogoutClick} type="button">
 						logout
 					</button> */}
-					<Typography variant="h1">holaaaaaaaaaaaaa</Typography>
+					<Typography variant="h1">holaaaaa</Typography>
 					<Button sx={{ fontSize: '3rem' }} variant="contained" color="secondary">
 						holaaaaaaaaaaaaa
 					</Button>

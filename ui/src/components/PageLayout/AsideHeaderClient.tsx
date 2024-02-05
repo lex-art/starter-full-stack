@@ -11,10 +11,11 @@ export default function AsideHeaderClient({ drawerWidth }: AdiseHeaderClientProp
 	const [mobileOpen, setMobileOpen] = useState(false)
 	const [isClosing, setIsClosing] = useState(false)
 	const [open, setOpen] = useState(true)
-	/* const handleDrawerClose = () => {
+
+	const handleDrawerClose = () => {
 		setIsClosing(true)
 		setMobileOpen(false)
-	} */
+	}
 
 	const handleDrawerTransitionEnd = () => {
 		setIsClosing(false)
@@ -27,12 +28,9 @@ export default function AsideHeaderClient({ drawerWidth }: AdiseHeaderClientProp
 	}
 
 	const handleDrawerOpen = () => {
-		setOpen(true)
+		setOpen(!open)
 	}
 
-	const handleDrawerClose = () => {
-		setOpen(false)
-	}
 	return (
 		<>
 			<Header

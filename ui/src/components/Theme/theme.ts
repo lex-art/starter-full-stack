@@ -1,7 +1,8 @@
 // src/theme.ts
 'use client'
 import { colors, font } from '@/lib/design-tokens'
-import { PaletteOptions, ThemeOptions, createTheme } from '@mui/material/styles'
+import { PaletteMode } from '@mui/material'
+import { PaletteOptions, ThemeOptions } from '@mui/material/styles'
 import { Roboto } from 'next/font/google'
 
 const robotoFont = Roboto({
@@ -10,43 +11,119 @@ const robotoFont = Roboto({
 	display: 'swap'
 })
 
-const PaletteThemeOptions: ThemeOptions & PaletteOptions = {
+const getDesignTokens = (mode: PaletteMode) => ({
 	palette: {
-		mode: 'light',
-		primary: {
-			main: colors.primary,
-			light: colors.primaryLight,
-			dark: colors.primaryDark,
-			contrastText: colors.white
+		mode,
+		...(mode === 'light'
+			? {
+					primary: {
+						main: colors.light.primary,
+						light: colors.light.primaryLight,
+						dark: colors.light.primaryDark,
+						contrastText: colors.light.white
+					},
+					secondary: {
+						main: colors.light.secondary,
+						light: colors.light.secondaryLight,
+						dark: colors.light.secondaryDark,
+						contrastText: colors.light.white
+					},
+					success: {
+						main: colors.light.success,
+						light: colors.light.successLight,
+						dark: colors.light.successDark,
+						contrastText: colors.light.white
+					},
+					error: {
+						main: colors.light.error,
+						light: colors.light.errorLight,
+						dark: colors.light.errorDark,
+						contrastText: colors.light.white
+					},
+					warning: {
+						main: colors.light.warning,
+						light: colors.light.warningLight,
+						dark: colors.light.warningDark,
+						contrastText: colors.light.white
+					}
+				}
+			: {
+					// palette values for dark mode
+					primary: {
+						main: colors.dark.primary,
+						light: colors.dark.primaryLight,
+						dark: colors.dark.primaryDark,
+						contrastText: colors.dark.white
+					},
+					secondary: {
+						main: colors.dark.secondary,
+						light: colors.dark.secondaryLight,
+						dark: colors.dark.secondaryDark,
+						contrastText: colors.light.white
+					},
+					success: {
+						main: colors.dark.success,
+						light: colors.dark.successLight,
+						dark: colors.dark.successDark,
+						contrastText: colors.dark.white
+					},
+					error: {
+						main: colors.dark.error,
+						light: colors.dark.errorLight,
+						dark: colors.dark.errorDark,
+						contrastText: colors.dark.white
+					},
+					warning: {
+						main: colors.dark.warning,
+						light: colors.dark.warningLight,
+						dark: colors.dark.warningDark,
+						contrastText: colors.dark.white
+					},
+					background: {
+						default: colors.dark.primaryDark,
+						paper: colors.dark.primaryLight
+					}
+				})
+	}
+})
+
+const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions => ({
+	...getDesignTokens(mode),
+	...(mode === 'light'
+		? { background: { default: colors.light.primaryDark } }
+		: { background: { default: colors.dark.primaryDark } }),
+	/* 	text: {
+		...(mode === 'light'
+			? {
+					primary: colors.light.contrastText,
+					secondary: colors.light.textSecondary
+				}
+			: {
+					primary: colors.dark.white,
+					secondary: colors.dark.textSecondary
+				})
+	}, */
+	transitions: {
+		easing: {
+			easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+			easeOut: 'cubic-bezier(0.0, 0, 0.2, 1)',
+			easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
+			sharp: 'cubic-bezier(0.4, 0, 0.6, 1)'
 		},
-		secondary: {
-			main: colors.secondary,
-			light: colors.secondaryLight,
-			dark: colors.secondaryDark,
-			contrastText: colors.white
-		},
-		success: {
-			main: colors.success,
-			light: colors.successLight,
-			dark: colors.successDark,
-			contrastText: colors.white
-		},
-		error: {
-			main: colors.error,
-			light: colors.errorLight,
-			dark: colors.errorDark,
-			contrastText: colors.white
-		},
-		warning: {
-			main: colors.warning,
-			light: colors.warningLight,
-			dark: colors.warningDark,
-			contrastText: colors.white
+		duration: {
+			shortest: 150,
+			shorter: 200,
+			short: 250,
+			standard: 300,
+			complex: 375,
+			enteringScreen: 2225,
+			leavingScreen: 1195
 		}
 	},
+
 	text: {
-		primary: colors.white,
-		secondary: colors.textSecondary
+		primary: colors.light.white,
+		secondary: colors.light.textSecondary
 	},
 	typography: {
 		fontFamily: robotoFont.style.fontFamily,
@@ -58,9 +135,6 @@ const PaletteThemeOptions: ThemeOptions & PaletteOptions = {
 			fontFamily: font.fontFamilyBold
 		}
 	}
-}
+})
 
-const theme = createTheme(PaletteThemeOptions)
-
-export { robotoFont, PaletteThemeOptions }
-export default theme
+export { robotoFont, paletteThemeOptions }

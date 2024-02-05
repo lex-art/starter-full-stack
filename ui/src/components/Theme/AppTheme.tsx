@@ -1,18 +1,44 @@
+'use client'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
-import { ReactNode } from 'react'
+import { ReactNode, createContext, useMemo, useState } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
-import theme from './theme'
+import { paletteThemeOptions } from './theme'
+import { CssBaseline, PaletteMode, createTheme } from '@mui/material'
 
 interface AppThemeProps {
 	children: ReactNode
+	window?: () => Window
 }
 
-const AppThemeMUI = ({ children }: AppThemeProps) => {
+const ColorModeContext = createContext({ toggleColorMode: () => {} })
+
+const AppThemeMUI = ({ children, window }: AppThemeProps) => {
+	const storageMode = (
+		window !== undefined ? () => window().localStorage.getItem('colorMode') : 'light'
+	) as PaletteMode
+	const [mode, setMode] = useState<PaletteMode>(storageMode)
+	const colorMode = useMemo(
+		() => ({
+			// The dark mode switch would invoke this method
+			toggleColorMode: () => {
+				setMode((prevMode: PaletteMode) => (prevMode === 'light' ? 'dark' : 'light'))
+			}
+		}),
+		[]
+	)
+	const theme = useMemo(() => createTheme(paletteThemeOptions(mode)), [mode])
+
 	return (
-		<AppRouterCacheProvider>
-			<ThemeProvider theme={theme}>{children}</ThemeProvider>
-		</AppRouterCacheProvider>
+		<ColorModeContext.Provider value={colorMode}>
+			<AppRouterCacheProvider /*options={{ enableCssLayer: true }} */>
+				<ThemeProvider theme={theme}>
+					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+					<CssBaseline />
+					{children}
+				</ThemeProvider>
+			</AppRouterCacheProvider>
+		</ColorModeContext.Provider>
 	)
 }
 
-export { AppThemeMUI }
+export { AppThemeMUI, ColorModeContext }
