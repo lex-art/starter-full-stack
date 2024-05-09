@@ -7,7 +7,6 @@ import PageLayout from '@/components/PageLayout/PageLayout'
 import { headers } from 'next/headers'
 import { locales } from '@/navigation'
 import Head from 'next/head'
-
 type Props = {
 	children: ReactNode
 	params: { locale: string }
@@ -18,7 +17,7 @@ const roboto = Roboto({
 	subsets: ['latin'],
 	display: 'swap'
 })
-const excludePaths = ['/auth/*']
+const excludePaths = ['/auth/*', '/landing']
 
 export default function LocaleLayout({ children, params: { locale } }: Props) {
 	const messages = useMessages()

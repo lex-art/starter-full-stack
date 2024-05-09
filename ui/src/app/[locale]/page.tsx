@@ -1,10 +1,10 @@
 import configAuth from '../api/auth/configAuth'
-import { getServerSession } from 'next-auth'
-import { Session } from 'next-auth'
-import { signOut } from 'next-auth/react'
+import { getServerSession, Session } from 'next-auth'
+
 import { useLocale } from 'next-intl'
 import { Button, Typography } from '@mui/material'
 import AppGrid from '@/components/Common/Grid/Grid'
+import { signOut } from 'next-auth/react'
 
 type Props = {
 	session: Session | null
@@ -19,7 +19,6 @@ export default async function Index() {
 			callbackUrl: locale + '/auth/login'
 		})
 	}
-
 	return (
 		<AppGrid width="100%" height="100%">
 			{session ? (

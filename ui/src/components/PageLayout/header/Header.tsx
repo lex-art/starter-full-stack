@@ -14,12 +14,19 @@ interface HeaderProps {
 	handleDrawerToggle(): void
 	open: boolean
 	handleDrawerOpen(): void
+	logOut(): void
 }
 interface AppBarProps extends MuiAppBarProps {
 	open?: boolean
 }
 
-export default function Header({ drawerWidth, handleDrawerToggle, open, handleDrawerOpen }: HeaderProps) {
+export default function Header({
+	drawerWidth,
+	handleDrawerToggle,
+	open,
+	handleDrawerOpen,
+	logOut
+}: HeaderProps) {
 	const theme = useTheme()
 	const colorMode = useContext(ColorModeContext)
 	const locale = useLocale()
@@ -109,6 +116,9 @@ export default function Header({ drawerWidth, handleDrawerToggle, open, handleDr
 						color="inherit"
 					>
 						{theme.palette.mode === 'dark' ? <AppIcons.Brightness4 /> : <AppIcons.Brightness7 />}
+					</IconButton>
+					<IconButton sx={{ ml: 1 }} onClick={logOut} color="inherit">
+						<AppIcons.Logout />
 					</IconButton>
 				</Box>
 			</Toolbar>

@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server'
 import { withAuth } from 'next-auth/middleware'
 import createIntlMiddleware from 'next-intl/middleware'
 import { locales } from './navigation'
+import configAuth from './app/api/auth/configAuth'
+import { getSession } from 'next-auth/react'
 
 const publicPages = ['/auth/*']
 
@@ -17,8 +19,22 @@ const authMiddleware = withAuth(
 	// and not for pages listed in `pages`.
 	(req) => intlMiddleware(req),
 	{
+		jwt: {
+			decode: configAuth.jwt.decode
+		},
 		callbacks: {
-			authorized: ({ token }) => true //token != null
+			authorized: async ({ req, token }) => {
+				const requestForNextAuth = {
+					headers: {
+						cookie: req.headers.get('cookie') ?? undefined
+					}
+				}
+				console.log('====================================')
+				console.log('token', token)
+				console.log('====================================')
+				const session = await getSession({ req: requestForNextAuth })
+				return !!session
+			}
 		},
 		pages: {
 			signIn: '/auth/login'
@@ -43,9 +59,8 @@ export default function middleware(request: NextRequest) {
 
 	if (isPublicPage) {
 		return intlMiddleware(newRequest)
-	} else {
-		return (authMiddleware as any)(newRequest)
 	}
+	return (authMiddleware as any)(newRequest)
 }
 
 export const config = {

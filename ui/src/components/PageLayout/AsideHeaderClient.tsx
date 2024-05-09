@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Header from './header/Header'
 import Aside from './Aside/Aside'
+import { signOut } from 'next-auth/react'
 
 interface AdiseHeaderClientProps {
 	drawerWidth: number
@@ -31,6 +32,10 @@ export default function AsideHeaderClient({ drawerWidth }: AdiseHeaderClientProp
 		setOpen(!open)
 	}
 
+	const logOut = () => {
+		signOut()
+	}
+
 	return (
 		<>
 			<Header
@@ -38,6 +43,7 @@ export default function AsideHeaderClient({ drawerWidth }: AdiseHeaderClientProp
 				handleDrawerToggle={handleDrawerToggle}
 				open={open}
 				handleDrawerOpen={handleDrawerOpen}
+				logOut={logOut}
 			/>
 			<Aside
 				drawerWidth={drawerWidth}
