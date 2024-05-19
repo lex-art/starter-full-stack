@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react'
 import messages from '../../../locales/es/common.json'
-import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText, useTheme } from '@mui/material'
+import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { ISubMenuRoute } from '@/lib/types/MenuRoute'
 import Icons from '@/components/Common/Icons/Icons'
+import { useRouter } from '@/navigation'
 
 interface MenuItemProps {
 	text: keyof typeof messages
@@ -27,13 +28,16 @@ export default function MenuItem({
 }: MenuItemProps) {
 	const t = useTranslations('common')
 	const [open, setOpen] = React.useState(true)
-
+	const redirect = useRouter()
 	const handleClick = () => {
 		if (submenu) {
 			setOpen(!open)
 		} else {
 			handleDrawerClose && handleDrawerClose()
 			//TODO: Add navigation
+			if (link) {
+				redirect.push(link)
+			}
 		}
 	}
 

@@ -1,3 +1,3 @@
-type Messages = (typeof import('./locales/en'))['default']
+type Messages = (typeof import('./locales/es'))['default']
 
 declare interface IntlMessages extends Messages {}

@@ -1,0 +1,23 @@
+.paginationButtons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.arrowLeft, .arrowRight {
+    margin: 0 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--color-primary);
+}
+
+.arrowLeft:hover, .arrowRight:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.arrowLeft:active, .arrowRight:active {
+    scale: .9;
+}

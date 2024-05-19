@@ -1,12 +1,11 @@
 import AppGrid from '@/components/Common/Grid/Grid'
 import { useTranslations } from 'next-intl'
 
-export default function Secret() {
+export default function Catalogue() {
 	const t = useTranslations('common')
-
 	return (
-		<AppGrid>
-			<p>{t('home')}</p>
+		<AppGrid width="100%" height="100%">
+			<h1>{t('icons')}</h1>
 		</AppGrid>
 	)
 }

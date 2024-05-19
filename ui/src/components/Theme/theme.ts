@@ -92,7 +92,7 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 	...(mode === 'light'
 		? { background: { default: colors.light.primaryDark } }
 		: { background: { default: colors.dark.primaryDark } }),
-	/* 	text: {
+	text: {
 		...(mode === 'light'
 			? {
 					primary: colors.light.contrastText,
@@ -102,7 +102,7 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 					primary: colors.dark.white,
 					secondary: colors.dark.textSecondary
 				})
-	}, */
+	},
 	transitions: {
 		easing: {
 			easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -120,11 +120,10 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 			leavingScreen: 1195
 		}
 	},
-
-	text: {
+	/* text: {
 		primary: colors.light.white,
 		secondary: colors.light.textSecondary
-	},
+	}, */
 	typography: {
 		fontFamily: robotoFont.style.fontFamily,
 		fontSize: font.sizes.fontSizeMedium,

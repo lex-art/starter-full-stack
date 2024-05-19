@@ -29,9 +29,6 @@ const authMiddleware = withAuth(
 						cookie: req.headers.get('cookie') ?? undefined
 					}
 				}
-				console.log('====================================')
-				console.log('token', token)
-				console.log('====================================')
 				const session = await getSession({ req: requestForNextAuth })
 				return !!session
 			}

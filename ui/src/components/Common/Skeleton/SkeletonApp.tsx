@@ -87,3 +87,6 @@ export const SkeletonApp: FC = () => {
 		</AppGrid>
 	)
 }
+
+SkeletonApp.displayName = 'SkeletonApp'
+export default SkeletonApp

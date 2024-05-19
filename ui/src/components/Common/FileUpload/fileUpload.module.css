@@ -1,0 +1,39 @@
+.imgSelectedFile {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+
+}
+
+.error{
+    border: dashed 0.2rem var(--color-error) !important;
+}
+
+.containerSelectedFiles {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin: 0.5rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border: dashed 0.2rem gray;
+    border-radius: 0.5rem;
+    background-color: ghostwhite;
+    overflow-y: auto;
+    transition: border-color 0.3s;
+    color: "#262626";
+}
+
+.dragDropText {
+    margin: 0;
+    color: gray;
+    font-size: 1.2rem;
+}
+
+.inputFile{
+    display: none;
+}

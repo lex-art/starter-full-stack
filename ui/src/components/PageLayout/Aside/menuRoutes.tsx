@@ -3,9 +3,9 @@ import { IMenuRoute } from '@/lib/types/MenuRoute'
 
 export const MENU_ROUTES: Array<IMenuRoute> = [
 	{
-		text: 'item',
+		text: 'components',
 		rol: [],
-		link: '#',
+		link: '/catalogue',
 		icon: <AppIcons.Home />
 	},
 	{
