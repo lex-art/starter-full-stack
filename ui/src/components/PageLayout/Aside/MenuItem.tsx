@@ -1,10 +1,11 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import messages from '../../../locales/es/common.json'
 import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { ISubMenuRoute } from '@/lib/types/MenuRoute'
 import Icons from '@/components/Common/Icons/Icons'
 import { useRouter } from '@/navigation'
+import AppTypography from '@/components/Common/Typography/Typography'
 
 interface MenuItemProps {
 	text: keyof typeof messages
@@ -15,6 +16,7 @@ interface MenuItemProps {
 	submenu?: Array<ISubMenuRoute>
 	openAside?: boolean
 	handleDrawerClose?(): void
+	section?: keyof typeof messages
 }
 
 export default function MenuItem({
@@ -24,10 +26,11 @@ export default function MenuItem({
 	index,
 	submenu,
 	openAside,
-	handleDrawerClose
+	handleDrawerClose,
+	section
 }: MenuItemProps) {
 	const t = useTranslations('common')
-	const [open, setOpen] = React.useState(true)
+	const [open, setOpen] = useState(true)
 	const redirect = useRouter()
 	const handleClick = () => {
 		if (submenu) {
@@ -43,6 +46,16 @@ export default function MenuItem({
 
 	return (
 		<ListItem disablePadding sx={{ display: 'block' }}>
+			{section && openAside && (
+				<AppTypography
+					variant="h5"
+					fontWeight="bold"
+					color="primary"
+					sx={{ px: 2.5, py: 1, opacity: openAside ? 1 : 0 }}
+				>
+					{t(section)}
+				</AppTypography>
+			)}
 			<ListItemButton
 				sx={{
 					minHeight: 48,

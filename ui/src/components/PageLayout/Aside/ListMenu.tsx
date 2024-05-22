@@ -33,6 +33,7 @@ export default function ListMenu({ drawerWidth, open, handleDrawerClose }: ListI
 					submenu={route.subMenu}
 					openAside={open}
 					handleDrawerClose={handleDrawerClose}
+					section={route.section}
 				/>
 			))}
 		</List>

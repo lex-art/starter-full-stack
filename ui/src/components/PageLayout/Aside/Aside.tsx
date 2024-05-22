@@ -3,6 +3,8 @@ import { Divider, styled, Theme, CSSObject, Drawer as DraweMobile } from '@mui/m
 import MuiDrawer from '@mui/material/Drawer'
 import DraftsIcon from '@mui/icons-material/Drafts'
 import ListMenu from './ListMenu'
+import AppGrid from '@/components/Common/Grid/Grid'
+import AppTypography from '@/components/Common/Typography/Typography'
 
 interface AsideProps {
 	drawerWidth: number
@@ -43,6 +45,18 @@ const openedMixin = (theme: Theme, drawerWidth: number): CSSObject => ({
 	overflowX: 'hidden'
 })
 
+const Footer = styled('div')(({ theme }) => ({
+	position: 'absolute',
+	bottom: 0,
+	width: '100%',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center',
+	padding: theme.spacing(1),
+	backgroundColor: theme.palette.background.paper,
+	borderTop: `1px solid ${theme.palette.divider}`
+}))
+
 export default function Aside({
 	drawerWidth,
 	window,
@@ -57,14 +71,16 @@ export default function Aside({
 		flexShrink: 0,
 		whiteSpace: 'nowrap',
 		boxSizing: 'border-box',
-		...(open && {
-			...openedMixin(theme, drawerWidth),
-			'& .MuiDrawer-paper': openedMixin(theme, drawerWidth)
-		}),
-		...(!open && {
-			...closedMixin(theme),
-			'& .MuiDrawer-paper': closedMixin(theme)
-		})
+		position: 'relative',
+		'& .MuiDrawer-paper': {
+			...(!open && closedMixin(theme)),
+			...(open && openedMixin(theme, drawerWidth)),
+			position: 'relative',
+			scrollbarWidth: 'none', // Firefox
+			'&::-webkit-scrollbar': {
+				display: 'none' // Chrome, Safari, Opera
+			}
+		}
 	}))
 
 	return (
@@ -81,6 +97,9 @@ export default function Aside({
 				</DrawerHeader>
 				<Divider />
 				<ListMenu drawerWidth={drawerWidth} open={open} />
+				<Footer>
+					<AppTypography>© Footer</AppTypography>
+				</Footer>
 			</Drawer>
 			{/* Mobile Version */}
 			<DraweMobile
@@ -102,6 +121,9 @@ export default function Aside({
 				</DrawerHeader>
 				<Divider />
 				<ListMenu drawerWidth={drawerWidth} handleDrawerClose={handleDrawerClose} open />
+				<Footer>
+					<AppTypography>© Footer</AppTypography>
+				</Footer>
 			</DraweMobile>
 		</>
 	)
