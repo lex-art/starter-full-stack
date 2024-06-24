@@ -4,6 +4,10 @@ import { ReactNode, createContext, useMemo, useState } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
 import { paletteThemeOptions } from './theme'
 import { CssBaseline, PaletteMode, createTheme } from '@mui/material'
+import { AppButtonThemeOptions } from '../Common/Button/Button'
+import { AppTypographyTheme } from '../Common/Typography/Typography'
+import { AppAutocompleteTheme } from '../Common/Autocomplete/Autocomplete'
+import { AppTextFieldThemeOptions } from '../Common/TextField/TextField'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -26,7 +30,17 @@ const AppThemeMUI = ({ children, window }: AppThemeProps) => {
 		}),
 		[]
 	)
-	const theme = useMemo(() => createTheme(paletteThemeOptions(mode)), [mode])
+	const theme = useMemo(
+		() =>
+			createTheme(
+				paletteThemeOptions(mode),
+				AppButtonThemeOptions,
+				AppTypographyTheme,
+				AppAutocompleteTheme,
+				AppTextFieldThemeOptions
+			),
+		[mode]
+	)
 
 	return (
 		<ColorModeContext.Provider value={colorMode}>

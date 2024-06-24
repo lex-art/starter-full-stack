@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Box } from '@mui/material'
 import AsideHeaderClient from './AsideHeaderClient'
+import AppBreadcrumb from '../Breadcrumb/BreadCrumb'
 
 type Props = {
 	children?: ReactNode
@@ -21,6 +22,7 @@ export default function PageLayout({ children }: Props) {
 					backgroundColor: 'background.default'
 				}}
 			>
+				<AppBreadcrumb />
 				{children}
 			</Box>
 		</Box>

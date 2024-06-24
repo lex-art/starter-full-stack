@@ -5,6 +5,24 @@ import AppGrid from '../Grid/Grid'
 import AppCircularLoader from '../CircularLoader/CicularLoader'
 import AppTextField, { AppTextFieldProps } from '../TextField/TextField'
 
+export interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown, boolean, boolean, boolean>> {
+	label?: AppTextFieldProps['label']
+	placeholder?: AppTextFieldProps['placeholder']
+	variant?: AppTextFieldProps['variant']
+	error?: AppTextFieldProps['error']
+	helperText?: AppTextFieldProps['helperText']
+	minLength?: number
+	options: Array<unknown>
+	onSelectValue: (value: unknown) => void
+	inputValue?: string
+	onInputValueChange?: (input: string) => void
+	loading?: boolean
+	warning?: boolean
+	disableClearable?: boolean
+	size?: 'small' | 'medium'
+	height?: 'small' | 'medium' | 'smaller'
+}
+
 const AppAutocompleteTheme: ThemeOptions = {
 	components: {
 		MuiAutocomplete: {
@@ -63,24 +81,6 @@ const AppAutocompleteTheme: ThemeOptions = {
 	}
 }
 
-interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown, boolean, boolean, boolean>> {
-	label?: AppTextFieldProps['label']
-	placeholder?: AppTextFieldProps['placeholder']
-	variant?: AppTextFieldProps['variant']
-	error?: AppTextFieldProps['error']
-	helperText?: AppTextFieldProps['helperText']
-	minLength?: number
-	options: Array<unknown>
-	onSelectValue: (value: unknown) => void
-	inputValue?: string
-	onInputValueChange?: (input: string) => void
-	loading?: boolean
-	warning?: boolean
-	disableClearable?: boolean
-	size?: 'small' | 'medium'
-	height?: 'small' | 'medium' | 'smaller'
-}
-
 const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 	(
 		{ helperText, error, placeholder, label, variant, onSelectValue, onInputValueChange, loading, ...props },
@@ -128,3 +128,4 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 AppAutocomplete.displayName = 'Tikal Box Autocomplete'
 
 export { AppAutocomplete, AppAutocompleteTheme }
+export default AppAutocomplete

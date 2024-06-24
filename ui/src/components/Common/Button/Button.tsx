@@ -2,6 +2,7 @@ import Button, { ButtonProps } from '@mui/material/Button'
 import { ThemeOptions } from '@mui/material/styles'
 import { forwardRef } from 'react'
 import { colors, font } from '@/lib/design-tokens'
+import { Padding } from '@mui/icons-material'
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
@@ -12,8 +13,8 @@ declare module '@mui/material/Button' {
 const AppButtonThemeOptions: ThemeOptions = {
 	typography: {
 		button: {
-			color: colors.light.white
-			//textTransform: 'none',
+			color: colors.light.white,
+			textTransform: 'none'
 		}
 	},
 	components: {
@@ -23,22 +24,33 @@ const AppButtonThemeOptions: ThemeOptions = {
 				variant: 'contained'
 			},
 			styleOverrides: {
+				root: {
+					borderRadius: '5rem'
+				},
 				contained: {
 					fontSize: font.sizes.fontSizeMedium,
-					fontFamily: font.fontFamilyBold,
+					//fontFamily: font.fontFamilyBold,
 					color: colors.light.white
 				},
 				text: {
-					fontSize: font.sizes.fontSizeMedium,
-					fontFamily: font.fontFamilyBold
+					fontSize: font.sizes.fontSizeMedium
+					//fontFamily: font.fontFamilyBold
 				},
 				outlined: {
-					fontSize: font.sizes.fontSizeMedium,
-					fontFamily: font.fontFamilyBold
+					fontSize: font.sizes.fontSizeMedium
+					//fontFamily: font.fontFamilyBold
 				},
 				sizeSmall: {
 					fontSize: font.sizes.fontSizeSmall,
-					fontFamily: font.fontFamilyBold
+					padding: '0rem 0rem'
+				},
+				sizeMedium: {
+					fontSize: font.sizes.fontSizeMedium,
+					Padding: '1rem 2rem'
+				},
+				sizeLarge: {
+					fontSize: font.sizes.fontSizeLarge,
+					padding: '1.5rem 3rem'
 				}
 			},
 			variants: [

@@ -3,7 +3,6 @@ import { Divider, styled, Theme, CSSObject, Drawer as DraweMobile } from '@mui/m
 import MuiDrawer from '@mui/material/Drawer'
 import DraftsIcon from '@mui/icons-material/Drafts'
 import ListMenu from './ListMenu'
-import AppGrid from '@/components/Common/Grid/Grid'
 import AppTypography from '@/components/Common/Typography/Typography'
 
 interface AsideProps {
@@ -33,6 +32,10 @@ const closedMixin = (theme: Theme): CSSObject => ({
 	width: `calc(${theme.spacing(8)} + 1px)`,
 	[theme.breakpoints.up('sm')]: {
 		width: `calc(${theme.spacing(8)} + 1px)`
+	},
+	scrollbarWidth: 'none', // Firefox
+	'&::-webkit-scrollbar': {
+		display: 'none' // Chrome, Safari, Opera
 	}
 })
 
@@ -42,7 +45,11 @@ const openedMixin = (theme: Theme, drawerWidth: number): CSSObject => ({
 		easing: theme.transitions.easing.easeInOut,
 		duration: theme.transitions.duration.enteringScreen
 	}),
-	overflowX: 'hidden'
+	overflowX: 'hidden',
+	scrollbarWidth: 'none', // Firefox
+	'&::-webkit-scrollbar': {
+		display: 'none' // Chrome, Safari, Opera
+	}
 })
 
 const Footer = styled('div')(({ theme }) => ({
@@ -72,15 +79,14 @@ export default function Aside({
 		whiteSpace: 'nowrap',
 		boxSizing: 'border-box',
 		position: 'relative',
-		'& .MuiDrawer-paper': {
-			...(!open && closedMixin(theme)),
-			...(open && openedMixin(theme, drawerWidth)),
-			position: 'relative',
-			scrollbarWidth: 'none', // Firefox
-			'&::-webkit-scrollbar': {
-				display: 'none' // Chrome, Safari, Opera
-			}
-		}
+		...(open && {
+			...openedMixin(theme, drawerWidth),
+			'& .MuiDrawer-paper': openedMixin(theme, drawerWidth)
+		}),
+		...(!open && {
+			...closedMixin(theme),
+			'& .MuiDrawer-paper': closedMixin(theme)
+		})
 	}))
 
 	return (

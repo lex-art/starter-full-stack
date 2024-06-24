@@ -1,4 +1,4 @@
-import { AppIcons } from '@/components/Common'
+import AppIcons from '@/components/Common/Icons/Icons'
 import { IMenuRoute } from '@/lib/types/MenuRoute'
 
 export const MENU_ROUTES: Array<IMenuRoute> = [
@@ -19,13 +19,13 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 				text: 'buttons',
 				rol: [],
 				icon: <AppIcons.ControlPointOutlined />,
-				link: '#'
+				link: '/elements/buttons'
 			},
 			{
 				text: 'textFields',
 				rol: [],
 				icon: <AppIcons.TextFieldsOutlined />,
-				link: '#'
+				link: '/elements/text-fields'
 			},
 			{
 				text: 'selects',

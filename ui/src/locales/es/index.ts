@@ -1,7 +1,9 @@
 import common from './common.json'
+import components from './components.json'
 
 const locale = {
-	common
+	common,
+	components
 }
 
 export default locale

@@ -1,7 +1,9 @@
 import common from './common.json'
+import components from './components.json'
 
 const en = {
-	common
+	common,
+	components
 }
 
 export default en

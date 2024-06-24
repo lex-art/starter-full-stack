@@ -1,11 +1,16 @@
 import React, { ReactNode, useState } from 'react'
 import messages from '../../../locales/es/common.json'
-import { Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { Collapse } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { ISubMenuRoute } from '@/lib/types/MenuRoute'
 import Icons from '@/components/Common/Icons/Icons'
 import { useRouter } from '@/navigation'
 import AppTypography from '@/components/Common/Typography/Typography'
+import AppListItem from '@/components/Common/Menu/ListMenu/ListItem'
+import AppListItemButton from '@/components/Common/Menu/ListMenu/ListItemButton'
+import AppListItemIcon from '@/components/Common/Menu/ListMenu/ListItemIcon'
+import AppList from '@/components/Common/Menu/ListMenu/List'
+import AppListItemText from '@/components/Common/Menu/ListMenu/ListItemText'
 
 interface MenuItemProps {
 	text: keyof typeof messages
@@ -32,6 +37,7 @@ export default function MenuItem({
 	const t = useTranslations('common')
 	const [open, setOpen] = useState(true)
 	const redirect = useRouter()
+
 	const handleClick = () => {
 		if (submenu) {
 			setOpen(!open)
@@ -45,7 +51,7 @@ export default function MenuItem({
 	}
 
 	return (
-		<ListItem disablePadding sx={{ display: 'block' }}>
+		<AppListItem disablePadding sx={{ display: 'block' }}>
 			{section && openAside && (
 				<AppTypography
 					variant="h5"
@@ -56,7 +62,7 @@ export default function MenuItem({
 					{t(section)}
 				</AppTypography>
 			)}
-			<ListItemButton
+			<AppListItemButton
 				sx={{
 					minHeight: 48,
 					justifyContent: openAside ? 'initial' : 'center',
@@ -65,7 +71,7 @@ export default function MenuItem({
 				onClick={handleClick}
 				selected={!!link}
 			>
-				<ListItemIcon
+				<AppListItemIcon
 					sx={{
 						minWidth: 0,
 						mr: openAside ? 3 : 'auto',
@@ -73,15 +79,15 @@ export default function MenuItem({
 					}}
 				>
 					{icon}
-				</ListItemIcon>
-				<ListItemText primary={t(text) + ' ' + index} sx={{ opacity: openAside ? 1 : 0 }} />
+				</AppListItemIcon>
+				{openAside && <AppListItemText primary={t(text) + ' ' + index} sx={{ opacity: openAside ? 1 : 0 }} />}
 				{submenu && openAside ? open ? <Icons.ExpandLess /> : <Icons.ExpandMore /> : null}
-			</ListItemButton>
+			</AppListItemButton>
 			{submenu && (
 				<Collapse in={open} timeout="auto" unmountOnExit>
-					<List component="div" disablePadding>
+					<AppList component="div" disablePadding>
 						{submenu.map((subMenu, index) => (
-							<ListItemButton
+							<AppListItemButton
 								sx={{
 									pl: openAside ? 5 : 3,
 									minHeight: 48,
@@ -89,8 +95,12 @@ export default function MenuItem({
 									justifyContent: openAside ? 'initial' : 'center'
 								}}
 								key={'sub-' + subMenu.text + index}
+								onClick={() => {
+									handleDrawerClose && handleDrawerClose()
+									redirect.push(subMenu.link)
+								}}
 							>
-								<ListItemIcon
+								<AppListItemIcon
 									sx={{
 										minWidth: 0,
 										mr: openAside ? 3 : 'auto',
@@ -98,13 +108,18 @@ export default function MenuItem({
 									}}
 								>
 									{subMenu.icon}
-								</ListItemIcon>
-								<ListItemText primary={t(subMenu.text) + ' ' + index} sx={{ opacity: openAside ? 1 : 0 }} />
-							</ListItemButton>
+								</AppListItemIcon>
+								{openAside && (
+									<AppListItemText
+										primary={t(subMenu.text) + ' ' + index}
+										sx={{ opacity: openAside ? 1 : 0 }}
+									/>
+								)}
+							</AppListItemButton>
 						))}
-					</List>
+					</AppList>
 				</Collapse>
 			)}
-		</ListItem>
+		</AppListItem>
 	)
 }

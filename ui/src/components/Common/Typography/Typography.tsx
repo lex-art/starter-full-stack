@@ -17,7 +17,7 @@ const AppTypographyTheme: ThemeOptions = {
 					props: { variant: 'subtitle1' },
 					style: {
 						fontSize: font.sizes.fontTitle,
-						fontFamily: font.fontFamilyBold,
+						// fontFamily: font.fontFamilyBold,
 						lineHeight: 1.6,
 						color: colors.light.textSecondary,
 						whiteSpace: 'collapse',
@@ -29,7 +29,7 @@ const AppTypographyTheme: ThemeOptions = {
 					props: { variant: 'subtitle2' },
 					style: {
 						fontSize: font.sizes.fontSubtitle,
-						fontFamily: font.fontFamilyBold,
+						// fontFamily: font.fontFamilyBold,
 						lineHeight: 1.6,
 						color: colors.light.textSecondary,
 						whiteSpace: 'collapse',
@@ -60,7 +60,7 @@ const AppTypographyTheme: ThemeOptions = {
 				{
 					props: { variant: 'body3' },
 					style: {
-						fontSize: font.sizes.fontSizeLarge,
+						fontSize: font.sizes.fontSizeSmall,
 						lineHeight: 1.6,
 						color: colors.light.textSecondary,
 						whiteSpace: 'collapse',

@@ -72,5 +72,6 @@
   "checkboxes": "Casilla de verificación",
   "radios": "Radios",
   "calendar": "Calendario",
-  "snackbar": "Snackbar"
+  "snackbar": "Snackbar",
+  "logout": "Cerrar sesión"
 }

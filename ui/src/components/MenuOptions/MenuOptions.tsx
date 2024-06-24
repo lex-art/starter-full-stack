@@ -38,7 +38,7 @@ export const AppMenuOptions: FC<AppMenuOptionsProps> = ({ dataItems, button, clo
 			handleClose()
 			setCloseMenu(false)
 		}
-	}, [closeMenu])
+	}, [closeMenu, setCloseMenu])
 
 	return (
 		<AppGrid>
