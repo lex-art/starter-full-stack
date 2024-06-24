@@ -80,7 +80,7 @@ export default function Header({
 	const AppBar = styled(MuiAppBar, {
 		shouldForwardProp: (prop) => prop !== 'open'
 	})<AppBarProps>(({ theme, open }) => ({
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('lg')]: {
 			zIndex: theme.zIndex.drawer + 1
 		},
 		transition: theme.transitions.create(['width', 'margin'], {
@@ -88,13 +88,13 @@ export default function Header({
 			duration: theme.transitions.duration.leavingScreen
 		}),
 		width: `calc(100% - ${theme.spacing(8)})`,
-		[theme.breakpoints.down('sm')]: {
+		[theme.breakpoints.down('lg')]: {
 			width: `100%`
 		},
 		...(open && {
 			marginLeft: `${drawerWidth}rem`,
 			width: `calc(100% - ${drawerWidth}rem)`,
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('lg')]: {
 				width: `100%`
 			},
 			transition: theme.transitions.create(['width', 'margin'], {
@@ -122,7 +122,7 @@ export default function Header({
 							color: 'white'
 						},
 						position: 'absolute',
-						display: { sm: 'flex', xs: 'none' },
+						display: { lg: 'flex', xs: 'none' },
 						backgroundColor: 'rgba(0, 0, 0, 0.04)',
 						color: 'transparent',
 						width: '3rem',
@@ -137,7 +137,7 @@ export default function Header({
 					aria-label="open drawer"
 					edge="start"
 					onClick={handleDrawerToggle}
-					sx={{ mr: 2, display: { sm: 'none' } }}
+					sx={{ mr: 2, display: { lg: 'none' } }}
 				>
 					<MenuIcon />
 				</AppIconButton>

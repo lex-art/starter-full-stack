@@ -5,7 +5,7 @@ export const font = {
 		fontSizeXLarge: 24,
 		fontSizeLarge: 18,
 		fontSizeMedium: 14,
-		fontSizeSmall: 12,
+		fontSizeSmall: 11,
 		fontTitle: '5vh',
 		fontSubtitle: '3.2rem'
 	}

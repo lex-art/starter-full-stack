@@ -18,44 +18,44 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			{
 				text: 'buttons',
 				rol: [],
-				icon: <AppIcons.ControlPointOutlined />,
+				icon: <AppIcons.ControlPointOutlined fontSize="small" />,
 				link: '/elements/buttons'
 			},
 			{
 				text: 'textFields',
 				rol: [],
-				icon: <AppIcons.TextFieldsOutlined />,
+				icon: <AppIcons.TextFieldsOutlined fontSize="small" />,
 				link: '/elements/text-fields'
 			},
 			{
 				text: 'selects',
 				link: '#',
-				icon: <AppIcons.SelectAllOutlined />
+				icon: <AppIcons.SelectAllOutlined fontSize="small" />
 			},
 			{
 				text: 'checkboxes',
 				link: '#',
-				icon: <AppIcons.CheckBoxOutlined />
+				icon: <AppIcons.CheckBoxOutlined fontSize="small" />
 			},
 			{
 				text: 'radios',
 				link: '#',
-				icon: <AppIcons.RadioButtonUncheckedOutlined />
+				icon: <AppIcons.RadioButtonUncheckedOutlined fontSize="small" />
 			},
 			{
 				text: 'icons',
 				link: '#',
-				icon: <AppIcons.AccessibilityNewOutlined />
+				icon: <AppIcons.AccessibilityNewOutlined fontSize="small" />
 			},
 			{
 				text: 'chips',
 				link: '#',
-				icon: <AppIcons.ChatOutlined />
+				icon: <AppIcons.ChatOutlined fontSize="small" />
 			},
 			{
 				text: 'typography',
 				link: '#',
-				icon: <AppIcons.AbcOutlined />
+				icon: <AppIcons.AbcOutlined fontSize="small" />
 			}
 		]
 	},
@@ -67,42 +67,42 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			{
 				text: 'cards',
 				link: '#',
-				icon: <AppIcons.CreditCardOutlined />
+				icon: <AppIcons.CreditCardOutlined fontSize="small" />
 			},
 			{
 				text: 'tables',
 				link: '#',
-				icon: <AppIcons.TableChartOutlined />
+				icon: <AppIcons.TableChartOutlined fontSize="small" />
 			},
 			{
 				text: 'calendar',
 				link: '#',
-				icon: <AppIcons.DateRangeOutlined />
+				icon: <AppIcons.DateRangeOutlined fontSize="small" />
 			},
 			{
 				text: 'modals',
 				link: '#',
-				icon: <AppIcons.DraftsOutlined />
+				icon: <AppIcons.DraftsOutlined fontSize="small" />
 			},
 			{
 				text: 'uploadFile',
 				link: '#',
-				icon: <AppIcons.FileUploadOutlined />
+				icon: <AppIcons.FileUploadOutlined fontSize="small" />
 			},
 			{
 				text: 'forms',
 				link: '#',
-				icon: <AppIcons.ChecklistOutlined />
+				icon: <AppIcons.ChecklistOutlined fontSize="small" />
 			},
 			{
 				text: 'skeleton',
 				link: '#',
-				icon: <AppIcons.Face2Outlined />
+				icon: <AppIcons.Face2Outlined fontSize="small" />
 			},
 			{
 				text: 'snackbar',
 				link: '#',
-				icon: <AppIcons.NotificationAddOutlined />
+				icon: <AppIcons.NotificationAddOutlined fontSize="small" />
 			}
 		]
 	}

@@ -1,4 +1,5 @@
-import { colors, font } from '@/lib/design-tokens'
+import { robotoFont } from '@/components/Theme/theme'
+import { font } from '@/lib/design-tokens'
 import Typography, { TypographyProps } from '@mui/material/Typography'
 import { ThemeOptions } from '@mui/material/styles'
 import { FC } from 'react'
@@ -17,9 +18,8 @@ const AppTypographyTheme: ThemeOptions = {
 					props: { variant: 'subtitle1' },
 					style: {
 						fontSize: font.sizes.fontTitle,
-						// fontFamily: font.fontFamilyBold,
+						fontWeight: 'bold',
 						lineHeight: 1.6,
-						color: colors.light.textSecondary,
 						whiteSpace: 'collapse',
 						overflowWrap: 'break-word',
 						wordWrap: 'break-word'
@@ -29,9 +29,8 @@ const AppTypographyTheme: ThemeOptions = {
 					props: { variant: 'subtitle2' },
 					style: {
 						fontSize: font.sizes.fontSubtitle,
-						// fontFamily: font.fontFamilyBold,
+						fontWeight: 'bold',
 						lineHeight: 1.6,
-						color: colors.light.textSecondary,
 						whiteSpace: 'collapse',
 						overflowWrap: 'break-word',
 						wordWrap: 'break-word'
@@ -60,16 +59,14 @@ const AppTypographyTheme: ThemeOptions = {
 				{
 					props: { variant: 'body3' },
 					style: {
-						fontSize: font.sizes.fontSizeSmall,
+						fontSize: font.sizes.fontSizeLarge,
 						lineHeight: 1.6,
-						color: colors.light.textSecondary,
 						whiteSpace: 'collapse',
 						overflowWrap: 'break-word',
 						wordWrap: 'break-word'
 					}
 				}
 			],
-
 			defaultProps: {
 				variantMapping: {
 					h1: 'h2',

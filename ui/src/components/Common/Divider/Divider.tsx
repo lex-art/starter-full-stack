@@ -6,7 +6,7 @@ const AppDividerTheme: ThemeOptions = {
 		MuiDivider: {
 			styleOverrides: {
 				root: {
-					'::before': {
+					'&::before': {
 						width: '3%'
 					}
 				}
@@ -19,14 +19,16 @@ interface AppDividerProps extends DividerProps {
 	marginY?: string
 }
 
-const AppDivider: FC<AppDividerProps> = ({ marginY, ...props }) => {
+const AppDivider: FC<AppDividerProps> = ({ marginY, children, ...props }) => {
 	return (
 		<Divider
 			sx={{
 				margin: marginY ? `${marginY} 0` : undefined
 			}}
 			{...props}
-		/>
+		>
+			{children}
+		</Divider>
 	)
 }
 

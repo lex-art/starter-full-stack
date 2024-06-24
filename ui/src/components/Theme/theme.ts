@@ -20,7 +20,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
 						main: colors.light.primary,
 						light: colors.light.primaryLight,
 						dark: colors.light.primaryDark,
-						contrastText: colors.light.white
+						contrastText: '#fff'
 					},
 					secondary: {
 						main: colors.light.secondary,
@@ -45,10 +45,13 @@ const getDesignTokens = (mode: PaletteMode) => ({
 						light: colors.light.warningLight,
 						dark: colors.light.warningDark,
 						contrastText: colors.light.white
+					},
+					text: {
+						primary: colors.light.textSecondary,
+						secondary: colors.light.textSecondary
 					}
 				}
 			: {
-					// palette values for dark mode
 					primary: {
 						main: colors.dark.primary,
 						light: colors.dark.primaryLight,
@@ -82,6 +85,10 @@ const getDesignTokens = (mode: PaletteMode) => ({
 					background: {
 						default: colors.dark.primaryDark,
 						paper: colors.dark.primaryLight
+					},
+					text: {
+						primary: colors.dark.white,
+						secondary: colors.dark.white
 					}
 				})
 	}
@@ -92,17 +99,6 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 	...(mode === 'light'
 		? { background: { default: colors.light.primaryDark } }
 		: { background: { default: colors.dark.primaryDark } }),
-	text: {
-		...(mode === 'light'
-			? {
-					primary: colors.light.contrastText,
-					secondary: colors.light.textSecondary
-				}
-			: {
-					primary: colors.dark.white,
-					secondary: colors.dark.textSecondary
-				})
-	},
 	transitions: {
 		easing: {
 			easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -120,10 +116,6 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 			leavingScreen: 1195
 		}
 	},
-	/* text: {
-		primary: colors.light.white,
-		secondary: colors.light.textSecondary
-	}, */
 	typography: {
 		fontFamily: robotoFont.style.fontFamily,
 		fontSize: font.sizes.fontSizeMedium,

@@ -2,7 +2,6 @@ import Button, { ButtonProps } from '@mui/material/Button'
 import { ThemeOptions } from '@mui/material/styles'
 import { forwardRef } from 'react'
 import { colors, font } from '@/lib/design-tokens'
-import { Padding } from '@mui/icons-material'
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
@@ -13,7 +12,6 @@ declare module '@mui/material/Button' {
 const AppButtonThemeOptions: ThemeOptions = {
 	typography: {
 		button: {
-			color: colors.light.white,
 			textTransform: 'none'
 		}
 	},
@@ -25,32 +23,29 @@ const AppButtonThemeOptions: ThemeOptions = {
 			},
 			styleOverrides: {
 				root: {
-					borderRadius: '5rem'
+					borderRadius: '0.6rem'
 				},
 				contained: {
 					fontSize: font.sizes.fontSizeMedium,
-					//fontFamily: font.fontFamilyBold,
 					color: colors.light.white
 				},
 				text: {
 					fontSize: font.sizes.fontSizeMedium
-					//fontFamily: font.fontFamilyBold
 				},
 				outlined: {
 					fontSize: font.sizes.fontSizeMedium
-					//fontFamily: font.fontFamilyBold
 				},
 				sizeSmall: {
 					fontSize: font.sizes.fontSizeSmall,
-					padding: '0rem 0rem'
+					padding: '0.5rem 0.5rem'
 				},
 				sizeMedium: {
 					fontSize: font.sizes.fontSizeMedium,
-					Padding: '1rem 2rem'
+					Padding: '0.5rem 3rem'
 				},
 				sizeLarge: {
 					fontSize: font.sizes.fontSizeLarge,
-					padding: '1.5rem 3rem'
+					padding: '0.5rem 3.5rem'
 				}
 			},
 			variants: [
@@ -67,10 +62,15 @@ const AppButtonThemeOptions: ThemeOptions = {
 	}
 }
 
-const AppButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-	const { children, variant, ...rest } = props
+const AppButton = forwardRef<HTMLButtonElement, ButtonProps & { pills?: boolean }>((props, ref) => {
+	const { children, pills, style, variant, ...rest } = props
 	return (
-		<Button ref={ref} variant={variant} {...rest}>
+		<Button
+			ref={ref}
+			style={{ borderRadius: pills ? '5rem' : undefined, ...style }}
+			variant={variant}
+			{...rest}
+		>
 			{children}
 		</Button>
 	)

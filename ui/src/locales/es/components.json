@@ -14,7 +14,7 @@
     "large": "Grande",
     "extraLarge": "Extra grande",
     "disabled": "Deshabilitado",
-    "button": "Boton",
+    "button": "Botón",
     "button Group": "Grupo de botones",
     "outline": "Contorno",
     "wider": "Más ancho",
@@ -23,10 +23,12 @@
     "activeState": "Estado activo",
     "disabledState": "Estado deshabilitado",
     "error": "Error",
-    "buttonContained": "Boton contenido",
-    "buttonOutlined": "Boton contorneado",
-    "buttonText": "Boton de texto",
+    "buttonContained": "Botón contenido",
+    "buttonOutlined": "Botón contorneado",
+    "buttonText": "Botón de texto",
     "inherit": "Heredar",
     "buttonSize": "Tamaño del botón",
-    "medium": "Medio"
+    "medium": "Medio",
+    "standard": "Estandar",
+    "pills": "Pildoras"
 }

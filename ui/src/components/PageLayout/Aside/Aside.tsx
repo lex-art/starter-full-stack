@@ -95,7 +95,7 @@ export default function Aside({
 				variant="permanent"
 				open={open}
 				sx={{
-					display: { xs: 'none', sm: 'block' }
+					display: { xs: 'none', lg: 'block' }
 				}}
 			>
 				<DrawerHeader>
@@ -118,8 +118,14 @@ export default function Aside({
 					keepMounted: true // Better open performance on mobile.
 				}}
 				sx={{
-					display: { xs: 'block', sm: 'none' },
-					'& .MuiDrawer-paper': { boxSizing: 'border-box', width: `${drawerWidth}rem` }
+					display: { xs: 'block', lg: 'none' },
+					'& .MuiDrawer-paper': {
+						boxSizing: 'border-box',
+						width: `${drawerWidth}rem`,
+						'&::-webkit-scrollbar': {
+							display: 'none' // Chrome, Safari, Opera
+						}
+					}
 				}}
 			>
 				<DrawerHeader>

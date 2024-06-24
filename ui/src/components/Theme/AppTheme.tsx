@@ -8,6 +8,9 @@ import { AppButtonThemeOptions } from '../Common/Button/Button'
 import { AppTypographyTheme } from '../Common/Typography/Typography'
 import { AppAutocompleteTheme } from '../Common/Autocomplete/Autocomplete'
 import { AppTextFieldThemeOptions } from '../Common/TextField/TextField'
+import { AppDividerTheme } from '../Common/Divider/Divider'
+import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
+import { AppIconsTheme } from '../Common/Icons/Icons'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -37,7 +40,10 @@ const AppThemeMUI = ({ children, window }: AppThemeProps) => {
 				AppButtonThemeOptions,
 				AppTypographyTheme,
 				AppAutocompleteTheme,
-				AppTextFieldThemeOptions
+				AppTextFieldThemeOptions,
+				AppDividerTheme,
+				AppListItemIconTheme,
+				AppIconsTheme
 			),
 		[mode]
 	)

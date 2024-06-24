@@ -24,22 +24,22 @@ export const AppIconsTheme: ThemeOptions = {
 				{
 					props: { fontSize: 'medium' },
 					style: {
-						width: '3.5rem',
-						height: '3.5rem'
+						width: '3rem',
+						height: '3rem'
 					}
 				},
 				{
 					props: { fontSize: 'small' },
 					style: {
-						width: '3.6rem',
-						height: '3.6rem'
+						width: '2rem',
+						height: '2rem'
 					}
 				},
 				{
 					props: { fontSize: 'smaller' },
 					style: {
-						width: '2.2rem',
-						height: '2.2rem'
+						width: '1.5rem',
+						height: '1.5rem'
 					}
 				}
 			]
