@@ -56,6 +56,11 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 				text: 'typography',
 				link: '#',
 				icon: <AppIcons.AbcOutlined fontSize="small" color="primary" />
+			},
+			{
+				text: 'forms',
+				link: '#',
+				icon: <AppIcons.DocumentScannerOutlined fontSize="small" color="primary" />
 			}
 		]
 	},

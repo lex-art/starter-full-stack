@@ -40,11 +40,6 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 						backgroundColor: colors.light.primaryLight
 					}
 				},
-				disabled: {
-					'&:hover': {
-						backgroundColor: 'transparent'
-					}
-				},
 				sizeSmall: {
 					paddingBottom: '1.5rem'
 				}

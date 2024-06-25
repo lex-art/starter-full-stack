@@ -42,7 +42,7 @@ export const colors = {
 		success: '#2E7D32',
 		successLight: '#4CAF50',
 		successDark: '#1B5E20',
-		error: '#D32F2F',
+		error: '#CF6679 ',
 		errorLight: '#EF5552',
 		errorDark: '#D32F2F',
 		warning: '#ED6C02',

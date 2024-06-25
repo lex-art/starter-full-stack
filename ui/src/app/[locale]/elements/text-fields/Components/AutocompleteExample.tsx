@@ -13,12 +13,17 @@ const suggestions = [
 ]
 
 export default function AutocompleteExample() {
-	const [value, setValue] = useState('')
+	const [value, setValue] = useState<string>('')
+	const [valueMultiple, setValueMultiple] = useState<string[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const debounceRef = useRef<ReturnType<typeof setTimeout>>()
 
-	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setValue(event.target.value)
+	const handleChange = (event: { label: string; value: string }) => {
+		setValue(event.label)
+	}
+
+	const handleMultipleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setValueMultiple(event.target.value.split(','))
 	}
 
 	const handleOnInputValueChange = (input: string) => {
@@ -45,23 +50,29 @@ export default function AutocompleteExample() {
 		>
 			<AppAutocomplete
 				value={value}
+				freeSolo={false}
 				options={suggestions}
 				label="Autocomplete"
 				onSelectValue={handleChange}
 				loading={isLoading}
 				onInputValueChange={handleOnInputValueChange}
 				getOptionLabel={(option: any) => option?.label ?? ''}
-				isOptionEqualToValue={(option, value) => (option as any).value === value}
+				isOptionEqualToValue={(option, value) => (option as any)?.value}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 			/>
-			<AppAutocomplete
+			{/* <AppAutocomplete
 				options={suggestions}
 				label="Autocomplete"
-				onSelectValue={function (value: unknown): void {
-					throw new Error('Function not implemented.')
-				}}
+				value={valueMultiple}
+				multiple
+				onSelectValue={handleMultipleChange}
+				loading={isLoading}
+				onInputValueChange={handleOnInputValueChange}
+				getOptionLabel={(option: any) => option?.label ?? ''}
+				isOptionEqualToValue={(option, value) => (option as any).value === value}
+				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 				variant="standard"
-			/>
+			/> */}
 			<AppAutocomplete
 				options={suggestions}
 				label="Autocomplete"
