@@ -1,9 +1,11 @@
+'use client'
 import { Autocomplete, AutocompleteProps, AutocompleteRenderInputParams, ThemeOptions } from '@mui/material'
 import { SyntheticEvent, forwardRef } from 'react'
 import { font } from '@/lib/design-tokens'
 import AppGrid from '../Grid/Grid'
 import AppCircularLoader from '../CircularLoader/CicularLoader'
 import AppTextField, { AppTextFieldProps } from '../TextField/TextField'
+import { Padding } from '@mui/icons-material'
 
 export interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown, boolean, boolean, boolean>> {
 	label?: AppTextFieldProps['label']
@@ -13,7 +15,7 @@ export interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown,
 	helperText?: AppTextFieldProps['helperText']
 	minLength?: number
 	options: Array<unknown>
-	onSelectValue: (value: unknown) => void
+	onSelectValue: (value: any) => void
 	inputValue?: string
 	onInputValueChange?: (input: string) => void
 	loading?: boolean
@@ -31,10 +33,10 @@ const AppAutocompleteTheme: ThemeOptions = {
 			},
 			styleOverrides: {
 				root: {
-					height: '5rem',
-					'& .MuiAutocomplete-input': {
-						height: '2rem'
-					},
+					'&.MuiAutocomplete-hasPopupIcon .MuiAutocomplete-inputRoot, &.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot':
+						{
+							padding: '0 4rem 0 1rem'
+						},
 					'& .MuiAutocomplete-endAdornment': {
 						height: '3rem',
 						top: 'calc(50% - 22px)',
@@ -95,7 +97,7 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 				variant={variant}
 				adornment={
 					loading ? (
-						<AppGrid marginX="1rem">
+						<AppGrid marginX="0rem" mt="0.4rem">
 							<AppCircularLoader size={25} />
 						</AppGrid>
 					) : null
@@ -125,7 +127,7 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 	}
 )
 
-AppAutocomplete.displayName = 'Tikal Box Autocomplete'
+AppAutocomplete.displayName = 'App Autocomplete'
 
 export { AppAutocomplete, AppAutocompleteTheme }
 export default AppAutocomplete

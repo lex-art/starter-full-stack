@@ -30,5 +30,14 @@
     "buttonSize": "Tamaño del botón",
     "medium": "Medio",
     "standard": "Estandar",
-    "pills": "Pildoras"
+    "pills": "Pildoras",
+    "textField": "Campo de texto",
+    "label": "Etiqueta",
+    "iconTextField": "Campo de texto de icono",
+    "outlined": "Contorneado",
+    "filled": "Lleno",
+    "autocomplete": "Autocompletar",
+    "smallTextField": "Campo de texto pequeño",
+    "mediumTextField": "Campo de texto mediano",
+    "largeTextField": "Campo de texto grande"
 }

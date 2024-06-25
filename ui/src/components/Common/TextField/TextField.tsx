@@ -6,20 +6,62 @@ import { ChangeEvent, FocusEvent, InputHTMLAttributes, ReactNode, Ref, forwardRe
 
 const AppTextFieldThemeOptions: ThemeOptions = {
 	components: {
+		MuiTextField: {
+			defaultProps: {
+				variant: 'outlined',
+				fullWidth: true
+			}
+		},
+		MuiInput: {
+			styleOverrides: {
+				root: {
+					fontSize: font.sizes.fontSizeMedium + 2
+				}
+			}
+		},
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					fontSize: font.sizes.fontSizeMedium + 2
+				}
+			}
+		},
+		MuiFilledInput: {
+			styleOverrides: {
+				root: {
+					fontSize: font.sizes.fontSizeMedium + 2,
+					paddingBottom: '1rem',
+					color: colors.light.white,
+					backgroundColor: colors.light.primaryLight,
+					'&:hover': {
+						backgroundColor: colors.light.primaryLight
+					},
+					'&.Mui-focused': {
+						backgroundColor: colors.light.primaryLight
+					}
+				},
+				disabled: {
+					'&:hover': {
+						backgroundColor: 'transparent'
+					}
+				},
+				sizeSmall: {
+					paddingBottom: '1.5rem'
+				}
+			}
+		},
 		MuiInputBase: {
 			styleOverrides: {
 				root: {
-					fontSize: font.sizes.fontSizeLarge,
-					fontFamily: font.fontFamily,
-					backgroundColor: colors.light.white,
-					height: '5rem',
-					margin: '1rem 0',
+					fontSize: font.sizes.fontSizeMedium + 2,
+					height: '3.9rem',
+					margin: '0.5rem 0',
 					padding: '0',
 					'& .MuiOutlinedInput-notchedOutline': {
 						padding: '0 .9rem'
 					},
 					'& .MuiOutlinedInput-notchedOutline > legend': {
-						fontSize: font.sizes.fontSizeMedium
+						fontSize: font.sizes.fontSizeSmall + 1
 					},
 					//for number input
 					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
@@ -31,8 +73,8 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 				},
 				sizeSmall: {
 					fontSize: font.sizes.fontSizeSmall,
-					height: '4rem',
-					margin: '0.5rem 0',
+					height: '3rem',
+					margin: '0.8rem 0',
 					padding: '0',
 					'& .MuiOutlinedInput-notchedOutline': {
 						padding: '0 .9rem'
@@ -51,9 +93,9 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 				multiline: {
 					height: 'auto',
 					'&.MuiOutlinedInput-root': {
-						height: 'auto',
+						//height: 'auto',
 						//margin: '1rem 0 0 0.25rem',
-						top: '-8%'
+						//top: '-8%'
 					}
 				}
 			}
@@ -61,20 +103,32 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 		MuiInputLabel: {
 			styleOverrides: {
 				root: {
-					fontSize: 24,
-					fontFamily: font.fontFamily,
-					height: '5rem',
-					margin: '1rem 0 0 0.25rem',
-					top: '-12%'
+					fontSize: font.sizes.fontSizeMedium,
+					'&.MuiInputLabel-outlined': {
+						'&.Mui-focused, &.MuiFormLabel-filled': {
+							transform: 'translate(14px, -2px) scale(0.9)'
+						}
+					},
+					'&.MuiInputLabel-standard': {
+						'&.Mui-focused, &.MuiFormLabel-filled': {
+							transform: 'translate(0, 5px) scale(0.9)'
+						}
+					},
+					'&.MuiInputLabel-filled': {
+						color: colors.light.white,
+						'&.Mui-focused, &.MuiFormLabel-filled': {
+							transform: 'translate(12px, -7px) scale(0.9)'
+						}
+					}
 				}
 			}
 		},
 		MuiFormHelperText: {
 			styleOverrides: {
 				root: {
-					fontSize: font.sizes.fontSizeSmall,
-					fontFamily: font.fontFamily,
-					marginTop: '-1rem'
+					fontSize: font.sizes.fontSizeMedium,
+					marginTop: '-0.5rem',
+					marginLeft: '0.8rem'
 				}
 			}
 		}
@@ -103,7 +157,6 @@ export interface AppTextFieldProps {
 	warning?: boolean
 	maxLength?: number
 	variant?: 'standard' | 'filled' | 'outlined'
-	height?: 'small' | 'medium' | 'smaller'
 	onBlur?: (event: FocusEvent<HTMLInputElement>) => void
 	onFocus?: (event: FocusEvent<HTMLInputElement>) => void
 }
@@ -132,7 +185,6 @@ export interface AppTextFieldProps {
  * @param onChange <(event: React.ChangeEvent<HTMLInputElement>) => void>: Callback fired when the value is changed.
  * @param type <undefined | 'password'>: Set to 'password' to use a password field
  * @param variant: <'standard' | 'filled' | 'outlined'>: The variant to use. @default 'outlined'
- * @param height: <'smallest' | 'smaller' | 'small' | 'medium'>: The height of the component.
  * @returns component
  */
 const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldProps>((props, ref) => {

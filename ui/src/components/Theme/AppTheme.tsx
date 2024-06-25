@@ -11,6 +11,7 @@ import { AppTextFieldThemeOptions } from '../Common/TextField/TextField'
 import { AppDividerTheme } from '../Common/Divider/Divider'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
 import { AppIconsTheme } from '../Common/Icons/Icons'
+import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -43,7 +44,8 @@ const AppThemeMUI = ({ children, window }: AppThemeProps) => {
 				AppTextFieldThemeOptions,
 				AppDividerTheme,
 				AppListItemIconTheme,
-				AppIconsTheme
+				AppIconsTheme,
+				AppFormLabelTheme
 			),
 		[mode]
 	)

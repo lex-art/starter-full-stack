@@ -10,7 +10,7 @@ declare module '@mui/material/SvgIcon' {
 	}
 }
 
-export const AppIconsTheme: ThemeOptions = {
+const AppIconsTheme: ThemeOptions = {
 	components: {
 		MuiSvgIcon: {
 			variants: [
@@ -47,5 +47,6 @@ export const AppIconsTheme: ThemeOptions = {
 	}
 }
 
-export const AppIcons = icons
+const AppIcons = icons
+export { AppIconsTheme, AppIcons }
 export default AppIcons
