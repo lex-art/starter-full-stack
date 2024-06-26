@@ -39,5 +39,6 @@
     "autocomplete": "Autocompletar",
     "smallTextField": "Campo de texto pequeño",
     "mediumTextField": "Campo de texto mediano",
-    "largeTextField": "Campo de texto grande"
+    "largeTextField": "Campo de texto grande",
+    "variants": "Variantes"
 }

@@ -1,34 +1,40 @@
 'use client'
 import AppAutocomplete from '@/components/Common/Autocomplete/Autocomplete'
 import AppPaper from '@/components/Common/Containers/Paper'
+import AppTypography from '@/components/Common/Typography/Typography'
+import { suggestionsAutocomplete } from '@/lib/utilities/constants'
 import { ClearIcon } from '@mui/x-date-pickers'
-import React, { ChangeEvent, useRef, useState } from 'react'
-const suggestions = [
-	{ label: 'Afghanistan', value: 'AF' },
-	{ label: 'Albania', value: 'AL' },
-	{ label: 'Algeria', value: 'DZ' },
-	{ label: 'Andorra', value: 'AD' },
-	{ label: 'Angola', value: 'AO' }
-	// Add more suggestions here
-]
+import React, { useRef, useState } from 'react'
+
+type valueMultiple = Record<string, unknown>
 
 export default function AutocompleteExample() {
-	const [value, setValue] = useState<string>('')
-	const [valueMultiple, setValueMultiple] = useState<string[]>([])
+	const [value, setValue] = useState<{ name: string; value: string } | null>({
+		name: 'Angola',
+		value: 'AO'
+	})
+	const [valueMultiple, setValueMultiple] = useState<valueMultiple[]>([
+		{ name: 'Afghanistan', value: 'AF' },
+		{ name: 'Albania', value: 'AL' }
+	])
 	const [isLoading, setIsLoading] = useState(false)
 	const debounceRef = useRef<ReturnType<typeof setTimeout>>()
 
-	const handleChange = (event: { label: string; value: string }) => {
-		setValue(event.label)
+	const handleChange = (event: { name: string; value: string } | string) => {
+		if (typeof event === 'string') {
+			setValue(null)
+			return
+		}
+		setValue(event)
 	}
 
-	const handleMultipleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setValueMultiple(event.target.value.split(','))
+	const handleMultipleChange = (event: valueMultiple[]) => {
+		setValueMultiple(event)
 	}
 
 	const handleOnInputValueChange = (input: string) => {
-		if (value === '') {
-			setValue('')
+		if (value?.value === '') {
+			setValue(null)
 		} else {
 			setIsLoading(true)
 			if (debounceRef.current) {
@@ -36,7 +42,6 @@ export default function AutocompleteExample() {
 			}
 			debounceRef.current = setTimeout(() => {
 				// Simulate a request to the server
-				setValue(input)
 				setIsLoading(false)
 			}, 500)
 		}
@@ -48,10 +53,13 @@ export default function AutocompleteExample() {
 				padding: 2
 			}}
 		>
+			<AppTypography variant="body1" fontWeight="bold" mb={1}>
+				Types of Autocomplete
+			</AppTypography>
 			<AppAutocomplete
 				value={value}
 				freeSolo={false}
-				options={suggestions}
+				options={suggestionsAutocomplete}
 				label="Autocomplete"
 				onSelectValue={handleChange}
 				loading={isLoading}
@@ -60,21 +68,23 @@ export default function AutocompleteExample() {
 				isOptionEqualToValue={(option, value) => (option as any)?.value}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 			/>
-			{/* <AppAutocomplete
-				options={suggestions}
-				label="Autocomplete"
+			<AppAutocomplete
+				options={suggestionsAutocomplete}
+				label="Multiple Autocomplete"
 				value={valueMultiple}
 				multiple
 				onSelectValue={handleMultipleChange}
 				loading={isLoading}
 				onInputValueChange={handleOnInputValueChange}
 				getOptionLabel={(option: any) => option?.label ?? ''}
-				isOptionEqualToValue={(option, value) => (option as any).value === value}
+				isOptionEqualToValue={(option, value) =>
+					(option as valueMultiple)?.value === (value as valueMultiple)?.value
+				}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 				variant="standard"
-			/> */}
+			/>
 			<AppAutocomplete
-				options={suggestions}
+				options={suggestionsAutocomplete}
 				label="Autocomplete"
 				onSelectValue={function (value: unknown): void {
 					throw new Error('Function not implemented.')
@@ -82,7 +92,7 @@ export default function AutocompleteExample() {
 				variant="filled"
 			/>
 			<AppAutocomplete
-				options={suggestions}
+				options={suggestionsAutocomplete}
 				label="Autocomplete"
 				onSelectValue={function (value: unknown): void {
 					throw new Error('Function not implemented.')

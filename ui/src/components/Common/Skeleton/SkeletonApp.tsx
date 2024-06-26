@@ -63,6 +63,7 @@ export const SkeletonApp: FC = () => {
 				justifyContent="end"
 				alignItems="center"
 				paddingX="2rem"
+				gap={2}
 			>
 				<Skeleton variant="circular" sx={{ bgcolor: 'grey.400' }} animation="wave" width={50} height={50}>
 					<Avatar />

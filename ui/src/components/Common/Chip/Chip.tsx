@@ -1,4 +1,4 @@
-import { colors } from '@/lib/design-tokens'
+import { colors, font } from '@/lib/design-tokens'
 import { Chip, ChipProps, ThemeOptions } from '@mui/material'
 import { FC } from 'react'
 
@@ -7,15 +7,15 @@ const AppChipTheme: ThemeOptions = {
 		MuiChip: {
 			styleOverrides: {
 				root: {
-					lineHeight: '1.6rem',
-					fontSize: '1.8rem'
+					lineHeight: font.sizes.fontSizeMedium,
+					fontSize: font.sizes.fontSizeMedium
 				}
 			},
 			variants: [
 				{
 					props: { variant: 'filled' },
 					style: {
-						color: colors.light.white
+						fontSize: font.sizes.fontSizeMedium
 					}
 				}
 			]

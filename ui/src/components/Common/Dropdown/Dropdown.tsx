@@ -1,3 +1,4 @@
+'use client'
 import {
 	Checkbox,
 	FormControl,
@@ -28,7 +29,6 @@ const AppDropdownTheme: ThemeOptions = {
 						alignItems: 'center',
 						display: 'flex'
 					},
-					color: 'black',
 					'& .MuiSvgIcon-fontSizeMedium ': {
 						fontSize: '4.5rem',
 						margin: '0',
@@ -57,6 +57,7 @@ interface AppDropDownProps {
 	helperText?: string
 	clearable?: boolean
 	width?: string | number
+	pills?: boolean
 }
 
 const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps>((props, ref) => {
@@ -74,7 +75,9 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 		multiline,
 		rows,
 		clearable = false,
-		width
+		width,
+		pills,
+		variant
 	} = props
 	const [open, setOpen] = useState(false)
 	const clearOption = () => {
@@ -115,6 +118,10 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 				}}
 				multiline={multiline}
 				rows={rows}
+				sx={{
+					borderRadius: pills ? '5rem' : undefined
+				}}
+				variant={variant}
 				renderValue={(selected) =>
 					multiple || Array.isArray(selected) ? (
 						<Typography variant="inherit">

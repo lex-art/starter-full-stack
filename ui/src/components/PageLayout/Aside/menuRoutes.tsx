@@ -29,7 +29,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'selects',
-				link: '#',
+				link: '/elements/selects',
 				icon: <AppIcons.SelectAllOutlined fontSize="small" color="primary" />
 			},
 			{

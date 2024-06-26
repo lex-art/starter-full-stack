@@ -1,11 +1,17 @@
 'use client'
-import { Autocomplete, AutocompleteProps, AutocompleteRenderInputParams, ThemeOptions } from '@mui/material'
+import {
+	Autocomplete,
+	AutocompleteProps,
+	AutocompleteRenderGetTagProps,
+	AutocompleteRenderInputParams,
+	ThemeOptions
+} from '@mui/material'
 import { SyntheticEvent, forwardRef } from 'react'
 import { font } from '@/lib/design-tokens'
 import AppGrid from '../Grid/Grid'
 import AppCircularLoader from '../CircularLoader/CicularLoader'
 import AppTextField, { AppTextFieldProps } from '../TextField/TextField'
-import { Padding } from '@mui/icons-material'
+import AppChip from '../Chip/Chip'
 
 export interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown, boolean, boolean, boolean>> {
 	label?: AppTextFieldProps['label']
@@ -22,7 +28,6 @@ export interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown,
 	warning?: boolean
 	disableClearable?: boolean
 	size?: 'small' | 'medium'
-	height?: 'small' | 'medium' | 'smaller'
 }
 
 const AppAutocompleteTheme: ThemeOptions = {
@@ -95,9 +100,10 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 				placeholder={placeholder}
 				label={label}
 				variant={variant}
+				multiline={props.multiple}
 				adornment={
 					loading ? (
-						<AppGrid marginX="0rem" mt="0.4rem">
+						<AppGrid marginX="0" mt="0.4rem">
 							<AppCircularLoader size={25} />
 						</AppGrid>
 					) : null
@@ -105,6 +111,13 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 				{...params}
 			/>
 		)
+
+		const renderTags = (tagValue: unknown[], getTagProps: AutocompleteRenderGetTagProps) => {
+			return tagValue.map((option: any, index: number) => (
+				<AppChip {...getTagProps({ index })} key={index} label={option?.label} />
+			))
+		}
+
 		const onChange = (_: SyntheticEvent<Element, Event>, newValue: unknown) => {
 			onSelectValue(newValue)
 		}
@@ -121,6 +134,7 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 				style={{ marginBottom: helperText ? '3rem' : '2rem' }}
 				renderInput={renderInput}
 				loading={loading}
+				renderTags={renderTags}
 				{...props}
 			/>
 		)

@@ -1,6 +1,7 @@
 import AppPaper from '@/components/Common/Containers/Paper'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
 import AppTextField from '@/components/Common/TextField/TextField'
+import AppTypography from '@/components/Common/Typography/Typography'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 
@@ -13,14 +14,10 @@ export default function GroupOne() {
 				padding: 2
 			}}
 		>
-			<AppFormLabel
-				focused
-				sx={{
-					fontWeight: 'bold'
-				}}
-			>
+			<AppTypography variant="body1" fontWeight="bold">
 				{t('components.textField')}
-			</AppFormLabel>
+			</AppTypography>
+
 			<AppTextField fullWidth label="Standard" variant="standard" />
 			<AppFormLabel
 				focused

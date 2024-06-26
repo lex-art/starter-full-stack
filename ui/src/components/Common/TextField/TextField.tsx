@@ -101,7 +101,7 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 					fontSize: font.sizes.fontSizeMedium,
 					'&.MuiInputLabel-outlined': {
 						'&.Mui-focused, &.MuiFormLabel-filled': {
-							transform: 'translate(14px, -2px) scale(0.9)'
+							transform: 'translate(14px, -5px) scale(0.9)'
 						}
 					},
 					'&.MuiInputLabel-standard': {
@@ -210,7 +210,8 @@ const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldPro
 			sx={{
 				'&.Mui-error': {
 					top: '-8%'
-				}
+				},
+				height: 'auto'
 			}}
 			variant={variant}
 			onBlur={onBlur}

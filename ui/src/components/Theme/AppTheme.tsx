@@ -12,6 +12,8 @@ import { AppDividerTheme } from '../Common/Divider/Divider'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
 import { AppIconsTheme } from '../Common/Icons/Icons'
 import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
+import { AppChipTheme } from '../Common/Chip/Chip'
+import { AppDropdownTheme } from '../Common/Dropdown/Dropdown'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -45,7 +47,9 @@ const AppThemeMUI = ({ children, window }: AppThemeProps) => {
 				AppDividerTheme,
 				AppListItemIconTheme,
 				AppIconsTheme,
-				AppFormLabelTheme
+				AppFormLabelTheme,
+				AppChipTheme,
+				AppDropdownTheme
 			),
 		[mode]
 	)
