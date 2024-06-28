@@ -11,7 +11,7 @@ const AppCheckboxTheme: ThemeOptions = {
 	components: {
 		MuiCheckbox: {
 			defaultProps: {
-				color: 'secondary'
+				color: 'primary'
 			},
 			styleOverrides: {
 				root: {

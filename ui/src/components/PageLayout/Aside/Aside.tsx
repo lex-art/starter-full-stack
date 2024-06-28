@@ -4,6 +4,7 @@ import MuiDrawer from '@mui/material/Drawer'
 import DraftsIcon from '@mui/icons-material/Drafts'
 import ListMenu from './ListMenu'
 import AppTypography from '@/components/Common/Typography/Typography'
+import AppBox from '@/components/Common/Containers/Box'
 
 interface AsideProps {
 	drawerWidth: number
@@ -53,8 +54,6 @@ const openedMixin = (theme: Theme, drawerWidth: number): CSSObject => ({
 })
 
 const Footer = styled('div')(({ theme }) => ({
-	position: 'absolute',
-	bottom: 0,
 	width: '100%',
 	display: 'flex',
 	alignItems: 'center',
@@ -103,7 +102,11 @@ export default function Aside({
 				</DrawerHeader>
 				<Divider />
 				<ListMenu drawerWidth={drawerWidth} open={open} />
-				<Footer>
+				<Footer
+					sx={{
+						marginTop: 'auto'
+					}}
+				>
 					<AppTypography>© Footer</AppTypography>
 				</Footer>
 			</Drawer>
@@ -132,8 +135,13 @@ export default function Aside({
 					<DraftsIcon fontSize="large" color="primary" />
 				</DrawerHeader>
 				<Divider />
+
 				<ListMenu drawerWidth={drawerWidth} handleDrawerClose={handleDrawerClose} open />
-				<Footer>
+				<Footer
+					sx={{
+						marginTop: 'auto'
+					}}
+				>
 					<AppTypography>© Footer</AppTypography>
 				</Footer>
 			</DraweMobile>

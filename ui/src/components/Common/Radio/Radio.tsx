@@ -1,9 +1,9 @@
-import { Checkbox, CheckboxProps, Radio, ThemeOptions } from '@mui/material'
+import { Radio, RadioProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
 import { font } from '@/lib/design-tokens'
 import AppFormControlLabel from '../FormControl/FormControlLabel'
 
-type AppCheckBoxProps = CheckboxProps & {
+type AppRadioProps = RadioProps & {
 	label: string
 }
 
@@ -11,7 +11,7 @@ const AppRadioTheme: ThemeOptions = {
 	components: {
 		MuiRadio: {
 			defaultProps: {
-				color: 'secondary'
+				color: 'primary'
 			},
 			styleOverrides: {
 				root: {
@@ -21,7 +21,7 @@ const AppRadioTheme: ThemeOptions = {
 		}
 	}
 }
-const AppRadio = forwardRef<HTMLDivElement, AppCheckBoxProps>((props, ref) => {
+const AppRadio = forwardRef<HTMLDivElement, AppRadioProps>((props, ref) => {
 	const { label, ...rest } = props
 	return <AppFormControlLabel ref={ref} label={label} control={<Radio {...rest} />} />
 })

@@ -6,4 +6,6 @@ const suggestionsArrayExample = [
 	{ name: 'Angola', value: 'AO' }
 ]
 
-export { suggestionsArrayExample }
+const checkBoxGroupExample = ['checkbox1', 'checkbox2', 'checkbox3', 'checkbox4', 'checkbox5']
+
+export { suggestionsArrayExample, checkBoxGroupExample }

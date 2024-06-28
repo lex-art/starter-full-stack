@@ -1,7 +1,7 @@
 import { Avatar, Skeleton, Typography, useMediaQuery } from '@mui/material'
 import { FC } from 'react'
 import styles from './styles.module.css'
-import AppGrid from '../Grid/Grid'
+import AppGrid from '@/components/Common/Grid/Grid'
 
 export const SkeletonApp: FC = () => {
 	return (

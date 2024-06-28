@@ -14,6 +14,10 @@ import { AppIconsTheme } from '../Common/Icons/Icons'
 import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
 import { AppChipTheme } from '../Common/Chip/Chip'
 import { AppDropdownTheme } from '../Common/Dropdown/Dropdown'
+import { AppCheckboxTheme } from '../Common/CheckBox/AppCheckBox'
+import { AppSwitchTheme } from '../Common/Switch/Switch'
+import { AppRadioTheme } from '../Common/Radio/Radio'
+import { AppRatingTheme } from '../Common/Rating/Rating'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -49,7 +53,11 @@ const AppThemeMUI = ({ children, window }: AppThemeProps) => {
 				AppIconsTheme,
 				AppFormLabelTheme,
 				AppChipTheme,
-				AppDropdownTheme
+				AppDropdownTheme,
+				AppCheckboxTheme,
+				AppRadioTheme,
+				AppSwitchTheme,
+				AppRatingTheme
 			),
 		[mode]
 	)

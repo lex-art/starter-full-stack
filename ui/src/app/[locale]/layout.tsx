@@ -1,7 +1,7 @@
 import { AppThemeMUI } from '@/components/Theme/AppTheme'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { ReactNode, StrictMode, Suspense } from 'react'
-import SkeletonApp from '@/components/Common/Skeleton/SkeletonApp'
+import SkeletonApp from '@/components/Skeleton/SkeletonApp'
 import { Roboto } from 'next/font/google'
 import PageLayout from '@/components/PageLayout/PageLayout'
 import { headers } from 'next/headers'

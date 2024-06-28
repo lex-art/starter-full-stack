@@ -1,10 +1,17 @@
 import AppCheckbox from '@/components/Common/CheckBox/AppCheckBox'
 import AppDivider from '@/components/Common/Divider/Divider'
 import AppGrid from '@/components/Common/Grid/Grid'
-import AppRadio from '@/components/Common/Radio/AppRadio'
+import AppRadio from '@/components/Common/Radio/Radio'
 import AppTypography from '@/components/Common/Typography/Typography'
-import { Radio } from '@mui/material'
 import React from 'react'
+import CustomSwitches from './Components/CustomSwitches'
+import { Favorite, FavoriteBorder } from '@mui/icons-material'
+import AppFormControl from '@/components/Common/FormControl/FormControl'
+import AppBox from '@/components/Common/Containers/Box'
+import AppFormGroup from '@/components/Common/FormControl/FormGroup'
+import AppFormLabel from '@/components/Common/FormControl/FormLabel'
+import CheclBoxGroup from './Components/CheckoxGroup'
+import AppRating from '@/components/Common/Rating/Rating'
 
 export default function Checkboxes() {
 	return (
@@ -27,6 +34,13 @@ export default function Checkboxes() {
 				}}
 			>
 				<AppCheckbox label="Checkbox" />
+				<AppCheckbox label="Checkbox custom" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+				<CheclBoxGroup />
+				<AppBox>
+					<AppRating label="Raiting samall" value={3} size="small" />
+					<AppRating label="Raiting medium" value={5} size="medium" />
+					<AppRating label="Raiing large" value={3} size="large" />
+				</AppBox>
 			</AppGrid>
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2" fontWeight="Bold">
@@ -46,6 +60,36 @@ export default function Checkboxes() {
 				}}
 			>
 				<AppRadio label="Radio" />
+				<AppBox>
+					<AppFormControl>
+						<AppFormLabel>Checkbox Group</AppFormLabel>
+						<AppFormGroup>
+							<AppRadio label="Radio 1" />
+							<AppRadio label="Radio 2" />
+							<AppRadio label="Radio 3" disabled />
+							<AppRadio label="Radio 4" size="small" />
+						</AppFormGroup>
+					</AppFormControl>
+				</AppBox>
+			</AppGrid>
+			<AppDivider marginY="0.5rem" textAlign="left">
+				<AppTypography variant="subtitle2" fontWeight="Bold">
+					Switches
+				</AppTypography>
+			</AppDivider>
+			<AppGrid
+				container
+				display="grid"
+				gap="2rem"
+				gridTemplateColumns={{
+					xs: '1fr',
+					sm: '1fr',
+					lg: '49% 1fr',
+					xl: '49% 1fr',
+					xxl: '49% 1fr'
+				}}
+			>
+				<CustomSwitches />
 			</AppGrid>
 		</AppGrid>
 	)
