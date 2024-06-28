@@ -16,6 +16,7 @@ import AppIcons from '../Icons/Icons'
 import AppMenuItem from '../Menu/MenuItem'
 import AppTypography from '../Typography/Typography'
 import { font } from '@/lib/design-tokens'
+import AppCircularLoader from '../CircularLoader/CicularLoader'
 
 const AppDropdownTheme: ThemeOptions = {
 	components: {
@@ -45,7 +46,23 @@ const AppDropdownTheme: ThemeOptions = {
 					height: '4.5rem',
 					width: '4rem'
 				}
-			}
+			},
+			variants: [
+				{
+					props: { variant: 'standard' },
+					style: {
+						'& .MuiSelect-select': {
+							padding: '1.5rem 1rem'
+						}
+					}
+				},
+				{
+					props: { size: 'small' },
+					style: {
+						top: '4%'
+					}
+				}
+			]
 		}
 	}
 }
@@ -58,12 +75,12 @@ interface AppDropDownProps {
 	clearable?: boolean
 	width?: string | number
 	pills?: boolean
+	loading?: boolean
 }
 
 const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps>((props, ref) => {
 	const t = useTranslations('common')
 	const {
-		options,
 		placeholder,
 		label,
 		onChange,
@@ -77,7 +94,11 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 		clearable = false,
 		width,
 		pills,
-		variant
+		variant,
+		options,
+		size,
+		autoWidth,
+		loading
 	} = props
 	const [open, setOpen] = useState(false)
 	const clearOption = () => {
@@ -87,12 +108,12 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 	}
 
 	return (
-		<FormControl fullWidth={!width} error={error} sx={{ width }}>
+		<FormControl fullWidth={!width} error={error} sx={{ width, my: 0.5 }}>
 			<InputLabel
-				id="TKB-select-label"
+				id="App-select-label"
 				sx={{
 					'&.Mui-error': {
-						top: '-9%'
+						top: '-1%'
 					}
 				}}
 			>
@@ -100,8 +121,8 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 			</InputLabel>
 			<Select
 				ref={ref}
-				labelId="TKB-select-label"
-				id="TKB-select"
+				labelId="App-select-label"
+				id="App-select"
 				value={value}
 				label={label}
 				placeholder={placeholder}
@@ -110,6 +131,7 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 				multiple={multiple}
 				disabled={disabled}
 				displayEmpty={open}
+				size={size}
 				onOpen={() => {
 					setOpen(true)
 				}}
@@ -139,10 +161,28 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 					clearable &&
 					value !== '' && (
 						<AppIconButton sx={{ right: 10 }} onClick={clearOption}>
-							<AppIcons.CloseOutlined />
+							<AppIcons.CloseOutlined
+								sx={{
+									height: '1.8rem',
+									width: '1.8rem'
+								}}
+							/>
 						</AppIconButton>
 					)
 				}
+				endAdornment={
+					loading && (
+						<AppCircularLoader
+							size={20}
+							width="auto"
+							sxGrid={{
+								mt: 1,
+								mr: 3.5
+							}}
+						/>
+					)
+				}
+				autoWidth={autoWidth}
 			>
 				<AppMenuItem value="" disabled>
 					<AppTypography variant="inherit">

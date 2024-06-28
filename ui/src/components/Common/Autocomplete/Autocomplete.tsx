@@ -114,7 +114,7 @@ const AppAutocomplete = forwardRef<HTMLDivElement, AppAutocompleteProps>(
 
 		const renderTags = (tagValue: unknown[], getTagProps: AutocompleteRenderGetTagProps) => {
 			return tagValue.map((option: any, index: number) => (
-				<AppChip {...getTagProps({ index })} key={index} label={option?.label} />
+				<AppChip {...getTagProps({ index })} key={index} label={option?.name} />
 			))
 		}
 

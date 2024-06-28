@@ -34,13 +34,13 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'checkboxes',
-				link: '#',
+				link: '/elements/checkboxes',
 				icon: <AppIcons.CheckBoxOutlined fontSize="small" color="primary" />
 			},
 			{
-				text: 'radios',
-				link: '#',
-				icon: <AppIcons.RadioButtonUncheckedOutlined fontSize="small" color="primary" />
+				text: 'calendar',
+				link: '/elements/calendar',
+				icon: <AppIcons.CalendarMonth fontSize="small" color="primary" />
 			},
 			{
 				text: 'icons',

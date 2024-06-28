@@ -35,7 +35,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined />}
+						adornment={<RemoveRedEyeOutlined fontSize="medium" />}
 					/>
 				</AppFormControl>
 				<AppFormControl>
@@ -52,7 +52,7 @@ export default function GroupTwo() {
 						variant="outlined"
 						placeholder="Search"
 						adornmentPosition="start"
-						adornment={<SearchOutlined />}
+						adornment={<SearchOutlined fontSize="medium" />}
 					/>
 				</AppFormControl>
 				<AppFormControl>
@@ -93,7 +93,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined />}
+						adornment={<RemoveRedEyeOutlined fontSize="medium" />}
 						disabled
 					/>
 				</AppFormControl>
@@ -111,7 +111,7 @@ export default function GroupTwo() {
 						variant="outlined"
 						placeholder="Search"
 						adornmentPosition="start"
-						adornment={<SearchOutlined />}
+						adornment={<SearchOutlined fontSize="medium" />}
 						disabled
 					/>
 				</AppFormControl>
@@ -153,14 +153,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						variant="standard"
 						placeholder="Search"
-						adornment={
-							<RemoveRedEyeOutlined
-								sx={{
-									width: '2rem',
-									height: '2rem'
-								}}
-							/>
-						}
+						adornment={<RemoveRedEyeOutlined fontSize="small" />}
 						size="small"
 					/>
 				</AppFormControl>
@@ -179,14 +172,7 @@ export default function GroupTwo() {
 						variant="outlined"
 						placeholder="Search"
 						adornmentPosition="start"
-						adornment={
-							<SearchOutlined
-								sx={{
-									width: '2rem',
-									height: '2rem'
-								}}
-							/>
-						}
+						adornment={<SearchOutlined fontSize="small" />}
 						size="small"
 					/>
 				</AppFormControl>

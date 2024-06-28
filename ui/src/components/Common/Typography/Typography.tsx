@@ -30,7 +30,7 @@ const AppTypographyTheme: ThemeOptions = {
 					style: {
 						fontSize: font.sizes.fontSubtitle,
 						fontWeight: 'bold',
-						lineHeight: 1.6,
+						lineHeight: 1.3,
 						whiteSpace: 'collapse',
 						overflowWrap: 'break-word',
 						wordWrap: 'break-word'

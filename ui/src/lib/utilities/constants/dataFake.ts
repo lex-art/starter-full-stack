@@ -1,4 +1,4 @@
-const suggestionsAutocomplete = [
+const suggestionsArrayExample = [
 	{ name: 'Afghanistan', value: 'AF' },
 	{ name: 'Albania', value: 'AL' },
 	{ name: 'Algeria', value: 'DZ' },
@@ -6,4 +6,4 @@ const suggestionsAutocomplete = [
 	{ name: 'Angola', value: 'AO' }
 ]
 
-export { suggestionsAutocomplete }
+export { suggestionsArrayExample }

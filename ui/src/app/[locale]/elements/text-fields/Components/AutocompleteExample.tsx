@@ -2,7 +2,7 @@
 import AppAutocomplete from '@/components/Common/Autocomplete/Autocomplete'
 import AppPaper from '@/components/Common/Containers/Paper'
 import AppTypography from '@/components/Common/Typography/Typography'
-import { suggestionsAutocomplete } from '@/lib/utilities/constants'
+import { suggestionsArrayExample } from '@/lib/utilities/constants'
 import { ClearIcon } from '@mui/x-date-pickers'
 import React, { useRef, useState } from 'react'
 
@@ -59,32 +59,32 @@ export default function AutocompleteExample() {
 			<AppAutocomplete
 				value={value}
 				freeSolo={false}
-				options={suggestionsAutocomplete}
+				options={suggestionsArrayExample}
 				label="Autocomplete"
 				onSelectValue={handleChange}
 				loading={isLoading}
 				onInputValueChange={handleOnInputValueChange}
-				getOptionLabel={(option: any) => option?.label ?? ''}
-				isOptionEqualToValue={(option, value) => (option as any)?.value}
+				getOptionLabel={(option: any) => option?.name ?? ''}
+				isOptionEqualToValue={(option, value) => (option as any)?.name}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 			/>
 			<AppAutocomplete
-				options={suggestionsAutocomplete}
+				options={suggestionsArrayExample}
 				label="Multiple Autocomplete"
 				value={valueMultiple}
 				multiple
 				onSelectValue={handleMultipleChange}
 				loading={isLoading}
 				onInputValueChange={handleOnInputValueChange}
-				getOptionLabel={(option: any) => option?.label ?? ''}
+				getOptionLabel={(option: any) => option?.name ?? ''}
 				isOptionEqualToValue={(option, value) =>
-					(option as valueMultiple)?.value === (value as valueMultiple)?.value
+					(option as valueMultiple)?.name === (value as valueMultiple)?.name
 				}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 				variant="standard"
 			/>
 			<AppAutocomplete
-				options={suggestionsAutocomplete}
+				options={suggestionsArrayExample}
 				label="Autocomplete"
 				onSelectValue={function (value: unknown): void {
 					throw new Error('Function not implemented.')
@@ -92,7 +92,7 @@ export default function AutocompleteExample() {
 				variant="filled"
 			/>
 			<AppAutocomplete
-				options={suggestionsAutocomplete}
+				options={suggestionsArrayExample}
 				label="Autocomplete"
 				onSelectValue={function (value: unknown): void {
 					throw new Error('Function not implemented.')

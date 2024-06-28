@@ -35,7 +35,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined />}
+						adornment={<RemoveRedEyeOutlined fontSize="small" />}
 						error
 						helperText="This is an error message"
 					/>
@@ -54,7 +54,7 @@ export default function TextFieldsError() {
 						variant="outlined"
 						placeholder="Search"
 						adornmentPosition="start"
-						adornment={<SearchOutlined />}
+						adornment={<SearchOutlined fontSize="small" />}
 						error
 						helperText="This is an error message"
 					/>

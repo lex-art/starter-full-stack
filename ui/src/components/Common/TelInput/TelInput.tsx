@@ -6,11 +6,12 @@ interface AppTelInputProps {
 	defaultCountryCode: MuiTelInputCountry
 }
 
-export const AppTelInput: FC<MuiTelInputProps & AppTelInputProps> = (props) => {
-	const { defaultCountryCode, ...rest } = props
+const AppTelInput: FC<MuiTelInputProps & AppTelInputProps> = (props) => {
+	const { defaultCountryCode, forceCallingCode, ...rest } = props
 	return (
 		<MuiTelInput
 			minRows={1}
+			forceCallingCode
 			inputProps={{
 				maxLength: MAX_LENGTH_NUMBER_PHONE[defaultCountryCode]
 			}}
@@ -21,4 +22,5 @@ export const AppTelInput: FC<MuiTelInputProps & AppTelInputProps> = (props) => {
 }
 
 AppTelInput.displayName = 'AppTelInput'
+export { AppTelInput }
 export default AppTelInput

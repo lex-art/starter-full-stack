@@ -23,7 +23,8 @@ const AppButtonThemeOptions: ThemeOptions = {
 			},
 			styleOverrides: {
 				root: {
-					borderRadius: '0.6rem'
+					borderRadius: '0.6rem',
+					paddingBottom: '0.4rem'
 				},
 				contained: {
 					fontSize: font.sizes.fontSizeMedium,
