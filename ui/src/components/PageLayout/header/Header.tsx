@@ -25,9 +25,9 @@ import { useRouter, usePathname } from '@/navigation'
 import { deepOrange } from '@mui/material/colors'
 import AppMenu from '@/components/Common/Menu/Menu'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
-import AppIconButton from '@/components/Common/IconButton/IconButton'
-import AppStyledBadge from '@/components/Common/Badge/Badge'
-import AppDivider from '@/components/Common/Divider/Divider'
+import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
+import AppStyledBadge from '@/components/Common/DataDisplay/Badge/Badge'
+import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import { Logout, PersonAdd } from '@mui/icons-material'
 const transformOrigin: PopoverOrigin | undefined = {
 	vertical: 'bottom',

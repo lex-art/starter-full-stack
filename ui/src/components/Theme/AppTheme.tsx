@@ -1,45 +1,61 @@
 'use client'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
-import { ReactNode, createContext, useMemo, useState } from 'react'
+import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
 import { paletteThemeOptions } from './theme'
 import { CssBaseline, PaletteMode, createTheme } from '@mui/material'
-import { AppButtonThemeOptions } from '../Common/Button/Button'
-import { AppTypographyTheme } from '../Common/Typography/Typography'
-import { AppAutocompleteTheme } from '../Common/Autocomplete/Autocomplete'
-import { AppTextFieldThemeOptions } from '../Common/TextField/TextField'
-import { AppDividerTheme } from '../Common/Divider/Divider'
+import { AppButtonThemeOptions } from '../Common/Inputs/Button/Button'
+import { AppTypographyTheme } from '../Common/DataDisplay/Typography/Typography'
+import { AppTextFieldThemeOptions } from '../Common/Inputs/TextField/TextField'
+import { AppDividerTheme } from '../Common/DataDisplay/Divider/Divider'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
 import { AppIconsTheme } from '../Common/Icons/Icons'
 import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
-import { AppChipTheme } from '../Common/Chip/Chip'
-import { AppDropdownTheme } from '../Common/Dropdown/Dropdown'
-import { AppCheckboxTheme } from '../Common/CheckBox/AppCheckBox'
-import { AppSwitchTheme } from '../Common/Switch/Switch'
-import { AppRadioTheme } from '../Common/Radio/Radio'
+import { AppChipTheme } from '../Common/DataDisplay/Chip/Chip'
+import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
 import { AppRatingTheme } from '../Common/Rating/Rating'
+import { AppSliderTheme } from '../Common/Inputs/Slider/Slider'
+import { AppStaticDatePickerTheme } from '../Common/Inputs/DatePicker/StaticDatePicker'
+import { AppDatePickerTheme } from '../Common/Inputs/DatePicker/DatePicker'
+import { AppTooltipTheme } from '../Common/DataDisplay/Tooltip/Tooltip'
+import { AppAutocompleteTheme } from '../Common/Inputs/Autocomplete/Autocomplete'
+import { AppDropdownTheme } from '../Common/Inputs/Dropdown/Dropdown'
+import { AppRadioTheme } from '../Common/Inputs/Radio/Radio'
+import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
+import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
 
 interface AppThemeProps {
 	children: ReactNode
-	window?: () => Window
+	//window?: Window
 }
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} })
 
-const AppThemeMUI = ({ children, window }: AppThemeProps) => {
-	const storageMode = (
-		window !== undefined ? () => window().localStorage.getItem('colorMode') : 'light'
-	) as PaletteMode
-	const [mode, setMode] = useState<PaletteMode>(storageMode)
+const AppThemeMUI = ({ children }: AppThemeProps) => {
+	const [mode, setMode] = useState<PaletteMode>('light')
+
 	const colorMode = useMemo(
 		() => ({
 			// The dark mode switch would invoke this method
 			toggleColorMode: () => {
-				setMode((prevMode: PaletteMode) => (prevMode === 'light' ? 'dark' : 'light'))
+				setMode((prevMode: PaletteMode) => {
+					const tempMode = prevMode === 'light' ? 'dark' : 'light'
+					window && window.localStorage.setItem('colorMode', tempMode)
+					return tempMode
+				})
 			}
 		}),
 		[]
 	)
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const savedMode = window.localStorage.getItem('colorMode') as PaletteMode
+			if (savedMode) {
+				setMode(savedMode)
+			}
+		}
+	}, [])
+
 	const theme = useMemo(
 		() =>
 			createTheme(
@@ -57,7 +73,12 @@ const AppThemeMUI = ({ children, window }: AppThemeProps) => {
 				AppCheckboxTheme,
 				AppRadioTheme,
 				AppSwitchTheme,
-				AppRatingTheme
+				AppRatingTheme,
+				AppSliderTheme,
+				AppStaticDatePickerTheme,
+				AppDatePickerTheme,
+				AppTooltipTheme,
+				AppMuiItemTheme
 			),
 		[mode]
 	)

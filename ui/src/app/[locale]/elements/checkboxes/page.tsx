@@ -1,17 +1,18 @@
-import AppCheckbox from '@/components/Common/CheckBox/AppCheckBox'
-import AppDivider from '@/components/Common/Divider/Divider'
-import AppGrid from '@/components/Common/Grid/Grid'
-import AppRadio from '@/components/Common/Radio/Radio'
-import AppTypography from '@/components/Common/Typography/Typography'
+import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
+import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
+import AppGrid from '@/components/Common/LAyout/Grid/Grid'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import React from 'react'
 import CustomSwitches from './Components/CustomSwitches'
-import { Favorite, FavoriteBorder } from '@mui/icons-material'
+import { Favorite, FavoriteBorder, VolumeDown, VolumeUp } from '@mui/icons-material'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
-import AppBox from '@/components/Common/Containers/Box'
+import AppBox from '@/components/Common/LAyout/Box'
 import AppFormGroup from '@/components/Common/FormControl/FormGroup'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
 import CheclBoxGroup from './Components/CheckoxGroup'
 import AppRating from '@/components/Common/Rating/Rating'
+import AppSlider from '@/components/Common/Inputs/Slider/Slider'
+import AppRadio from '@/components/Common/Inputs/Radio/Radio'
 
 export default function Checkboxes() {
 	return (
@@ -40,6 +41,14 @@ export default function Checkboxes() {
 					<AppRating label="Raiting samall" value={3} size="small" />
 					<AppRating label="Raiting medium" value={5} size="medium" />
 					<AppRating label="Raiing large" value={3} size="large" />
+					<AppSlider label="Slider whit icons" width={200} />
+					<AppSlider
+						label="Slider"
+						defaultValue={50}
+						width={200}
+						leftIcon={<VolumeDown />}
+						rightIcon={<VolumeUp />}
+					/>
 				</AppBox>
 			</AppGrid>
 			<AppDivider marginY="0.5rem" textAlign="left">

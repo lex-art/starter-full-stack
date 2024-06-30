@@ -3,8 +3,8 @@ import { Divider, styled, Theme, CSSObject, Drawer as DraweMobile } from '@mui/m
 import MuiDrawer from '@mui/material/Drawer'
 import DraftsIcon from '@mui/icons-material/Drafts'
 import ListMenu from './ListMenu'
-import AppTypography from '@/components/Common/Typography/Typography'
-import AppBox from '@/components/Common/Containers/Box'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppBox from '@/components/Common/LAyout/Box'
 
 interface AsideProps {
 	drawerWidth: number

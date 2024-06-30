@@ -1,6 +1,6 @@
 'use client'
-import AppCheckbox from '@/components/Common/CheckBox/AppCheckBox'
-import AppBox from '@/components/Common/Containers/Box'
+import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
+import AppBox from '@/components/Common/LAyout/Box'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
 import AppFormGroup from '@/components/Common/FormControl/FormGroup'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'

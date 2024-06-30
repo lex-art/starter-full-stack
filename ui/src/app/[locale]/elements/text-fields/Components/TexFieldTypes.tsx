@@ -1,11 +1,11 @@
 'use client'
 import React, { ChangeEvent } from 'react'
-import AppPaper from '@/components/Common/Containers/Paper'
-import { AppNumericField } from '@/components/Common/NumericField/NumericField'
-import AppTypography from '@/components/Common/Typography/Typography'
-import AppTelInput from '@/components/Common/TelInput/TelInput'
+import AppPaper from '@/components/Common/LAyout/Paper'
+import { AppNumericField } from '@/components/Common/Inputs/NumericField/NumericField'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppTelInput from '@/components/Common/Inputs/TelInput/TelInput'
 import { NumberFormatValues, OnValueChange } from 'react-number-format'
-import AppBox from '@/components/Common/Containers/Box'
+import AppBox from '@/components/Common/LAyout/Box'
 
 export default function TextFieldTypes() {
 	const [valueNumeric, setValueNumeric] = React.useState<number>()

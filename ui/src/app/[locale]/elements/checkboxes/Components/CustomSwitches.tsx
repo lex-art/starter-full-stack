@@ -1,8 +1,8 @@
 'use client'
-import AppCheckbox from '@/components/Common/CheckBox/AppCheckBox'
-import AppBox from '@/components/Common/Containers/Box'
+import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
+import AppBox from '@/components/Common/LAyout/Box'
 import AppSwitch from '@/components/Common/Switch/Switch'
-import AppTypography from '@/components/Common/Typography/Typography'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { Stack, Switch, styled } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
 

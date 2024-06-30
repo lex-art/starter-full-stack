@@ -1,9 +1,9 @@
-import AppBox from '@/components/Common/Containers/Box'
-import AppPaper from '@/components/Common/Containers/Paper'
+import AppBox from '@/components/Common/LAyout/Box'
+import AppPaper from '@/components/Common/LAyout/Paper'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
-import AppTextField from '@/components/Common/TextField/TextField'
-import AppTypography from '@/components/Common/Typography/Typography'
+import AppTextField from '@/components/Common/Inputs/TextField/TextField'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { RemoveRedEyeOutlined, SearchOutlined } from '@mui/icons-material'
 import { CircularProgress } from '@mui/material'
 import { useTranslations } from 'next-intl'
@@ -152,6 +152,7 @@ export default function GroupTwo() {
 					<AppTextField
 						fullWidth={false}
 						variant="standard"
+						label="Search"
 						placeholder="Search"
 						adornment={<RemoveRedEyeOutlined fontSize="small" />}
 						size="small"
@@ -170,9 +171,10 @@ export default function GroupTwo() {
 					<AppTextField
 						fullWidth={false}
 						variant="outlined"
+						label="Search"
 						placeholder="Search"
 						adornmentPosition="start"
-						adornment={<SearchOutlined fontSize="small" />}
+						//adornment={<SearchOutlined fontSize="small" />}
 						size="small"
 					/>
 				</AppFormControl>
@@ -188,6 +190,7 @@ export default function GroupTwo() {
 					<AppTextField
 						fullWidth={false}
 						variant="filled"
+						label="Search"
 						placeholder="Search"
 						adornment={
 							<CircularProgress

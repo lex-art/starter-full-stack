@@ -118,13 +118,7 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 	},
 	typography: {
 		fontFamily: robotoFont.style.fontFamily,
-		fontSize: font.sizes.fontSizeMedium,
-		h1: {
-			fontFamily: font.fontFamilyBold
-		},
-		h2: {
-			fontFamily: font.fontFamilyBold
-		}
+		fontSize: font.sizes.fontSizeMedium
 	}
 })
 

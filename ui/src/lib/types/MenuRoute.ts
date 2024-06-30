@@ -15,5 +15,6 @@ export interface IMenuRoute {
 	link?: string
 	rol?: Array<USER_ROLES>
 	icon?: ReactNode
+	defaultOpen?: boolean
 	subMenu?: Array<ISubMenuRoute>
 }

@@ -1,10 +1,10 @@
 'use client'
-import AppAutocomplete from '@/components/Common/Autocomplete/Autocomplete'
-import AppPaper from '@/components/Common/Containers/Paper'
-import AppTypography from '@/components/Common/Typography/Typography'
+import AppPaper from '@/components/Common/LAyout/Paper'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { suggestionsArrayExample } from '@/lib/utilities/constants'
 import { ClearIcon } from '@mui/x-date-pickers'
 import React, { useRef, useState } from 'react'
+import AppAutocomplete from '@/components/Common/Inputs/Autocomplete/Autocomplete'
 
 type valueMultiple = Record<string, unknown>
 

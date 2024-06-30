@@ -1,7 +1,7 @@
 import { font } from '@/lib/design-tokens'
 import { ThemeOptions } from '@mui/material'
 import MenuItem, { MenuItemProps } from '@mui/material/MenuItem'
-import { FC } from 'react'
+import { FC, forwardRef } from 'react'
 
 const AppMuiItemTheme: ThemeOptions = {
 	components: {
@@ -24,10 +24,15 @@ const AppMuiItemTheme: ThemeOptions = {
  * @param children: <ReactNode>: The content of the component.
  * @returns component
  */
-const AppMenuItem: FC<MenuItemProps> = ({ children, ...props }) => {
-	return <MenuItem {...props}>{children}</MenuItem>
-}
-
+const AppMenuItem: FC<MenuItemProps> = forwardRef<HTMLLIElement, MenuItemProps>(
+	({ children, ...props }, ref) => {
+		return (
+			<MenuItem ref={ref} {...props}>
+				{children}
+			</MenuItem>
+		)
+	}
+)
 AppMenuItem.displayName = 'TikalBoxMenuItem'
 export { AppMenuItem, AppMuiItemTheme }
 export default AppMenuItem

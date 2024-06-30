@@ -1,8 +1,9 @@
 import { FC } from 'react'
-//import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md'
-import { AppGrid, AppIcons } from '..'
+
 import styles from './AppPagination.module.css'
-import AppIconButton from '../IconButton/IconButton'
+import AppIconButton from '../Inputs/IconButton/IconButton'
+import AppGrid from '../LAyout/Grid/Grid'
+import AppIcons from '../Icons/Icons'
 
 interface AppPaginationProps {
 	page: number

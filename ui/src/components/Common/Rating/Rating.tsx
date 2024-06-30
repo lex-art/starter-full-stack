@@ -1,7 +1,7 @@
 import { Rating, RatingProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
 import { font } from '@/lib/design-tokens'
-import AppBox from '../Containers/Box'
+import AppBox from '../LAyout/Box'
 import AppFormLabel from '../FormControl/FormLabel'
 
 type AppRatingProps = RatingProps & {

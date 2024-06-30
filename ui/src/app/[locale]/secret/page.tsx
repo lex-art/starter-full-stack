@@ -1,4 +1,4 @@
-import AppGrid from '@/components/Common/Grid/Grid'
+import AppGrid from '@/components/Common/LAyout/Grid/Grid'
 import { useTranslations } from 'next-intl'
 
 export default function Secret() {

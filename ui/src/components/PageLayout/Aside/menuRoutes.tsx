@@ -44,17 +44,17 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'icons',
-				link: '#',
+				link: '/elements/icons',
 				icon: <AppIcons.AccessibilityNewOutlined fontSize="small" color="primary" />
 			},
 			{
 				text: 'chips',
-				link: '#',
+				link: '/elements/chips',
 				icon: <AppIcons.ChatOutlined fontSize="small" color="primary" />
 			},
 			{
 				text: 'typography',
-				link: '#',
+				link: '/elements/typography',
 				icon: <AppIcons.AbcOutlined fontSize="small" color="primary" />
 			}
 		]
@@ -62,12 +62,18 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 	{
 		text: 'components',
 		rol: [],
+		defaultOpen: true,
 		icon: <AppIcons.CarRentalOutlined />,
 		subMenu: [
 			{
 				text: 'cards',
-				link: '#',
+				link: '/components/cards',
 				icon: <AppIcons.CreditCardOutlined fontSize="small" color="primary" />
+			},
+			{
+				text: 'menu',
+				link: '/components/menu',
+				icon: <AppIcons.MenuOutlined fontSize="small" color="primary" />
 			},
 			{
 				text: 'tables',

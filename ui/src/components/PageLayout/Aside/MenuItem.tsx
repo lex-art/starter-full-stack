@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { ISubMenuRoute } from '@/lib/types/MenuRoute'
 import Icons from '@/components/Common/Icons/Icons'
 import { useRouter } from '@/navigation'
-import AppTypography from '@/components/Common/Typography/Typography'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppListItem from '@/components/Common/Menu/ListMenu/ListItem'
 import AppListItemButton from '@/components/Common/Menu/ListMenu/ListItemButton'
 import AppListItemIcon from '@/components/Common/Menu/ListMenu/ListItemIcon'
@@ -22,6 +22,7 @@ interface MenuItemProps {
 	openAside?: boolean
 	handleDrawerClose?(): void
 	section?: keyof typeof messages
+	defaultOpen?: boolean
 }
 
 export default function MenuItem({
@@ -32,10 +33,11 @@ export default function MenuItem({
 	submenu,
 	openAside,
 	handleDrawerClose,
-	section
+	section,
+	defaultOpen
 }: MenuItemProps) {
 	const t = useTranslations('common')
-	const [open, setOpen] = useState(true)
+	const [open, setOpen] = useState(defaultOpen ?? false)
 	const redirect = useRouter()
 
 	const handleClick = () => {

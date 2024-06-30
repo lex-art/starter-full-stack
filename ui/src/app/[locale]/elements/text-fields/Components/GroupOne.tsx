@@ -1,7 +1,7 @@
-import AppPaper from '@/components/Common/Containers/Paper'
+import AppPaper from '@/components/Common/LAyout/Paper'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
-import AppTextField from '@/components/Common/TextField/TextField'
-import AppTypography from '@/components/Common/Typography/Typography'
+import AppTextField from '@/components/Common/Inputs/TextField/TextField'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 
