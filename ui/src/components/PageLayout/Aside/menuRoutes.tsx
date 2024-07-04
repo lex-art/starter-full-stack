@@ -77,13 +77,13 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'tables',
-				link: '#',
+				link: '/components/tables',
 				icon: <AppIcons.TableChartOutlined fontSize="small" color="primary" />
 			},
 			{
-				text: 'calendar',
+				text: 'tabs',
 				link: '#',
-				icon: <AppIcons.DateRangeOutlined fontSize="small" color="primary" />
+				icon: <AppIcons.TabOutlined fontSize="small" color="primary" />
 			},
 			{
 				text: 'modals',

@@ -45,5 +45,9 @@
     "numbers": "Números",
     "phone": "Teléfono",
     "coins": "Monedas",
-    "typesInputs": "Tipos de entradas"
+    "typesInputs": "Tipos de entradas",
+    "tabs": "Pestañas",
+    "of": "de",
+    "rowsPerPage": "Filas por página",
+    "noResults": "Sin resultados"
 }

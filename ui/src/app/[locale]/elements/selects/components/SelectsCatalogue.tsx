@@ -1,8 +1,8 @@
 'use client'
-import AppDropdown from '@/components/Common/Dropdown/Dropdown'
+import AppDropdown from '@/components/Common/Inputs/Dropdown/Dropdown'
 import { suggestionsArrayExample } from '@/lib/utilities/constants'
 import { SelectChangeEvent } from '@mui/material'
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 
 interface SelectsCatalogueProps {
 	showError?: boolean
