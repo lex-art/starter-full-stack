@@ -31,9 +31,9 @@ const AppTablePaginationTheme: ThemeOptions = {
 				actions: {
 					button: {
 						svg: {
-							height: '3.5rem',
-							width: '3.5rem',
-							fontSize: '3rem'
+							height: '3rem',
+							width: '3rem',
+							fontSize: '2.5rem'
 						}
 					}
 				}
@@ -48,16 +48,18 @@ export interface AppTablePaginationProps {
 	page?: number
 	setPage?(newPage: number): void
 	setRowsPerPage?(rowsPerPage: number): void
+	rowsPerPageOptions?: number[]
 }
 const AppTablePagination: FC<AppTablePaginationProps> = ({
 	limit = 10,
 	total = 0,
 	page = 1,
 	setPage,
-	setRowsPerPage
+	setRowsPerPage,
+	rowsPerPageOptions
 }) => {
 	const t = useTranslations('common')
-	const [rowsPerPage, setRowsPerPageState] = useState(limit ?? 10)
+	const [rowsPerPage, setRowsPerPageState] = useState<number>(limit ?? 10)
 	const handleChangePage = (_: unknown, newPage: number) => {
 		setPage && setPage(newPage + 1)
 	}
@@ -70,7 +72,7 @@ const AppTablePagination: FC<AppTablePaginationProps> = ({
 
 	return (
 		<TablePagination
-			rowsPerPageOptions={[10, 25, 50]}
+			rowsPerPageOptions={rowsPerPageOptions ?? [10, 25, 50, { value: -1, label: t('all') }]}
 			component="div"
 			count={total}
 			rowsPerPage={rowsPerPage}

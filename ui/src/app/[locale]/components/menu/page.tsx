@@ -2,9 +2,9 @@
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppButton from '@/components/Common/Inputs/Button/Button'
-import AppBox from '@/components/Common/LAyout/Box'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
-import AppPaper from '@/components/Common/LAyout/Paper'
+import AppBox from '@/components/Common/Layout/Box'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppPaper from '@/components/Common/Layout/Paper'
 import AppListItem from '@/components/Common/Menu/ListMenu/ListItem'
 import AppMenu from '@/components/Common/Menu/Menu'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
@@ -51,13 +51,13 @@ export default function Menus() {
 		setContextMenu(
 			contextMenu === null
 				? {
-						mouseX: event.clientX + 2,
-						mouseY: event.clientY - 6
-					}
+					mouseX: event.clientX + 2,
+					mouseY: event.clientY - 6
+				}
 				: // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
-					// Other native context menus might behave different.
-					// With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
-					null
+				// Other native context menus might behave different.
+				// With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+				null
 		)
 	}
 

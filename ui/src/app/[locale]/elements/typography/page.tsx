@@ -1,7 +1,7 @@
-import AppBox from '@/components/Common/LAyout/Box'
-import AppPaper from '@/components/Common/LAyout/Paper'
+import AppBox from '@/components/Common/Layout/Box'
+import AppPaper from '@/components/Common/Layout/Paper'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import React from 'react'
 

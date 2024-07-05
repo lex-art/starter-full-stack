@@ -7,20 +7,22 @@ import AppTableContainer from '@/components/Common/DataDisplay/Table/TableContai
 import { AppTableHead } from '@/components/Common/DataDisplay/Table/TableHead'
 import AppTableRow from '@/components/Common/DataDisplay/Table/TableRow'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import AppBox from '@/components/Common/LAyout/Box'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
-import AppPaper from '@/components/Common/LAyout/Paper'
+import AppBox from '@/components/Common/Layout/Box'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppPaper from '@/components/Common/Layout/Paper'
 import AppDataTable, { HeadCell } from '@/components/DataTable/DataTable'
 import React from 'react'
 
 export const headerCells: Array<HeadCell> = [
 	{
 		id: 'address',
-		label: 'common.autocomplete'
+		label: 'common.autocomplete',
+		sortable: true
 	},
 	{
 		id: 'postalCode',
-		label: 'common.autocomplete'
+		label: 'common.autocomplete',
+		numeric: true
 	},
 	{
 		id: 'country',
@@ -28,7 +30,8 @@ export const headerCells: Array<HeadCell> = [
 	},
 	{
 		id: 'state',
-		label: 'components.tabs'
+		label: 'components.tabs',
+		colSpan: 3
 	},
 	{
 		id: 'createdDate',
@@ -77,7 +80,7 @@ export default function Tables() {
 									<AppTableCell>
 										<AppTypography fontWeight="bold">Header 3</AppTypography>
 									</AppTableCell>
-									<AppTableCell>
+									<AppTableCell rowSpan={2}>
 										<AppTypography fontWeight="bold">Header 4</AppTypography>
 									</AppTableCell>
 								</AppTableRow>
@@ -107,7 +110,7 @@ export default function Tables() {
 									<AppTableCell>
 										<AppTypography>Row 3</AppTypography>
 									</AppTableCell>
-									<AppTableCell>
+									<AppTableCell rowSpan={2}>
 										<AppTypography>Row 4</AppTypography>
 									</AppTableCell>
 								</AppTableRow>
@@ -190,7 +193,34 @@ export default function Tables() {
 					<AppTypography variant="body1" fontWeight="bold">
 						Data table
 					</AppTypography>
-					<AppDataTable headerCells={headerCells} rowsCells={[]} />
+					<AppDataTable
+						headerCells={headerCells}
+						rowsCells={[
+							{
+								id: 1,
+								hover: true,
+								data: {
+									address: 'address',
+									postalCode: 12345,
+									country: 'country',
+									state:
+										'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe necessitatibus laboriosam, illo vero ut beatae suscipit? Minima consequatur eum tenetur dolorem in ipsam rerum accusamus, ratione asperiores placeat! Quibusdam, inventore?',
+									createdDate: 'createdDate'
+								}
+							},
+							{
+								id: 2,
+								hover: true,
+								data: {
+									address: 'address 2',
+									postalCode: 1234567,
+									country: 'country 2',
+									state: 'state 2',
+									createdDate: 'createdDate 2'
+								}
+							}
+						]}
+					/>
 				</AppPaper>
 			</AppGrid>
 		</AppGrid>

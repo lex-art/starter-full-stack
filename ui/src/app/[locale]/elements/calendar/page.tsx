@@ -1,11 +1,11 @@
 'use client'
-import AppBox from '@/components/Common/LAyout/Box'
+import AppBox from '@/components/Common/Layout/Box'
 import AppDateCalendar from '@/components/Common/Inputs/DatePicker/DateCalendar'
 import AppDatePicker from '@/components/Common/Inputs/DatePicker/DatePicker'
 import AppStaticDatePicker from '@/components/Common/Inputs/DatePicker/StaticDatePicker'
 import AppTimePicker from '@/components/Common/Inputs/DatePicker/TimePicker'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import dayjs from 'dayjs'
 import React from 'react'
@@ -46,7 +46,7 @@ export default function Calendar() {
 					label="Date clerable"
 					defaultValue={dayjs(new Date())}
 					size="small"
-					onClear={() => {}}
+					onClear={() => { }}
 				/>
 				<AppTimePicker label="Basic date picker" />
 				<AppTimePicker label="Basic dates picker" size="small" variant="standard" />

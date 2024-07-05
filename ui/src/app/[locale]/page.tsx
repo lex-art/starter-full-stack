@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth'
 
 import { useLocale } from 'next-intl'
 import { Button, Typography } from '@mui/material'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 
 export default async function Index() {
 	const session = await getServerSession(configAuth)

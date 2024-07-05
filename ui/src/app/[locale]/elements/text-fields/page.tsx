@@ -1,5 +1,5 @@
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { useTranslations } from 'next-intl'
 import React from 'react'

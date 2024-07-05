@@ -1,5 +1,5 @@
-import AppBox from '@/components/Common/LAyout/Box'
-import AppPaper from '@/components/Common/LAyout/Paper'
+import AppBox from '@/components/Common/Layout/Box'
+import AppPaper from '@/components/Common/Layout/Paper'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'

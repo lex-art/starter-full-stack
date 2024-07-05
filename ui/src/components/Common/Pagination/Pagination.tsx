@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import styles from './AppPagination.module.css'
 import AppIconButton from '../Inputs/IconButton/IconButton'
-import AppGrid from '../LAyout/Grid/Grid'
+import AppGrid from '../Layout/Grid/Grid'
 import AppIcons from '../Icons/Icons'
 
 interface AppPaginationProps {

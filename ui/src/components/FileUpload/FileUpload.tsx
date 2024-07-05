@@ -14,7 +14,7 @@ import { useMediaQuery, useTheme } from '@mui/material'
 import classNames from 'classnames'
 import styles from './fileUpload.module.css'
 import { useTranslations } from 'next-intl'
-import AppGrid from '../Common/LAyout/Grid/Grid'
+import AppGrid from '../Common/Layout/Grid/Grid'
 import AppIconButton from '../Common/Inputs/IconButton/IconButton'
 import AppIcons from '../Common/Icons/Icons'
 import AppTypography from '../Common/DataDisplay/Typography/Typography'
@@ -131,11 +131,11 @@ export const FileUpload: FC<FileUploadProps> = ({
 				} else {
 					alert(
 						'El tamaño del archivo excede el límite permitido de: ' +
-							(limitZiseMB || 1024) / (1024 * 1024) +
-							' MB' +
-							' y el archivo tiene: ' +
-							(file.size / (1024 * 1024)).toFixed(2) +
-							' MB, por favor comprime tú archivo.'
+						(limitZiseMB || 1024) / (1024 * 1024) +
+						' MB' +
+						' y el archivo tiene: ' +
+						(file.size / (1024 * 1024)).toFixed(2) +
+						' MB, por favor comprime tú archivo.'
 					)
 				}
 			} else {
@@ -180,11 +180,11 @@ export const FileUpload: FC<FileUploadProps> = ({
 				} else {
 					alert(
 						'El tamaño del archivo excede el límite permitido de: ' +
-							(limitZiseMB || 1024) / (1024 * 1024) +
-							' MB' +
-							' y el archivo tiene: ' +
-							(file.size / (1024 * 1024)).toFixed(2) +
-							' MB, por favor comprime tú archivo.'
+						(limitZiseMB || 1024) / (1024 * 1024) +
+						' MB' +
+						' y el archivo tiene: ' +
+						(file.size / (1024 * 1024)).toFixed(2) +
+						' MB, por favor comprime tú archivo.'
 					)
 				}
 			} else {

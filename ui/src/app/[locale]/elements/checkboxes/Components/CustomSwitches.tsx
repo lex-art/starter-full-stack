@@ -1,6 +1,6 @@
 'use client'
 import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
-import AppBox from '@/components/Common/LAyout/Box'
+import AppBox from '@/components/Common/Layout/Box'
 import AppSwitch from '@/components/Common/Switch/Switch'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { Stack, Switch, styled } from '@mui/material'

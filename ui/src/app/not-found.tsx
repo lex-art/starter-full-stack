@@ -1,5 +1,5 @@
-import AppBox from '@/components/Common/LAyout/Box'
-import AppGrid from '@/components/Common/LAyout/Grid/Grid'
+import AppBox from '@/components/Common/Layout/Box'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { headers } from 'next/headers'
 

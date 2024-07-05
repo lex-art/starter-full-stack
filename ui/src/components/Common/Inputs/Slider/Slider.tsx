@@ -1,7 +1,7 @@
 import { Rating, RatingProps, Slide, Slider, SliderProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
 import { font } from '@/lib/design-tokens'
-import AppBox from '../../LAyout/Box'
+import AppBox from '../../Layout/Box'
 import AppFormLabel from '../../FormControl/FormLabel'
 
 interface AppSliderProps extends SliderProps {

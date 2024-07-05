@@ -1,5 +1,5 @@
 'use client'
-import AppPaper from '@/components/Common/LAyout/Paper'
+import AppPaper from '@/components/Common/Layout/Paper'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { suggestionsArrayExample } from '@/lib/utilities/constants'
 import { ClearIcon } from '@mui/x-date-pickers'

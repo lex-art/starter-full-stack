@@ -2,7 +2,7 @@
 import { Dialog, DialogActions, DialogContent, useMediaQuery } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import AppGrid from '../Common/LAyout/Grid/Grid'
+import AppGrid from '../Common/Layout/Grid/Grid'
 import AppIconButton from '../Common/Inputs/IconButton/IconButton'
 import AppIcons from '../Common/Icons/Icons'
 import AppTypography from '../Common/DataDisplay/Typography/Typography'

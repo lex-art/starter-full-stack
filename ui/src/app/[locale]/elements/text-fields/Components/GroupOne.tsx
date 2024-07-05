@@ -1,4 +1,4 @@
-import AppPaper from '@/components/Common/LAyout/Paper'
+import AppPaper from '@/components/Common/Layout/Paper'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'

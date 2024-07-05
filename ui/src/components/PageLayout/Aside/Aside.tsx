@@ -4,7 +4,7 @@ import MuiDrawer from '@mui/material/Drawer'
 import DraftsIcon from '@mui/icons-material/Drafts'
 import ListMenu from './ListMenu'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import AppBox from '@/components/Common/LAyout/Box'
+import AppBox from '@/components/Common/Layout/Box'
 
 interface AsideProps {
 	drawerWidth: number

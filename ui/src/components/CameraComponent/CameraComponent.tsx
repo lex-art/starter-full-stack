@@ -5,9 +5,9 @@ import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react
 import { Severity } from '@/lib/types/Severity'
 import { useTranslations } from 'next-intl'
 import AppButton from '../Common/Inputs/Button/Button'
-import AppGrid from '../Common/LAyout/Grid/Grid'
+import AppGrid from '../Common/Layout/Grid/Grid'
 import AppIcons from '../Common/Icons/Icons'
-import AppDropdown from '../Dropdown/Dropdown'
+import AppDropdown from '../../components/Common/Inputs/Dropdown/Dropdown'
 
 interface CameraComponentProps {
 	setImageSrc: Dispatch<SetStateAction<string | null>>
@@ -166,7 +166,7 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 					}}
 					startIcon={<AppIcons.PlayArrow />}
 				>
-					{t('startCamaera')}
+					{t('startCamera')}
 				</AppButton>
 			</AppGrid>
 			<AppGrid

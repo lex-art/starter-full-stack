@@ -23,6 +23,8 @@ import { AppDropdownTheme } from '../Common/Inputs/Dropdown/Dropdown'
 import { AppRadioTheme } from '../Common/Inputs/Radio/Radio'
 import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
 import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
+import { AppDataTableTheme } from '../DataTable/DataTable'
+import { AppTablePaginationTheme } from '../Common/TablePagination/TablePagination'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -78,7 +80,9 @@ const AppThemeMUI = ({ children }: AppThemeProps) => {
 				AppStaticDatePickerTheme,
 				AppDatePickerTheme,
 				AppTooltipTheme,
-				AppMuiItemTheme
+				AppMuiItemTheme,
+				AppDataTableTheme,
+				AppTablePaginationTheme
 			),
 		[mode]
 	)

@@ -4,7 +4,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "start:dev": "start http://localhost:3000 && next dev",
+    "start:dev": "next dev & (sleep 1 && (open http://localhost:3000 || start http://localhost:3000))",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

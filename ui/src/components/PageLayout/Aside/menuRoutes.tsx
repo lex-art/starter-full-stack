@@ -82,7 +82,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'tabs',
-				link: '#',
+				link: '/components/tabs',
 				icon: <AppIcons.TabOutlined fontSize="small" color="primary" />
 			},
 			{

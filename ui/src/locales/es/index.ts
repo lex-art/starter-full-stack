@@ -5,5 +5,5 @@ const locale = {
 	common,
 	components
 }
-
+export type Locale = typeof locale
 export default locale
