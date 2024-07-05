@@ -33,10 +33,7 @@ export default function Tabs() {
 				gap="2rem"
 				gridTemplateColumns={{
 					xs: '1fr',
-					sm: '1fr',
-					lg: '49% 1fr',
-					xl: '49% 1fr',
-					xxl: '49% 1fr'
+					sm: '1fr'
 				}}
 			>
 				<AppPaper
