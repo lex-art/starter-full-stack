@@ -25,6 +25,7 @@ import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
 import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
 import { AppDataTableTheme } from '../DataTable/DataTable'
 import { AppTablePaginationTheme } from '../Common/TablePagination/TablePagination'
+import { createAppTabTheme } from '../Tabs/Tab'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -82,7 +83,8 @@ const AppThemeMUI = ({ children }: AppThemeProps) => {
 				AppTooltipTheme,
 				AppMuiItemTheme,
 				AppDataTableTheme,
-				AppTablePaginationTheme
+				AppTablePaginationTheme,
+				createAppTabTheme(mode)
 			),
 		[mode]
 	)

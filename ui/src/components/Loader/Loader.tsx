@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { AppGrid } from '../Common'
 import AppCircularLoader from '../Common/FeedBack/CircularLoader/CircularLoader'
+import AppGrid from '../Common/Layout/Grid/Grid'
 
 interface ITBLoaderProps {
 	isLoading?: boolean

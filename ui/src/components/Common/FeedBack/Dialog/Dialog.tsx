@@ -1,53 +1,105 @@
-import { AlertColor, useMediaQuery } from '@mui/material'
+import { AlertColor, DialogTitle, useMediaQuery, useTheme } from '@mui/material'
 import Dialog, { DialogProps } from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import { ReactNode } from 'react'
 import AppAlert from '../Alert/Alert'
-import { colors } from '@/lib/design-tokens'
+import { colors, font } from '@/lib/design-tokens'
 import AppTypography from '../../DataDisplay/Typography/Typography'
+import AppIconButton from '../../Inputs/IconButton/IconButton'
+import AppIcons from '../../Icons/Icons'
 
 interface AppDialogProps {
-	titleText?: string
 	headerTitleSeverity?: AlertColor
 	actionButtons?: ReactNode
 	children: ReactNode
 	minWidth?: string
+	showCloseButton?: boolean
 }
 
 const AppDialog = ({
 	open,
 	onClose,
-	titleText,
+	title,
 	children,
 	actionButtons,
 	headerTitleSeverity,
 	minWidth,
 	fullScreen,
+	showCloseButton,
 	...rest
 }: DialogProps & AppDialogProps) => {
-	const isMobile: boolean = useMediaQuery('(min-width: 960px)')
+	const theme = useTheme()
+	const responsive = useMediaQuery(theme.breakpoints.down('md'))
 	return (
-		<Dialog open={open} onClose={onClose} fullScreen={fullScreen ?? !isMobile} {...rest}>
+		<Dialog
+			open={open}
+			onClose={onClose}
+			fullScreen={fullScreen ?? responsive}
+			transitionDuration={{
+				enter: 500,
+				exit: 500
+			}}
+			{...rest}
+		>
 			{headerTitleSeverity ? (
 				<AppAlert alertColor={headerTitleSeverity}>
-					<AppTypography variant="h4" fontFamily="RobotoBold" color={colors.light.textSecondary}>
-						{titleText}
-					</AppTypography>
+					<DialogTitle
+						sx={{
+							padding: '1rem 0'
+						}}
+						component="div"
+					>
+						<AppTypography variant="h4" fontWeight="bold">
+							{title}
+						</AppTypography>
+					</DialogTitle>
+					{showCloseButton && onClose && (
+						<AppIconButton
+							aria-label="close"
+							onClick={(event) => onClose(event, 'backdropClick')}
+							sx={{
+								position: 'absolute',
+								right: '8px',
+								top: '8px',
+								color: colors.light.textSecondary
+							}}
+						>
+							<AppIcons.Close />
+						</AppIconButton>
+					)}
 				</AppAlert>
 			) : (
-				<div
-					style={{
-						padding: '16px 24px 0px 24px',
-						fontSize: '1.9rem'
-					}}
-				>
-					<AppTypography variant="h4" fontFamily="RobotoBold" color={colors.light.textSecondary}>
-						{titleText}
-					</AppTypography>
-				</div>
+				<>
+					<DialogTitle
+						style={{
+							fontSize: font.sizes.fontSizeLarge
+						}}
+						component="div"
+					>
+						<AppTypography variant="h4" fontWeight="bold">
+							{title}
+						</AppTypography>
+					</DialogTitle>
+					{showCloseButton && onClose && (
+						<AppIconButton
+							aria-label="close"
+							onClick={(event) => onClose(event, 'backdropClick')}
+							sx={{
+								position: 'absolute',
+								right: '8px',
+								top: '8px',
+								color: colors.light.textSecondary
+							}}
+						>
+							<AppIcons.Close />
+						</AppIconButton>
+					)}
+				</>
 			)}
-			<DialogContent style={{ fontSize: '1.6rem', minWidth: minWidth ?? '600px' }}>{children}</DialogContent>
+			<DialogContent style={{ fontSize: font.sizes.fontSizeMedium, minWidth: minWidth ?? '600px' }}>
+				{children}
+			</DialogContent>
 			{actionButtons && <DialogActions sx={{ padding: '1.6rem' }}>{actionButtons}</DialogActions>}
 		</Dialog>
 	)

@@ -87,7 +87,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'modals',
-				link: '#',
+				link: '/components/modals',
 				icon: <AppIcons.DraftsOutlined fontSize="small" color="primary" />
 			},
 			{

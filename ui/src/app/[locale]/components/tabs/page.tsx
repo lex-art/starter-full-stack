@@ -53,13 +53,13 @@ export default function Tabs() {
 						</AppTabs>
 					</AppBox>
 					<AppCustomTabPanel value={value} index={0}>
-						Item One
+						<AppTypography variant="body1">Item One</AppTypography>
 					</AppCustomTabPanel>
 					<AppCustomTabPanel value={value} index={1}>
-						Item Two
+						<AppTypography variant="body1">Item Two</AppTypography>
 					</AppCustomTabPanel>
 					<AppCustomTabPanel value={value} index={2}>
-						Item Three
+						<AppTypography variant="body1">Item Three</AppTypography>
 					</AppCustomTabPanel>
 				</AppPaper>
 			</AppGrid>
