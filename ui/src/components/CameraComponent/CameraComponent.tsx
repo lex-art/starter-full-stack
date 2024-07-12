@@ -13,17 +13,17 @@ interface CameraComponentProps {
 	setImageSrc: Dispatch<SetStateAction<string | null>>
 	isStopCamera: boolean
 	setStopCamera: Dispatch<SetStateAction<boolean>>
-	isTackePhoto: boolean
-	setTackePhoto: Dispatch<SetStateAction<boolean>>
-	setCameraModalOpen: Dispatch<SetStateAction<boolean>>
+	isTakePhoto: boolean
+	setTakePhoto: Dispatch<SetStateAction<boolean>>
+	setCameraModalOpen?: Dispatch<SetStateAction<boolean>>
 }
 
 export const CameraComponent: FC<CameraComponentProps> = ({
 	setImageSrc,
 	isStopCamera,
 	setStopCamera,
-	isTackePhoto,
-	setTackePhoto,
+	isTakePhoto,
+	setTakePhoto,
 	setCameraModalOpen
 }) => {
 	const videoRef = useRef<HTMLVideoElement>(null)
@@ -50,13 +50,13 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 	}, [isStopCamera])
 
 	useEffect(() => {
-		if (isTackePhoto) {
+		if (isTakePhoto) {
 			takePhoto()
-			setTackePhoto(false)
+			setTakePhoto(false)
 			stopCamera()
-			setCameraModalOpen(false)
+			setCameraModalOpen && setCameraModalOpen(false)
 		}
-	}, [isTackePhoto])
+	}, [isTakePhoto])
 
 	const getPermission = async () => {
 		navigator.mediaDevices
@@ -161,7 +161,6 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 					onClick={startCamera}
 					variant="outlined"
 					sx={{
-						height: '5rem',
 						minWidth: '22rem'
 					}}
 					startIcon={<AppIcons.PlayArrow />}
@@ -187,7 +186,9 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 						height: isMobile ? '30rem' : '100%',
 						objectFit: 'cover'
 					}}
-				/>
+				>
+					<track kind="captions" srcLang="en" label="English" />
+				</video>
 			</AppGrid>
 		</AppGrid>
 	)

@@ -1,5 +1,5 @@
 'use client'
-import { Dialog, DialogActions, DialogContent, useMediaQuery } from '@mui/material'
+import { DialogActions, useMediaQuery } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import AppGrid from '../Common/Layout/Grid/Grid'
@@ -7,15 +7,17 @@ import AppIconButton from '../Common/Inputs/IconButton/IconButton'
 import AppIcons from '../Common/Icons/Icons'
 import AppTypography from '../Common/DataDisplay/Typography/Typography'
 import AppButton from '../Common/Inputs/Button/Button'
+import Image from 'next/image'
+import AppDialog from '../Common/FeedBack/Dialog/Dialog'
 
 interface AppImageViewerProps {
 	imageUrl: string
-	width?: string
+	width?: number | `${number}`
 	alt?: string
 	className?: string
 }
 
-const AppImageViewer = ({ imageUrl, alt = 'Image', width = '275rem', className }: AppImageViewerProps) => {
+const AppImageViewer = ({ imageUrl, alt = 'Image', width = 275, className }: AppImageViewerProps) => {
 	const t = useTranslations('common')
 	const [open, setOpen] = useState(false)
 	const isMobile: boolean = useMediaQuery('(min-width: 960px)')
@@ -26,7 +28,7 @@ const AppImageViewer = ({ imageUrl, alt = 'Image', width = '275rem', className }
 	const handleClose = () => {
 		setOpen(false)
 	}
-	const vefifyFileExt = (url: string, ext?: string) => {
+	const verifyFileExt = (url: string, ext?: string): boolean => {
 		const lastSlashIndex = url.lastIndexOf('/')
 		const questionMarkIndex = url.indexOf('?', lastSlashIndex)
 		const extension = url.substring(lastSlashIndex + 1, questionMarkIndex)
@@ -35,7 +37,7 @@ const AppImageViewer = ({ imageUrl, alt = 'Image', width = '275rem', className }
 
 	return (
 		<div>
-			{vefifyFileExt(imageUrl) ? (
+			{verifyFileExt(imageUrl) ? (
 				<AppGrid>
 					<AppIconButton onClick={handleOpen} color="secondary">
 						<AppIcons.PictureAsPdf
@@ -49,39 +51,44 @@ const AppImageViewer = ({ imageUrl, alt = 'Image', width = '275rem', className }
 					</AppIconButton>
 				</AppGrid>
 			) : (
-				<img
+				<Image
 					src={imageUrl}
 					alt={alt}
 					width={width}
+					height={width} // Set the height to match the width */
 					className={className}
 					style={{ borderRadius: '1rem', cursor: 'pointer' }}
 					onClick={handleOpen}
+					onKeyDown={handleOpen} // Add a keyboard listener
 				/>
 			)}
 
-			<Dialog fullScreen={!isMobile} open={open} onClose={handleClose} maxWidth="md">
-				<DialogContent>
-					{vefifyFileExt(imageUrl) ? (
-						<AppGrid width="50vw" height="90vh">
-							<object data={imageUrl + '#toolbar=0'} type="application/pdf" width="100%" height="100%">
-								<p>
-									Este navegador no soporta la visualización de PDFs. Por favor, descarga el PDF para verlo:{' '}
-									<a href={imageUrl}>Descargar PDF</a>.
-								</p>
-							</object>
-						</AppGrid>
-					) : (
-						<img src={imageUrl} alt="Imagen ampliada" style={{ width: '100%' }} />
-					)}
-				</DialogContent>
-				{!isMobile && (
-					<DialogActions>
+			<AppDialog
+				fullScreen={!isMobile}
+				open={open}
+				onClose={handleClose}
+				maxWidth="md"
+				actionButtons={
+					!isMobile && (
 						<AppButton variant="outlined" color="error" onClick={handleClose}>
 							Cerrar
 						</AppButton>
-					</DialogActions>
+					)
+				}
+			>
+				{verifyFileExt(imageUrl) ? (
+					<AppGrid width="50vw" height="90vh">
+						<object data={imageUrl + '#toolbar=0'} type="application/pdf" width="100%" height="100%">
+							<p>
+								Este navegador no soporta la visualización de PDFs. Por favor, descarga el PDF para verlo:{' '}
+								<a href={imageUrl}>Descargar PDF</a>.
+							</p>
+						</object>
+					</AppGrid>
+				) : (
+					<img src={imageUrl} alt="Imagen ampliada" style={{ width: '100%' }} />
 				)}
-			</Dialog>
+			</AppDialog>
 		</div>
 	)
 }

@@ -92,7 +92,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'uploadFile',
-				link: '#',
+				link: '/components/uploadFile',
 				icon: <AppIcons.FileUploadOutlined fontSize="small" color="primary" />
 			},
 			{

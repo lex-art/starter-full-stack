@@ -73,5 +73,10 @@
   "calendar": "Calendario",
   "snackbar": "Snackbar",
   "logout": "Cerrar sesión",
-  "all": "Todos"
+  "all": "Todos",
+  "fileSizeExceeded": "El tamaño del archivo excede el límite permitido de: {size}MB y el archivo tiene: {fileSize}MB, por favor comprime tú archivo.",
+  "fileNotValid": "El tipo de archivo no es permitido, por favor selecciona un archivo válido.",
+  "uploadMultipleFiles": "Subir múltiples archivos",
+  "uploadAnyFile": "Subir cualquier archivo",
+  "takePhotoWithCamera": "Tomar foto con cámara"
 }
