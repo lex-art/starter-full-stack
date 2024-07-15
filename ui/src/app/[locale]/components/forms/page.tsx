@@ -7,7 +7,7 @@ import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
 import React, { useState } from 'react'
-import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { simpleFormSchema } from './utils/validations/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -17,19 +17,20 @@ import AppStep from '@/components/Stepper/Step'
 import AppStepLabel from '@/components/Stepper/StepLabel'
 import AppIcons from '@/components/Common/Icons/Icons'
 import AppStepButton from '@/components/Stepper/StepButton'
-import AppStepContent from '@/components/Stepper/StepContent'
 import FormPart1 from './components/FormPar1'
 import FormPart2 from './components/FormPart2'
+import AppStepContent from '@/components/Stepper/StepContent'
+import { StepIconProps } from '@mui/material'
+import { arraySchema } from './utils/validations/arraySchema'
+import AppNumericField from '@/components/Common/Inputs/NumericField/NumericField'
+import AppBox from '@/components/Common/Layout/Box'
 
 type Schema = z.infer<typeof simpleFormSchema>
 type AdvancedSchema = z.infer<typeof advancedValidationSchema>
+type ArraySchema = z.infer<typeof arraySchema>
 
 export default function Forms() {
 	const [activeStep, setActiveStep] = useState(0)
-	const [completed, setCompleted] = useState<{
-		[k: number]: boolean
-	}>({})
-
 	const method = useForm<Schema>({
 		resolver: zodResolver(simpleFormSchema)
 	})
@@ -42,6 +43,31 @@ export default function Forms() {
 	})
 	const { handleSubmit: handleSubmit2 } = methods2
 
+	const methods3 = useForm<ArraySchema>({
+		resolver: zodResolver(arraySchema),
+		defaultValues: {
+			fields: [
+				{
+					name: '',
+					age: null,
+					relationship: ''
+				}
+			]
+		}
+	})
+	const { handleSubmit: handleSubmit3, control: control3 } = methods3
+	const { fields, append, remove } = useFieldArray({
+		control: control3,
+		name: 'fields',
+		rules: {
+			validate: (value) => {
+				if (value.length < 1) {
+					return 'At least 1 field is required'
+				}
+				return true
+			}
+		}
+	})
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
 	}
@@ -51,6 +77,14 @@ export default function Forms() {
 	}
 	const handleStep = (step: number) => () => {
 		setActiveStep(step)
+	}
+
+	const AddIcon = (props: StepIconProps) => {
+		const { active, completed, className } = props
+		if (completed) {
+			return <AppIcons.CheckCircle color="success" className={className} />
+		}
+		return <AppIcons.Add className={className} color={active ? 'info' : 'inherit'} />
 	}
 	return (
 		<AppGrid item width="100%">
@@ -140,55 +174,179 @@ export default function Forms() {
 					</AppTypography>
 					<FormProvider {...methods2}>
 						<form onSubmit={handleSubmit2((data) => console.log(data))}>
-							<AppStepper alternativeLabel nonLinear activeStep={activeStep}>
-								<AppStep>
-									<AppStepLabel
-										key={0}
-										StepIconComponent={AppIcons.Add}
-										StepIconProps={{
-											active: activeStep === 0,
-											completed: completed[0],
-											icon: <AppIcons.Add color="primary" />
-										}}
-										/* StepIconProps={{
-											classes: {
-												active: 
-											}
-										}} */
-									>
-										Add Info
-									</AppStepLabel>
-									<AppStepContent>
+							<AppStepper alternativeLabel activeStep={activeStep} orientation="horizontal">
+								<AppStep key="addKey">
+									<AppStepLabel StepIconComponent={AddIcon}>Add Info</AppStepLabel>
+									<AppStepContent currentStep={activeStep === 0}>
 										<FormPart1 />
-										<AppButton onClick={handleNext}>Next</AppButton>
+										<AppButton onClick={handleNext} color="secondary">
+											Next
+										</AppButton>
 									</AppStepContent>
 								</AppStep>
-								<AppStep>
+
+								<AppStep key="step2">
 									<AppStepLabel
-										key={1}
-										StepIconComponent={AppIcons.Settings}
-										StepIconProps={{
-											active: activeStep === 1,
-											completed: completed[1]
+										StepIconComponent={(props: StepIconProps) => {
+											const { active, completed, className } = props
+											if (completed) {
+												return <AppIcons.CheckCircle color="success" className={className} />
+											}
+											return <AppIcons.Settings className={className} color={active ? 'info' : 'inherit'} />
 										}}
 									>
 										Step 2
 									</AppStepLabel>
-									<AppStepContent>
+									<AppStepContent currentStep={activeStep === 1}>
 										<FormPart2 />
+										<AppButton onClick={handleNext}>Next</AppButton>
+										<AppButton onClick={handleBack} color="secondary">
+											Back
+										</AppButton>
 									</AppStepContent>
 								</AppStep>
-								<AppStep>
-									<AppStepButton key={2} icon={<AppIcons.Send />} color="inherit" onClick={handleStep(2)}>
+								<AppStep key="step3">
+									<AppStepButton
+										icon={<AppIcons.Send color={activeStep === 2 ? 'info' : 'inherit'} />}
+										onClick={handleStep(2)}
+									>
 										Step 3
 									</AppStepButton>
-									<AppStepContent>
+									<AppStepContent currentStep={activeStep === 2}>
 										<AppButton type="submit">Send Form</AppButton>
+										<AppButton onClick={handleBack} color="secondary">
+											Back
+										</AppButton>
 									</AppStepContent>
 								</AppStep>
 							</AppStepper>
 						</form>
 					</FormProvider>
+				</AppPaper>
+			</AppGrid>
+			<AppDivider marginY="0.5rem" textAlign="left">
+				<AppTypography
+					variant="subtitle2"
+					sx={{
+						whiteSpace: 'nowrap'
+					}}
+				>
+					Array Field
+				</AppTypography>
+			</AppDivider>
+			<AppGrid container display="grid" gap="2rem">
+				<AppPaper
+					elevation={5}
+					sx={{
+						padding: 2
+					}}
+				>
+					<AppTypography variant="body1" fontWeight="bold">
+						Array field
+					</AppTypography>
+					<form onSubmit={handleSubmit3((data) => console.log(data))}>
+						<AppBox>
+							{fields.map((item, index) => (
+								<AppFormGroup key={item.id}>
+									<Controller
+										control={control3}
+										name={`fields.${index}.name`}
+										render={({ field, fieldState: { error } }) => (
+											<AppTextField label="Name" {...field} error={!!error} helperText={error?.message} />
+										)}
+									/>
+									<Controller
+										control={control3}
+										name={`fields.${index}.age`}
+										render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+											<AppNumericField
+												label="Age"
+												value={value ? value.toString() : null}
+												onChange={(values) => onChange(values.floatValue)}
+												onBlur={onBlur}
+												error={!!error}
+												helperText={error?.message}
+											/>
+										)}
+									/>
+									<Controller
+										control={control3}
+										name={`fields.${index}.relationship`}
+										render={({ field, fieldState: { error } }) => (
+											<AppTextField
+												label="Relationship"
+												{...field}
+												error={!!error}
+												helperText={error?.message}
+											/>
+										)}
+									/>
+									<AppButton
+										onClick={() => remove(index)}
+										color="error"
+										/* sx={{
+											gridColumn: {
+												xs: 'span 2',
+												sm: 'span 2',
+												md: 'span 1'
+											},
+											justifySelf: {
+												xs: 'center',
+												sm: 'center',
+												md: 'stretch'
+											}
+										}} */
+									>
+										Remove
+									</AppButton>
+								</AppFormGroup>
+							))}
+							<AppFormGroup
+								sx={{
+									m: 3,
+									gap: '1rem'
+								}}
+							>
+								<AppButton
+									onClick={() => append({ name: '', age: null, relationship: '' })}
+									sx={{
+										width: '50%',
+										gridColumn: {
+											xs: 'span 2',
+											sm: 'span 2',
+											md: 'span 1'
+										},
+										justifySelf: {
+											xs: 'center',
+											sm: 'center',
+											md: 'stretch'
+										}
+									}}
+								>
+									Add
+								</AppButton>
+								<AppButton
+									type="submit"
+									color="info"
+									sx={{
+										width: '50%',
+										gridColumn: {
+											xs: 'span 2',
+											sm: 'span 2',
+											md: 'span 1'
+										},
+										justifySelf: {
+											xs: 'center',
+											sm: 'center',
+											md: 'stretch'
+										}
+									}}
+								>
+									Submit
+								</AppButton>
+							</AppFormGroup>
+						</AppBox>
+					</form>
 				</AppPaper>
 			</AppGrid>
 		</AppGrid>

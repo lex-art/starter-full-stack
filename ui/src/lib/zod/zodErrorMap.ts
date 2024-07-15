@@ -1,5 +1,6 @@
 import { ZodIssueCode, ZodParsedType, defaultErrorMap, ZodErrorMap } from 'zod'
 import { useTranslations } from 'next-intl'
+import path from 'path'
 
 const jsonStringifyReplacer = (_: string, value: unknown): unknown => {
 	if (typeof value === 'bigint') {
@@ -57,7 +58,7 @@ export const makeZodI18nMap: MakeZodI18nMap = (option) => (issue, ctx) => {
 	let message: string
 	message = defaultErrorMap(issue, ctx).message
 
-	const path = issue.path.length > 0 && !!tForm ? { path: tForm(issue.path.join('.') as any) } : {}
+	const path = issue.path.length > 0 && !!tForm ? { path: tForm(issue.path.join('.') as any) } : { path: '' }
 
 	switch (issue.code) {
 		case ZodIssueCode.invalid_type:

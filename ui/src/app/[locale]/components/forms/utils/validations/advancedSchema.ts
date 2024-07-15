@@ -10,14 +10,14 @@ const VALUES: [Property, ...Property[]] = [
 	...countries.slice(1).map((p) => p.value)
 ]
 const advancedValidationSchema = z.object({
-	name: z.string().min(2, { message: 'Name must be at least 2 characters' }).optional(),
-	email: z.string().email({ message: 'Invalid email' }),
-	password: z.string().min(8, { message: 'Password must be at least 8 characters' }),
+	name: z.string().min(2).optional(),
+	email: z.string().email(),
+	password: z.string().min(8),
 	birthDate: z.date().max(new Date(), { message: 'Invalid date' }),
-	weight: z.number().min(0, { message: 'Weight must be at least 0' }),
-	plan: z.string().min(2, { message: 'Plan must be at least 2 characters' }),
-	phone: z.string().min(10, { message: 'Phone number must be at least 10 characters' }),
-	country: z.enum(VALUES)
+	weight: z.number().min(0),
+	plan: z.string().min(2),
+	phone: z.string().min(10),
+	country: z.enum(VALUES).default('')
 })
 
 export { advancedValidationSchema }

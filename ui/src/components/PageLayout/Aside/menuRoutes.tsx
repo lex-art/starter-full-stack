@@ -102,12 +102,12 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'skeleton',
-				link: '#',
+				link: '/components/skeleton',
 				icon: <AppIcons.Face2Outlined fontSize="small" color="primary" />
 			},
 			{
 				text: 'snackbar',
-				link: '#',
+				link: '/components/snackbar',
 				icon: <AppIcons.NotificationAddOutlined fontSize="small" color="primary" />
 			}
 		]

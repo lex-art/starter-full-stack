@@ -1,8 +1,15 @@
 import { Box, BoxProps } from '@mui/material'
-import { FC } from 'react'
+import { ForwardedRef, forwardRef } from 'react'
 
-const AppBox: FC<BoxProps> = ({ children, ...props }) => {
-	return <Box {...props}>{children}</Box>
-}
+const AppBox = forwardRef<HTMLDivElement, BoxProps>(
+	({ children, ...rest }, ref: ForwardedRef<HTMLDivElement>) => {
+		return (
+			<Box ref={ref} {...rest}>
+				{children}
+			</Box>
+		)
+	}
+)
 
+AppBox.displayName = 'AppBox'
 export default AppBox

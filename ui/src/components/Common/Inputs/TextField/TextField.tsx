@@ -50,7 +50,7 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 				root: {
 					fontSize: font.sizes.fontSizeMedium + 2,
 					height: sizes.medium,
-					margin: '0.5rem 0',
+					margin: '0.7rem 0',
 					padding: '0',
 					'&.MuiOutlinedInput-root': {
 						paddingLeft: '0.5rem'
@@ -59,7 +59,7 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 						padding: '0 .9rem'
 					},
 					'& .MuiOutlinedInput-notchedOutline > legend': {
-						fontSize: font.sizes.fontSizeSmall + 1
+						fontSize: font.sizes.fontSizeMedium
 					},
 					//for number input
 					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
@@ -72,13 +72,13 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 				sizeSmall: {
 					fontSize: font.sizes.fontSizeSmall,
 					height: sizes.small,
-					margin: '0.8rem 0',
+					margin: '1rem 0',
 					padding: '0',
 					'& .MuiOutlinedInput-notchedOutline': {
 						padding: '0 .9rem'
 					},
 					'& .MuiOutlinedInput-notchedOutline > legend': {
-						fontSize: font.sizes.fontSizeMedium - 2.5
+						fontSize: font.sizes.fontSizeMedium - 1
 					},
 					//for number input
 					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
@@ -101,15 +101,15 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 		MuiInputLabel: {
 			styleOverrides: {
 				root: {
-					fontSize: font.sizes.fontSizeMedium,
+					fontSize: font.sizes.fontSizeMedium + 2,
 					'&.MuiInputLabel-outlined': {
 						'&.Mui-focused, &.MuiFormLabel-filled': {
-							transform: 'translate(14px, -5px) scale(0.9)'
+							transform: 'translate(14px, -4px) scale(0.9)'
 						}
 					},
 					'&.MuiInputLabel-standard': {
 						'&.Mui-focused, &.MuiFormLabel-filled': {
-							transform: 'translate(0, 5px) scale(0.9)'
+							transform: 'translate(0, 4px) scale(0.9)'
 						}
 					},
 					'&.MuiInputLabel-filled': {
