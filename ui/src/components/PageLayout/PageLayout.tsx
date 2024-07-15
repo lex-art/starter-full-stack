@@ -4,7 +4,7 @@ import AsideHeaderClient from './AsideHeaderClient'
 import AppBreadcrumb from '../Breadcrumb/BreadCrumb'
 
 type Props = {
-	children?: ReactNode
+	readonly children?: ReactNode
 }
 const drawerWidth = 25
 

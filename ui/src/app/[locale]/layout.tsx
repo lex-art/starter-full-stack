@@ -8,8 +8,8 @@ import { headers } from 'next/headers'
 import { locales } from '@/navigation'
 import Head from 'next/head'
 type Props = {
-	children: ReactNode
-	params: { locale: string }
+	readonly children: ReactNode
+	readonly params: { locale: string }
 }
 
 const roboto = Roboto({

@@ -150,7 +150,7 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 						name: camera?.label,
 						value: camera?.deviceId
 					}))}
-					value={selectedCamera || ''}
+					value={selectedCamera ?? ''}
 					label={t('selectCamera')}
 					width={isMobile ? '30rem' : '100%'}
 					onChange={(event: SelectChangeEvent<unknown>) => {

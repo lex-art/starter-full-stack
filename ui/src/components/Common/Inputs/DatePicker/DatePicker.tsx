@@ -6,10 +6,10 @@ import { IconButton, TextFieldProps } from '@mui/material'
 import { ThemeOptions, styled } from '@mui/material/styles'
 import { LocalizationProvider, PickersDay } from '@mui/x-date-pickers'
 import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker'
-import type {} from '@mui/x-date-pickers/themeAugmentation'
-import dayjs from 'dayjs'
 import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded'
+import { Dayjs } from 'dayjs'
 import 'dayjs/locale/es'
+import type {} from '@mui/x-date-pickers/themeAugmentation'
 
 const AppDatePickerTheme: ThemeOptions = {
 	components: {
@@ -51,7 +51,7 @@ const StyledDay = styled(PickersDay)(({ theme }) => ({
 	}
 }))
 
-interface IDatePickerProps extends DatePickerProps<dayjs.Dayjs> {
+interface IDatePickerProps extends DatePickerProps<Dayjs> {
 	error?: boolean
 	helperText?: string
 	variant?: 'standard' | 'outlined' | 'filled'

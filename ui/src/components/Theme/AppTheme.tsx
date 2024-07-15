@@ -26,6 +26,8 @@ import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
 import { AppDataTableTheme } from '../DataTable/DataTable'
 import { AppTablePaginationTheme } from '../Common/TablePagination/TablePagination'
 import { createAppTabTheme } from '../Tabs/Tab'
+import { AppFormGroupThem } from '../Common/FormControl/FormGroup'
+import { AppStepLabelThem } from '../Stepper/StepLabel'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -84,7 +86,9 @@ const AppThemeMUI = ({ children }: AppThemeProps) => {
 				AppMuiItemTheme,
 				AppDataTableTheme,
 				AppTablePaginationTheme,
-				createAppTabTheme(mode)
+				createAppTabTheme(mode),
+				AppFormGroupThem,
+				AppStepLabelThem
 			),
 		[mode]
 	)

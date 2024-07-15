@@ -1,9 +1,11 @@
 import common from './common.json'
 import components from './components.json'
+import zod from './zod.json'
 
 const en = {
 	common,
-	components
+	components,
+	zod
 }
 
 export default en

@@ -1,5 +1,4 @@
 'use client'
-import AppBox from '@/components/Common/Layout/Box'
 import AppDateCalendar from '@/components/Common/Inputs/DatePicker/DateCalendar'
 import AppDatePicker from '@/components/Common/Inputs/DatePicker/DatePicker'
 import AppStaticDatePicker from '@/components/Common/Inputs/DatePicker/StaticDatePicker'
@@ -44,9 +43,12 @@ export default function Calendar() {
 				<AppDatePicker label="Date readonly" defaultValue={dayjs(new Date())} size="medium" readOnly />
 				<AppDatePicker
 					label="Date clerable"
+					value={dayjs(new Date())}
 					defaultValue={dayjs(new Date())}
 					size="small"
-					onClear={() => { }}
+					onClear={() => {
+						return
+					}}
 				/>
 				<AppTimePicker label="Basic date picker" />
 				<AppTimePicker label="Basic dates picker" size="small" variant="standard" />

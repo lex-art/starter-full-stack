@@ -1,4 +1,4 @@
-import { Avatar, Skeleton, Typography, useMediaQuery } from '@mui/material'
+import { Avatar, Skeleton, Typography } from '@mui/material'
 import { FC } from 'react'
 import styles from './styles.module.css'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
@@ -15,10 +15,7 @@ export const SkeletonApp: FC = () => {
 			gridTemplateAreas={{ xs: '"header" "main"', sm: '"aside header" "aside main"' }}
 			gridTemplateRows="7rem 1fr"
 		>
-			<AppGrid
-				sx={{ bgcolor: 'grey.800', display: { xs: 'none', sm: 'block' } }}
-				className={styles.asideSkeleton}
-			>
+			<AppGrid sx={{ bgcolor: 'grey.800', display: { xs: 'none', sm: 'block' } }}>
 				<Skeleton sx={{ bgcolor: 'grey.400' }} variant="rectangular" width="100%">
 					<div style={{ paddingTop: '7rem' }} />
 				</Skeleton>

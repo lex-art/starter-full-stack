@@ -97,7 +97,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'forms',
-				link: '#',
+				link: '/components/forms',
 				icon: <AppIcons.ChecklistOutlined fontSize="small" color="primary" />
 			},
 			{

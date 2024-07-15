@@ -1,6 +1,10 @@
 export const font = {
 	fontFamily: 'RobotoRegular',
 	fontFamilyBold: 'RobotoBold',
+	weights: {
+		regular: 400,
+		bold: 700
+	},
 	sizes: {
 		fontSizeXLarge: 24,
 		fontSizeLarge: 18,

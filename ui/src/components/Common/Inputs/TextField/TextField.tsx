@@ -1,4 +1,4 @@
-import { colors, font } from '@/lib/design-tokens'
+import { colors, font, sizes } from '@/lib/design-tokens'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import { ThemeOptions } from '@mui/material/styles'
@@ -49,7 +49,7 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 			styleOverrides: {
 				root: {
 					fontSize: font.sizes.fontSizeMedium + 2,
-					height: '3.9rem',
+					height: sizes.medium,
 					margin: '0.5rem 0',
 					padding: '0',
 					'&.MuiOutlinedInput-root': {
@@ -71,7 +71,7 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 				},
 				sizeSmall: {
 					fontSize: font.sizes.fontSizeSmall,
-					height: '3rem',
+					height: sizes.small,
 					margin: '0.8rem 0',
 					padding: '0',
 					'& .MuiOutlinedInput-notchedOutline': {
