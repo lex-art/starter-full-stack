@@ -62,60 +62,58 @@ interface IDatePickerProps extends DatePickerProps<Dayjs> {
 const AppDatePicker: FC<IDatePickerProps> = forwardRef<HTMLDivElement, IDatePickerProps>(
 	({ error, helperText, variant, size, onClear, ...rest }, ref) => {
 		return (
-			<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
-				<DatePicker
-					ref={ref}
-					slots={{
-						openPickerIcon: EditCalendarRoundedIcon,
-						openPickerButton: StyledButton,
-						day: StyledDay as any
-					}}
-					slotProps={{
-						openPickerIcon: { fontSize: '1.5rem' },
-						popper: { color: 'secondary' },
-						textField: {
-							error,
-							helperText,
-							variant,
-							size
-						},
-						field: {
-							clearable: !!onClear,
-							onClear
-						},
-						layout: {
-							sx: {
-								'&.MuiButtonBase-root': {
-									'&.MuiSvgIcon-root ': {
-										fontSize: '2rem'
-									},
-									svg: {
-										width: '0.8rem',
-										height: '0.8rem',
-										fontSize: '0.8rem'
-									}
+			<DatePicker
+				ref={ref}
+				slots={{
+					openPickerIcon: EditCalendarRoundedIcon,
+					openPickerButton: StyledButton,
+					day: StyledDay as any
+				}}
+				slotProps={{
+					openPickerIcon: { fontSize: '1.5rem' },
+					popper: { color: 'secondary' },
+					textField: {
+						error,
+						helperText,
+						variant,
+						size
+					},
+					field: {
+						clearable: !!onClear,
+						onClear
+					},
+					layout: {
+						sx: {
+							'&.MuiButtonBase-root': {
+								'&.MuiSvgIcon-root ': {
+									fontSize: '2rem'
 								},
-								'&.MuiPickersLayout-root': {
-									svg: {
-										width: '3rem',
-										height: '3rem'
-									},
-									div: {
-										fontSize: font.sizes.fontSizeMedium
-									},
-									button: {
-										fontSize: font.sizes.fontSizeMedium
-									},
-									span: {
-										fontSize: font.sizes.fontSizeMedium
-									}
+								svg: {
+									width: '0.8rem',
+									height: '0.8rem',
+									fontSize: '0.8rem'
+								}
+							},
+							'&.MuiPickersLayout-root': {
+								svg: {
+									width: '3rem',
+									height: '3rem'
+								},
+								div: {
+									fontSize: font.sizes.fontSizeMedium
+								},
+								button: {
+									fontSize: font.sizes.fontSizeMedium
+								},
+								span: {
+									fontSize: font.sizes.fontSizeMedium
 								}
 							}
 						}
-					}}
-					{...rest}
-				/>
-			</LocalizationProvider>
+					}
+				}}
+				{...rest}
+			/>
 		)
 	}
 )

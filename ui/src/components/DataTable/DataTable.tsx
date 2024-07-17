@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl'
 import AppTableBody from '../Common/DataDisplay/Table/TableBody'
 import AppCircularLoader from '../Common/FeedBack/CircularLoader/CircularLoader'
 import { IntlMessages } from '@/global'
-import AppTablePagination, { AppTablePaginationProps } from '../Common/TablePagination/TablePagination'
+import AppTablePagination, { AppTablePaginationProps } from '../TablePagination/TablePagination'
 
 type Primitive = string | number | boolean | undefined | null
 

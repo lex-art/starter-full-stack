@@ -1,7 +1,7 @@
 import { AppThemeMUI } from '@/components/Theme/AppTheme'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { ReactNode, StrictMode, Suspense } from 'react'
-import SkeletonApp from '@/components/Skeleton/SkeletonApp'
+import SkeletonApp from '@/components/SkeletonApp/SkeletonApp'
 import { Roboto } from 'next/font/google'
 import PageLayout from '@/components/PageLayout/PageLayout'
 import { headers } from 'next/headers'
@@ -34,13 +34,13 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 					<meta name="viewport" content="initial-scale=1, width=device-width" />
 				</Head>
 				<StrictMode>
-					<AppThemeMUI>
-						<Suspense fallback={<SkeletonApp />}>
-							<NextIntlClientProvider locale={locale} messages={messages}>
+					<NextIntlClientProvider locale={locale} messages={messages}>
+						<AppThemeMUI>
+							<Suspense fallback={<SkeletonApp />}>
 								{isExcludeLayout ? <main>{children}</main> : <PageLayout>{children}</PageLayout>}
-							</NextIntlClientProvider>
-						</Suspense>
-					</AppThemeMUI>
+							</Suspense>
+						</AppThemeMUI>
+					</NextIntlClientProvider>
 				</StrictMode>
 			</body>
 		</html>

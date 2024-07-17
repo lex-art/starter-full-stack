@@ -16,31 +16,29 @@ const AppDateCalendar: FC<AppDateCalendarProps> = forwardRef<HTMLDivElement, App
 	(props, ref) => {
 		const { error, helperText, variant, size, sx, ...rest } = props
 		return (
-			<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
-				<DateCalendar
-					sx={{
-						...sx,
-						svg: {
-							width: '3.5rem',
-							height: '3.5rem'
-						},
-						div: {
-							fontSize: font.sizes.fontSizeMedium
-						},
-						button: {
-							fontSize: font.sizes.fontSizeMedium
-						},
-						span: {
-							fontSize: font.sizes.fontSizeMedium
-						},
-						li: {
-							fontSize: font.sizes.fontSizeMedium
-						}
-					}}
-					{...rest}
-					ref={ref}
-				/>
-			</LocalizationProvider>
+			<DateCalendar
+				sx={{
+					...sx,
+					svg: {
+						width: '3.5rem',
+						height: '3.5rem'
+					},
+					div: {
+						fontSize: font.sizes.fontSizeMedium
+					},
+					button: {
+						fontSize: font.sizes.fontSizeMedium
+					},
+					span: {
+						fontSize: font.sizes.fontSizeMedium
+					},
+					li: {
+						fontSize: font.sizes.fontSizeMedium
+					}
+				}}
+				{...rest}
+				ref={ref}
+			/>
 		)
 	}
 )

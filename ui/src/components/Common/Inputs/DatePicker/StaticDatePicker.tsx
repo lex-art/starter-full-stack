@@ -28,34 +28,32 @@ const AppStaticDatePicker: FC<AppStaticDatePickerProps> = forwardRef<
 	AppStaticDatePickerProps
 >(({ error, helperText, ...props }, ref) => {
 	return (
-		<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
-			<StaticDatePicker
-				ref={ref}
-				localeText={{
-					toolbarTitle: props.toolbarTitle
-				}}
-				slotProps={{
-					layout: {
-						sx: {
-							svg: {
-								width: '3.5rem',
-								height: '3.5rem'
-							},
-							div: {
-								fontSize: font.sizes.fontSizeMedium
-							},
-							button: {
-								fontSize: font.sizes.fontSizeMedium
-							},
-							span: {
-								fontSize: font.sizes.fontSizeMedium
-							}
+		<StaticDatePicker
+			ref={ref}
+			localeText={{
+				toolbarTitle: props.toolbarTitle
+			}}
+			slotProps={{
+				layout: {
+					sx: {
+						svg: {
+							width: '3.5rem',
+							height: '3.5rem'
+						},
+						div: {
+							fontSize: font.sizes.fontSizeMedium
+						},
+						button: {
+							fontSize: font.sizes.fontSizeMedium
+						},
+						span: {
+							fontSize: font.sizes.fontSizeMedium
 						}
 					}
-				}}
-				{...props}
-			/>
-		</LocalizationProvider>
+				}
+			}}
+			{...props}
+		/>
 	)
 })
 

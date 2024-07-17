@@ -25,7 +25,7 @@ const AppButtonThemeOptions: ThemeOptions = {
 				root: {
 					borderRadius: '0.7rem',
 					paddingBottom: '0.3rem',
-					height: sizes.medium
+					minHeight: sizes.medium
 				},
 				contained: {
 					fontSize: font.sizes.fontSizeMedium,
@@ -38,17 +38,17 @@ const AppButtonThemeOptions: ThemeOptions = {
 					fontSize: font.sizes.fontSizeMedium
 				},
 				sizeSmall: {
-					height: sizes.small,
+					minHeight: sizes.small,
 					fontSize: font.sizes.fontSizeSmall,
 					padding: '0.5rem 0.5rem'
 				},
 				sizeMedium: {
-					height: sizes.medium,
+					minHeight: sizes.medium,
 					fontSize: font.sizes.fontSizeMedium,
 					Padding: '0.5rem 3rem'
 				},
 				sizeLarge: {
-					height: sizes.large,
+					minHeight: sizes.large,
 					fontSize: font.sizes.fontSizeLarge,
 					padding: '0.5rem 3.5rem'
 				}

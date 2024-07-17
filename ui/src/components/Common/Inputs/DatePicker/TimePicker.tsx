@@ -24,30 +24,28 @@ const AppTimePicker: FC<ITimePickerProps> = forwardRef<HTMLDivElement, ITimePick
 	const { error, helperText, variant, size, ...rest } = props
 
 	return (
-		<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
-			<TimePicker
-				slots={{
-					openPickerButton: StyledButton
-				}}
-				slotProps={{
-					textField: {
-						error,
-						helperText,
-						variant,
-						size
-					},
-					layout: {
-						sx: {
-							li: {
-								fontSize: font.sizes.fontSizeMedium
-							}
+		<TimePicker
+			slots={{
+				openPickerButton: StyledButton
+			}}
+			slotProps={{
+				textField: {
+					error,
+					helperText,
+					variant,
+					size
+				},
+				layout: {
+					sx: {
+						li: {
+							fontSize: font.sizes.fontSizeMedium
 						}
 					}
-				}}
-				ref={ref}
-				{...rest}
-			/>
-		</LocalizationProvider>
+				}
+			}}
+			ref={ref}
+			{...rest}
+		/>
 	)
 })
 

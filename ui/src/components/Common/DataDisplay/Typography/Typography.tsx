@@ -65,6 +65,16 @@ const AppTypographyTheme: ThemeOptions = {
 						overflowWrap: 'break-word',
 						wordWrap: 'break-word'
 					}
+				},
+				{
+					props: { variant: 'caption' },
+					style: {
+						fontSize: font.sizes.fontSizeSmall,
+						lineHeight: 1.6,
+						whiteSpace: 'collapse',
+						overflowWrap: 'break-word',
+						wordWrap: 'break-word'
+					}
 				}
 			],
 			defaultProps: {

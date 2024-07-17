@@ -2,7 +2,6 @@ import React, { ReactNode, useState } from 'react'
 import messages from '../../../locales/es/common.json'
 import { Collapse } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import { ISubMenuRoute } from '@/lib/types/MenuRoute'
 import Icons from '@/components/Common/Icons/Icons'
 import { useRouter } from '@/navigation'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
@@ -11,12 +10,12 @@ import AppListItemButton from '@/components/Common/Menu/ListMenu/ListItemButton'
 import AppListItemIcon from '@/components/Common/Menu/ListMenu/ListItemIcon'
 import AppList from '@/components/Common/Menu/ListMenu/List'
 import AppListItemText from '@/components/Common/Menu/ListMenu/ListItemText'
+import { ISubMenuRoute } from '@/types/MenuRoute'
 
 interface MenuItemProps {
 	text: keyof typeof messages
 	icon?: ReactNode
 	link?: string
-	setIsMenuOpen?(isMenuOpen: boolean): void
 	index?: number
 	submenu?: Array<ISubMenuRoute>
 	openAside?: boolean

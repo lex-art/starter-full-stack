@@ -1,5 +1,5 @@
 import AppIcons from '@/components/Common/Icons/Icons'
-import { IMenuRoute } from '@/lib/types/MenuRoute'
+import { IMenuRoute } from '@/types/MenuRoute'
 
 export const MENU_ROUTES: Array<IMenuRoute> = [
 	{
