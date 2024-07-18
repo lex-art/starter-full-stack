@@ -6,7 +6,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 		section: 'menu',
 		text: 'components',
 		rol: [],
-		link: '/catalogue',
+		link: '/',
 		icon: <AppIcons.Home />
 	},
 	{

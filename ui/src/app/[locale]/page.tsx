@@ -1,40 +1,135 @@
 import configAuth from '../api/auth/configAuth'
 import { getServerSession } from 'next-auth'
-
 import { useLocale } from 'next-intl'
-import { Button, Typography } from '@mui/material'
+import { font } from '@/lib/design-tokens'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppPaper from '@/components/Common/Layout/Paper'
+import AppBarChart from '../../components/chartsExamples/Bar'
+import AppLineChart from '../../components/chartsExamples/Line'
+import AppScatter from '../../components/chartsExamples/Scatter'
+import AppPie from '../../components/chartsExamples/Pie'
+import AppSparkLine from '@/components/chartsExamples/SparkLine'
+import AppGauges from '@/components/chartsExamples/Guages'
 
 export default async function Index() {
 	const session = await getServerSession(configAuth)
 	const locale = useLocale()
 	return (
 		<AppGrid width="100%" height="100%">
-			{session ? (
-				<>
-					{/* <p>{t('loggedIn', { username: session.user?.name })}</p>
-					<p>
-						<Link href={locale + '/secret'}>{t('secret')}</Link>
-					</p>
-					<button onClick={onLogoutClick} type="button">
-						{t('logout')}
-					</button> */}
-					<h1>Logueado</h1>
-				</>
-			) : (
-				<>
-					{/* <p>{t('loggedOut')}</p>
-					<Link href={locale + '/login'}>{t('login')}</Link> */}
-					<h1>No logueado</h1>
-					{/* <button onClick={onLogoutClick} type="button">
-						logout
-					</button> */}
-					<Typography variant="h1">holaaaaa</Typography>
-					<Button sx={{ fontSize: '3rem' }} variant="contained" color="secondary">
-						holaaaaaaaaaaaaa
-					</Button>
-				</>
-			)}
+			<AppDivider marginY="0.5rem" textAlign="left">
+				<AppTypography
+					variant="subtitle2"
+					fontWeight="Bold"
+					sx={{
+						whiteSpace: 'nowrap'
+					}}
+				>
+					Session data
+				</AppTypography>
+			</AppDivider>
+			<code
+				style={{
+					fontSize: font.sizes.fontSizeMedium
+				}}
+			>
+				{JSON.stringify(session, null, 2)}
+			</code>
+			<br />
+			<code
+				style={{
+					fontSize: font.sizes.fontSizeMedium
+				}}
+			>
+				{locale}
+			</code>
+			<AppDivider marginY="0.5rem" textAlign="left">
+				<AppTypography
+					variant="subtitle2"
+					fontWeight="Bold"
+					sx={{
+						whiteSpace: 'nowrap'
+					}}
+				>
+					Charts
+				</AppTypography>
+			</AppDivider>
+			<AppPaper
+				elevation={5}
+				sx={{
+					padding: 2
+				}}
+			>
+				<AppTypography variant="body1" fontWeight="bold">
+					Bar chart
+				</AppTypography>
+				<AppGrid
+					container
+					display="grid"
+					gap="2rem"
+					gridTemplateColumns={{
+						xs: '1fr',
+						sm: '1fr',
+						lg: '49% 1fr',
+						xl: '49% 1fr'
+					}}
+				>
+					<AppBarChart />
+					<AppLineChart />
+				</AppGrid>
+			</AppPaper>
+
+			<AppPaper
+				elevation={5}
+				sx={{
+					padding: 2,
+					mt: 2
+				}}
+			>
+				<AppTypography variant="body1" fontWeight="bold">
+					Bar chart
+				</AppTypography>
+				<AppGrid
+					container
+					display="grid"
+					gap="2rem"
+					gridTemplateColumns={{
+						xs: '1fr',
+						sm: '1fr',
+						lg: '49% 1fr',
+						xl: '49% 1fr'
+					}}
+				>
+					<AppScatter />
+					<AppPie />
+				</AppGrid>
+			</AppPaper>
+			<AppPaper
+				elevation={5}
+				sx={{
+					padding: 2,
+					mt: 2
+				}}
+			>
+				<AppTypography variant="body1" fontWeight="bold">
+					Bar chart
+				</AppTypography>
+				<AppGrid
+					container
+					display="grid"
+					gap="2rem"
+					gridTemplateColumns={{
+						xs: '1fr',
+						sm: '1fr',
+						lg: '49% 1fr',
+						xl: '49% 1fr'
+					}}
+				>
+					<AppSparkLine />
+					<AppGauges />
+				</AppGrid>
+			</AppPaper>
 		</AppGrid>
 	)
 }

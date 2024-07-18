@@ -37,7 +37,6 @@ import { z } from 'zod'
 import { makeZodI18nMap } from '@/lib/zod/zodErrorMap'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import AppIconButton from '../Common/Inputs/IconButton/IconButton'
 
 interface AppThemeProps {
 	children: ReactNode
