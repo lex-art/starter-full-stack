@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react'
-import messages from '../../../locales/es/common.json'
+import messages from '../../../../locales/es/common.json'
 import { Collapse } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import Icons from '@/components/Common/Icons/Icons'

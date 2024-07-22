@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Box } from '@mui/material'
 import AsideHeaderClient from './AsideHeaderClient'
-import AppBreadcrumb from '../Breadcrumb/BreadCrumb'
+import AppBreadcrumb from '../../Breadcrumb/BreadCrumb'
 
 type Props = {
 	readonly children?: ReactNode

@@ -14,8 +14,11 @@ export const SkeletonApp: FC = () => {
 			gridTemplateColumns={{ xs: '1fr', sm: '25rem 1fr' }}
 			gridTemplateAreas={{ xs: '"header" "main"', sm: '"aside header" "aside main"' }}
 			gridTemplateRows="7rem 1fr"
+			sx={{
+				bgcolor: 'grey.700'
+			}}
 		>
-			<AppGrid sx={{ bgcolor: 'grey.800', display: { xs: 'none', sm: 'block' } }}>
+			<AppGrid sx={{ bgcolor: 'grey.700', display: { xs: 'none', sm: 'block' } }}>
 				<Skeleton sx={{ bgcolor: 'grey.400' }} variant="rectangular" width="100%">
 					<div style={{ paddingTop: '7rem' }} />
 				</Skeleton>
@@ -73,7 +76,7 @@ export const SkeletonApp: FC = () => {
 				<AppGrid item width="100%" height="100%" flexDirection="column" className={styles.mainContainer}>
 					<Skeleton
 						sx={{
-							bgcolor: 'grey.400'
+							bgcolor: 'grey.500'
 						}}
 						animation="wave"
 						variant="rectangular"

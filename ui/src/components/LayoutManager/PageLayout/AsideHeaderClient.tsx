@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
-import Header from './header/Header'
-import Aside from './Aside/Aside'
+import { Header } from './header/Header'
+import { Aside } from './Aside/Aside'
 import { signOut } from 'next-auth/react'
 
 interface AsideHeaderClientProps {

@@ -104,6 +104,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.50.0(react@18.2.0))
+      '@mui/base':
+        specifier: 5.0.0-beta.40
+        version: 5.0.0-beta.40(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@mui/icons-material':
         specifier: ^5.15.6
         version: 5.15.7(@mui/material@5.15.7(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@emotion/styled@11.11.0(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@types/react@18.2.51)(react@18.2.0)
@@ -8707,7 +8710,7 @@ snapshots:
   '@mui/x-date-pickers@6.19.3(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@emotion/styled@11.11.0(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@mui/material@5.15.7(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@emotion/styled@11.11.0(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@mui/system@5.16.4(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@emotion/styled@11.11.0(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(dayjs@1.11.10)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.23.9
-      '@mui/base': 5.0.0-beta.34(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@mui/base': 5.0.0-beta.40(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@mui/material': 5.15.7(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@emotion/styled@11.11.0(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@mui/system': 5.16.4(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@emotion/styled@11.11.0(@emotion/react@11.11.3(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0))(@types/react@18.2.51)(react@18.2.0)
       '@mui/utils': 5.15.7(@types/react@18.2.51)(react@18.2.0)
@@ -8905,7 +8908,7 @@ snapshots:
 
   '@radix-ui/react-arrow@1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
       '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9111,7 +9114,7 @@ snapshots:
 
   '@radix-ui/react-toggle@1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.18)(@types/react@18.2.51)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.51)(react@18.2.0)
@@ -9154,7 +9157,7 @@ snapshots:
 
   '@radix-ui/react-use-escape-keydown@1.0.3(@types/react@18.2.51)(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
       '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.51)(react@18.2.0)
       react: 18.2.0
     optionalDependencies:
@@ -9176,7 +9179,7 @@ snapshots:
 
   '@radix-ui/react-use-rect@1.0.1(@types/react@18.2.51)(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
       '@radix-ui/rect': 1.0.1
       react: 18.2.0
     optionalDependencies:
@@ -9184,7 +9187,7 @@ snapshots:
 
   '@radix-ui/react-use-size@1.0.1(@types/react@18.2.51)(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
       '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.51)(react@18.2.0)
       react: 18.2.0
     optionalDependencies:
@@ -9202,7 +9205,7 @@ snapshots:
 
   '@radix-ui/rect@1.0.1':
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
 
   '@react-spring/animated@9.7.3(react@18.2.0)':
     dependencies:
@@ -12628,7 +12631,7 @@ snapshots:
 
   i18next@23.12.1:
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.8
 
   iconv-lite@0.4.24:
     dependencies:

@@ -9,7 +9,7 @@ import { AppTypographyTheme } from '../Common/DataDisplay/Typography/Typography'
 import { AppTextFieldThemeOptions } from '../Common/Inputs/TextField/TextField'
 import { AppDividerTheme } from '../Common/DataDisplay/Divider/Divider'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
-import AppIcons, { AppIconsTheme } from '../Common/Icons/Icons'
+import { AppIconsTheme } from '../Common/Icons/Icons'
 import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
 import { AppChipTheme } from '../Common/DataDisplay/Chip/Chip'
 import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
@@ -30,22 +30,23 @@ import { AppFormGroupThem } from '../Common/FormControl/FormGroup'
 import { AppStepLabelThem } from '../Stepper/StepLabel'
 import { AppThemeOptions } from '../Common/FeedBack/Snackbar/Snackbar'
 import { AppAlertTheme } from '../Common/FeedBack/Alert/Alert'
-import { SnackbarProvider, useSnackbar } from 'notistack'
+import { SnackbarProvider } from 'notistack'
 import { SETTINGS_TOAST } from '@/configs'
 import { useLocale, useTranslations } from 'next-intl'
-import { z } from 'zod'
 import { makeZodI18nMap } from '@/lib/zod/zodErrorMap'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { z } from 'zod'
 
 interface AppThemeProps {
 	children: ReactNode
+	initialThemeMode: PaletteMode
 }
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} })
 
-const AppThemeMUI = ({ children }: AppThemeProps) => {
-	const [mode, setMode] = useState<PaletteMode>('light')
+const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) => {
+	const [mode, setMode] = useState<PaletteMode>(initialThemeMode)
 	// this configuration is for the zod error messages for global use in client sides
 	const locale = useLocale()
 	const t = useTranslations('zod')
@@ -55,7 +56,10 @@ const AppThemeMUI = ({ children }: AppThemeProps) => {
 			toggleColorMode: () => {
 				setMode((prevMode: PaletteMode) => {
 					const tempMode = prevMode === 'light' ? 'dark' : 'light'
-					window && window.localStorage.setItem('colorMode', tempMode)
+					if (window) {
+						document.cookie = `timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}; path=/`
+						document.cookie = `theme=${tempMode}; path=/`
+					}
 					return tempMode
 				})
 			}
@@ -69,13 +73,10 @@ const AppThemeMUI = ({ children }: AppThemeProps) => {
 	)
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			const savedMode = window.localStorage.getItem('colorMode') as PaletteMode
-			if (savedMode) {
-				setMode(savedMode)
-			}
+		if (initialThemeMode && initialThemeMode !== mode) {
+			setMode(initialThemeMode)
 		}
-	}, [])
+	}, [initialThemeMode])
 
 	const theme = useMemo(
 		() =>

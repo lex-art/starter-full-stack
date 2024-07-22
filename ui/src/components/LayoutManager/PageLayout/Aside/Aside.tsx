@@ -1,10 +1,9 @@
-import React from 'react'
-import { Divider, styled, Theme, CSSObject, Drawer as DraweMobile } from '@mui/material'
+import React, { FC } from 'react'
+import { Divider, styled, Theme, CSSObject, Drawer as DrawerMobile } from '@mui/material'
 import MuiDrawer from '@mui/material/Drawer'
 import DraftsIcon from '@mui/icons-material/Drafts'
 import ListMenu from './ListMenu'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import AppBox from '@/components/Common/Layout/Box'
 
 interface AsideProps {
 	drawerWidth: number
@@ -63,14 +62,14 @@ const Footer = styled('div')(({ theme }) => ({
 	borderTop: `1px solid ${theme.palette.divider}`
 }))
 
-export default function Aside({
+const Aside: FC<AsideProps> = ({
 	drawerWidth,
 	window,
 	mobileOpen,
 	handleDrawerClose,
 	handleDrawerTransitionEnd,
 	open
-}: AsideProps) {
+}) => {
 	const container = window !== undefined ? () => window().document.body : undefined
 	const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
 		width: `${drawerWidth}rem`,
@@ -111,7 +110,7 @@ export default function Aside({
 				</Footer>
 			</Drawer>
 			{/* Mobile Version */}
-			<DraweMobile
+			<DrawerMobile
 				container={container}
 				variant="temporary"
 				open={mobileOpen}
@@ -144,7 +143,9 @@ export default function Aside({
 				>
 					<AppTypography>© Footer</AppTypography>
 				</Footer>
-			</DraweMobile>
+			</DrawerMobile>
 		</>
 	)
 }
+
+export { Aside }
