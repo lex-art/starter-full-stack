@@ -1,4 +1,5 @@
 'use client'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { signIn } from 'next-auth/react'
 import React, { FormEventHandler } from 'react'
 
@@ -21,14 +22,16 @@ export default function Login() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label htmlFor="username">Usuario:</label>
-			<input type="text" id="username" name="username" required />
+		<AppGrid container justifyContent="center" alignItems="center">
+			<form onSubmit={handleSubmit}>
+				<label htmlFor="username">Usuario:</label>
+				<input type="text" id="username" name="username" required />
 
-			<label htmlFor="password">Contraseña:</label>
-			<input type="password" id="password" name="password" required />
+				<label htmlFor="password">Contraseña:</label>
+				<input type="password" id="password" name="password" required />
 
-			<button type="submit">Iniciar sesión</button>
-		</form>
+				<button type="submit">Iniciar sesión</button>
+			</form>
+		</AppGrid>
 	)
 }

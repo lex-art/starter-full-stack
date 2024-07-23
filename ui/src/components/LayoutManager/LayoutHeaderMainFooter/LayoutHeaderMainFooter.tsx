@@ -7,7 +7,6 @@ import { Footer } from './Footer'
 type Props = {
 	readonly children?: ReactNode
 }
-const drawerWidth = 25
 
 export default function LayoutHeaderMainFooter({ children }: Props) {
 	return (
