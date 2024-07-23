@@ -119,6 +119,9 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 	typography: {
 		fontFamily: robotoFont.style.fontFamily,
 		fontSize: font.sizes.fontSizeMedium
+	},
+	shape: {
+		borderRadius: 8
 	}
 })
 

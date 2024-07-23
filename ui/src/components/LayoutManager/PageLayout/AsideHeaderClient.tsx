@@ -1,14 +1,17 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Header } from './header/Header'
 import { Aside } from './Aside/Aside'
 import { signOut } from 'next-auth/react'
+import AppLoader from '@/components/Loader/Loader'
+import { AppGlobalContext } from '@/components/Theme/AppTheme'
 
 interface AsideHeaderClientProps {
 	readonly drawerWidth: number
 }
 
 export default function AsideHeaderClient({ drawerWidth }: AsideHeaderClientProps) {
+	const { isLoading } = useContext(AppGlobalContext)
 	const [mobileOpen, setMobileOpen] = useState(false)
 	const [isClosing, setIsClosing] = useState(false)
 	const [open, setOpen] = useState(true)
@@ -38,6 +41,7 @@ export default function AsideHeaderClient({ drawerWidth }: AsideHeaderClientProp
 
 	return (
 		<>
+			<AppLoader isLoading={isLoading} />
 			<Header
 				drawerWidth={drawerWidth}
 				handleDrawerToggle={handleDrawerToggle}

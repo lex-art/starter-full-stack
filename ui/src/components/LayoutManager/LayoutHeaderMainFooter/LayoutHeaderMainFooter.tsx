@@ -26,7 +26,17 @@ export default function LayoutHeaderMainFooter({ children }: Props) {
 			`}
 		>
 			<Header />
-			<AppBox gridArea="main" component="main" pl={10} pr={10}>
+			<AppBox
+				gridArea="main"
+				component="main"
+				sx={{
+					flexGrow: 1,
+					p: 2,
+					pt: 8,
+					pb: 8,
+					backgroundColor: 'background.default'
+				}}
+			>
 				<AppBreadcrumb />
 				{children}
 			</AppBox>

@@ -43,14 +43,19 @@ interface AppThemeProps {
 	initialThemeMode: PaletteMode
 }
 
-const ColorModeContext = createContext({ toggleColorMode: () => {} })
+const AppGlobalContext = createContext({
+	toggleColorMode: () => {},
+	isLoading: false,
+	setIsLoading: (value: boolean) => {}
+})
 
 const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) => {
 	const [mode, setMode] = useState<PaletteMode>(initialThemeMode)
+	const [isLoading, setIsLoading] = useState(false)
 	// this configuration is for the zod error messages for global use in client sides
 	const locale = useLocale()
 	const t = useTranslations('zod')
-	const colorMode = useMemo(
+	const initValuesContext = useMemo(
 		() => ({
 			// The dark mode switch would invoke this method
 			toggleColorMode: () => {
@@ -62,9 +67,11 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 					}
 					return tempMode
 				})
-			}
+			},
+			isLoading,
+			setIsLoading
 		}),
-		[]
+		[isLoading]
 	)
 	z.setErrorMap(
 		makeZodI18nMap({
@@ -113,7 +120,7 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 	)
 
 	return (
-		<ColorModeContext.Provider value={colorMode}>
+		<AppGlobalContext.Provider value={initValuesContext}>
 			<AppRouterCacheProvider /* options={{ enableCssLayer: true }} */>
 				<ThemeProvider theme={theme}>
 					<SnackbarProvider
@@ -123,12 +130,6 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 						style={SETTINGS_TOAST.style}
 						autoHideDuration={3000}
 						preventDuplicate
-						/* iconVariant={{
-							success: <AppIcons.CheckCircle />,
-							error: <AppIcons.Error />,
-							warning: <AppIcons.Warning />,
-							info: <AppIcons.Info />
-						}} */
 					>
 						<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
 							{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
@@ -138,8 +139,8 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 					</SnackbarProvider>
 				</ThemeProvider>
 			</AppRouterCacheProvider>
-		</ColorModeContext.Provider>
+		</AppGlobalContext.Provider>
 	)
 }
 
-export { AppThemeMUI, ColorModeContext }
+export { AppThemeMUI, AppGlobalContext }

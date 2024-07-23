@@ -1,28 +1,26 @@
 import { FC } from 'react'
 import AppCircularLoader from '../Common/FeedBack/CircularLoader/CircularLoader'
-import AppGrid from '../Common/Layout/Grid/Grid'
+import { Backdrop } from '@mui/material'
 
 interface ITBLoaderProps {
 	isLoading?: boolean
 }
 
-export const TBLoader: FC<ITBLoaderProps> = ({ isLoading }) => {
+const AppLoader: FC<ITBLoaderProps> = ({ isLoading }) => {
 	if (!isLoading) return null
 	return (
-		<AppGrid
-			width="100vw"
-			minHeight="100vh"
-			height="100%"
-			position="fixed"
-			display="flex"
-			justifyContent="center"
-			alignItems="center"
-			zIndex={9999}
-			style={{
-				backgroundColor: 'rgba(0,0,0,0.5)'
+		<Backdrop
+			sx={{
+				color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : theme.palette.background.paper),
+				zIndex: (theme) => theme.zIndex.drawer + 2
 			}}
+			open={isLoading}
+			//onClick={handleClose}
 		>
-			<AppCircularLoader color="secondary" size={80} />
-		</AppGrid>
+			<AppCircularLoader color="inherit" size={80} />
+		</Backdrop>
 	)
 }
+
+export { AppLoader }
+export default AppLoader

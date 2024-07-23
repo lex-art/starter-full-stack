@@ -42,11 +42,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<AppThemeMUI initialThemeMode={initialThemeMode}>
 							<Suspense fallback={<SkeletonApp />}>
-								{isExcludeLayout ? (
-									<main>{children}</main>
-								) : (
-									<LayoutHeaderMainFooter>{children}</LayoutHeaderMainFooter>
-								)}
+								{isExcludeLayout ? <main>{children}</main> : <PageLayout>{children}</PageLayout>}
 							</Suspense>
 						</AppThemeMUI>
 					</NextIntlClientProvider>

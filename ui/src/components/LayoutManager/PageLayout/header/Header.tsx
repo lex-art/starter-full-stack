@@ -16,7 +16,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { ColorModeContext } from '@/components/Theme/AppTheme'
+import { AppGlobalContext } from '@/components/Theme/AppTheme'
 import AppIcons from '@/components/Common/Icons/Icons'
 import { useLocale, useTranslations } from 'next-intl'
 import { useRouter, usePathname } from '@/navigation'
@@ -81,7 +81,7 @@ const Header: FC<HeaderProps> = ({
 }) => {
 	const theme = useTheme()
 	const t = useTranslations('common')
-	const colorMode = useContext(ColorModeContext)
+	const colorMode = useContext(AppGlobalContext)
 	const locale = useLocale()
 	const redirect = useRouter()
 	const otherLocale = locale === 'es' ? 'en' : 'es'

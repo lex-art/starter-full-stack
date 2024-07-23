@@ -7,7 +7,7 @@ import AppBox from '@/components/Common/Layout/Box'
 import AppMenu from '@/components/Common/Menu/Menu'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
 import { AppMenuList } from '@/components/Common/Menu/MenuList'
-import { ColorModeContext } from '@/components/Theme/AppTheme'
+import { AppGlobalContext } from '@/components/Theme/AppTheme'
 import { alpha, AppBar, Avatar, InputBase, styled, Toolbar, useTheme } from '@mui/material'
 import { useLocale, useTranslations } from 'next-intl'
 import { useRouter, usePathname } from '@/navigation'
@@ -15,6 +15,7 @@ import { FC, useState, MouseEvent, useContext } from 'react'
 import MenuItem from '../PageLayout/Aside/MenuItem'
 import { signOut } from 'next-auth/react'
 import { MENU_ROUTES } from '../PageLayout/Aside/menuRoutes'
+import AppLoader from '@/components/Loader/Loader'
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
@@ -67,7 +68,8 @@ export const Header: FC = () => {
 	const theme = useTheme()
 	const pathname = usePathname()
 	const t = useTranslations('common')
-	const colorMode = useContext(ColorModeContext)
+	const { isLoading } = useContext(AppGlobalContext)
+	const colorMode = useContext(AppGlobalContext)
 	const locale = useLocale()
 	const otherLocale = locale === 'es' ? 'en' : 'es'
 	const redirect = useRouter()
@@ -84,9 +86,13 @@ export const Header: FC = () => {
 		signOut()
 	}
 
+	console.log('====================================')
+	console.log('Header', isLoading)
+	console.log('====================================')
 	return (
 		<AppBox gridArea="header">
-			<AppBar position="static">
+			<AppLoader isLoading={isLoading} />
+			<AppBar position="fixed">
 				<Toolbar>
 					<AppIconButton
 						size="large"
@@ -183,7 +189,7 @@ export const Header: FC = () => {
 							sx={{ ml: 1 }}
 							onClick={() => {
 								colorMode.toggleColorMode()
-								window.localStorage.setItem('colorMode', theme.palette.mode === 'dark' ? 'light' : 'dark')
+								document.cookie = `theme=${theme.palette.mode === 'dark' ? 'light' : 'dark'}; path=/`
 							}}
 							color="inherit"
 						>
