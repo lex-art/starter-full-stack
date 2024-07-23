@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import { Box } from '@mui/material'
 import AsideHeaderClient from './AsideHeaderClient'
 import AppBreadcrumb from '../../Breadcrumb/BreadCrumb'
+import AppBox from '@/components/Common/Layout/Box'
 
 type Props = {
 	readonly children?: ReactNode
@@ -10,9 +10,9 @@ const drawerWidth = 25
 
 export default function PageLayout({ children }: Props) {
 	return (
-		<Box sx={{ display: 'flex', height: '100%', minHeight: '100vh' }}>
+		<AppBox sx={{ display: 'flex', height: '100%', minHeight: '100vh' }}>
 			<AsideHeaderClient drawerWidth={drawerWidth} />
-			<Box
+			<AppBox
 				component="main"
 				sx={{
 					flexGrow: 1,
@@ -24,7 +24,7 @@ export default function PageLayout({ children }: Props) {
 			>
 				<AppBreadcrumb />
 				{children}
-			</Box>
-		</Box>
+			</AppBox>
+		</AppBox>
 	)
 }

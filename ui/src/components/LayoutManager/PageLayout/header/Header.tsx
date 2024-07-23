@@ -189,9 +189,9 @@ const Header: FC<HeaderProps> = ({
 							>
 								{theme.palette.mode === 'dark' ? <AppIcons.Brightness4 /> : <AppIcons.Brightness7 />}
 							</AppIconButton>
-							<IconButton sx={{ ml: 1 }} onClick={logOut} color="inherit">
+							<AppIconButton sx={{ ml: 1 }} onClick={logOut} color="inherit">
 								<AppIcons.Logout />
-							</IconButton>
+							</AppIconButton>
 							<IconButton id="header" type="button" onClick={handleClick}>
 								<AppStyledBadge
 									overlap="circular"

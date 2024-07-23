@@ -8,6 +8,8 @@ import { cookies, headers } from 'next/headers'
 import { locales } from '@/navigation'
 import Head from 'next/head'
 import { PaletteMode } from '@mui/material'
+import LayoutHeaderMainFooter from '@/components/LayoutManager/LayoutHeaderMainFooter/LayoutHeaderMainFooter'
+
 type Props = {
 	readonly children: ReactNode
 	readonly params: { locale: string }

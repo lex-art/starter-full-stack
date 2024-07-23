@@ -78,5 +78,6 @@
   "fileNotValid": "El tipo de archivo no es permitido, por favor selecciona un archivo válido.",
   "uploadMultipleFiles": "Subir múltiples archivos",
   "uploadAnyFile": "Subir cualquier archivo",
-  "takePhotoWithCamera": "Tomar foto con cámara"
+  "takePhotoWithCamera": "Tomar foto con cámara",
+  "search": "Buscar"
 }
