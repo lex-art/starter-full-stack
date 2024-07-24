@@ -5,13 +5,14 @@ import AppBox from '@/components/Common/Layout/Box'
 
 type Props = {
 	readonly children?: ReactNode
+	readonly isOpenDrawer: boolean
 }
 const drawerWidth = 25
 
-export default function PageLayout({ children }: Props) {
+export default function PageLayout({ children, isOpenDrawer }: Props) {
 	return (
 		<AppBox sx={{ display: 'flex', height: '100%', minHeight: '100vh' }}>
-			<AsideHeaderClient drawerWidth={drawerWidth} />
+			<AsideHeaderClient drawerWidth={drawerWidth} isOpenDrawer={isOpenDrawer} />
 			<AppBox
 				component="main"
 				sx={{

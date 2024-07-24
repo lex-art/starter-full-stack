@@ -151,7 +151,7 @@ const Header: FC<HeaderProps> = ({
 						left: -15
 					}}
 				>
-					{!open ? <ChevronRightIcon fontSize="large" /> : <ChevronLeftIcon fontSize="large" />}
+					{!openDrawer ? <ChevronRightIcon fontSize="large" /> : <ChevronLeftIcon fontSize="large" />}
 				</AppIconButton>
 				<AppIconButton
 					color="inherit"

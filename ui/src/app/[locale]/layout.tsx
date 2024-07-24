@@ -32,6 +32,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 		'i'
 	).test(currentPath)
 	const initialThemeMode = (cookieStore.get('theme')?.value || 'light') as PaletteMode
+	const isOpenDrawer = cookieStore.get('drawerOpen')?.value === 'true'
 	return (
 		<html lang={locale}>
 			<body className={roboto.className}>
@@ -42,7 +43,11 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<AppThemeMUI initialThemeMode={initialThemeMode}>
 							<Suspense fallback={<SkeletonApp />}>
-								{isExcludeLayout ? <main>{children}</main> : <PageLayout>{children}</PageLayout>}
+								{isExcludeLayout ? (
+									<main>{children}</main>
+								) : (
+									<PageLayout isOpenDrawer={isOpenDrawer}>{children}</PageLayout>
+								)}
 							</Suspense>
 						</AppThemeMUI>
 					</NextIntlClientProvider>

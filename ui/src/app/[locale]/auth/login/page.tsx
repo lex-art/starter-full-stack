@@ -2,7 +2,7 @@
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { signIn } from 'next-auth/react'
-import React, { FormEventHandler } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import logo from '../../../../../public/img/react.png'
 import AppPaper from '@/components/Common/Layout/Paper'
@@ -10,13 +10,27 @@ import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppButton from '@/components/Common/Inputs/Button/Button'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import AppIcons from '@/components/Common/Icons/Icons'
+import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { userSchema } from './schema/user'
+import { useSnackbar } from 'notistack'
+import { Severity } from '@/types'
+import AppCircularLoader from '@/components/Common/FeedBack/CircularLoader/CircularLoader'
+import AppCircularProgress from '@/components/Common/FeedBack/CircularProgress/CircularProgress'
+
+type UserSchema = z.infer<typeof userSchema>
 
 export default function Login() {
-	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-		event.preventDefault()
-		const username = (event.target as HTMLFormElement)?.username.value
-		const password = (event.target as HTMLFormElement)?.password.value
-
+	const { enqueueSnackbar } = useSnackbar()
+	const [isLoading, setIsLoading] = useState(false)
+	const { control, handleSubmit } = useForm<UserSchema>({
+		mode: 'onSubmit',
+		resolver: zodResolver(userSchema)
+	})
+	const onSubmit = async (data: UserSchema) => {
+		const username = data.email
+		const password = data.password
 		const result = await signIn('credentials', {
 			redirect: true, // Evita redirecciones automáticas
 			username,
@@ -26,6 +40,9 @@ export default function Login() {
 		if (result?.error) {
 			// Manejar errores, por ejemplo mostrando un mensaje al usuario
 			console.error(result.error)
+			enqueueSnackbar(result.error, {
+				variant: Severity.Error
+			})
 		}
 	}
 
@@ -48,8 +65,8 @@ export default function Login() {
 						sx: 300,
 						md: 300
 					},
-					maxWidth: 300,
-					width: 300,
+					maxWidth: 500,
+					width: 500,
 					minHeight: 500,
 					display: 'flex',
 					flexDirection: 'column',
@@ -70,24 +87,37 @@ export default function Login() {
 						padding: 0,
 						boxSizing: 'border-box'
 					}}
-					onSubmit={handleSubmit}
+					onSubmit={handleSubmit(onSubmit)}
 				>
-					<AppTextField fullWidth label="username" />
-					<AppTextField fullWidth label="password" type="password" />
-
-					<label htmlFor="username">Usuario:</label>
-					<input type="text" id="username" name="username" required />
-
-					<label htmlFor="password">Contraseña:</label>
-					<input type="password" id="password" name="password" required />
-
-					<button type="submit">Iniciar sesión</button>
+					<Controller
+						control={control}
+						name="email"
+						render={({ field, fieldState: { error } }) => (
+							<AppTextField {...field} error={!!error} helperText={error?.message} label="Email" />
+						)}
+					/>
+					<Controller
+						control={control}
+						name="password"
+						render={({ field, fieldState: { error } }) => (
+							<AppTextField
+								label="password"
+								type="password"
+								{...field}
+								error={!!error}
+								helperText={error?.message}
+							/>
+						)}
+					/>
 					<AppButton
 						type="submit"
 						fullWidth
+						variant="contained"
 						sx={{
 							mt: 1
 						}}
+						disabled={isLoading}
+						endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
 					>
 						Iniciar sesión
 					</AppButton>
