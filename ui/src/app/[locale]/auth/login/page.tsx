@@ -2,7 +2,7 @@
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { signIn } from 'next-auth/react'
-import React, { useState } from 'react'
+import React, { useState, useTransition } from 'react'
 import Image from 'next/image'
 import logo from '../../../../../public/img/react.png'
 import AppPaper from '@/components/Common/Layout/Paper'
@@ -22,29 +22,29 @@ type UserSchema = z.infer<typeof userSchema>
 
 export default function Login() {
 	const { enqueueSnackbar } = useSnackbar()
-	const [isLoading, setIsLoading] = useState(false)
+	const [isLoading, transaction] = useTransition()
 	const { control, handleSubmit } = useForm<UserSchema>({
 		mode: 'onSubmit',
 		resolver: zodResolver(userSchema)
 	})
 	const onSubmit = async (data: UserSchema) => {
-		setIsLoading(true)
-		const username = data.email
-		const password = data.password
-		const result = await signIn('credentials', {
-			redirect: true, // Evita redirecciones automáticas
-			username,
-			password,
-			callbackUrl: '/'
-		})
-		if (result?.error) {
-			// Manejar errores, por ejemplo mostrando un mensaje al usuario
-			console.error(result.error)
-			enqueueSnackbar(result.error, {
-				variant: Severity.Error
+		transaction(async () => {
+			const username = data.email
+			const password = data.password
+			const result = await signIn('credentials', {
+				redirect: true, // Evita redirecciones automáticas
+				username,
+				password,
+				callbackUrl: '/'
 			})
-		}
-		setIsLoading(false)
+			if (result?.error) {
+				// Manejar errores, por ejemplo mostrando un mensaje al usuario
+				console.error(result.error)
+				enqueueSnackbar(result.error, {
+					variant: Severity.Error
+				})
+			}
+		})
 	}
 
 	return (
