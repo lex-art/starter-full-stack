@@ -6,12 +6,10 @@ import React, { FormEventHandler } from 'react'
 import Image from 'next/image'
 import logo from '../../../../../public/img/react.png'
 import AppPaper from '@/components/Common/Layout/Paper'
-import AppFormGroup from '@/components/Common/FormControl/FormGroup'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppButton from '@/components/Common/Inputs/Button/Button'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import AppIcons from '@/components/Common/Icons/Icons'
-import AppBox from '@/components/Common/Layout/Box'
 
 export default function Login() {
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {

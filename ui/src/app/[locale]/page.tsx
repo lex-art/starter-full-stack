@@ -12,9 +12,12 @@ import AppScatter from '../../components/chartsExamples/Scatter'
 import AppPie from '../../components/chartsExamples/Pie'
 import AppSparkLine from '@/components/chartsExamples/SparkLine'
 import AppGauges from '@/components/chartsExamples/Guages'
+import { cookies } from 'next/headers'
 
 export default async function Index() {
 	const session = await getServerSession(configAuth)
+	const cookie = cookies()
+	const token = cookie.get('next-auth.session-token')
 	const locale = useLocale()
 	return (
 		<AppGrid width="100%" height="100%">
@@ -35,6 +38,15 @@ export default async function Index() {
 				}}
 			>
 				{JSON.stringify(session, null, 2)}
+			</code>
+			<br />
+
+			<code
+				style={{
+					fontSize: font.sizes.fontSizeMedium
+				}}
+			>
+				{JSON.stringify(token, null, 2)}
 			</code>
 			<br />
 			<code
