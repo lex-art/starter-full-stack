@@ -16,7 +16,6 @@ import { z } from 'zod'
 import { userSchema } from './schema/user'
 import { useSnackbar } from 'notistack'
 import { Severity } from '@/types'
-import AppCircularLoader from '@/components/Common/FeedBack/CircularLoader/CircularLoader'
 import AppCircularProgress from '@/components/Common/FeedBack/CircularProgress/CircularProgress'
 
 type UserSchema = z.infer<typeof userSchema>
@@ -29,6 +28,7 @@ export default function Login() {
 		resolver: zodResolver(userSchema)
 	})
 	const onSubmit = async (data: UserSchema) => {
+		setIsLoading(true)
 		const username = data.email
 		const password = data.password
 		const result = await signIn('credentials', {
@@ -44,6 +44,7 @@ export default function Login() {
 				variant: Severity.Error
 			})
 		}
+		setIsLoading(false)
 	}
 
 	return (
