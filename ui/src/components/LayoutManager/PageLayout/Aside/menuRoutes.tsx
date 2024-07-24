@@ -109,6 +109,11 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 				text: 'snackbar',
 				link: '/components/snackbar',
 				icon: <AppIcons.NotificationAddOutlined fontSize="small" color="primary" />
+			},
+			{
+				text: 'editors',
+				link: '/components/editor',
+				icon: <AppIcons.EditOutlined fontSize="small" color="primary" />
 			}
 		]
 	}

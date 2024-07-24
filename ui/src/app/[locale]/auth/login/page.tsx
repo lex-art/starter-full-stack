@@ -77,13 +77,13 @@ export default function Login() {
 					<AppTextField fullWidth label="username" />
 					<AppTextField fullWidth label="password" type="password" />
 
-					{/* <label htmlFor="username">Usuario:</label>
+					<label htmlFor="username">Usuario:</label>
 					<input type="text" id="username" name="username" required />
 
 					<label htmlFor="password">Contraseña:</label>
 					<input type="password" id="password" name="password" required />
 
-					<button type="submit">Iniciar sesión</button> */}
+					<button type="submit">Iniciar sesión</button>
 					<AppButton
 						type="submit"
 						fullWidth
