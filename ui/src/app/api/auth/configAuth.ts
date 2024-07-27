@@ -1,7 +1,9 @@
-import CredentialsProvider from 'next-auth/providers/credentials'
 import type { NextAuthOptions } from 'next-auth'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { JWTEncodeParams } from 'next-auth/jwt'
+import GoogleProvider from 'next-auth/providers/google'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import FacebookProvider from 'next-auth/providers/facebook'
 
 const configAuth = {
 	providers: [
@@ -18,6 +20,21 @@ const configAuth = {
 
 				return null
 			}
+		}),
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+			authorization: {
+				params: {
+					prompt: 'consent',
+					access_type: 'offline',
+					response_type: 'code'
+				}
+			}
+		}),
+		FacebookProvider({
+			clientId: process.env.FACEBOOK_CLIENT_ID ?? '',
+			clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? ''
 		})
 	],
 	pages: {
@@ -59,6 +76,12 @@ const configAuth = {
 			//TODO: add type user to session
 			session.user = token.user as any
 			return session
+		},
+		async signIn({ account, profile, email }) {
+			if (account?.provider === 'google') {
+				return !profile?.email?.endsWith('@example.com')
+			}
+			return true // Do different verification for other providers that don't have `email_verified`
 		}
 	},
 	secret: process.env.NEXTAUTH_SECRET

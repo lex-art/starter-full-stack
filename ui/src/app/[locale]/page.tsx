@@ -43,7 +43,9 @@ export default async function Index() {
 
 			<code
 				style={{
-					fontSize: font.sizes.fontSizeMedium
+					fontSize: font.sizes.fontSizeMedium,
+					whiteSpace: 'pre-line',
+					wordWrap: 'break-word'
 				}}
 			>
 				{JSON.stringify(token, null, 2)}

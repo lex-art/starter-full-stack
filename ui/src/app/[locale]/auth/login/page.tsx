@@ -2,7 +2,7 @@
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { signIn } from 'next-auth/react'
-import React, { useState, useTransition } from 'react'
+import React, { useContext, useState, useTransition } from 'react'
 import Image from 'next/image'
 import logo from '../../../../../public/img/react.png'
 import AppPaper from '@/components/Common/Layout/Paper'
@@ -17,15 +17,32 @@ import { userSchema } from './schema/user'
 import { useSnackbar } from 'notistack'
 import { Severity } from '@/types'
 import AppCircularProgress from '@/components/Common/FeedBack/CircularProgress/CircularProgress'
+import { Divider, styled, Toolbar, useTheme } from '@mui/material'
+import { Link, usePathname, useRouter } from '@/navigation'
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
+import { AppGlobalContext } from '@/components/Theme/AppTheme'
+import { useLocale, useTranslations } from 'next-intl'
 
 type UserSchema = z.infer<typeof userSchema>
 
 export default function Login() {
 	const { enqueueSnackbar } = useSnackbar()
+	const theme = useTheme()
+	const colorMode = useContext(AppGlobalContext)
+	const t = useTranslations('common')
+	const locale = useLocale()
+	const redirect = useRouter()
+	const pathname = usePathname()
+	const otherLocale = locale === 'es' ? 'en' : 'es'
 	const [isLoading, transaction] = useTransition()
 	const { control, handleSubmit } = useForm<UserSchema>({
 		mode: 'onSubmit',
-		resolver: zodResolver(userSchema)
+		resolver: zodResolver(userSchema),
+		defaultValues: {
+			email: '',
+			password: ''
+		}
 	})
 	const onSubmit = async (data: UserSchema) => {
 		transaction(async () => {
@@ -47,6 +64,38 @@ export default function Login() {
 		})
 	}
 
+	const loginWithFacebook = async () => {
+		transaction(async () => {
+			const result = await signIn('facebook', {
+				redirect: true,
+				callbackUrl: '/'
+			})
+			if (result?.error) {
+				// Manejar errores, por ejemplo mostrando un mensaje al usuario
+				console.error(result.error)
+				enqueueSnackbar(result.error, {
+					variant: Severity.Error
+				})
+			}
+		})
+	}
+
+	const loginWithGoogle = async () => {
+		transaction(async () => {
+			const result = await signIn('google', {
+				redirect: true,
+				callbackUrl: '/'
+			})
+			if (result?.error) {
+				// Manejar errores, por ejemplo mostrando un mensaje al usuario
+				console.error(result.error)
+				enqueueSnackbar(result.error, {
+					variant: Severity.Error
+				})
+			}
+		})
+	}
+
 	return (
 		<AppGrid
 			container
@@ -55,9 +104,39 @@ export default function Login() {
 			alignItems="center"
 			height="100vh"
 			sx={{
-				backgroundColor: (theme) => theme.palette.primary.main
+				backgroundColor: (theme) => theme.palette.background.default
 			}}
 		>
+			<MuiAppBar>
+				<Toolbar
+					sx={{
+						display: 'flex',
+						justifyContent: 'flex-end'
+					}}
+				>
+					<AppIconButton
+						sx={{ ml: 1 }}
+						onClick={() => {
+							colorMode.toggleColorMode()
+							document.cookie = `theme=${theme.palette.mode === 'dark' ? 'light' : 'dark'}; path=/`
+						}}
+						color="inherit"
+					>
+						{theme.palette.mode === 'dark' ? <AppIcons.Brightness4 /> : <AppIcons.Brightness7 />}
+					</AppIconButton>
+					<AppIconButton
+						sx={{ ml: 1 }}
+						onClick={() =>
+							redirect.push(pathname, {
+								locale: otherLocale
+							})
+						}
+						color="inherit"
+					>
+						{locale === 'es' ? <AppIcons.GTranslate /> : <AppIcons.GTranslateRounded />}
+					</AppIconButton>
+				</Toolbar>
+			</MuiAppBar>
 			<AppPaper
 				elevation={5}
 				sx={{
@@ -73,12 +152,11 @@ export default function Login() {
 					flexDirection: 'column',
 					alignItems: 'center',
 					justifyContent: 'center',
-
 					gap: 2
 				}}
 			>
 				<AppTypography variant="h4">Iniciar sesión</AppTypography>
-				<Image src={logo} alt="Logo" width={100} height={100} />
+				<Image src={logo} alt="Logo" width={100} height={100} priority />
 				<AppTypography variant="body1" fontWeight="bold">
 					Simple Form
 				</AppTypography>
@@ -94,7 +172,7 @@ export default function Login() {
 						control={control}
 						name="email"
 						render={({ field, fieldState: { error } }) => (
-							<AppTextField {...field} error={!!error} helperText={error?.message} label="Email" />
+							<AppTextField {...field} error={!!error} helperText={error?.message} label={t('email')} />
 						)}
 					/>
 					<Controller
@@ -102,7 +180,7 @@ export default function Login() {
 						name="password"
 						render={({ field, fieldState: { error } }) => (
 							<AppTextField
-								label="password"
+								label={t('password')}
 								type="password"
 								{...field}
 								error={!!error}
@@ -120,41 +198,48 @@ export default function Login() {
 						disabled={isLoading}
 						endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
 					>
-						Iniciar sesión
+						{t('login')}
 					</AppButton>
 				</form>
-				<AppDivider
-					marginY="0.5rem"
-					textAlign="center"
-					sx={{
-						width: '100%'
-					}}
-				>
-					<AppTypography>Or</AppTypography>
+				<AppDivider marginY="0.5rem" textAlign="center">
+					<AppTypography fontWeight="Bold">Or</AppTypography>
 				</AppDivider>
-
-				<AppButton startIcon={<AppIcons.Facebook />} fullWidth variant="outlined">
+				<AppButton
+					startIcon={<AppIcons.Facebook />}
+					fullWidth
+					variant="outlined"
+					onClick={loginWithFacebook}
+					disabled={isLoading}
+					endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+				>
 					Login with Facebook
 				</AppButton>
 
-				<AppButton startIcon={<AppIcons.Google />} fullWidth variant="outlined">
+				<AppButton
+					startIcon={<AppIcons.Google />}
+					fullWidth
+					variant="outlined"
+					onClick={loginWithGoogle}
+					disabled={isLoading}
+					endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+				>
 					Login with Google
 				</AppButton>
 
 				<AppButton startIcon={<AppIcons.Twitter />} fullWidth variant="outlined">
 					Login with Twitter
 				</AppButton>
+				<Link
+					style={{
+						textDecoration: 'none'
+					}}
+					href="/auth/forgot-password"
+				>
+					<AppTypography variant="body2" color="textSecondary">
+						Recuperar contraseña
+					</AppTypography>
+				</Link>
 			</AppPaper>
-			{/* <AppIconButton
-				sx={{ ml: 1 }}
-				onClick={() => {
-					colorMode.toggleColorMode()
-					document.cookie = `theme=${theme.palette.mode === 'dark' ? 'light' : 'dark'}; path=/`
-				}}
-				color="inherit"
-			>
-				{theme.palette.mode === 'dark' ? <AppIcons.Brightness4 /> : <AppIcons.Brightness7 />}
-			</AppIconButton> */}
 		</AppGrid>
 	)
 }

@@ -6,9 +6,9 @@ const AppDividerTheme: ThemeOptions = {
 		MuiDivider: {
 			styleOverrides: {
 				root: {
-					'&::before': {
+					/* '&::before': {
 						width: '3%'
-					}
+					} */
 				}
 			}
 		}
