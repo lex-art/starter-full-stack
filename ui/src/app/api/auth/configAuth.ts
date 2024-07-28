@@ -4,6 +4,7 @@ import { JWTEncodeParams } from 'next-auth/jwt'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
+import { refreshAccessToken } from './refreshToken'
 
 const configAuth = {
 	providers: [
@@ -70,7 +71,14 @@ const configAuth = {
 			if (user) {
 				token.user = user
 			}
-			return token
+
+			// return token
+			// Access token has expired, try to update it
+			if (account?.expires_at && Date.now() < account?.expires_at) {
+				return token
+			}
+			// TODO: later add refresh token
+			return token //refreshAccessToken(token)
 		},
 		session({ session, token }) {
 			//TODO: add type user to session

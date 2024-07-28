@@ -13,12 +13,15 @@ import AppPie from '../../components/chartsExamples/Pie'
 import AppSparkLine from '@/components/chartsExamples/SparkLine'
 import AppGauges from '@/components/chartsExamples/Guages'
 import { cookies } from 'next/headers'
+import useRoleAccess from '@/lib/hooks/useRoleAccess'
 
 export default async function Index() {
 	const session = await getServerSession(configAuth)
 	const cookie = cookies()
 	const token = cookie.get('next-auth.session-token')
 	const locale = useLocale()
+	const access = useRoleAccess('projects')
+
 	return (
 		<AppGrid width="100%" height="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
@@ -57,6 +60,14 @@ export default async function Index() {
 				}}
 			>
 				{locale}
+			</code>
+			<br />
+			<code
+				style={{
+					fontSize: font.sizes.fontSizeMedium
+				}}
+			>
+				{JSON.stringify(access, null, 2)}
 			</code>
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography

@@ -32,6 +32,6 @@ const AppIconButton = forwardRef<HTMLButtonElement, AppIconButtonProps>(
 	}
 )
 
-AppIconButton.displayName = 'TikalBoxIconButton'
+AppIconButton.displayName = 'AppBoxIconButton'
 export { AppIconButton }
 export default AppIconButton

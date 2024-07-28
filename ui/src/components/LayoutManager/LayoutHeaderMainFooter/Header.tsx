@@ -86,9 +86,6 @@ export const Header: FC = () => {
 		signOut()
 	}
 
-	console.log('====================================')
-	console.log('Header', isLoading)
-	console.log('====================================')
 	return (
 		<AppBox gridArea="header">
 			<AppLoader isLoading={isLoading} />

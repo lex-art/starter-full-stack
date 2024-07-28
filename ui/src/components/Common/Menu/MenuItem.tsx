@@ -33,6 +33,6 @@ const AppMenuItem: FC<MenuItemProps> = forwardRef<HTMLLIElement, MenuItemProps>(
 		)
 	}
 )
-AppMenuItem.displayName = 'TikalBoxMenuItem'
+AppMenuItem.displayName = 'AppBoxMenuItem'
 export { AppMenuItem, AppMuiItemTheme }
 export default AppMenuItem

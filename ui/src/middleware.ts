@@ -1,9 +1,10 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { withAuth } from 'next-auth/middleware'
 import createIntlMiddleware from 'next-intl/middleware'
 import { locales } from './navigation'
 import configAuth from './app/api/auth/configAuth'
 import { getSession } from 'next-auth/react'
+import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
 
 const publicPages = ['/auth/*']
 
@@ -57,6 +58,16 @@ export default function middleware(request: NextRequest) {
 	if (isPublicPage) {
 		return intlMiddleware(newRequest)
 	}
+	const role = request.cookies.get('role')
+	let haveAccess = doesRoleHaveAccessToURL({
+		role: role?.value ?? 'guest',
+		url: request.nextUrl.pathname
+	})
+	if (!haveAccess) {
+		// Redirect to login page if user has no access to that particular page
+		return NextResponse.rewrite(new URL('/403', request.url))
+	}
+
 	return (authMiddleware as any)(newRequest)
 }
 

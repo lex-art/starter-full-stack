@@ -203,6 +203,6 @@ const AppDropdown = forwardRef<HTMLSelectElement, AppDropDownProps & SelectProps
 	)
 })
 
-AppDropdown.displayName = 'Tikal Box Dropdown'
+AppDropdown.displayName = 'App Box Dropdown'
 export { AppDropdown, AppDropdownTheme }
 export default AppDropdown
