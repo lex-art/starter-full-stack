@@ -25,7 +25,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 					decimalNumbers: true,
 					charset: 'utf8mb4_unicode_ci',
 					connectionLimit: 2
-				}
+				},
+				schema: 'development'
 			})
 		})
 	],

@@ -13,14 +13,14 @@ import AppPie from '../../components/chartsExamples/Pie'
 import AppSparkLine from '@/components/chartsExamples/SparkLine'
 import AppGauges from '@/components/chartsExamples/Guages'
 import { cookies } from 'next/headers'
-import useRoleAccess from '@/lib/hooks/useRoleAccess'
+import userPermission from '@/lib/hooks/userPermission'
 
 export default async function Index() {
 	const session = await getServerSession(configAuth)
 	const cookie = cookies()
 	const token = cookie.get('next-auth.session-token')
 	const locale = useLocale()
-	const access = useRoleAccess('projects')
+	const access = userPermission('projects')
 
 	return (
 		<AppGrid width="100%" height="100%">

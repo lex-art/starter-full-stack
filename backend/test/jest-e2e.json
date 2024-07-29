@@ -12,6 +12,12 @@
   },
   "moduleNameMapper": {
     "@app/auth/(.*)": "<rootDir>/../libs/auth/src/$1",
-    "@app/auth": "<rootDir>/../libs/auth/src"
+    "@app/auth": "<rootDir>/../libs/auth/src",
+    "@app/attachment/(.*)": "<rootDir>/../libs/attachment/src/$1",
+    "@app/attachment": "<rootDir>/../libs/attachment/src",
+    "@app/file-creation/(.*)": "<rootDir>/../libs/file-creation/src/$1",
+    "@app/file-creation": "<rootDir>/../libs/file-creation/src",
+    "@app/mail/(.*)": "<rootDir>/../libs/mail/src/$1",
+    "@app/mail": "<rootDir>/../libs/mail/src"
   }
 }

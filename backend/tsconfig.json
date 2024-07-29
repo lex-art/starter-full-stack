@@ -18,11 +18,23 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/auth": [
-        "libs/auth/src"
+      "@app/attachment": [
+        "libs/attachment/src"
       ],
-      "@app/auth/*": [
-        "libs/auth/src/*"
+      "@app/attachment/*": [
+        "libs/attachment/src/*"
+      ],
+      "@app/file-creation": [
+        "libs/file-creation/src"
+      ],
+      "@app/file-creation/*": [
+        "libs/file-creation/src/*"
+      ],
+      "@app/mail": [
+        "libs/mail/src"
+      ],
+      "@app/mail/*": [
+        "libs/mail/src/*"
       ]
     }
   }

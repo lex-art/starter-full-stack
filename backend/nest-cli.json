@@ -7,13 +7,31 @@
     "webpack": true
   },
   "projects": {
-    "auth": {
+    "attachment": {
       "type": "library",
-      "root": "libs/auth",
+      "root": "libs/attachment",
       "entryFile": "index",
-      "sourceRoot": "libs/auth/src",
+      "sourceRoot": "libs/attachment/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/auth/tsconfig.lib.json"
+        "tsConfigPath": "libs/attachment/tsconfig.lib.json"
+      }
+    },
+    "file-creation": {
+      "type": "library",
+      "root": "libs/file-creation",
+      "entryFile": "index",
+      "sourceRoot": "libs/file-creation/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/file-creation/tsconfig.lib.json"
+      }
+    },
+    "mail": {
+      "type": "library",
+      "root": "libs/mail",
+      "entryFile": "index",
+      "sourceRoot": "libs/mail/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/mail/tsconfig.lib.json"
       }
     }
   }

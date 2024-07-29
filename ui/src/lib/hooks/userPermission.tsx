@@ -3,7 +3,7 @@ import { accessLevel } from '../accessControl/accessLevel'
 import { cookies, headers } from 'next/headers'
 
 // It's optional to define page and role here
-const useRoleAccess = (page?: string, role?: string) => {
+const userPermission = (page?: string, role?: string) => {
 	const header = headers()
 	const cookieStore = cookies()
 	const currentPath = header.get('x-url') || ''
@@ -26,4 +26,4 @@ const useRoleAccess = (page?: string, role?: string) => {
 	}
 }
 
-export default useRoleAccess
+export default userPermission
