@@ -3,7 +3,7 @@ import { UserEntity } from './user.entity'
 
 
 @Entity('profiles')
-export class ProfilesEntity extends BaseEntity {
+export class ProfileEntity extends BaseEntity {
 	@PrimaryGeneratedColumn('increment', { name: 'id_profile' })
 	idProfile: number
 
@@ -27,7 +27,7 @@ export class ProfilesEntity extends BaseEntity {
 	countryCallingCode?: string
 
 	@Column({
-		type: 'datetime',
+		type: 'date',
 		name: 'birth_date'
 	})
 	birthDate: Date

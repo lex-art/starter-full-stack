@@ -60,7 +60,7 @@ async function bootstrap() {
       './docs/swagger-spec.json',
       JSON.stringify(document, null, 2)
     );
-
+    app.setGlobalPrefix('api');
     await app.listen(3002);
     if (module.hot) {
       module.hot.accept();

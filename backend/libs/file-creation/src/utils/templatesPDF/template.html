@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-wrap: balance;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="data:image/png;base64,{{=it.logo}}" width="100px" alt="logo">
+            <div class="container-barcode">
+                <label><strong>{{=it.id}}</strong></label>
+                <h1>{{=it.name}}</h1>
+                <label><strong>Creado: {{=it.createdDate}}</strong></label>
+            </div>
+        </header>
+    </div>
+</body>
+
+</html>

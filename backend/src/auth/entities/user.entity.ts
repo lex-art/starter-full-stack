@@ -1,4 +1,4 @@
-import { USER_PERMISSION, USER_ROLE, USER_TYPE } from 'src/types/enums'
+import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm'
 
 // in DB, the table name is 'users'
