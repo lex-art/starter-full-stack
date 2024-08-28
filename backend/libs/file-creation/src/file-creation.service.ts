@@ -58,7 +58,7 @@ export class FileCreationService {
 		return pdf
 	}
 
-    public async generateHTMLPdfFile() {
+    public async generateHTMLPdfFile(dataFile: Record<string, unknown>) {
         const browser = await launch({
             headless: true,
             executablePath:
@@ -71,7 +71,7 @@ export class FileCreationService {
         const templateFile: string = readFileSync(join(__dirname, '/utils/templatesPDF/template.html'), 'utf8')
         const logo: string = readFileSync(join(__dirname, '/utils/templatesPDF/logo.png'), 'base64')
         const templateFuncion: RenderFunction = template(templateFile)
-        const html = templateFuncion({ logo, id: '001', name: 'Juan Perez', createdDate: '2021-09-01',})
+        const html = templateFuncion(dataFile ??{ logo, id: '001', name: 'Juan Perez', createdDate: '2021-09-01',})
         await page.setContent(html)
 			const pdf = await page.pdf({
 				format: 'letter',
