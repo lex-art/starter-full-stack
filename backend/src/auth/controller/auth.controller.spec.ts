@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ControllerController } from './controller.controller';
+import { ControllerController } from './user.controller';
 
-describe('ControllerController', () => {
+describe('AuthController', () => {
   let controller: ControllerController;
 
   beforeEach(async () => {
