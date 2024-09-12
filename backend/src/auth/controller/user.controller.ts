@@ -1,16 +1,17 @@
 import { Body, Controller, Get, HttpException, Post, Put } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
-import { GetUserDto, GetUserQuery } from '../queries/implementation/get-user.query';
+import { GetUserQuery } from '../queries/query/get-user.query';
+import { LoginFormDto } from '../dto/login.dto';
 
 @Controller('auth')
-export class ControllerController {
+export class UserController {
     constructor(
         private readonly queryBus: QueryBus
     ) {}
 
-    @Post('create-account')
+    @Post('create-user')
     register(
-        @Body() body: GetUserDto,
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -23,9 +24,9 @@ export class ControllerController {
         }
     }
 
-    @Get('user-account')
+    @Get('user')
     getUser(
-        @Body() body: GetUserDto,
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -38,9 +39,9 @@ export class ControllerController {
         }
     }
 
-    @Get('all-accounts')
+    @Get('all-users')
     getAllUsers(
-        @Body() body: GetUserDto,
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -53,9 +54,9 @@ export class ControllerController {
         }
     }
 
-    @Put('update-account')
+    @Put('update-user')
     update(
-        @Body() body: GetUserDto,
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -68,9 +69,9 @@ export class ControllerController {
         }
     }
 
-    @Get('delete-account')
+    @Get('delete-user')
     delete(
-        @Body() body: GetUserDto,
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string

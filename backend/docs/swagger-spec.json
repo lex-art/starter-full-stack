@@ -21,18 +21,8 @@
     },
     "/auth/create-account": {
       "post": {
-        "operationId": "ControllerController_register",
+        "operationId": "UserController_register",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": ""
@@ -42,18 +32,8 @@
     },
     "/auth/user-account": {
       "get": {
-        "operationId": "ControllerController_getUser",
+        "operationId": "UserController_getUser",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": ""
@@ -63,18 +43,8 @@
     },
     "/auth/all-accounts": {
       "get": {
-        "operationId": "ControllerController_getAllUsers",
+        "operationId": "UserController_getAllUsers",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": ""
@@ -84,18 +54,8 @@
     },
     "/auth/update-account": {
       "put": {
-        "operationId": "ControllerController_update",
+        "operationId": "UserController_update",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": ""
@@ -105,18 +65,96 @@
     },
     "/auth/delete-account": {
       "get": {
-        "operationId": "ControllerController_delete",
+        "operationId": "UserController_delete",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetUserDto"
-              }
-            }
+        "responses": {
+          "200": {
+            "description": ""
           }
-        },
+        }
+      }
+    },
+    "/auth/login": {
+      "get": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/resend-email": {
+      "get": {
+        "operationId": "AuthController_resendEmail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/refresh-token": {
+      "get": {
+        "operationId": "AuthController_refreshToken",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "get": {
+        "operationId": "AuthController_forgotPassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "get": {
+        "operationId": "AuthController_resetPassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/change-password": {
+      "get": {
+        "operationId": "AuthController_changePassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/verify-email": {
+      "get": {
+        "operationId": "AuthController_verifyEmail",
+        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -139,11 +177,6 @@
   ],
   "servers": [],
   "components": {
-    "schemas": {
-      "GetUserDto": {
-        "type": "object",
-        "properties": {}
-      }
-    }
+    "schemas": {}
   }
 }

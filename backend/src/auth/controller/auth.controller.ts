@@ -1,16 +1,20 @@
-import { Body, Controller, Get, HttpException } from "@nestjs/common";
-import { QueryBus } from "@nestjs/cqrs";
-import { GetUserDto, GetUserQuery } from "../queries/implementation/get-user.query";
+import { Body, Controller, Get, HttpException, Post } from "@nestjs/common";
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
+import { GetUserQuery } from "../queries/query/get-user.query";
+import { LoginFormDto } from "../dto/login.dto";
+import { CreateUserCommand } from "../commands/command/create-user.command";
+import { UserDto } from "../dto/user.dto";
 
 @Controller('auth')
-export class ControllerController {
+export class AuthController {
     constructor(
-        private readonly queryBus: QueryBus
+        private readonly queryBus: QueryBus,
+        private readonly commandBus: CommandBus
     ) {}
 
     @Get('login')
     login(
-        @Body() body: GetUserDto,
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -23,9 +27,24 @@ export class ControllerController {
         }
     }
 
+    @Post('create-account')
+    async register(
+        @Body() body: UserDto,
+    ): Promise<{
+        message: string,
+        email: string
+    }> {
+        try{
+            const command = new CreateUserCommand(body)
+            return this.commandBus.execute(command)
+        } catch (error) {
+            throw new HttpException(error.message, error.status)
+        }
+    }
+
     @Get('resend-email')
-    resendEmail(
-        @Body() body: GetUserDto,
+    async resendEmail(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -39,8 +58,8 @@ export class ControllerController {
     }
 
     @Get('logout')
-    logout(
-        @Body() body: GetUserDto,
+    async logout(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -54,8 +73,8 @@ export class ControllerController {
     }
 
     @Get('refresh-token')
-    refreshToken(
-        @Body() body: GetUserDto,
+    async refreshToken(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -69,8 +88,8 @@ export class ControllerController {
     }
 
     @Get('forgot-password')
-    forgotPassword(
-        @Body() body: GetUserDto,
+    async forgotPassword(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -84,8 +103,8 @@ export class ControllerController {
     }
 
     @Get('reset-password')
-    resetPassword(
-        @Body() body: GetUserDto,
+    async resetPassword(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -99,8 +118,8 @@ export class ControllerController {
     }
 
     @Get('change-password')
-    changePassword(
-        @Body() body: GetUserDto,
+    async changePassword(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string
@@ -114,8 +133,8 @@ export class ControllerController {
     }
 
     @Get('verify-email')
-    verifyEmail(
-        @Body() body: GetUserDto,
+    async verifyEmail(
+        @Body() body: LoginFormDto,
     ): Promise<{
         message: string,
         email: string

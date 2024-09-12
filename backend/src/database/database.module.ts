@@ -7,7 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 		TypeOrmModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
-			useFactory: (configService: ConfigService) => ({
+			useFactory: async (configService: ConfigService) => {
+			  return {
 				isGlobal: true,
 				type: 'postgres',
 				logging: true,
@@ -22,12 +23,13 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 				migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
 				timezone: 'Z',
 				extra: {
-					decimalNumbers: true,
-					charset: 'utf8mb4_unicode_ci',
-					connectionLimit: 2
+				  decimalNumbers: true,
+				  charset: 'utf8mb4_unicode_ci',
+				  connectionLimit: 2
 				},
-				schema: 'dev'
-			})
+				schema: 'development'
+			  };
+			}
 		})
 	],
 	exports: [TypeOrmModule]

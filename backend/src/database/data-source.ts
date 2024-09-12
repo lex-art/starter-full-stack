@@ -9,7 +9,7 @@ config()
 const configService = new ConfigService()
 
 const options: DataSourceOptions & SeederOptions = {
-	type: 'postgres',
+	type: 'Postgres',
 	host: configService.getOrThrow('DATABASE_HOST'),
 	port: configService.getOrThrow('DATABASE_PORT'),
 	username: configService.getOrThrow('DATABASE_USERNAME'),

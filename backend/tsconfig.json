@@ -18,6 +18,12 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@app/": [
+        "src/"
+      ],
+      "@app/*": [
+        "src/*"
+      ],
       "@app/attachment": [
         "libs/attachment/src"
       ],
