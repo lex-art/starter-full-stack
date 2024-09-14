@@ -3,13 +3,13 @@ import { QueryBus } from '@nestjs/cqrs';
 import { GetUserQuery } from '../queries/query/get-user.query';
 import { LoginFormDto } from '../dto/login.dto';
 
-@Controller('auth')
+@Controller('auth/user')
 export class UserController {
     constructor(
         private readonly queryBus: QueryBus
     ) {}
 
-    @Post('create-user')
+    @Post('create')
     register(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -39,7 +39,7 @@ export class UserController {
         }
     }
 
-    @Get('all-users')
+    @Get('all')
     getAllUsers(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -54,7 +54,7 @@ export class UserController {
         }
     }
 
-    @Put('update-user')
+    @Put('update')
     update(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -69,7 +69,7 @@ export class UserController {
         }
     }
 
-    @Get('delete-user')
+    @Get('delete')
     delete(
         @Body() body: LoginFormDto,
     ): Promise<{

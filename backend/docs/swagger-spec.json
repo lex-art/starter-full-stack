@@ -19,10 +19,20 @@
         }
       }
     },
-    "/auth/create-account": {
+    "/auth/user/create": {
       "post": {
         "operationId": "UserController_register",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -30,10 +40,20 @@
         }
       }
     },
-    "/auth/user-account": {
+    "/auth/user/user": {
       "get": {
         "operationId": "UserController_getUser",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -41,10 +61,20 @@
         }
       }
     },
-    "/auth/all-accounts": {
+    "/auth/user/all": {
       "get": {
         "operationId": "UserController_getAllUsers",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -52,10 +82,20 @@
         }
       }
     },
-    "/auth/update-account": {
+    "/auth/user/update": {
       "put": {
         "operationId": "UserController_update",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -63,10 +103,20 @@
         }
       }
     },
-    "/auth/delete-account": {
+    "/auth/user/delete": {
       "get": {
         "operationId": "UserController_delete",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -78,8 +128,39 @@
       "get": {
         "operationId": "AuthController_login",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/create-account": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
             "description": ""
           }
         }
@@ -89,6 +170,16 @@
       "get": {
         "operationId": "AuthController_resendEmail",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -100,6 +191,16 @@
       "get": {
         "operationId": "AuthController_logout",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -111,6 +212,16 @@
       "get": {
         "operationId": "AuthController_refreshToken",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -122,6 +233,16 @@
       "get": {
         "operationId": "AuthController_forgotPassword",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -133,6 +254,16 @@
       "get": {
         "operationId": "AuthController_resetPassword",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -144,6 +275,16 @@
       "get": {
         "operationId": "AuthController_changePassword",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -155,6 +296,16 @@
       "get": {
         "operationId": "AuthController_verifyEmail",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -177,6 +328,15 @@
   ],
   "servers": [],
   "components": {
-    "schemas": {}
+    "schemas": {
+      "LoginFormDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {}
+      }
+    }
   }
 }
