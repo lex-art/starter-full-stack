@@ -9,22 +9,8 @@ export class UserController {
         private readonly queryBus: QueryBus
     ) {}
 
-    @Post('create')
-    register(
-        @Body() body: LoginFormDto,
-    ): Promise<{
-        message: string,
-        email: string
-    }> {
-        try{
-            const query = new GetUserQuery(body)
-            return this.queryBus.execute(query)
-        } catch (error) {
-            throw new HttpException(error.message, error.status)
-        }
-    }
 
-    @Get('user')
+    @Get()
     getUser(
         @Body() body: LoginFormDto,
     ): Promise<{

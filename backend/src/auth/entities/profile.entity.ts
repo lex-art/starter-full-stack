@@ -4,7 +4,7 @@ import { UserEntity } from './user.entity'
 
 @Entity('profiles')
 export class ProfileEntity extends BaseEntity {
-	@PrimaryGeneratedColumn('increment', { name: 'id_profile' })
+	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS'  ,name: 'id_profile' })
 	idProfile: number
 
 	@OneToOne(() => UserEntity, (user) => user.email, { nullable: false })

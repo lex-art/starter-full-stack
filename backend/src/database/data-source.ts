@@ -5,11 +5,10 @@ import { SeederOptions } from 'typeorm-extension'
 import { MainSeeder } from './seeds/Main.seeder'
 
 config()
-
 const configService = new ConfigService()
 
 const options: DataSourceOptions & SeederOptions = {
-	type: 'Postgres',
+	type: 'postgres',
 	host: configService.getOrThrow('DATABASE_HOST'),
 	port: configService.getOrThrow('DATABASE_PORT'),
 	username: configService.getOrThrow('DATABASE_USERNAME'),

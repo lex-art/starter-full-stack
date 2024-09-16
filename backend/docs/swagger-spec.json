@@ -19,28 +19,7 @@
         }
       }
     },
-    "/auth/user/create": {
-      "post": {
-        "operationId": "UserController_register",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/user/user": {
+    "/auth/user": {
       "get": {
         "operationId": "UserController_getUser",
         "parameters": [],
@@ -295,6 +274,27 @@
     "/auth/verify-email": {
       "get": {
         "operationId": "AuthController_verifyEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/delete-account": {
+      "delete": {
+        "operationId": "AuthController_deleteAccount",
         "parameters": [],
         "requestBody": {
           "required": true,

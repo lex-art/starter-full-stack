@@ -5,8 +5,9 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm'
 @Entity('users')
 // for a entity class, should be call in singular
 export class UserEntity extends BaseEntity {
+	
 	@PrimaryColumn({
-		length: 50,
+		length: 100,
 		unique: true
 	})
 	email: string

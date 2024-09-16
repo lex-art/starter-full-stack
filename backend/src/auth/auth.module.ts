@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { UserController } from './controller/user.controller';
 import { QueryHandlers } from './queries/handlers';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -11,6 +11,13 @@ import { AuthController } from './controller/auth.controller';
 import { CommandHandlers } from './commands/handlers';
 import { EventsHandlers } from './events/handlers';
 import { MailModule } from '@app/mail';
+import { JwtStrategy } from './strategy/jwt.strategy';
+import { APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { RolesGuard } from './guard/role.guard';
+import { TypeUserGuard } from './guard/type-user.guard';
+import { AuthGuard } from './guard/auth.guard';
+import { UserSubscriber } from './encrypt/user.suscriber';
+import { CryptoUtility } from '@app/lib/utilities';
 
 @Module({
     imports: [
@@ -29,6 +36,30 @@ import { MailModule } from '@app/mail';
         inject: [ConfigService]
     })],
     controllers: [UserController, AuthController],
-    providers: [...QueryHandlers, ...CommandHandlers,...EventsHandlers],
+    providers: [
+        ...QueryHandlers, 
+        ...CommandHandlers,
+        ...EventsHandlers, 
+        JwtStrategy,
+        CryptoUtility,
+        UserSubscriber,
+        {
+			provide: APP_GUARD, // this is to use global guard
+			useClass: AuthGuard
+		},
+        {
+            provide: APP_GUARD,
+            useClass: RolesGuard
+        },
+        {
+			provide: APP_GUARD,
+			useClass: TypeUserGuard
+		},
+		{
+			provide: APP_PIPE,
+			useClass: ValidationPipe
+		}
+    ],
+    exports:[PassportModule, JwtStrategy]
 })
 export class AuthModule {}

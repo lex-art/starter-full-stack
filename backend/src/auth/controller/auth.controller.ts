@@ -1,9 +1,10 @@
-import { Body, Controller, Get, HttpException, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, Post } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetUserQuery } from "../queries/query/get-user.query";
 import { LoginFormDto } from "../dto/login.dto";
 import { CreateUserCommand } from "../commands/command/create-user.command";
 import { UserDto } from "../dto/user.dto";
+import { Public } from "@app/decorator";
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +14,7 @@ export class AuthController {
     ) {}
 
     @Get('login')
+    @Public()
     login(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -147,6 +149,20 @@ export class AuthController {
         }
     }
 
+    @Delete('delete-account')
+    async deleteAccount(
+        @Body() body: LoginFormDto,
+    ): Promise<{
+        message: string,
+        email: string
+    }> {
+        try{
+            const query = new GetUserQuery(body)
+            return this.queryBus.execute(query)
+        } catch (error) {
+            throw new HttpException(error.message, error.status)
+        }
+    }
     
 
     
