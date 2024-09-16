@@ -11,9 +11,24 @@
     "backend:start:dev": "pnpm --filter backend -r start:dev",
     "lint": "pnpm --stream -r lint",
     "format": "pnpm --stream -r format",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.7"
+  },
+  "lint-staged": {
+    "ui/*.{js,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "backend/*.{js,ts}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
 }

@@ -7,7 +7,6 @@ import AppSparkLine from '@/components/chartsExamples/SparkLine'
 import { font } from '@/lib/design-tokens'
 import userPermission from '@/lib/hooks/userPermission'
 import { getServerSession } from 'next-auth'
-import { useLocale } from 'next-intl'
 import { cookies } from 'next/headers'
 import AppBarChart from '../../components/chartsExamples/Bar'
 import AppLineChart from '../../components/chartsExamples/Line'
@@ -19,7 +18,7 @@ export default async function Index() {
 	const session = await getServerSession(configAuth)
 	const cookie = cookies()
 	const token = cookie.get('next-auth.session-token')
-	const locale = useLocale()
+	//const locale = useLocale() //TODO: get locale from session from header and set from ui
 	const access = userPermission('projects')
 
 	return (
@@ -54,13 +53,13 @@ export default async function Index() {
 				{JSON.stringify(token, null, 2)}
 			</code>
 			<br />
-			<code
+			{/* <code
 				style={{
 					fontSize: font.sizes.fontSizeMedium
 				}}
 			>
 				{locale}
-			</code>
+			</code> */}
 			<br />
 			<code
 				style={{
