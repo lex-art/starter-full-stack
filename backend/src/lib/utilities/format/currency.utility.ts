@@ -1,4 +1,4 @@
-import { Currency, Unit } from "src/types"
+import { Currency, Unit } from 'src/types'
 
 export const parseNumberToLocaleString = (value?: string): string => {
 	if (!value) {

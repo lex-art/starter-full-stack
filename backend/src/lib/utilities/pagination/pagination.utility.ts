@@ -1,4 +1,4 @@
-import { QueryPaginationDto } from "../../dto/query.dto";
+import { QueryPaginationDto } from '../../dto/query.dto'
 
 export const mapPagination = (query: QueryPaginationDto) => ({
 	data: [],

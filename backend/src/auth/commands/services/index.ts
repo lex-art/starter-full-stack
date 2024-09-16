@@ -1,5 +1,3 @@
-import { CreateUserService } from "./create-user.service";
+import { CreateUserService } from './create-user.service'
 
-export const CommandServices = [
-    CreateUserService
-]
+export const CommandServices = [CreateUserService]

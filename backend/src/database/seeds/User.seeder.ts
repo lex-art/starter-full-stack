@@ -13,7 +13,12 @@ export class UserSeeder implements Seeder {
 			password: '$2b$10$uLJ0TQGPo0PkTf/CR58QHuqc8r1qxeYelWr2ariMLueqQa.pGACJa', // 12345678
 			type: USER_TYPE.STANDARD,
 			rol: USER_ROLE.SUPER_ADMIN,
-			permissions: [USER_PERMISSION.CREATE, USER_PERMISSION.READ, USER_PERMISSION.UPDATE, USER_PERMISSION.DELETE],
+			permissions: [
+				USER_PERMISSION.CREATE,
+				USER_PERMISSION.READ,
+				USER_PERMISSION.UPDATE,
+				USER_PERMISSION.DELETE
+			]
 		})
 		const user = await userRepository.save(newUser)
 		const profile = profileRepository.create({

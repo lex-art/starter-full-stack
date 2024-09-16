@@ -7,7 +7,7 @@
   "useTabs": true,
   "tabWidth": 4,
   "plugins": [
-    "./node_modules/prettier-plugin-packagejson/lib/index.js",
+    "./node_modules/prettier-plugin-packagejson/lib/index.cjs",
     "./node_modules/prettier-plugin-organize-imports/index.js"
   ]
 }

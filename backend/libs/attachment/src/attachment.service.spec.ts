@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AttachmentService } from './attachment.service';
+import { Test, TestingModule } from '@nestjs/testing'
+import { AttachmentService } from './attachment.service'
 
 describe('AttachmentService', () => {
-  let service: AttachmentService;
+	let service: AttachmentService
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [AttachmentService],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			providers: [AttachmentService]
+		}).compile()
 
-    service = module.get<AttachmentService>(AttachmentService);
-  });
+		service = module.get<AttachmentService>(AttachmentService)
+	})
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+	it('should be defined', () => {
+		expect(service).toBeDefined()
+	})
+})

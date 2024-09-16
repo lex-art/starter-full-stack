@@ -1,5 +1,3 @@
-import { NotificationEmailUserHandler } from "./notification-email-user.handlrer";
+import { NotificationEmailUserHandler } from './notification-email-user.handlrer'
 
-export const EventsHandlers = [
-    NotificationEmailUserHandler
-]
+export const EventsHandlers = [NotificationEmailUserHandler]

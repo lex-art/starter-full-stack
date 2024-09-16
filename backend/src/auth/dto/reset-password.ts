@@ -1,7 +1,6 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsString, MinLength } from 'class-validator'
 import { USER_TYPE } from 'src/types/enums'
 
-
 export class ChangePasswordDto {
 	@IsString()
 	@IsNotEmpty()

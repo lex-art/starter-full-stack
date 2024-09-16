@@ -1,13 +1,12 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { UserEntity } from './user.entity'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
-
+import { UserEntity } from './user.entity'
 
 // in DB, the table name is 'profiles'
 @Entity('profiles')
 // for a entity class, should be call in singular
 export class ProfileEntity extends BaseEntityWithTimestamps {
-	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS'  ,name: 'id_profile' })
+	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_profile' })
 	idProfile: number
 
 	@OneToOne(() => UserEntity, (user) => user.email, { nullable: false })
@@ -35,9 +34,9 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	})
 	birthDate: Date
 
-    @Column({ type: 'varchar', length: 500 })
-    address: string
+	@Column({ type: 'varchar', length: 500 })
+	address: string
 
-    @Column({ type: 'varchar', length: 500, name: 'img_profile' })
-    imgProfile: string
+	@Column({ type: 'varchar', length: 500, name: 'img_profile' })
+	imgProfile: string
 }

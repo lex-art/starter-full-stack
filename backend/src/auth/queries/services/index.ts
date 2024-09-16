@@ -1,5 +1,3 @@
-import { GetUserService } from './get-user.service';
+import { GetUserService } from './get-user.service'
 
-export const QueryServices = [
-    GetUserService
-]
+export const QueryServices = [GetUserService]

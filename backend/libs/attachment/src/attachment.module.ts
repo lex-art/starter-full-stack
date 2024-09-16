@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { AttachmentService } from './attachment.service';
+import { Module } from '@nestjs/common'
+import { AttachmentService } from './attachment.service'
 
 @Module({
-  providers: [AttachmentService],
-  exports: [AttachmentService],
+	providers: [AttachmentService],
+	exports: [AttachmentService]
 })
 export class AttachmentModule {}

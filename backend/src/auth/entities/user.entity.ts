@@ -1,12 +1,11 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 // in DB, the table name is 'users'
 @Entity('users')
 // for a entity class, should be call in singular
 export class UserEntity extends BaseEntityWithTimestamps {
-	
 	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_user' })
 	idUser: number
 
@@ -33,19 +32,18 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	})
 	type: USER_TYPE
 
+	@Column({
+		type: 'simple-array',
+		nullable: true
+	})
+	permissions: USER_PERMISSION[]
 
-    @Column({
-        type: 'simple-array',
-        nullable: true
-    })
-    permissions: USER_PERMISSION[]
-
-    @Column({
-        name: 'user_name',
-        type: 'varchar',
-        nullable: true
-    })
-    userName?: string
+	@Column({
+		name: 'user_name',
+		type: 'varchar',
+		nullable: true
+	})
+	userName?: string
 
 	@Column({ type: 'bool', default: false })
 	verified: boolean

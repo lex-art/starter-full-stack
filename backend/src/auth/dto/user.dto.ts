@@ -1,7 +1,6 @@
-import { USER_TYPE, USER_ROLE, USER_PERMISSION } from './../../types/enums';
 import { Type } from 'class-transformer'
 import { IsArray, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
-
+import { USER_PERMISSION, USER_ROLE, USER_TYPE } from './../../types/enums'
 
 export class UserDto {
 	@IsString()
@@ -25,10 +24,10 @@ export class UserDto {
 	@IsNotEmpty()
 	type: USER_TYPE
 
-    @IsArray()
-    @IsOptional()
+	@IsArray()
+	@IsOptional()
 	@Type(() => String)
-    permissions: USER_PERMISSION[]
+	permissions: USER_PERMISSION[]
 
 	@IsOptional()
 	@IsString()

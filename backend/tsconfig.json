@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "types": [
+      "jest",
+      "node"
+    ],
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -46,6 +51,13 @@
     }
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "libs/**/*.ts",
+    "libs/test/**/*.json"
   ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
