@@ -1,8 +1,7 @@
-import { FC, ReactElement, ReactNode, forwardRef } from 'react'
+import { font } from '@/lib/design-tokens'
 import { ThemeOptions, colors } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
-import { font } from '@/lib/design-tokens'
-import { Palette } from '@mui/icons-material'
+import { FC, ReactElement, ReactNode, forwardRef } from 'react'
 
 declare module '@mui/material/Tooltip' {
 	interface TooltipProps {

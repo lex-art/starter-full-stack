@@ -1,13 +1,12 @@
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { useTranslations } from 'next-intl'
-import React from 'react'
+import AutocompleteExample from './Components/AutocompleteExample'
 import GroupOne from './Components/GroupOne'
 import GroupTwo from './Components/GroupTwo'
-import AutocompleteExample from './Components/AutocompleteExample'
-import TextFieldsError from './Components/TextFieldsError'
 import TextFieldTypes from './Components/TexFieldTypes'
+import TextFieldsError from './Components/TextFieldsError'
 
 export default function TextFields() {
 	const t = useTranslations()

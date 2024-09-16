@@ -1,4 +1,5 @@
 'use client'
+import { font } from '@/lib/design-tokens'
 import {
 	Autocomplete,
 	AutocompleteProps,
@@ -7,11 +8,10 @@ import {
 	ThemeOptions
 } from '@mui/material'
 import { SyntheticEvent, forwardRef } from 'react'
-import { font } from '@/lib/design-tokens'
-import AppTextField, { AppTextFieldProps } from '../TextField/TextField'
-import AppGrid from '../../Layout/Grid/Grid'
-import AppCircularLoader from '../../FeedBack/CircularLoader/CircularLoader'
 import AppChip from '../../DataDisplay/Chip/Chip'
+import AppCircularLoader from '../../FeedBack/CircularLoader/CircularLoader'
+import AppGrid from '../../Layout/Grid/Grid'
+import AppTextField, { AppTextFieldProps } from '../TextField/TextField'
 
 export interface AppAutocompleteProps extends Partial<AutocompleteProps<unknown, boolean, boolean, boolean>> {
 	label?: AppTextFieldProps['label']
@@ -39,9 +39,9 @@ const AppAutocompleteTheme: ThemeOptions = {
 			styleOverrides: {
 				root: {
 					'&.MuiAutocomplete-hasPopupIcon .MuiAutocomplete-inputRoot, &.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot':
-					{
-						padding: '0 4rem 0 1rem'
-					},
+						{
+							padding: '0 4rem 0 1rem'
+						},
 					'& .MuiAutocomplete-endAdornment': {
 						height: '3rem',
 						top: 'calc(50% - 22px)',

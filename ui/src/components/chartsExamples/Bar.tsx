@@ -1,5 +1,4 @@
 'use client'
-import React, { use } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart'
 
 export default function AppBarChart() {

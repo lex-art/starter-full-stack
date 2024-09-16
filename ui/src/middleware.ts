@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { withAuth } from 'next-auth/middleware'
-import createIntlMiddleware from 'next-intl/middleware'
-import { locales } from './navigation'
-import configAuth from './app/api/auth/configAuth'
 import { getSession } from 'next-auth/react'
+import createIntlMiddleware from 'next-intl/middleware'
+import { NextRequest, NextResponse } from 'next/server'
+import configAuth from './app/api/auth/configAuth'
 import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
+import { locales } from './navigation'
 
 const publicPages = ['/auth/*']
 

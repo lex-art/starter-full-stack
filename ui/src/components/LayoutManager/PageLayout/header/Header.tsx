@@ -1,33 +1,33 @@
 'use client'
-import React, { FC, useContext, useState } from 'react'
-import {
-	Toolbar,
-	IconButton,
-	Typography,
-	styled,
-	useTheme,
-	Box,
-	Avatar,
-	SxProps,
-	Paper,
-	ListItemIcon
-} from '@mui/material'
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
-import MenuIcon from '@mui/icons-material/Menu'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import { AppGlobalContext } from '@/components/Theme/AppTheme'
-import AppIcons from '@/components/Common/Icons/Icons'
-import { useLocale, useTranslations } from 'next-intl'
-import { useRouter, usePathname } from '@/navigation'
-import { deepOrange } from '@mui/material/colors'
 import AppStyledBadge from '@/components/Common/DataDisplay/Badge/Badge'
-import { Logout, PersonAdd } from '@mui/icons-material'
+import AppIcons from '@/components/Common/Icons/Icons'
 import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
 import AppBox from '@/components/Common/Layout/Box'
-import { AppMenuList } from '@/components/Common/Menu/MenuList'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
+import { AppMenuList } from '@/components/Common/Menu/MenuList'
+import { AppGlobalContext } from '@/components/Theme/AppTheme'
+import { usePathname, useRouter } from '@/navigation'
 import { ClickAwayListener } from '@mui/base/ClickAwayListener' // TODO: try to remove this import and use the one from '@mui/material'
+import { Logout, PersonAdd } from '@mui/icons-material'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import MenuIcon from '@mui/icons-material/Menu'
+import {
+	Avatar,
+	Box,
+	IconButton,
+	ListItemIcon,
+	Paper,
+	SxProps,
+	Toolbar,
+	Typography,
+	styled,
+	useTheme
+} from '@mui/material'
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import { deepOrange } from '@mui/material/colors'
+import { useLocale, useTranslations } from 'next-intl'
+import { FC, useContext, useState } from 'react'
 import './style.css'
 
 interface HeaderProps {

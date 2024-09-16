@@ -1,8 +1,7 @@
 'use client'
-import React from 'react'
 import { Breadcrumbs, Link } from '@mui/material'
-import AppTypography from '../Common/DataDisplay/Typography/Typography'
 import { usePathname } from 'next/navigation'
+import AppTypography from '../Common/DataDisplay/Typography/Typography'
 
 const AppBreadcrumb = () => {
 	const router = usePathname()

@@ -1,6 +1,6 @@
 import { font } from '@/lib/design-tokens'
 import { StepLabel, StepLabelProps, ThemeOptions } from '@mui/material'
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 const AppStepLabelThem: ThemeOptions = {
 	components: {

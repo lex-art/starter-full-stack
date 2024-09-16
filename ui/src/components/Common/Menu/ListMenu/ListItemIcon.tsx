@@ -1,4 +1,3 @@
-import { font } from '@/lib/design-tokens'
 import { ListItemIcon, ListItemIconProps, ThemeOptions } from '@mui/material'
 import { FC } from 'react'
 

@@ -3,14 +3,14 @@
 
 import AppIcons from '@/components/Common/Icons/Icons'
 import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
-import Placeholder from '@tiptap/extension-placeholder'
+import AppBox from '@/components/Common/Layout/Box'
 import { Toolbar } from '@mui/material'
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
+import { EditorContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
 import { useState } from 'react'
 import './styles.css'
-import AppBox from '@/components/Common/Layout/Box'
 
 function CustomEditor() {
 	const [showValue, setShowValue] = useState(false)

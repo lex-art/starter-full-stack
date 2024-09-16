@@ -1,5 +1,5 @@
 import { Collapse, CollapseProps } from '@mui/material'
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 const AppCollapse = forwardRef<HTMLDivElement, CollapseProps>(({ children, ...rest }, ref) => {
 	return (

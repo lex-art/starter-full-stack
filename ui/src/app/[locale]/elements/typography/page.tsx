@@ -1,9 +1,8 @@
-import AppBox from '@/components/Common/Layout/Box'
-import AppPaper from '@/components/Common/Layout/Paper'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import React from 'react'
+import AppBox from '@/components/Common/Layout/Box'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppPaper from '@/components/Common/Layout/Paper'
 
 export default function Typography() {
 	return (

@@ -1,13 +1,13 @@
+import { colors, font } from '@/lib/design-tokens'
 import { AlertColor, DialogTitle, useMediaQuery, useTheme } from '@mui/material'
 import Dialog, { DialogProps } from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import { ReactNode } from 'react'
-import AppAlert from '../Alert/Alert'
-import { colors, font } from '@/lib/design-tokens'
 import AppTypography from '../../DataDisplay/Typography/Typography'
-import AppIconButton from '../../Inputs/IconButton/IconButton'
 import AppIcons from '../../Icons/Icons'
+import AppIconButton from '../../Inputs/IconButton/IconButton'
+import AppAlert from '../Alert/Alert'
 
 interface AppDialogProps {
 	headerTitleSeverity?: AlertColor

@@ -1,7 +1,6 @@
 import { font } from '@/lib/design-tokens'
 import { TextFieldProps } from '@mui/material'
-import { DateCalendar, DateCalendarProps, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DateCalendar, DateCalendarProps } from '@mui/x-date-pickers'
 import { Dayjs } from 'dayjs'
 import { FC, forwardRef } from 'react'
 

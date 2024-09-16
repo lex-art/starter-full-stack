@@ -1,12 +1,11 @@
+import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppButton from '@/components/Common/Inputs/Button/Button'
 import AppBox from '@/components/Common/Layout/Box'
-import AppPaper from '@/components/Common/Layout/Paper'
-import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
-import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppPaper from '@/components/Common/Layout/Paper'
 import { colors } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import React from 'react'
 
 export default function Buttons() {
 	const t = useTranslations()

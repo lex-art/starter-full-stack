@@ -1,7 +1,6 @@
 import { List, ListSubheader } from '@mui/material'
-import React from 'react'
-import { MENU_ROUTES } from './menuRoutes'
 import MenuItem from './MenuItem'
+import { MENU_ROUTES } from './menuRoutes'
 
 interface ListItemProps {
 	drawerWidth: number

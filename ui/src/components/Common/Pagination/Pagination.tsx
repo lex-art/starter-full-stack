@@ -1,9 +1,9 @@
 import { FC } from 'react'
 
-import styles from './AppPagination.module.css'
+import AppIcons from '../Icons/Icons'
 import AppIconButton from '../Inputs/IconButton/IconButton'
 import AppGrid from '../Layout/Grid/Grid'
-import AppIcons from '../Icons/Icons'
+import styles from './AppPagination.module.css'
 
 interface AppPaginationProps {
 	page: number

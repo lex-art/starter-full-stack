@@ -4,7 +4,6 @@ import AppSkeleton from '@/components/Common/FeedBack/Skeleton/Skeleton'
 import AppBox from '@/components/Common/Layout/Box'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
-import React from 'react'
 const data = [
 	{
 		src: 'https://i.ytimg.com/vi/pLqipJNItIo/hqdefault.jpg?sqp=-oaymwEYCNIBEHZIVfKriqkDCwgBFQAAiEIYAXAB&rs=AOn4CLBkklsyaw9FxDmMKapyBYCn9tbPNQ',

@@ -1,6 +1,3 @@
-import { render, screen } from '@testing-library/react'
-import PageLayout from '@/components/LayoutManager/PageLayout/PageLayout'
-
 describe('PageLayout', () => {
 	/* it('renders children', () => {
 		const children = <div>Test Children</div>

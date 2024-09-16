@@ -11,7 +11,6 @@ import AppBox from '@/components/Common/Layout/Box'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
 import AppDataTable, { HeadCell } from '@/components/DataTable/DataTable'
-import React from 'react'
 
 export const headerCells: Array<HeadCell> = [
 	{

@@ -1,5 +1,5 @@
 import { MenuList, MenuListProps } from '@mui/material'
-import { forwardRef, ElementType } from 'react'
+import { ElementType, forwardRef } from 'react'
 
 const AppMenuList = forwardRef<
 	HTMLUListElement,

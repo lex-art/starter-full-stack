@@ -16,4 +16,4 @@ const countries = [
 	{ name: 'Angola', value: 'AO' }
 ]
 
-export { suggestionsArrayExample, checkBoxGroupExample, countries }
+export { checkBoxGroupExample, countries, suggestionsArrayExample }

@@ -1,11 +1,10 @@
 'use client'
-import AppPaper from '@/components/Common/Layout/Paper'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/Layout/Grid/Grid'
-import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
-import AppIcons from '@/components/Common/Icons/Icons'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import React from 'react'
+import AppIcons from '@/components/Common/Icons/Icons'
+import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppPaper from '@/components/Common/Layout/Paper'
 
 export default function Icons() {
 	return (

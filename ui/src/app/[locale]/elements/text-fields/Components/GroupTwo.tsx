@@ -1,13 +1,12 @@
-import AppBox from '@/components/Common/Layout/Box'
-import AppPaper from '@/components/Common/Layout/Paper'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
-import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppBox from '@/components/Common/Layout/Box'
+import AppPaper from '@/components/Common/Layout/Paper'
 import { RemoveRedEyeOutlined, SearchOutlined } from '@mui/icons-material'
 import { CircularProgress } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import React from 'react'
 
 export default function GroupTwo() {
 	const t = useTranslations()

@@ -1,11 +1,11 @@
 'use client'
-import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
-import AppBox from '@/components/Common/Layout/Box'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
 import AppFormGroup from '@/components/Common/FormControl/FormGroup'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
+import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
+import AppBox from '@/components/Common/Layout/Box'
 import { checkBoxGroupExample } from '@/lib/utilities/constants'
-import React, { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 export default function CheclBoxGroup() {
 	const [checked, setChecked] = useState<string>('')

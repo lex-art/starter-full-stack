@@ -1,14 +1,13 @@
-import { AppThemeMUI } from '@/components/Theme/AppTheme'
-import { NextIntlClientProvider, useMessages } from 'next-intl'
-import { ReactNode, StrictMode, Suspense } from 'react'
-import SkeletonApp from '@/components/SkeletonApp/SkeletonApp'
-import { Roboto } from 'next/font/google'
 import PageLayout from '@/components/LayoutManager/PageLayout/PageLayout'
-import { cookies, headers } from 'next/headers'
+import SkeletonApp from '@/components/SkeletonApp/SkeletonApp'
+import { AppThemeMUI } from '@/components/Theme/AppTheme'
 import { locales } from '@/navigation'
 import { PaletteMode } from '@mui/material'
-import LayoutHeaderMainFooter from '@/components/LayoutManager/LayoutHeaderMainFooter/LayoutHeaderMainFooter'
 import { Metadata, Viewport } from 'next'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { Roboto } from 'next/font/google'
+import { cookies, headers } from 'next/headers'
+import { ReactNode, StrictMode, Suspense } from 'react'
 
 type Props = {
 	readonly children: ReactNode

@@ -1,4 +1,8 @@
 'use client'
+import { colors } from '@/lib/design-tokens'
+import { useMediaQuery, useTheme } from '@mui/material'
+import classNames from 'classnames'
+import { useTranslations } from 'next-intl'
 import {
 	ChangeEvent,
 	Dispatch,
@@ -11,20 +15,16 @@ import {
 	useEffect,
 	useState
 } from 'react'
-import { useMediaQuery, useTheme } from '@mui/material'
-import classNames from 'classnames'
-import styles from './fileUpload.module.css'
-import { useTranslations } from 'next-intl'
-import AppGrid from '../Common/Layout/Grid/Grid'
-import AppIconButton from '../Common/Inputs/IconButton/IconButton'
-import AppIcons from '../Common/Icons/Icons'
 import AppTypography from '../Common/DataDisplay/Typography/Typography'
-import AppFormHelperText from '../Common/FormControl/FormHelpText'
-import AppButton from '../Common/Inputs/Button/Button'
 import AppDialog from '../Common/FeedBack/Dialog/Dialog'
-import { colors, font } from '@/lib/design-tokens'
-import AppImageViewer from './ImageViewer'
+import AppFormHelperText from '../Common/FormControl/FormHelpText'
+import AppIcons from '../Common/Icons/Icons'
+import AppButton from '../Common/Inputs/Button/Button'
+import AppIconButton from '../Common/Inputs/IconButton/IconButton'
 import AppBox from '../Common/Layout/Box'
+import AppGrid from '../Common/Layout/Grid/Grid'
+import AppImageViewer from './ImageViewer'
+import styles from './fileUpload.module.css'
 
 const CameraComponent = lazy(() =>
 	import('../CameraComponent/CameraComponent').then((module) => ({ default: module.CameraComponent }))

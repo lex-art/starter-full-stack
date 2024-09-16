@@ -1,13 +1,13 @@
 'use client'
+import { Severity } from '@/lib/types/Severity'
 import { SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import { useSnackbar } from 'notistack'
 import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react'
-import { Severity } from '@/lib/types/Severity'
-import { useTranslations } from 'next-intl'
-import AppButton from '../Inputs/Button/Button'
-import AppGrid from '../Layout/Grid/Grid'
 import AppIcons from '../Icons/Icons'
+import AppButton from '../Inputs/Button/Button'
 import AppDropdown from '../Inputs/Dropdown/Dropdown'
+import AppGrid from '../Layout/Grid/Grid'
 
 interface CameraComponentProps {
 	setImageSrc: Dispatch<SetStateAction<string | null>>

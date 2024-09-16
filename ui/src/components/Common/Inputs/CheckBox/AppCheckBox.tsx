@@ -1,6 +1,6 @@
+import { font } from '@/lib/design-tokens'
 import { Checkbox, CheckboxProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
-import { font } from '@/lib/design-tokens'
 import AppFormControlLabel from '../../FormControl/FormControlLabel'
 
 type AppCheckBoxProps = CheckboxProps & {

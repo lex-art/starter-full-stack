@@ -7,7 +7,7 @@ import AppPaper from '@/components/Common/Layout/Paper'
 import AppTab from '@/components/Tabs/Tab'
 import AppCustomTabPanel from '@/components/Tabs/TabPanel'
 import AppTabs from '@/components/Tabs/Tabs'
-import { useState, SyntheticEvent } from 'react'
+import { SyntheticEvent, useState } from 'react'
 
 function a11yProps(index: number) {
 	return {

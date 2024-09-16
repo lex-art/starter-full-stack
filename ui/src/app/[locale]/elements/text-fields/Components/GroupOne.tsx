@@ -1,9 +1,8 @@
-import AppPaper from '@/components/Common/Layout/Paper'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppFormLabel from '@/components/Common/FormControl/FormLabel'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
-import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
+import AppPaper from '@/components/Common/Layout/Paper'
 import { useTranslations } from 'next-intl'
-import React from 'react'
 
 export default function GroupOne() {
 	const t = useTranslations()

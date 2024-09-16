@@ -1,8 +1,8 @@
-import { Rating, RatingProps, Slide, Slider, SliderProps, ThemeOptions } from '@mui/material'
-import { forwardRef } from 'react'
 import { font } from '@/lib/design-tokens'
-import AppBox from '../../Layout/Box'
+import { Slider, SliderProps, ThemeOptions } from '@mui/material'
+import { forwardRef } from 'react'
 import AppFormLabel from '../../FormControl/FormLabel'
+import AppBox from '../../Layout/Box'
 
 interface AppSliderProps extends SliderProps {
 	rightIcon?: React.ReactNode

@@ -1,6 +1,6 @@
-import { FC, forwardRef } from 'react'
 import { MAX_LENGTH_NUMBER_PHONE } from '@/lib/utilities/constants/maxLengthNumbePhone'
 import { MuiTelInput, MuiTelInputCountry, MuiTelInputProps } from 'mui-tel-input'
+import { FC, forwardRef } from 'react'
 
 interface AppTelInputProps {
 	defaultCountryCode: MuiTelInputCountry

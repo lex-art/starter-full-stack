@@ -1,8 +1,8 @@
+import AppBox from '@/components/Common/Layout/Box'
 import { ReactNode } from 'react'
 import AppBreadcrumb from '../../Breadcrumb/BreadCrumb'
-import AppBox from '@/components/Common/Layout/Box'
-import { Header } from './Header'
 import { Footer } from './Footer'
+import { Header } from './Header'
 
 type Props = {
 	readonly children?: ReactNode

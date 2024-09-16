@@ -1,2 +1,2 @@
-export * from './sizes'
 export * from './dataFake'
+export * from './sizes'

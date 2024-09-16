@@ -1,6 +1,6 @@
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppBox from '@/components/Common/Layout/Box'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
-import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { headers } from 'next/headers'
 
 // Render the default Next.js 404 page when a route

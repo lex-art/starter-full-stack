@@ -1,10 +1,10 @@
 'use client'
-import React, { useContext, useState } from 'react'
-import { Header } from './header/Header'
-import { Aside } from './Aside/Aside'
-import { signOut } from 'next-auth/react'
 import AppLoader from '@/components/Loader/Loader'
 import { AppGlobalContext } from '@/components/Theme/AppTheme'
+import { signOut } from 'next-auth/react'
+import { useContext, useState } from 'react'
+import { Aside } from './Aside/Aside'
+import { Header } from './header/Header'
 
 interface AsideHeaderClientProps {
 	readonly drawerWidth: number

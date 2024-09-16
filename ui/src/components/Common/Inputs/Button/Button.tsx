@@ -1,7 +1,7 @@
+import { colors, font, sizes } from '@/lib/design-tokens'
 import Button, { ButtonProps } from '@mui/material/Button'
 import { ThemeOptions } from '@mui/material/styles'
 import { forwardRef } from 'react'
-import { colors, font, sizes } from '@/lib/design-tokens'
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {

@@ -1,6 +1,6 @@
+import { font } from '@/lib/design-tokens'
 import { Radio, RadioProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
-import { font } from '@/lib/design-tokens'
 import AppFormControlLabel from '../../FormControl/FormControlLabel'
 
 type AppRadioProps = RadioProps & {

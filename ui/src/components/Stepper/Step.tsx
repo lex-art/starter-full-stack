@@ -1,5 +1,5 @@
 import { Step, StepProps } from '@mui/material'
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 const AppStep = forwardRef<HTMLDivElement, StepProps>((props, ref) => {
 	const { children, ...rest } = props

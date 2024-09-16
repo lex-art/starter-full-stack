@@ -3,7 +3,6 @@ import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
-import React from 'react'
 import RichTextEditor from './EditorText'
 
 export default function Editors() {

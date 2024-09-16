@@ -1,8 +1,8 @@
+import { InputAdornment } from '@mui/material'
 import React, { ReactNode, forwardRef } from 'react'
 import { NumberFormatValues, NumericFormat, OnValueChange } from 'react-number-format'
-import AppTextField from '../TextField/TextField'
 import AppIcons from '../../Icons/Icons'
-import { InputAdornment } from '@mui/material'
+import AppTextField from '../TextField/TextField'
 
 interface AppNumericFormatBase {
 	decimalScale?: number

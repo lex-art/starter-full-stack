@@ -1,10 +1,9 @@
-import type { NextAuthOptions } from 'next-auth'
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import type { NextAuthOptions } from 'next-auth'
 import { JWTEncodeParams } from 'next-auth/jwt'
-import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
-import { refreshAccessToken } from './refreshToken'
+import GoogleProvider from 'next-auth/providers/google'
 
 const configAuth = {
 	providers: [

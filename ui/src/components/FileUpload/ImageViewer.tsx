@@ -1,14 +1,14 @@
 'use client'
-import { DialogActions, useMediaQuery } from '@mui/material'
+import { useMediaQuery } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
-import AppGrid from '../Common/Layout/Grid/Grid'
-import AppIconButton from '../Common/Inputs/IconButton/IconButton'
-import AppIcons from '../Common/Icons/Icons'
-import AppTypography from '../Common/DataDisplay/Typography/Typography'
-import AppButton from '../Common/Inputs/Button/Button'
 import Image from 'next/image'
+import { useState } from 'react'
+import AppTypography from '../Common/DataDisplay/Typography/Typography'
 import AppDialog from '../Common/FeedBack/Dialog/Dialog'
+import AppIcons from '../Common/Icons/Icons'
+import AppButton from '../Common/Inputs/Button/Button'
+import AppIconButton from '../Common/Inputs/IconButton/IconButton'
+import AppGrid from '../Common/Layout/Grid/Grid'
 
 interface AppImageViewerProps {
 	imageUrl: string

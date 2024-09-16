@@ -1,10 +1,10 @@
-import { render, screen, fireEvent } from '@testing-library/react'
 import { Header } from '@/components/LayoutManager/PageLayout/header/Header'
-import { NextIntlClientProvider } from 'next-intl'
 import localeValues from '@/locales/es'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { NextIntlClientProvider } from 'next-intl'
 
 // Importar después de haber hecho el mock
-import { useRouter, usePathname } from '@/navigation'
+import { usePathname, useRouter } from '@/navigation'
 
 // Configurar el mock para useRouter y usePathname
 const mockedUseRouter = useRouter as jest.Mock

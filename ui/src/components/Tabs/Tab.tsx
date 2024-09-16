@@ -1,5 +1,5 @@
 import { font } from '@/lib/design-tokens'
-import { TabProps, Tab, ThemeOptions } from '@mui/material'
+import { Tab, TabProps, ThemeOptions } from '@mui/material'
 import { FC, forwardRef } from 'react'
 
 // Define una función para crear el tema de AppTab

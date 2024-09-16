@@ -1,10 +1,10 @@
 'use client'
+import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
 import AppBox from '@/components/Common/Layout/Box'
 import AppSwitch from '@/components/Common/Switch/Switch'
-import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import { Stack, Switch, styled } from '@mui/material'
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	width: 62,

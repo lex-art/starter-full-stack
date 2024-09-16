@@ -1,15 +1,14 @@
 'use client'
-import { FC, forwardRef } from 'react'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { colors, font } from '@/lib/design-tokens'
+import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded'
 import { IconButton, TextFieldProps } from '@mui/material'
 import { ThemeOptions, styled } from '@mui/material/styles'
-import { LocalizationProvider, PickersDay } from '@mui/x-date-pickers'
+import { PickersDay } from '@mui/x-date-pickers'
 import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker'
-import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded'
+import type {} from '@mui/x-date-pickers/themeAugmentation'
 import { Dayjs } from 'dayjs'
 import 'dayjs/locale/es'
-import type {} from '@mui/x-date-pickers/themeAugmentation'
+import { FC, forwardRef } from 'react'
 
 const AppDatePickerTheme: ThemeOptions = {
 	components: {

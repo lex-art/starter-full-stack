@@ -1,13 +1,12 @@
-import React from 'react'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import { useTranslations } from 'next-intl'
-import AppPaper from '@/components/Common/Layout/Paper'
-import SelectsCatalogue from './components/SelectsCatalogue'
-import AppBox from '@/components/Common/Layout/Box'
-import { suggestionsArrayExample } from '@/lib/utilities/constants'
 import AppDropdown from '@/components/Common/Inputs/Dropdown/Dropdown'
+import AppBox from '@/components/Common/Layout/Box'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppPaper from '@/components/Common/Layout/Paper'
+import { suggestionsArrayExample } from '@/lib/utilities/constants'
+import { useTranslations } from 'next-intl'
+import SelectsCatalogue from './components/SelectsCatalogue'
 
 export default function Selects() {
 	const t = useTranslations()

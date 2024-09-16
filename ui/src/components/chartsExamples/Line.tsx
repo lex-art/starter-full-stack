@@ -1,6 +1,5 @@
 'use client'
 import { LineChart } from '@mui/x-charts/LineChart'
-import React from 'react'
 
 export default function AppLineChart() {
 	return (

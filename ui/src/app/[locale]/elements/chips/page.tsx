@@ -1,14 +1,13 @@
 'use client'
 import AppAvatar from '@/components/Common/DataDisplay/Avtar/Avatar'
 import AppChip from '@/components/Common/DataDisplay/Chip/Chip'
-import AppBox from '@/components/Common/Layout/Box'
-import AppPaper from '@/components/Common/Layout/Paper'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
-import AppGrid from '@/components/Common/Layout/Grid/Grid'
-import AppIcons from '@/components/Common/Icons/Icons'
 import AppTooltip from '@/components/Common/DataDisplay/Tooltip/Tooltip'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
-import React from 'react'
+import AppIcons from '@/components/Common/Icons/Icons'
+import AppBox from '@/components/Common/Layout/Box'
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import AppPaper from '@/components/Common/Layout/Paper'
 
 export default function ChipsExamples() {
 	return (
@@ -33,7 +32,7 @@ export default function ChipsExamples() {
 						<AppChip label="Chip Disabled" disabled />
 						<AppChip label="Chip Outlined" variant="outlined" />
 						<AppChip label="Chip Filled Disabled" variant="filled" disabled />
-						<AppChip label="Chip Clerable" variant="outlined" onDelete={() => { }} />
+						<AppChip label="Chip Clerable" variant="outlined" onDelete={() => {}} />
 
 						<AppChip label="Chip Success" color="primary" />
 						<AppChip label="Chip Success" color="secondary" />
@@ -44,7 +43,7 @@ export default function ChipsExamples() {
 
 						<AppChip
 							label="Chip withe custom icon delete"
-							onDelete={() => { }}
+							onDelete={() => {}}
 							variant="outlined"
 							color="error"
 							deleteIcon={<AppIcons.DeleteOutline />}

@@ -1,4 +1,4 @@
-import { colors, font } from '@/lib/design-tokens'
+import { font } from '@/lib/design-tokens'
 import { Chip, ChipProps, ThemeOptions } from '@mui/material'
 import { FC, forwardRef } from 'react'
 

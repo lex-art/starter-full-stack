@@ -1,6 +1,6 @@
 'use server'
-import { accessLevel } from '../accessControl/accessLevel'
 import { cookies, headers } from 'next/headers'
+import { accessLevel } from '../accessControl/accessLevel'
 
 // It's optional to define page and role here
 const userPermission = (page?: string, role?: string) => {

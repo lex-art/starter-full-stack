@@ -1,6 +1,6 @@
 import { font } from '@/lib/design-tokens'
-import { AlertColor, AlertPropsColorOverrides, Snackbar, SnackbarProps, ThemeOptions } from '@mui/material'
-import React, { forwardRef, SyntheticEvent } from 'react'
+import { Snackbar, SnackbarProps, ThemeOptions } from '@mui/material'
+import { forwardRef } from 'react'
 import AppAlert from '../Alert/Alert'
 
 const AppThemeOptions: ThemeOptions = {

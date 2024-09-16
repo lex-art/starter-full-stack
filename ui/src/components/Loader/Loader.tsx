@@ -1,6 +1,6 @@
+import { Backdrop } from '@mui/material'
 import { FC } from 'react'
 import AppCircularLoader from '../Common/FeedBack/CircularLoader/CircularLoader'
-import { Backdrop } from '@mui/material'
 
 interface ITBLoaderProps {
 	isLoading?: boolean

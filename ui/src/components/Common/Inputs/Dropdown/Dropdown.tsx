@@ -1,4 +1,5 @@
 'use client'
+import { font } from '@/lib/design-tokens'
 import {
 	Checkbox,
 	FormControl,
@@ -9,14 +10,13 @@ import {
 	ThemeOptions,
 	Typography
 } from '@mui/material'
-import { forwardRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { font } from '@/lib/design-tokens'
-import AppIconButton from '../IconButton/IconButton'
-import AppCircularLoader from '../../FeedBack/CircularLoader/CircularLoader'
-import AppMenuItem from '../../Menu/MenuItem'
+import { forwardRef, useState } from 'react'
 import AppTypography from '../../DataDisplay/Typography/Typography'
+import AppCircularLoader from '../../FeedBack/CircularLoader/CircularLoader'
 import AppIcons from '../../Icons/Icons'
+import AppMenuItem from '../../Menu/MenuItem'
+import AppIconButton from '../IconButton/IconButton'
 
 const AppDropdownTheme: ThemeOptions = {
 	components: {

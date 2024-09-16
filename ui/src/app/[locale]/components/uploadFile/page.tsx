@@ -11,7 +11,7 @@ import AppFileUpload from '@/components/FileUpload/FileUpload'
 import AppImageViewer from '@/components/FileUpload/ImageViewer'
 import { SIZE } from '@/lib/utilities/constants'
 import { useTranslations } from 'next-intl'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export default function UploadFile() {
 	const t = useTranslations('common')

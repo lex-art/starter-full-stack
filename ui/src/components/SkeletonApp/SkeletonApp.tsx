@@ -1,7 +1,7 @@
+import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { Avatar, Skeleton, Typography } from '@mui/material'
 import { FC } from 'react'
 import styles from './styles.module.css'
-import AppGrid from '@/components/Common/Layout/Grid/Grid'
 
 export const SkeletonApp: FC = () => {
 	return (

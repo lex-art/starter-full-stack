@@ -125,4 +125,4 @@ const paletteThemeOptions = (mode: PaletteMode): ThemeOptions & PaletteOptions =
 	}
 })
 
-export { robotoFont, paletteThemeOptions }
+export { paletteThemeOptions, robotoFont }

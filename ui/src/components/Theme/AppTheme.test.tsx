@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react'
-import { PaletteMode } from '@mui/material'
 import { AppThemeMUI } from '@/components/Theme/AppTheme'
-import { NextIntlClientProvider } from 'next-intl'
 import localeValues from '@/locales/es'
+import { render, screen } from '@testing-library/react'
+import { NextIntlClientProvider } from 'next-intl'
 
 const messages = localeValues
 const locale = 'es'

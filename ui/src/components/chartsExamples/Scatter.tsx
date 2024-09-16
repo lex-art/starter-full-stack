@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import { ScatterChart } from '@mui/x-charts/ScatterChart'
 
 const data = [
