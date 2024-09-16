@@ -1,14 +1,14 @@
 import { DataSource, EntitySubscriberInterface, EventSubscriber, InsertEvent, LoadEvent, UpdateEvent } from "typeorm";
-import { UserEntity } from "../entities";
+import { ProfileEntity } from "../entities";
 import { EntityProperties } from "@app/lib/utilities/common";
 import { CryptoUtility } from "@app/lib/utilities";
 import { Logger } from "@nestjs/common";
 import { AuthException } from "../exceptions";
 
 @EventSubscriber()
-export class UserSubscriber implements EntitySubscriberInterface<UserEntity> {
-    private readonly logger = new Logger(UserSubscriber.name);
-    private readonly fieldsToEncrypt : Array<keyof EntityProperties<UserEntity>> = [];
+export class ProfileSubscriber implements EntitySubscriberInterface<ProfileEntity> {
+    private readonly logger = new Logger(ProfileSubscriber.name);
+    private readonly fieldsToEncrypt : Array<keyof EntityProperties<ProfileEntity>> = [];
 
 
     constructor(
@@ -17,33 +17,33 @@ export class UserSubscriber implements EntitySubscriberInterface<UserEntity> {
 
     ) {
         this._dataSource.subscribers.push(this);
-        this.fieldsToEncrypt = ['password', 'rol', 'type', 'permissions', 'userName', 'verified', 'timeZone'];
+        this.fieldsToEncrypt = ['firstName', 'lastName', 'phone', 'countryCode', 'countryCallingCode', 'address'];
     }
 
     listenTo() {
-        return UserEntity;
+        return ProfileEntity;
     }
 
-    async afterLoad(entity: UserEntity, event?: LoadEvent<UserEntity>): Promise<UserEntity | void> {
+    async afterLoad(entity: ProfileEntity, event?: LoadEvent<ProfileEntity>): Promise<ProfileEntity | void> {
         this.logger.debug(`After load event on entity ${entity.constructor.name}`);
         try {
-            event.entity = await this._crypto.decryptEntityData<UserEntity>(entity, this.fieldsToEncrypt);
+            event.entity = await this._crypto.decryptEntityData<ProfileEntity>(entity, this.fieldsToEncrypt);
         } catch (error) {
             this.logger.error(`Error after load event on entity ${entity.constructor.name}`, error);
         }
     }
 
-    async beforeInsert(event: InsertEvent<UserEntity>) {
+    async beforeInsert(event: InsertEvent<ProfileEntity>) {
         this.logger.debug(`Before insert event on entity ${event.entity.constructor.name}`);
         try {
-            event.entity = await this._crypto.encryptEntityData<UserEntity>(event.entity, this.fieldsToEncrypt);
+            event.entity = await this._crypto.encryptEntityData<ProfileEntity>(event.entity, this.fieldsToEncrypt);
         } catch (error) {
             this.logger.error(`Error before insert event on entity ${event.entity.constructor.name}`, error);
             throw new AuthException('Error encrypting data', 'ERROR_ENCRYPTING_DATA');
         }
     }
 
-    async beforeUpdate(event: UpdateEvent<UserEntity>) {
+    async beforeUpdate(event: UpdateEvent<ProfileEntity>) {
         this.logger.debug(`Before update event on entity ${event.entity.constructor.name}`);
         try {
             event.entity = await this._crypto.encryptEntityData<Record<string, any>>(event.entity, this.fieldsToEncrypt);

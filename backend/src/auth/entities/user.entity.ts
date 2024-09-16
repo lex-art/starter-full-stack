@@ -1,12 +1,16 @@
+import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 // in DB, the table name is 'users'
 @Entity('users')
 // for a entity class, should be call in singular
-export class UserEntity extends BaseEntity {
+export class UserEntity extends BaseEntityWithTimestamps {
 	
-	@PrimaryColumn({
+	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_user' })
+	idUser: number
+
+	@Column({
 		length: 100,
 		unique: true
 	})
@@ -25,7 +29,7 @@ export class UserEntity extends BaseEntity {
 	@Column({
 		type: 'enum',
 		enum: USER_TYPE,
-		default: USER_TYPE.USER
+		default: USER_TYPE.STANDARD
 	})
 	type: USER_TYPE
 

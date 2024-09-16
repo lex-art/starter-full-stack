@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpException, Post, Put } from '@nestjs/common'
 import { QueryBus } from '@nestjs/cqrs';
 import { GetUserQuery } from '../queries/query/get-user.query';
 import { LoginFormDto } from '../dto/login.dto';
+import { Public } from '@app/decorator';
 
 @Controller('auth/user')
 export class UserController {
@@ -11,6 +12,7 @@ export class UserController {
 
 
     @Get()
+    @Public()
     getUser(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -25,7 +27,7 @@ export class UserController {
         }
     }
 
-    @Get('all')
+    /* @Get('all')
     getAllUsers(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -69,6 +71,6 @@ export class UserController {
             throw new HttpException(error.message, error.status)
         }
     }
-
+ */
     
 }

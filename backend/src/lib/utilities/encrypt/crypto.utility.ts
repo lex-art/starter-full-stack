@@ -88,12 +88,13 @@ export class CryptoUtility {
 }
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 
 @Injectable()
 export class CryptoUtility {
+  private readonly logger = new Logger(CryptoUtility.name)
   private  algorithm: string; // Algoritmo de cifrado
   private  key: Buffer; // Clave de cifrado
   private  iv: Buffer; // Vector de inicialización
@@ -128,7 +129,7 @@ export class CryptoUtility {
       encrypted += cipher.final('base64');
       return encrypted;
     } catch (error) {
-      console.error('Error encrypting data:', error);
+      this.logger.error('Error encrypting data:', error);
       return null;
     }
   }
@@ -143,7 +144,7 @@ export class CryptoUtility {
       decrypted += decipher.final('utf8');
       return decrypted;
     } catch (error) {
-      console.error('Error decrypting data:', error);
+      this.logger.error('Error decrypting data:', error);
       return null;
     }
   }

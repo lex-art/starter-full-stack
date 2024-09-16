@@ -7,6 +7,14 @@ export class NotificationEmailUserHandler implements IEventHandler<UserCreatedEv
     constructor(private readonly emailService: EmailService) {}
 
     async handle(event: UserCreatedEvent) {
-        return this.emailService.sendEmail(event.username, 'Welcome to our platform!');
+        return this.emailService.sendEmail({
+            email: event.email,
+            from: '"Support Team" <support@gmail.com>',
+            subject: 'Welcome to the platform',
+            data: {
+                username: event.username
+            },
+            template: 'user/new-user.template.hbs'
+        });
     }
 }

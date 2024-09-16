@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, HttpException, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetUserQuery } from "../queries/query/get-user.query";
 import { LoginFormDto } from "../dto/login.dto";
 import { CreateUserCommand } from "../commands/command/create-user.command";
 import { UserDto } from "../dto/user.dto";
 import { Public } from "@app/decorator";
+import { ProfileDto } from "../dto/profile.dto";
+import { AuthException } from "../exceptions";
 
 @Controller('auth')
 export class AuthController {
@@ -13,7 +15,7 @@ export class AuthController {
         private readonly commandBus: CommandBus
     ) {}
 
-    @Get('login')
+   @Get('login')
     @Public()
     login(
         @Body() body: LoginFormDto,
@@ -30,8 +32,9 @@ export class AuthController {
     }
 
     @Post('create-account')
+    @Public()
     async register(
-        @Body() body: UserDto,
+        @Body() body: UserDto & ProfileDto,
     ): Promise<{
         message: string,
         email: string
@@ -40,11 +43,14 @@ export class AuthController {
             const command = new CreateUserCommand(body)
             return this.commandBus.execute(command)
         } catch (error) {
-            throw new HttpException(error.message, error.status)
+            if(error instanceof AuthException) {
+                throw new HttpException(error, HttpStatus.BAD_REQUEST)
+			}
+			throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 
-    @Get('resend-email')
+   @Get('resend-email')
     async resendEmail(
         @Body() body: LoginFormDto,
     ): Promise<{
@@ -163,7 +169,6 @@ export class AuthController {
             throw new HttpException(error.message, error.status)
         }
     }
-    
 
     
 }

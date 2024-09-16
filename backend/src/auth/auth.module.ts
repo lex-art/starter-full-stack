@@ -3,7 +3,7 @@ import { UserController } from './controller/user.controller';
 import { QueryHandlers } from './queries/handlers';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProfileEntity, UserEntity } from './entities';
+import { AuthEntities } from './entities';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -16,13 +16,15 @@ import { APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { RolesGuard } from './guard/role.guard';
 import { TypeUserGuard } from './guard/type-user.guard';
 import { AuthGuard } from './guard/auth.guard';
-import { UserSubscriber } from './encrypt/user.suscriber';
 import { CryptoUtility } from '@app/lib/utilities';
+import { CommandServices } from './commands/services';
+import { ProfileSubscriber } from './encrypt/profile.subscriber';
+import { QueryServices } from './queries/services';
 
 @Module({
     imports: [
         CqrsModule,
-        TypeOrmModule.forFeature([UserEntity, ProfileEntity]), 
+        TypeOrmModule.forFeature(AuthEntities), 
         PassportModule,   
         MailModule,
         JwtModule.registerAsync({
@@ -37,12 +39,14 @@ import { CryptoUtility } from '@app/lib/utilities';
     })],
     controllers: [UserController, AuthController],
     providers: [
-        ...QueryHandlers, 
+        ...QueryHandlers,
+        ...QueryServices,
         ...CommandHandlers,
-        ...EventsHandlers, 
+        ...CommandServices,
+        ...EventsHandlers,
         JwtStrategy,
         CryptoUtility,
-        UserSubscriber,
+        ProfileSubscriber,
         {
 			provide: APP_GUARD, // this is to use global guard
 			useClass: AuthGuard

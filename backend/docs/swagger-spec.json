@@ -40,69 +40,6 @@
         }
       }
     },
-    "/auth/user/all": {
-      "get": {
-        "operationId": "UserController_getAllUsers",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/user/update": {
-      "put": {
-        "operationId": "UserController_update",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/user/delete": {
-      "get": {
-        "operationId": "UserController_delete",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/auth/login": {
       "get": {
         "operationId": "AuthController_login",
@@ -128,16 +65,6 @@
       "post": {
         "operationId": "AuthController_register",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": ""
@@ -330,10 +257,6 @@
   "components": {
     "schemas": {
       "LoginFormDto": {
-        "type": "object",
-        "properties": {}
-      },
-      "UserDto": {
         "type": "object",
         "properties": {}
       }

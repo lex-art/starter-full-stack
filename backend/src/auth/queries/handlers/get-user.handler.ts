@@ -1,21 +1,25 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { GetUserQuery } from "../query/get-user.query";
 import { Logger } from "@nestjs/common";
+import { GetUserService } from "../services/get-user.service";
 
 @QueryHandler(GetUserQuery)
 export class GetUserHandler implements IQueryHandler<GetUserQuery> {
     private readonly logger = new Logger(GetUserHandler.name)
     constructor(
-        // initialize your service here and apply you business logic
+        private readonly GetUserService: GetUserService
     ) {}
 
     async execute(query: GetUserQuery) {
         try{
-            console.log(query)
-            return {
-                message: 'Get user query executed',
-                email: query.body.email
-            };
+
+            /* return await this.GetUserService.getUser(query.body).then(response => {
+                return  {
+                    message: 'User found successfully',
+                    data: response
+                }
+            }); */
+            
         } catch (error) {
             this.logger.error(error.message)
             throw new Error('Error consulting =>' +  error.message)

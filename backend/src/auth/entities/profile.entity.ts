@@ -1,9 +1,12 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { UserEntity } from './user.entity'
+import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
 
 
+// in DB, the table name is 'profiles'
 @Entity('profiles')
-export class ProfileEntity extends BaseEntity {
+// for a entity class, should be call in singular
+export class ProfileEntity extends BaseEntityWithTimestamps {
 	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS'  ,name: 'id_profile' })
 	idProfile: number
 
@@ -11,19 +14,19 @@ export class ProfileEntity extends BaseEntity {
 	@JoinColumn({ name: 'user' })
 	user: UserEntity
 
-	@Column({ type: 'varchar', length: 50, name: 'first_name' })
+	@Column({ type: 'varchar', name: 'first_name' })
 	firstName: string
 
-	@Column({ type: 'varchar', length: 50, name: 'last_name' })
+	@Column({ type: 'varchar', name: 'last_name' })
 	lastName: string
 
-	@Column({ type: 'varchar', length: 15, nullable: true })
+	@Column({ type: 'varchar', nullable: true })
 	phone: string
 
-	@Column({ type: 'varchar', length: 3, nullable: true, name: 'country_code' })
+	@Column({ type: 'varchar', nullable: true, name: 'country_code' })
 	countryCode?: string
 
-	@Column({ type: 'varchar', length: 5, nullable: true, name: 'country_calling_code' })
+	@Column({ type: 'varchar', nullable: true, name: 'country_calling_code' })
 	countryCallingCode?: string
 
 	@Column({
@@ -32,9 +35,9 @@ export class ProfileEntity extends BaseEntity {
 	})
 	birthDate: Date
 
-    @Column({ type: 'varchar', length: 100 })
+    @Column({ type: 'varchar', length: 500 })
     address: string
 
-    @Column({ type: 'varchar', length: 100, name: 'img_profile' })
+    @Column({ type: 'varchar', length: 500, name: 'img_profile' })
     imgProfile: string
 }

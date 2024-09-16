@@ -1,6 +1,4 @@
-import { USER_TYPE, USER_ROLE, USER_PERMISSION } from '../../types/enums';
-import { Type } from 'class-transformer'
-import { IsArray, IsDateString, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import {  IsDateString, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 
 export class ProfileDto {
@@ -31,4 +29,12 @@ export class ProfileDto {
 	@IsString()
 	@IsOptional()
 	imgProfile: string
+
+	@IsString()
+	@IsOptional()
+	countryCode: string
+
+	@IsString()
+	@IsOptional()
+	countryCallingCode: string
 }

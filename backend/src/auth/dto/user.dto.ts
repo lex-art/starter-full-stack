@@ -29,4 +29,8 @@ export class UserDto {
     @IsOptional()
 	@Type(() => String)
     permissions: USER_PERMISSION[]
+
+	@IsOptional()
+	@IsString()
+	timeZone: string
 }

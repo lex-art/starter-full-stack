@@ -3,8 +3,21 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
+    "assets": [
+      {
+        "include": "../libs/mail/src/templates/**/*.hbs",
+        "outDir": "dist/libs",
+        "watchAssets": true
+      },
+      {
+        "include": "../libs/file-creation/src/templates/**/*.{html,jpeg,png,svg,css}",
+        "outDir": "dist/libs",
+        "watchAssets": true
+      }
+    ],
     "deleteOutDir": true,
-    "webpack": true
+    "webpack": true,
+    "watchAssets": true
   },
   "projects": {
     "attachment": {
@@ -22,7 +35,8 @@
       "entryFile": "index",
       "sourceRoot": "libs/file-creation/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/file-creation/tsconfig.lib.json"
+        "tsConfigPath": "libs/file-creation/tsconfig.lib.json",
+        "deleteOutDir": true
       }
     },
     "mail": {
@@ -31,7 +45,8 @@
       "entryFile": "index",
       "sourceRoot": "libs/mail/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/mail/tsconfig.lib.json"
+        "tsConfigPath": "libs/mail/tsconfig.lib.json",
+        "deleteOutDir": true
       }
     }
   }
