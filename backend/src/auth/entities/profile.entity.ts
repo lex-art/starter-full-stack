@@ -9,7 +9,7 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_profile' })
 	idProfile: number
 
-	@OneToOne(() => UserEntity, (user) => user.email, { nullable: false })
+	@OneToOne(() => UserEntity, (user) => user.profile, { nullable: false })
 	@JoinColumn({ name: 'user' })
 	user: UserEntity
 

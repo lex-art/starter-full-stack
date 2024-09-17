@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
+import { ProfileEntity } from './profile.entity'
 
 // in DB, the table name is 'users'
 @Entity('users')
@@ -54,4 +55,7 @@ export class UserEntity extends BaseEntityWithTimestamps {
 		nullable: true
 	})
 	timeZone?: string
+
+	@OneToOne(() => ProfileEntity, profile => profile.user)
+	profile: ProfileEntity;
 }

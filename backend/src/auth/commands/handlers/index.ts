@@ -1,3 +1,4 @@
 import { CreateUserHandler } from './create-user.handler'
+import { LoginUserHandler } from './login-user.handler'
 
-export const CommandHandlers = [CreateUserHandler]
+export const CommandHandlers = [CreateUserHandler, LoginUserHandler]

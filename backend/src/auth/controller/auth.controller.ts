@@ -2,6 +2,7 @@ import { Public } from '@app/decorator'
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post } from '@nestjs/common'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { CreateUserCommand } from '../commands/command/create-user.command'
+import { LoginUserCommand } from '../commands/command/login-user.command'
 import { LoginFormDto } from '../dto/login.dto'
 import { ProfileDto } from '../dto/profile.dto'
 import { UserDto } from '../dto/user.dto'
@@ -15,17 +16,25 @@ export class AuthController {
 		private readonly commandBus: CommandBus
 	) {}
 
-	@Get('login')
+	@Post('login')
 	@Public()
-	login(@Body() body: LoginFormDto): Promise<{
+	async login(@Body() body: LoginFormDto): Promise<{
 		message: string
-		email: string
+		data: {
+			accessToken: string
+			refreshToken: string
+			user: UserDto & ProfileDto
+		}
 	}> {
 		try {
-			const query = new GetUserQuery(body)
-			return this.queryBus.execute(query)
+			const command = new LoginUserCommand(body)
+			return await this.commandBus.execute(command)
 		} catch (error) {
-			throw new HttpException(error.message, error.status)
+			if (error instanceof AuthException) {
+				throw new HttpException(error, HttpStatus.BAD_REQUEST)
+			}
+
+			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
 		}
 	}
 
@@ -37,7 +46,7 @@ export class AuthController {
 	}> {
 		try {
 			const command = new CreateUserCommand(body)
-			return this.commandBus.execute(command)
+			return await this.commandBus.execute(command)
 		} catch (error) {
 			if (error instanceof AuthException) {
 				throw new HttpException(error, HttpStatus.BAD_REQUEST)

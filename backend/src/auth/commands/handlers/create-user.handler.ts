@@ -1,4 +1,5 @@
 import { UserCreatedEvent } from '@app/auth/events/event/notification-email-user.event'
+import { AuthException } from '@app/auth/exceptions'
 import { Logger } from '@nestjs/common'
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs'
 import { CreateUserCommand } from '../command/create-user.command'
@@ -23,7 +24,10 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
 			})
 		} catch (error) {
 			this.logger.error(error.message)
-			throw new Error('Error creating user =>' + error.message)
+			throw new AuthException(
+				'Error creating user =>' + error.message,
+				error?.code ?? 'ERROR_CREATING_USER'
+			)
 		}
 	}
 }

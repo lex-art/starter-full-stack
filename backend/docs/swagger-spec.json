@@ -41,7 +41,7 @@
       }
     },
     "/auth/login": {
-      "get": {
+      "post": {
         "operationId": "AuthController_login",
         "parameters": [],
         "requestBody": {
@@ -55,7 +55,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }
