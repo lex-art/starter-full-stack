@@ -44,16 +44,6 @@
       "post": {
         "operationId": "AuthController_login",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": ""
@@ -61,7 +51,7 @@
         }
       }
     },
-    "/auth/create-account": {
+    "/auth/register": {
       "post": {
         "operationId": "AuthController_register",
         "parameters": [],
@@ -72,50 +62,19 @@
         }
       }
     },
-    "/auth/resend-email": {
-      "get": {
-        "operationId": "AuthController_resendEmail",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/auth/logout": {
-      "get": {
+      "post": {
         "operationId": "AuthController_logout",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }
       }
     },
     "/auth/refresh-token": {
-      "get": {
+      "post": {
         "operationId": "AuthController_refreshToken",
         "parameters": [],
         "requestBody": {
@@ -129,14 +88,14 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }
       }
     },
     "/auth/forgot-password": {
-      "get": {
+      "post": {
         "operationId": "AuthController_forgotPassword",
         "parameters": [],
         "requestBody": {
@@ -150,14 +109,14 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }
       }
     },
     "/auth/reset-password": {
-      "get": {
+      "post": {
         "operationId": "AuthController_resetPassword",
         "parameters": [],
         "requestBody": {
@@ -171,14 +130,14 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }
       }
     },
     "/auth/change-password": {
-      "get": {
+      "post": {
         "operationId": "AuthController_changePassword",
         "parameters": [],
         "requestBody": {
@@ -192,14 +151,14 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }
       }
     },
     "/auth/verify-email": {
-      "get": {
+      "post": {
         "operationId": "AuthController_verifyEmail",
         "parameters": [],
         "requestBody": {
@@ -213,7 +172,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         }

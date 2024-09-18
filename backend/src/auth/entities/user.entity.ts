@@ -1,10 +1,11 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, Index, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
 import { ProfileEntity } from './profile.entity'
 
 // in DB, the table name is 'users'
 @Entity('users')
+@Index('email', ['email'], { unique: true })
 // for a entity class, should be call in singular
 export class UserEntity extends BaseEntityWithTimestamps {
 	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_user' })
@@ -56,6 +57,6 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	})
 	timeZone?: string
 
-	@OneToOne(() => ProfileEntity, profile => profile.user)
-	profile: ProfileEntity;
+	@OneToOne(() => ProfileEntity, (profile) => profile.user)
+	profile: ProfileEntity
 }

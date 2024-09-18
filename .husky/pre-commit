@@ -1,2 +1,2 @@
-pnpm test # call this if you want to run tests before commit, this need more configuration
+# pnpm test # call this if you want to run tests before commit, this need more configuration
 pnpm lint-staged

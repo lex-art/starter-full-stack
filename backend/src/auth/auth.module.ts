@@ -14,7 +14,8 @@ import { UserController } from './controller/user.controller'
 import { ProfileSubscriber } from './encrypt/profile.subscriber'
 import { AuthEntities } from './entities'
 import { EventsHandlers } from './events/handlers'
-import { AuthGuard } from './guard/auth.guard'
+import { JwtAuthGuard } from './guard/jwt.guard'
+import { LocalAuthGuard } from './guard/local.guard'
 import { RolesGuard } from './guard/role.guard'
 import { TypeUserGuard } from './guard/type-user.guard'
 import { QueryHandlers } from './queries/handlers'
@@ -46,11 +47,12 @@ import { JwtStrategy } from './strategy/jwt.strategy'
 		...CommandServices,
 		...EventsHandlers,
 		JwtStrategy,
+		LocalAuthGuard,
 		CryptoUtility,
 		ProfileSubscriber,
 		{
 			provide: APP_GUARD, // this is to use global guard
-			useClass: AuthGuard
+			useClass: JwtAuthGuard
 		},
 		{
 			provide: APP_GUARD,

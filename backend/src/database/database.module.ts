@@ -27,7 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 						charset: 'utf8mb4_unicode_ci',
 						connectionLimit: 2
 					},
-					schema: 'development'
+					schema: configService.get('DATABASE_SCHEMA')
 				}
 			}
 		})

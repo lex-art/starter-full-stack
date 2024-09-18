@@ -1,12 +1,13 @@
 import { Public } from '@app/decorator'
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post } from '@nestjs/common'
+import { Body, Controller, Delete, HttpException, HttpStatus, Post, Request, UseGuards } from '@nestjs/common'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
-import { CreateUserCommand } from '../commands/command/create-user.command'
+import { CreateAccountCommand } from '../commands/command/create-account.command'
 import { LoginUserCommand } from '../commands/command/login-user.command'
 import { LoginFormDto } from '../dto/login.dto'
 import { ProfileDto } from '../dto/profile.dto'
 import { UserDto } from '../dto/user.dto'
 import { AuthException } from '../exceptions'
+import { LocalAuthGuard } from '../guard/local.guard'
 import { GetUserQuery } from '../queries/query/get-user.query'
 
 @Controller('auth')
@@ -16,18 +17,17 @@ export class AuthController {
 		private readonly commandBus: CommandBus
 	) {}
 
+	@UseGuards(LocalAuthGuard)
 	@Post('login')
-	@Public()
-	async login(@Body() body: LoginFormDto): Promise<{
+	async login(@Request() req: { user: UserDto & ProfileDto }): Promise<{
 		message: string
 		data: {
 			accessToken: string
 			refreshToken: string
-			user: UserDto & ProfileDto
 		}
 	}> {
 		try {
-			const command = new LoginUserCommand(body)
+			const command = new LoginUserCommand(req.user)
 			return await this.commandBus.execute(command)
 		} catch (error) {
 			if (error instanceof AuthException) {
@@ -38,14 +38,14 @@ export class AuthController {
 		}
 	}
 
-	@Post('create-account')
+	@Post('register')
 	@Public()
 	async register(@Body() body: UserDto & ProfileDto): Promise<{
 		message: string
 		email: string
 	}> {
 		try {
-			const command = new CreateUserCommand(body)
+			const command = new CreateAccountCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {
 			if (error instanceof AuthException) {
@@ -55,33 +55,16 @@ export class AuthController {
 		}
 	}
 
-	@Get('resend-email')
-	async resendEmail(@Body() body: LoginFormDto): Promise<{
+	@Post('logout')
+	async logout(): Promise<{
 		message: string
-		email: string
 	}> {
-		try {
-			const query = new GetUserQuery(body)
-			return this.queryBus.execute(query)
-		} catch (error) {
-			throw new HttpException(error.message, error.status)
+		return {
+			message: 'This method is not implemented yet'
 		}
 	}
 
-	@Get('logout')
-	async logout(@Body() body: LoginFormDto): Promise<{
-		message: string
-		email: string
-	}> {
-		try {
-			const query = new GetUserQuery(body)
-			return this.queryBus.execute(query)
-		} catch (error) {
-			throw new HttpException(error.message, error.status)
-		}
-	}
-
-	@Get('refresh-token')
+	@Post('refresh-token')
 	async refreshToken(@Body() body: LoginFormDto): Promise<{
 		message: string
 		email: string
@@ -94,7 +77,8 @@ export class AuthController {
 		}
 	}
 
-	@Get('forgot-password')
+	@Post('forgot-password')
+	@Public()
 	async forgotPassword(@Body() body: LoginFormDto): Promise<{
 		message: string
 		email: string
@@ -107,7 +91,8 @@ export class AuthController {
 		}
 	}
 
-	@Get('reset-password')
+	@Post('reset-password')
+	@Public()
 	async resetPassword(@Body() body: LoginFormDto): Promise<{
 		message: string
 		email: string
@@ -120,7 +105,7 @@ export class AuthController {
 		}
 	}
 
-	@Get('change-password')
+	@Post('change-password')
 	async changePassword(@Body() body: LoginFormDto): Promise<{
 		message: string
 		email: string
@@ -133,7 +118,7 @@ export class AuthController {
 		}
 	}
 
-	@Get('verify-email')
+	@Post('verify-email')
 	async verifyEmail(@Body() body: LoginFormDto): Promise<{
 		message: string
 		email: string
