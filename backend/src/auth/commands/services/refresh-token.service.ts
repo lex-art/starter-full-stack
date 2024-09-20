@@ -1,5 +1,6 @@
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
+import { GeneralResponse } from '@app/types'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
@@ -14,7 +15,7 @@ export class RefreshTokenService {
 		private readonly configService: ConfigService
 	) {}
 
-	async refreshToken(refreshToken: string) {
+	async refreshToken(refreshToken: string): Promise<GeneralResponse> {
 		if (!refreshToken) {
 			throw new AuthException('Refresh token is required', 'REFRESH_TOKEN_REQUIRED')
 		}

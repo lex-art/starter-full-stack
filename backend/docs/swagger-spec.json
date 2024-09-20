@@ -82,7 +82,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
+                "$ref": "#/components/schemas/RefreshTokenDto"
               }
             }
           }
@@ -98,16 +98,6 @@
       "post": {
         "operationId": "AuthController_forgotPassword",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": ""
@@ -124,28 +114,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/change-password": {
-      "post": {
-        "operationId": "AuthController_changePassword",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
+                "$ref": "#/components/schemas/ResetPasswordDto"
               }
             }
           }
@@ -166,7 +135,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
+                "$ref": "#/components/schemas/VerifyEmailOtpDto"
               }
             }
           }
@@ -182,16 +151,6 @@
       "delete": {
         "operationId": "AuthController_deleteAccount",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": ""
@@ -216,6 +175,18 @@
   "components": {
     "schemas": {
       "LoginFormDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "RefreshTokenDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ResetPasswordDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "VerifyEmailOtpDto": {
         "type": "object",
         "properties": {}
       }

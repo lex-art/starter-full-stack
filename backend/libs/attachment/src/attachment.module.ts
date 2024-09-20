@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common'
-import { AttachmentService } from './attachment.service'
+import { CommandHandlers } from './Commands/Handler'
+import { CommandServices } from './Commands/services'
 
 @Module({
-	providers: [AttachmentService],
-	exports: [AttachmentService]
+	providers: [...CommandHandlers, ...CommandServices],
+	exports: [...CommandHandlers, ...CommandServices]
 })
 export class AttachmentModule {}

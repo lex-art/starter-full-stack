@@ -1,6 +1,7 @@
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { encrypt } from '@app/lib/utilities'
+import { GeneralResponse } from '@app/types'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 
@@ -18,12 +19,7 @@ export class ResetPasswordService {
 		confirmPassword: string
 		email?: string
 		token?: string
-	}): Promise<{
-		message: string
-		data: {
-			email: string
-		}
-	}> {
+	}): Promise<GeneralResponse> {
 		let user: UserEntity = null
 		if (token) {
 			const dataUser: UserEntity = this.jwtService.verify(token)

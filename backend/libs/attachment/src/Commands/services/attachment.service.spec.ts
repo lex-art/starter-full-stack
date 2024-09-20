@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { AttachmentService } from './attachment.service'
+import { AttachmentService } from './pre-upload-url.service'
 
 describe('AttachmentService', () => {
 	let service: AttachmentService

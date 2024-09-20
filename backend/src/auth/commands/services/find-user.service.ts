@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class FindUserService {
-	async forgotPassword(email: string) {
+	async getUser(email: string) {
 		const user = await UserEntity.findOne({ where: { email } })
 		if (!user) {
 			throw new AuthException('User not found', 'USER_NOT_FOUND')
