@@ -50,7 +50,7 @@ export class FileCreationService {
 	public generateRawPdfFile() {
 		const pdf = new PDFDocument()
 
-		pdf.fontSize(16).text('Texto de pruebaclear', { align: 'center' })
+		pdf.fontSize(16).text('Texto de prueba', { align: 'center' })
 		pdf.moveDown()
 
 		pdf.fontSize(12).text('Este es un ejemplo de archivo PDF generado con NestJS y pdfkit.')

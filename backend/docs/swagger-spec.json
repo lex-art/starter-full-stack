@@ -157,6 +157,68 @@
           }
         }
       }
+    },
+    "/upload": {
+      "post": {
+        "operationId": "AttachmentController_uploadFile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/upload/multiple": {
+      "post": {
+        "operationId": "AttachmentController_uploadMultipleFiles",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/upload/download/{filename}": {
+      "get": {
+        "operationId": "AttachmentController_downloadFile",
+        "parameters": [
+          {
+            "name": "filename",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/upload/{filename}": {
+      "get": {
+        "operationId": "AttachmentController_viewFile",
+        "parameters": [
+          {
+            "name": "filename",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "info": {
