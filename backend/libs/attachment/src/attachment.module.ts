@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
-import { AttachmentController } from '../controllers/attachment.controller'
+import { AttachmentController } from './controllers/attachment.controller'
 import { Services } from './services'
 
 @Module({

@@ -1,8 +1,12 @@
 import { Type } from 'class-transformer'
-import { IsArray, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsArray, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from './../../types/enums'
 
 export class UserDto {
+	@Type(() => Number)
+	@IsNumber()
+	idUser: number
+
 	@IsString()
 	@IsNotEmpty()
 	@IsEmail()

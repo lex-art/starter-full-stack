@@ -19,22 +19,53 @@
         }
       }
     },
-    "/auth/user": {
+    "/user": {
       "get": {
         "operationId": "UserController_getUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "UserController_updateUser",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginFormDto"
+                "$ref": "#/components/schemas/FullUserDto"
               }
             }
           }
         },
         "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/all": {
+      "get": {
+        "operationId": "UserController_getAllUsers",
+        "parameters": [],
+        "responses": {
           "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/change-password": {
+      "post": {
+        "operationId": "UserController_changePassword",
+        "parameters": [],
+        "responses": {
+          "201": {
             "description": ""
           }
         }
@@ -236,7 +267,7 @@
   "servers": [],
   "components": {
     "schemas": {
-      "LoginFormDto": {
+      "FullUserDto": {
         "type": "object",
         "properties": {}
       },

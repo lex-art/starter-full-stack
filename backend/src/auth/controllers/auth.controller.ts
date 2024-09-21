@@ -14,6 +14,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { CreateAccountCommand } from '../commands/command/create-account.command'
 import { DeleteAccountCommand } from '../commands/command/delete-account.command'
 import { EmailVerifyOtpCommand } from '../commands/command/email-verify-otp.command'
+import { ForgoPasswordCommand } from '../commands/command/forgot-password.command'
 import { LoginUserCommand } from '../commands/command/login-user.command'
 import { RefreshTokenCommand } from '../commands/command/refresh-token.command'
 import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
@@ -23,7 +24,6 @@ import { ProfileDto } from '../dto/profile.dto'
 import { UserDto } from '../dto/user.dto'
 import { AuthException } from '../exceptions'
 import { LocalAuthGuard } from '../guard/local.guard'
-import { ForgoPasswordCommand } from './../commands/command/forgot-password.command'
 
 @Controller('auth')
 export class AuthController {

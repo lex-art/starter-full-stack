@@ -9,8 +9,7 @@ import { PassportModule } from '@nestjs/passport'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { CommandHandlers } from './commands/handlers'
 import { CommandServices } from './commands/services'
-import { AuthController } from './controller/auth.controller'
-import { UserController } from './controller/user.controller'
+import { AuthController } from './controllers/auth.controller'
 import { ProfileSubscriber } from './encrypt/profile.subscriber'
 import { AuthEntities } from './entities'
 import { EventsHandlers } from './events/handlers'
@@ -18,8 +17,6 @@ import { JwtAuthGuard } from './guard/jwt.guard'
 import { LocalAuthGuard } from './guard/local.guard'
 import { RolesGuard } from './guard/role.guard'
 import { TypeUserGuard } from './guard/type-user.guard'
-import { QueryHandlers } from './queries/handlers'
-import { QueryServices } from './queries/services'
 import { JwtStrategy } from './strategy/jwt.strategy'
 
 @Module({
@@ -39,10 +36,8 @@ import { JwtStrategy } from './strategy/jwt.strategy'
 			inject: [ConfigService]
 		})
 	],
-	controllers: [UserController, AuthController],
+	controllers: [AuthController],
 	providers: [
-		...QueryHandlers,
-		...QueryServices,
 		...CommandHandlers,
 		...CommandServices,
 		...EventsHandlers,

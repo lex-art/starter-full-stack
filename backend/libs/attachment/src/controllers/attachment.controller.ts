@@ -27,14 +27,14 @@ export class AttachmentController {
 	// Método para descargar el archivo
 	@Get('download/:filename')
 	downloadFile(@Param('filename') filename: string, @Res() res: Response) {
-		const filePath = join(__dirname, '..', 'uploads', filename)
+		const filePath = join(__dirname, '..', '..', '..', '..', 'uploads', filename)
 		return res.download(filePath) // Esto fuerza la descarga del archivo
 	}
 
 	// Método para ver el archivo (si es compatible con el navegador)
 	@Get(':filename')
 	viewFile(@Param('filename') filename: string, @Res() res: Response) {
-		const filePath = join(__dirname, '..', 'uploads', filename)
+		const filePath = join(__dirname, '..', '..', '..', '..', 'uploads', filename)
 		return res.sendFile(filePath) // Esto permite ver el archivo si el navegador lo soporta
 	}
 }

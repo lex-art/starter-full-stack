@@ -9,7 +9,7 @@ export class FileUploadService {
 	getMulterOptions(): MulterOptions {
 		return {
 			storage: diskStorage({
-				destination: './uploads',
+				destination: '../../../../uploads',
 				filename: (_, file, cb) => {
 					const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
 					const ext = extname(file.originalname)
