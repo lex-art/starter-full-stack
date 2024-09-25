@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { SnackbarOrigin } from 'notistack'
 import { CSSProperties } from 'react'
 

@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { ThemeOptions } from '@mui/material'
 import Alert, { AlertProps } from '@mui/material/Alert'
 import { forwardRef } from 'react'

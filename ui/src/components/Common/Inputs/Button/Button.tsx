@@ -1,4 +1,4 @@
-import { colors, font, sizes } from '@/lib/design-tokens'
+import { colors, font, sizes } from '@/lib/designTokens'
 import Button, { ButtonProps } from '@mui/material/Button'
 import { ThemeOptions } from '@mui/material/styles'
 import { forwardRef } from 'react'

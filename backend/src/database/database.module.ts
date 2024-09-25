@@ -17,8 +17,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 					username: configService.get('DATABASE_USERNAME'),
 					password: configService.get('DATABASE_PASSWORD'),
 					database: configService.get('DATABASE_NAME'),
+					schema: configService.get('DATABASE_SCHEMA'),
 					autoLoadEntities: true,
-					synchronize: configService.get('NODE_ENV') === 'development',
+					synchronize: true, //  configService.get('NODE_ENV') === 'development',
 					entities: [__dirname + '/**/*.entity{.ts,.js}'],
 					migrations: [__dirname + '/database/migrations/*{.ts,.js}'],
 					timezone: 'Z',
@@ -26,8 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 						decimalNumbers: true,
 						charset: 'utf8mb4_unicode_ci',
 						connectionLimit: 2
-					},
-					schema: configService.get('DATABASE_SCHEMA')
+					}
 				}
 			}
 		})

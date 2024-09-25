@@ -1,4 +1,4 @@
-import { USER_ROLES } from '@/lib/utilities/emuns'
+import { USER_ROLES } from '@/lib/utilities/emun'
 import { ReactNode } from 'react'
 import messages from '../locales/es/common.json'
 

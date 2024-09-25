@@ -10,7 +10,10 @@ export class LoginUserHandler {
 
 	async execute(command: LoginUserCommand) {
 		try {
-			return await this.loginUser.loginUser(command.body)
+			return await this.loginUser.loginUser({
+				user: command.body.user,
+				profile: command.body.profile
+			})
 		} catch (error) {
 			this.logger.error(error.message)
 			return error

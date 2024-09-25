@@ -3,4 +3,4 @@ import NextAuth from 'next-auth'
 
 const handler = NextAuth(configAuth)
 
-export { handler as GET, handler as POST }
+export { handler as DELETE, handler as GET, handler as PATCH, handler as POST, handler as PUT }

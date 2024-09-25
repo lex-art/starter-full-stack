@@ -1,4 +1,4 @@
-import { colors, font } from '@/lib/design-tokens'
+import { colors, font } from '@/lib/designTokens'
 import { AlertColor, DialogTitle, useMediaQuery, useTheme } from '@mui/material'
 import Dialog, { DialogProps } from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'

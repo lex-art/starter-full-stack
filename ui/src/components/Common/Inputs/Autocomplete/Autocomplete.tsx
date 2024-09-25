@@ -1,5 +1,5 @@
 'use client'
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import {
 	Autocomplete,
 	AutocompleteProps,

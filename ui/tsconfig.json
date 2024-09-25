@@ -40,7 +40,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/lib/utilities/emun/userPermission.ts",
+    "src/app/api/auth/[...nextauth]"
   ],
   "exclude": [
     "node_modules"

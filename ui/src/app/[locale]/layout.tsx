@@ -4,6 +4,7 @@ import { AppThemeMUI } from '@/components/Theme/AppTheme'
 import { locales } from '@/navigation'
 import { PaletteMode } from '@mui/material'
 import { Metadata, Viewport } from 'next'
+import { getToken } from 'next-auth/jwt'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { Roboto } from 'next/font/google'
 import { cookies, headers } from 'next/headers'
@@ -30,7 +31,7 @@ export const viewport: Viewport = {
 	initialScale: 1
 }
 
-export default function LocaleLayout({ children, params: { locale } }: Props) {
+export default  function LocaleLayout({ children, params: { locale } }: Props) {
 	const messages = useMessages()
 	const header = headers()
 	const cookieStore = cookies()
@@ -41,6 +42,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 	).test(currentPath)
 	const initialThemeMode = (cookieStore.get('theme')?.value || 'light') as PaletteMode
 	const isOpenDrawer = cookieStore.get('drawerOpen')?.value === 'true'
+
 	return (
 		<html lang={locale}>
 			<body className={roboto.className}>

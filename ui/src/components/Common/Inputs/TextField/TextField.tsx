@@ -1,4 +1,4 @@
-import { colors, font, sizes } from '@/lib/design-tokens'
+import { colors, font, sizes } from '@/lib/designTokens'
 import InputAdornment from '@mui/material/InputAdornment'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import { ThemeOptions } from '@mui/material/styles'

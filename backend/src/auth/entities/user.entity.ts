@@ -59,4 +59,5 @@ export class UserEntity extends BaseEntityWithTimestamps {
 
 	@OneToOne(() => ProfileEntity, (profile) => profile.user)
 	profile: ProfileEntity
+	user: import("/Users/ochanax/Desktop/proyectos/estudio/starter-full-stack/backend/src/auth/dto/profile.dto").ProfileDto
 }

@@ -1,4 +1,4 @@
-import { colors } from '@/lib/design-tokens'
+import { colors } from '@/lib/designTokens'
 import { Link } from '@/navigation'
 import { FC } from 'react'
 

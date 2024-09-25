@@ -1,5 +1,5 @@
 'use client'
-import { colors } from '@/lib/design-tokens'
+import { colors } from '@/lib/designTokens'
 import { useMediaQuery, useTheme } from '@mui/material'
 import classNames from 'classnames'
 import { useTranslations } from 'next-intl'

@@ -1,12 +1,12 @@
+import { getToken } from 'next-auth/jwt'
 import { withAuth } from 'next-auth/middleware'
 import { getSession } from 'next-auth/react'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
-import configAuth from './app/api/auth/configAuth'
 import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
 import { locales } from './navigation'
 
-const publicPages = ['/auth/*']
+const publicPages = ['/auth/*', '/api/auth', '/_next/static', '/_next/image']
 
 const intlMiddleware = createIntlMiddleware({
 	locales,
@@ -20,11 +20,15 @@ const authMiddleware = withAuth(
 	// and not for pages listed in `pages`.
 	(req) => intlMiddleware(req),
 	{
-		jwt: {
+		/**
+		 * @todo Implementar la decodificación de JWT si se uso en la configuración de NextAuth
+		 */
+		/* jwt: {
 			decode: configAuth.jwt.decode
-		},
+		}, */
 		callbacks: {
 			authorized: async ({ req, token }) => {
+				const token2 = await getToken({ req })
 				const requestForNextAuth = {
 					headers: {
 						cookie: req.headers.get('cookie') ?? undefined

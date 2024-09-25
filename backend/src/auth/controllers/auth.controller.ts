@@ -33,17 +33,32 @@ export class AuthController {
 		private readonly commandBus: CommandBus
 	) {}
 
+	@Public()
 	@UseGuards(LocalAuthGuard)
 	@Post('login')
-	async login(@Request() req: { user: UserDto & ProfileDto }): Promise<{
+	async login(
+		@Request()
+		req: {
+			user: {
+				user: UserDto
+				profile: ProfileDto
+			}
+		}
+	): Promise<{
 		message: string
 		data: {
 			accessToken: string
 			refreshToken: string
+			user: UserDto & {
+				profile: ProfileDto
+			}
 		}
 	}> {
 		try {
-			const command = new LoginUserCommand(req.user)
+			const command = new LoginUserCommand({
+				user: req.user.user,
+				profile: req.user.profile
+			})
 			return await this.commandBus.execute(command)
 		} catch (error) {
 			this.logger.error(error)

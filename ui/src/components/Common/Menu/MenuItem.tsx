@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { ThemeOptions } from '@mui/material'
 import MenuItem, { MenuItemProps } from '@mui/material/MenuItem'
 import { FC, forwardRef } from 'react'

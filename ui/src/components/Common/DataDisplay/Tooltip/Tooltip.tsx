@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { ThemeOptions, colors } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import { FC, ReactElement, ReactNode, forwardRef } from 'react'

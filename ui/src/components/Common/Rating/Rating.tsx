@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { Rating, RatingProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
 import AppFormLabel from '../FormControl/FormLabel'

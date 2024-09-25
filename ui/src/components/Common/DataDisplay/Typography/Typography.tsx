@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import Typography, { TypographyProps } from '@mui/material/Typography'
 import { ThemeOptions } from '@mui/material/styles'
 import { FC, forwardRef } from 'react'

@@ -15,17 +15,18 @@ export class AuthService {
 		private readonly configService: ConfigService
 	) {}
 
-	async loginUser(data: UserDto & ProfileDto): Promise<{
+	async loginUser(data: { user: UserDto; profile: ProfileDto }): Promise<{
 		message: string
 		data: {
-			token: string
+			accessToken: string
 			refreshToken: string
+			user: UserDto & {
+				profile: ProfileDto
+			}
 		}
 	}> {
-		const user: UserEntity = plainToClass(UserEntity, data)
-
-		const payload: Record<string, unknown> = instanceToPlain(user)
-		const token = this.jwtService.sign(payload, {
+		const payload: Record<string, unknown> = instanceToPlain(data.user)
+		const accessToken = this.jwtService.sign(payload, {
 			expiresIn: this.configService.get('JWT_EXPIRATION_TIME')
 		})
 
@@ -36,13 +37,20 @@ export class AuthService {
 		return {
 			message: 'Login successful',
 			data: {
-				token,
-				refreshToken
+				accessToken,
+				refreshToken,
+				user: {
+					...data.user,
+					profile: data.profile
+				}
 			}
 		}
 	}
 
-	async validateUser({ email, password }: LoginFormDto): Promise<UserDto & ProfileDto> {
+	async validateUser({ email, password }: LoginFormDto): Promise<{
+		user: UserDto
+		profile: ProfileDto
+	}> {
 		const user = await UserEntity.findOne({
 			where: { email }
 		})
@@ -66,8 +74,8 @@ export class AuthService {
 		delete user.password
 
 		return {
-			...plainToClass(UserDto, user),
-			...plainToClass(ProfileDto, profile)
+			user: plainToClass(UserDto, user),
+			profile: plainToClass(ProfileDto, profile)
 		}
 	}
 }

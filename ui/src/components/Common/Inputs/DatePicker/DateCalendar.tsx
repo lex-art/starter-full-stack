@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { TextFieldProps } from '@mui/material'
 import { DateCalendar, DateCalendarProps } from '@mui/x-date-pickers'
 import { Dayjs } from 'dayjs'

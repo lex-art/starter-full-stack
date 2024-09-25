@@ -1,6 +1,6 @@
 // src/theme.ts
 'use client'
-import { colors, font } from '@/lib/design-tokens'
+import { colors, font } from '@/lib/designTokens'
 import { PaletteMode } from '@mui/material'
 import { PaletteOptions, ThemeOptions } from '@mui/material/styles'
 import { Roboto } from 'next/font/google'

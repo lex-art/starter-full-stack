@@ -1,4 +1,5 @@
 // auth/jwt.strategy.ts
+import { ICurrentUser } from '@app/types/user.type'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
@@ -14,8 +15,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		})
 	}
 
-	async validate(payload: any) {
+	async validate(payload: ICurrentUser) {
 		//You can add another validation for each user
-		return { username: payload.username }
+		return payload
 	}
 }

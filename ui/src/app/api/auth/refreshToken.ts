@@ -5,7 +5,7 @@ import { JWT } from 'next-auth/jwt'
  * `accessToken` and `accessTokenExpires`. If an error occurs,
  * returns the old token and an error property
  */
-export async function refreshAccessToken(token: JWT) {
+export async function refreshGoogleAccessToken(token: JWT) {
 	try {
 		const params = new URLSearchParams({
 			client_id: process.env.GOOGLE_CLIENT_ID ?? '',

@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { Tab, TabProps, ThemeOptions } from '@mui/material'
 import { FC, forwardRef } from 'react'
 

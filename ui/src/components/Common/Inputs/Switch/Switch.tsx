@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { Switch, SwitchProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
 import AppFormControlLabel from '../../FormControl/FormControlLabel'

@@ -14,6 +14,7 @@ const options: DataSourceOptions & SeederOptions = {
 	username: configService.getOrThrow('DATABASE_USERNAME'),
 	password: configService.getOrThrow('DATABASE_PASSWORD'),
 	database: configService.getOrThrow('DATABASE_NAME'),
+	schema: configService.getOrThrow('DATABASE_SCHEMA'),
 	migrations: ['./src/database/migrations/*{.js,.ts}'],
 	entities: ['./src/**/*.entity{.ts,.js}'],
 	seeds: [MainSeeder],

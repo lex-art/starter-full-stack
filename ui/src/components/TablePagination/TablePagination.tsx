@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { TablePagination, ThemeOptions } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { FC, useState } from 'react'

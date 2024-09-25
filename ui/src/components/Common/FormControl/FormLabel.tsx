@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { ThemeOptions } from '@mui/material'
 import FormLabel, { FormLabelProps } from '@mui/material/FormLabel'
 import { FC } from 'react'

@@ -1,4 +1,4 @@
-import { font } from '@/lib/design-tokens'
+import { font } from '@/lib/designTokens'
 import { IconButton, TextFieldProps, styled } from '@mui/material'
 import { TimePicker, TimePickerProps } from '@mui/x-date-pickers'
 import { Dayjs } from 'dayjs'

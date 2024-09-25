@@ -18,6 +18,7 @@ import { LocalAuthGuard } from './guard/local.guard'
 import { RolesGuard } from './guard/role.guard'
 import { TypeUserGuard } from './guard/type-user.guard'
 import { JwtStrategy } from './strategy/jwt.strategy'
+import { LocalStrategy } from './strategy/local.strategy'
 
 @Module({
 	imports: [
@@ -42,6 +43,7 @@ import { JwtStrategy } from './strategy/jwt.strategy'
 		...CommandServices,
 		...EventsHandlers,
 		JwtStrategy,
+		LocalStrategy,
 		LocalAuthGuard,
 		CryptoUtility,
 		ProfileSubscriber,

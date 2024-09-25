@@ -1,5 +1,5 @@
 'use client'
-import { colors, font } from '@/lib/design-tokens'
+import { colors, font } from '@/lib/designTokens'
 import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded'
 import { IconButton, TextFieldProps } from '@mui/material'
 import { ThemeOptions, styled } from '@mui/material/styles'
