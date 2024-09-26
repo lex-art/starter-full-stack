@@ -18,7 +18,7 @@ import { signIn } from 'next-auth/react'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSnackbar } from 'notistack'
-import { useContext, useEffect, useTransition } from 'react'
+import { useContext, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
@@ -67,7 +67,7 @@ export default function Login() {
 	const loginWithFacebook = async () => {
 		transaction(async () => {
 			const result = await signIn('facebook', {
-				redirect: true,
+				redirect: false,
 				callbackUrl: '/'
 			})
 			if (result?.error) {
@@ -83,7 +83,7 @@ export default function Login() {
 	const loginWithGoogle = async () => {
 		transaction(async () => {
 			const result = await signIn('google', {
-				redirect: true,
+				redirect: false,
 				callbackUrl: '/'
 			})
 			if (result?.error) {

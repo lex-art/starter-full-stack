@@ -98,6 +98,7 @@ export class AuthController {
 	}
 
 	@Post('refresh-token')
+	@Public()
 	async refreshToken(@Body() body: RefreshTokenDto): Promise<{
 		message: string
 		email: string

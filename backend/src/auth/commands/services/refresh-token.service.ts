@@ -4,7 +4,7 @@ import { GeneralResponse } from '@app/types'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { plainToClass } from 'class-transformer'
+import { instanceToPlain } from 'class-transformer'
 
 @Injectable()
 export class RefreshTokenService {
@@ -32,15 +32,16 @@ export class RefreshTokenService {
 			if (!validateUser) {
 				throw new AuthException('User not found', 'USER_NOT_FOUND')
 			}
-			const payload = plainToClass(UserEntity, validateUser)
+			delete validateUser.password
+			const payload: Record<string, unknown> = instanceToPlain(validateUser)
 			const token = this.jwtService.sign(payload, {
-				expiresIn: this.configService.get('JWT_ACCESS_TOKEN_EXPIRATION_TIME')
+				expiresIn: this.configService.get('JWT_EXPIRATION_TIME')
 			})
 
 			return {
 				message: 'Token refreshed successfully',
 				data: {
-					token
+					accessToken: token
 				}
 			}
 		} catch (error) {

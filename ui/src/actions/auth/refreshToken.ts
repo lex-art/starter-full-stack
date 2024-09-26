@@ -1,19 +1,26 @@
 import { API_URLS } from '@/lib/utilities/emun'
-import apiConfig from '../apiConfig'
+import axios from 'axios'
+import { JWT } from 'next-auth/jwt'
 
-export const refreshAccessTokenAction = async (refreshToken?: string) => {
-	const response = await apiConfig.post<{
-		token: string
-	}>({
-		url: API_URLS.REFRESH_TOKEN,
-		body: { refreshToken }
-	})
-	if (response.error) {
+export async function refreshAccessToken(
+	token: JWT
+): Promise<{ accessToken: string; error?: string } > {
+	try {
+		const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + API_URLS.REFRESH_TOKEN, {
+			refreshToken: token.refreshToken
+		})
+		const refreshedTokens = response.data.data
+
 		return {
-			token: null
+			accessToken: refreshedTokens.accessToken
 		}
-	}
-	return {
-		token: response?.data.token
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.error('Error:', error.response?.data)
+		}
+		return {
+			accessToken: '',
+			error: 'RefreshAccessTokenError'
+		}
 	}
 }

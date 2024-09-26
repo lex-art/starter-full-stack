@@ -27,15 +27,14 @@ const authMiddleware = withAuth(
 			decode: configAuth.jwt.decode
 		}, */
 		callbacks: {
-			authorized: async ({ req, token }) => {
-				const token2 = await getToken({ req })
+			authorized: async ({ req }) => {
 				const requestForNextAuth = {
 					headers: {
 						cookie: req.headers.get('cookie') ?? undefined
 					}
 				}
 				const session = await getSession({ req: requestForNextAuth })
-				return !!session
+				return !!session?.user
 			}
 		},
 		pages: {
