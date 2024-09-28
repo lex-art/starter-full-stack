@@ -171,7 +171,7 @@ const Header: FC<HeaderProps> = ({
 							<AppIconButton
 								sx={{ ml: 1 }}
 								onClick={() =>
-									redirect.push(pathname, {
+									redirect.push(pathname ?? '/', {
 										locale: otherLocale
 									})
 								}

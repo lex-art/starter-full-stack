@@ -12,8 +12,6 @@ export interface IProfile {
 	countryCode?: string
 	countryCallingCode?: string
 
-	/* accessToken?: string
-	refreshToken?: string */
 }
 
 export interface IUser {

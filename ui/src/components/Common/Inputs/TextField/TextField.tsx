@@ -52,6 +52,9 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 					height: sizes.medium,
 					margin: '0.7rem 0',
 					padding: '0',
+					'& .MuiOutlinedInput-input': {
+						padding: '0 0.8rem'
+					},
 					'&.MuiOutlinedInput-root': {
 						paddingLeft: '0.5rem'
 					},
@@ -156,8 +159,8 @@ export interface AppTextFieldProps {
 	minRows?: string | number
 	value?: unknown
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-	adornment?: ReactNode
-	adornmentPosition?: 'end' | 'start'
+	adornmentRight?: ReactNode
+	adornmentLeft?: ReactNode
 	hiddenLabel?: boolean
 	inputProps?: InputHTMLAttributes<HTMLInputElement> & { ref?: Ref<HTMLInputElement> }
 	warning?: boolean
@@ -196,8 +199,8 @@ export interface AppTextFieldProps {
 const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldProps>((props, ref) => {
 	const {
 		variant,
-		adornment,
-		adornmentPosition,
+		adornmentLeft,
+		adornmentRight,
 		inputProps,
 		maxLength,
 		onBlur,
@@ -211,11 +214,34 @@ const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldPro
 		<TextField
 			{...rest}
 			ref={ref}
-			inputProps={
-				inputProps ?? {
+			slotProps={{
+				...rest.slotProps,
+				htmlInput: {
+					...rest.slotProps?.htmlInput,
 					maxLength: maxLength
+				},
+				input: {
+					...rest.slotProps?.input,
+					...(adornmentRight
+						? {
+								endAdornment: (
+									<>
+										<InputAdornment position="end">{adornmentRight}</InputAdornment>
+									</>
+								)
+							}
+						: {}),
+					...(adornmentLeft
+						? {
+								startAdornment: (
+									<>
+										<InputAdornment position="start">{adornmentLeft}</InputAdornment>
+									</>
+								)
+							}
+						: {})
 				}
-			}
+			}}
 			multiline={multiline}
 			error={error}
 			sx={{
@@ -227,30 +253,6 @@ const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldPro
 			variant={variant}
 			onBlur={onBlur}
 			onFocus={onFocus}
-			{...(adornment
-				? {
-						InputProps: {
-							...rest.InputProps,
-							...(adornmentPosition === 'start'
-								? {
-										startAdornment: (
-											<>
-												<InputAdornment position="start">{adornment}</InputAdornment>
-												{rest?.InputProps?.startAdornment}
-											</>
-										)
-									}
-								: {
-										endAdornment: (
-											<>
-												<InputAdornment position="end">{adornment}</InputAdornment>
-												{rest.InputProps?.endAdornment}
-											</>
-										)
-									})
-						}
-					}
-				: {})}
 		/>
 	)
 })

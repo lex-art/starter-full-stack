@@ -14,7 +14,6 @@ export default function PageLayout({ children, isOpenDrawer }: Props) {
 		<AppBox sx={{ display: 'flex', height: '100%', minHeight: '100vh' }}>
 			<AsideHeaderClient drawerWidth={drawerWidth} isOpenDrawer={isOpenDrawer} />
 			<AppBox
-				component="main"
 				sx={{
 					flexGrow: 1,
 					p: 2,

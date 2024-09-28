@@ -104,15 +104,27 @@ export const AppNumericField = forwardRef<HTMLDivElement, AppNumericFieldProps>(
 			error={error}
 			helperText={helperText}
 			variant={variant}
-			adornment={
-				<InputAdornment component="div" position="start">
+			adornmentLeft={
+				<InputAdornment
+					sx={{
+						marginRight: '0',
+						margin: '0',
+						'.MuiInputAdornment-root': {
+							marginRight: '0',
+						}
+					}}
+					component="div"
+					style={{
+						marginRight: '0'
+					}}
+					position="start"
+				>
 					{currency === 'USD' && <AppIcons.AttachMoney fontSize="small" />}
 					{currency === 'EU' && <AppIcons.Euro fontSize="small" />}
 					{currency === 'GTQ' && <AppIcons.AttachMoney fontSize="small" />}
 					{currency === 'MXN' && <AppIcons.AttachMoney fontSize="small" />}
 				</InputAdornment>
 			}
-			adornmentPosition="start"
 			onBlurCapture={onBlur}
 			allowLeadingZeros={allowLeadingZeros}
 			isAllowed={(values: NumberFormatValues) => {

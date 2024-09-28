@@ -34,7 +34,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined fontSize="small" />}
+						adornmentRight={<RemoveRedEyeOutlined fontSize="small" />}
 						error
 						helperText="This is an error message"
 					/>
@@ -52,8 +52,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						variant="outlined"
 						placeholder="Search"
-						adornmentPosition="start"
-						adornment={<SearchOutlined fontSize="small" />}
+						adornmentLeft={<SearchOutlined fontSize="small" />}
 						error
 						helperText="This is an error message"
 					/>
@@ -71,7 +70,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						label="Filled"
 						variant="filled"
-						adornment={
+						adornmentRight={
 							<CircularProgress
 								color="secondary"
 								size={20}
@@ -98,7 +97,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined />}
+						adornmentRight={<RemoveRedEyeOutlined />}
 						disabled
 						error
 						helperText="This is an error message"
@@ -117,8 +116,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						variant="outlined"
 						placeholder="Search"
-						adornmentPosition="start"
-						adornment={<SearchOutlined />}
+						adornmentLeft={<SearchOutlined />}
 						disabled
 						error
 						helperText="This is an error message"
@@ -137,7 +135,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						label="Filled"
 						variant="filled"
-						adornment={
+						adornmentRight={
 							<CircularProgress
 								color="secondary"
 								size={20}
@@ -164,7 +162,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						variant="standard"
 						placeholder="Search"
-						adornment={
+						adornmentRight={
 							<RemoveRedEyeOutlined
 								sx={{
 									width: '2rem',
@@ -191,8 +189,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						variant="outlined"
 						placeholder="Search"
-						adornmentPosition="start"
-						adornment={
+						adornmentLeft={
 							<SearchOutlined
 								sx={{
 									width: '2rem',
@@ -218,7 +215,7 @@ export default function TextFieldsError() {
 						fullWidth={false}
 						variant="filled"
 						placeholder="Search"
-						adornment={
+						adornmentRight={
 							<CircularProgress
 								color="secondary"
 								size={15}

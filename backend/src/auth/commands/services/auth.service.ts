@@ -2,6 +2,7 @@ import { LoginFormDto } from '@app/auth/dto/login.dto'
 import { ProfileDto } from '@app/auth/dto/profile.dto'
 import { UserDto } from '@app/auth/dto/user.dto'
 import { ProfileEntity, UserEntity } from '@app/auth/entities'
+import { AuthException } from '@app/auth/exceptions'
 import { compare } from '@app/lib/utilities'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -55,11 +56,11 @@ export class AuthService {
 			where: { email }
 		})
 		if (!user) {
-			return null
+			throw new AuthException('User not found', 'USER_NOT_FOUND')
 		}
 		const isMatchPassword = await compare(password, user.password)
 		if (!isMatchPassword) {
-			return null
+			throw new AuthException('Invalid password', 'INVALID_PASSWORD')
 		}
 
 		const profile = await ProfileEntity.findOneBy({
@@ -69,7 +70,7 @@ export class AuthService {
 		})
 
 		if (!profile) {
-			return null
+			throw new AuthException('Profile not found', 'PROFILE_NOT_FOUND')
 		}
 		delete user.password
 

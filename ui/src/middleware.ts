@@ -1,4 +1,3 @@
-import { getToken } from 'next-auth/jwt'
 import { withAuth } from 'next-auth/middleware'
 import { getSession } from 'next-auth/react'
 import createIntlMiddleware from 'next-intl/middleware'
@@ -34,7 +33,7 @@ const authMiddleware = withAuth(
 					}
 				}
 				const session = await getSession({ req: requestForNextAuth })
-				return !!session?.user
+				return !!session?.accessToken
 			}
 		},
 		pages: {

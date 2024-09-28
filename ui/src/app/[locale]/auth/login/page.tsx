@@ -12,18 +12,18 @@ import { AppGlobalContext } from '@/components/Theme/AppTheme'
 import { Link, usePathname, useRouter } from '@/navigation'
 import { Severity } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { Toolbar, useTheme } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 import { signIn } from 'next-auth/react'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSnackbar } from 'notistack'
-import { useContext, useTransition } from 'react'
+import { useContext, useState, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
 import { userSchema } from './schema/user'
-
 type UserSchema = z.infer<typeof userSchema>
 
 export default function Login() {
@@ -36,6 +36,7 @@ export default function Login() {
 	const pathname = usePathname()
 	const otherLocale = locale === 'es' ? 'en' : 'es'
 	const [isLoading, transaction] = useTransition()
+	const [showPassword, setShowPassword] = useState(false)
 	const { control, handleSubmit } = useForm<UserSchema>({
 		mode: 'onSubmit',
 		resolver: zodResolver(userSchema),
@@ -49,7 +50,7 @@ export default function Login() {
 			const username = data.email
 			const password = data.password
 			const result = await signIn('credentials', {
-				redirect: true, // Evita redirecciones automáticas
+				redirect: false, // Evita redirecciones automáticas
 				username,
 				password,
 				callbackUrl: '/'
@@ -60,7 +61,11 @@ export default function Login() {
 				enqueueSnackbar(result.error, {
 					variant: Severity.Error
 				})
+				return
 			}
+			redirect.push('/', {
+				locale: otherLocale
+			})
 		})
 	}
 
@@ -80,6 +85,14 @@ export default function Login() {
 		})
 	}
 
+	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault()
+	}
+
+	const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault()
+	}
+
 	const loginWithGoogle = async () => {
 		transaction(async () => {
 			const result = await signIn('google', {
@@ -94,6 +107,10 @@ export default function Login() {
 				})
 			}
 		})
+	}
+
+	const handleShowPassword = () => {
+		setShowPassword((prev) => !prev)
 	}
 
 	return (
@@ -181,10 +198,20 @@ export default function Login() {
 						render={({ field, fieldState: { error } }) => (
 							<AppTextField
 								label={t('password')}
-								type="password"
+								type={showPassword ? 'text' : 'password'}
 								{...field}
 								error={!!error}
 								helperText={error?.message}
+								adornmentRight={
+									<AppIconButton
+										aria-label="toggle password visibility"
+										onClick={handleShowPassword}
+										onMouseDown={handleMouseDownPassword}
+										onMouseUp={handleMouseUpPassword}
+									>
+										{showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
+									</AppIconButton>
+								}
 							/>
 						)}
 					/>

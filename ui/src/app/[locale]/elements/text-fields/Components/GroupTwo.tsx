@@ -34,7 +34,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined fontSize="medium" />}
+						adornmentRight={<RemoveRedEyeOutlined fontSize="medium" />}
 					/>
 				</AppFormControl>
 				<AppFormControl>
@@ -50,8 +50,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						variant="outlined"
 						placeholder="Search"
-						adornmentPosition="start"
-						adornment={<SearchOutlined fontSize="medium" />}
+						adornmentLeft={<SearchOutlined fontSize="medium" />}
 					/>
 				</AppFormControl>
 				<AppFormControl>
@@ -67,7 +66,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						label="Filled"
 						variant="filled"
-						adornment={
+						adornmentRight={
 							<CircularProgress
 								color="secondary"
 								size={20}
@@ -92,7 +91,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						label="Standard"
 						variant="standard"
-						adornment={<RemoveRedEyeOutlined fontSize="medium" />}
+						adornmentRight={<RemoveRedEyeOutlined fontSize="medium" />}
 						disabled
 					/>
 				</AppFormControl>
@@ -109,8 +108,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						variant="outlined"
 						placeholder="Search"
-						adornmentPosition="start"
-						adornment={<SearchOutlined fontSize="medium" />}
+						adornmentLeft={<SearchOutlined fontSize="medium" />}
 						disabled
 					/>
 				</AppFormControl>
@@ -127,7 +125,7 @@ export default function GroupTwo() {
 						fullWidth={false}
 						label="Filled"
 						variant="filled"
-						adornment={
+						adornmentRight={
 							<CircularProgress
 								color="secondary"
 								size={20}
@@ -153,7 +151,7 @@ export default function GroupTwo() {
 						variant="standard"
 						label="Search"
 						placeholder="Search"
-						adornment={<RemoveRedEyeOutlined fontSize="small" />}
+						adornmentRight={<RemoveRedEyeOutlined fontSize="small" />}
 						size="small"
 					/>
 				</AppFormControl>
@@ -172,8 +170,7 @@ export default function GroupTwo() {
 						variant="outlined"
 						label="Search"
 						placeholder="Search"
-						adornmentPosition="start"
-						//adornment={<SearchOutlined fontSize="small" />}
+						//adornmentLeft={<SearchOutlined fontSize="small" />}
 						size="small"
 					/>
 				</AppFormControl>
@@ -191,7 +188,7 @@ export default function GroupTwo() {
 						variant="filled"
 						label="Search"
 						placeholder="Search"
-						adornment={
+						adornmentRight={
 							<CircularProgress
 								color="secondary"
 								size={15}

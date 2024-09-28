@@ -83,7 +83,7 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 		if (initialThemeMode && initialThemeMode !== mode) {
 			setMode(initialThemeMode)
 		}
-	}, [initialThemeMode])
+	}, [initialThemeMode, mode])
 
 	const theme = useMemo(
 		() =>

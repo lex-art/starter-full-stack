@@ -4,11 +4,10 @@ import { AppThemeMUI } from '@/components/Theme/AppTheme'
 import { locales } from '@/navigation'
 import { PaletteMode } from '@mui/material'
 import { Metadata, Viewport } from 'next'
-import { getToken } from 'next-auth/jwt'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { Roboto } from 'next/font/google'
 import { cookies, headers } from 'next/headers'
-import { ReactNode, StrictMode, Suspense } from 'react'
+import { ReactNode, Suspense } from 'react'
 
 type Props = {
 	readonly children: ReactNode
@@ -31,7 +30,7 @@ export const viewport: Viewport = {
 	initialScale: 1
 }
 
-export default  function LocaleLayout({ children, params: { locale } }: Props) {
+export default function LocaleLayout({ children, params: { locale } }: Props) {
 	const messages = useMessages()
 	const header = headers()
 	const cookieStore = cookies()
@@ -46,19 +45,19 @@ export default  function LocaleLayout({ children, params: { locale } }: Props) {
 	return (
 		<html lang={locale}>
 			<body className={roboto.className}>
-				<StrictMode>
-					<NextIntlClientProvider locale={locale} messages={messages}>
-						<AppThemeMUI initialThemeMode={initialThemeMode}>
-							<Suspense fallback={<SkeletonApp />}>
-								{isExcludeLayout ? (
-									<main>{children}</main>
-								) : (
-									<PageLayout isOpenDrawer={isOpenDrawer}>{children}</PageLayout>
-								)}
-							</Suspense>
-						</AppThemeMUI>
-					</NextIntlClientProvider>
-				</StrictMode>
+				{/*<StrictMode> */}
+				<NextIntlClientProvider locale={locale} messages={messages}>
+					<AppThemeMUI initialThemeMode={initialThemeMode}>
+						<Suspense fallback={<SkeletonApp />}>
+							{isExcludeLayout ? (
+								<main>{children}</main>
+							) : (
+								<PageLayout isOpenDrawer={isOpenDrawer}>{children}</PageLayout>
+							)}
+						</Suspense>
+					</AppThemeMUI>
+				</NextIntlClientProvider>
+				{/* </StrictMode> */}
 			</body>
 		</html>
 	)
