@@ -5,7 +5,6 @@ import AppButton from '@/components/Common/Inputs/Button/Button'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
-import { Link } from '@/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import { useSnackbar } from 'notistack'
@@ -14,6 +13,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
 import { userSchema } from '../login/schema/user'
+import { Link } from '@/i18n/routing'
 type UserSchema = z.infer<typeof userSchema>
 
 export default function ForgotPassword() {

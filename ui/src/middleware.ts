@@ -2,29 +2,21 @@ import { withAuth } from 'next-auth/middleware'
 import { getSession } from 'next-auth/react'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
+import { locales, routing } from './i18n/routing'
 import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
-import { locales } from './navigation'
 
 const publicPages = ['/auth/*', '/api/auth', '/_next/static', '/_next/image']
 
-const intlMiddleware = createIntlMiddleware({
-	locales,
-	localePrefix: 'as-needed',
-	defaultLocale: 'es'
-})
+const handleI18nRouting = createIntlMiddleware(routing)
 
 const authMiddleware = withAuth(
 	// Note that this callback is only invoked if
 	// the `authorized` callback has returned `true`
 	// and not for pages listed in `pages`.
-	(req) => intlMiddleware(req),
+	function onSuccess(req) {
+		return handleI18nRouting(req)
+	},
 	{
-		/**
-		 * @todo Implementar la decodificación de JWT si se uso en la configuración de NextAuth
-		 */
-		/* jwt: {
-			decode: configAuth.jwt.decode
-		}, */
 		callbacks: {
 			authorized: async ({ req }) => {
 				const requestForNextAuth = {
@@ -50,6 +42,7 @@ export default function middleware(request: NextRequest) {
 			.join('|')})$`,
 		'i'
 	)
+
 	const isPublicPage = publicPathnameRegex.test(request.nextUrl.pathname)
 	const requestHeaders = new Headers(request.headers)
 	requestHeaders.set('x-url', request.nextUrl.pathname)
@@ -58,12 +51,12 @@ export default function middleware(request: NextRequest) {
 	})
 
 	if (isPublicPage) {
-		return intlMiddleware(newRequest)
+		return handleI18nRouting(newRequest)
 	}
-	const role = request.cookies.get('role')
+	const role = newRequest.cookies.get('role')
 	let haveAccess = doesRoleHaveAccessToURL({
 		role: role?.value ?? 'guest',
-		url: request.nextUrl.pathname
+		url: newRequest.nextUrl.pathname
 	})
 	if (!haveAccess) {
 		// Redirect to login page if user has no access to that particular page
@@ -75,5 +68,6 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
 	// Skip all paths that should not be internationalized
-	matcher: ['/((?!api|_next|.*\\..*).*)']
+	//matcher: ['/((?!api|_next|.*\\..*).*)'],
+	matcher: ['/', '/(es|en)/:path*', '/((?!api|_next|.*\\..*).*)']
 }

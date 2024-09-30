@@ -9,7 +9,7 @@ import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
 import { AppGlobalContext } from '@/components/Theme/AppTheme'
-import { Link, usePathname, useRouter } from '@/navigation'
+import { useRouter as i18nRouter, Link, usePathname } from '@/i18n/routing'
 import { Severity } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -18,8 +18,9 @@ import MuiAppBar from '@mui/material/AppBar'
 import { signIn } from 'next-auth/react'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 import { useSnackbar } from 'notistack'
-import { useContext, useState, useTransition } from 'react'
+import { useContext, useEffect, useState, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
@@ -32,11 +33,12 @@ export default function Login() {
 	const colorMode = useContext(AppGlobalContext)
 	const t = useTranslations('common')
 	const locale = useLocale()
-	const redirect = useRouter()
+	const redirect = i18nRouter()
 	const pathname = usePathname()
 	const otherLocale = locale === 'es' ? 'en' : 'es'
 	const [isLoading, transaction] = useTransition()
 	const [showPassword, setShowPassword] = useState(false)
+	const query = useSearchParams()
 	const { control, handleSubmit } = useForm<UserSchema>({
 		mode: 'onSubmit',
 		resolver: zodResolver(userSchema),
@@ -45,26 +47,26 @@ export default function Login() {
 			password: ''
 		}
 	})
+
+	useEffect(() => {
+		transaction(() => {
+			if (query.get('error')) {
+				enqueueSnackbar(query.get('error'), {
+					variant: Severity.Error
+				})
+			}
+		})
+	}, [query])
+
 	const onSubmit = async (data: UserSchema) => {
 		transaction(async () => {
 			const username = data.email
 			const password = data.password
 			const result = await signIn('credentials', {
-				redirect: false, // Evita redirecciones automáticas
+				redirect: true, // Evita redirecciones automáticas
 				username,
 				password,
 				callbackUrl: '/'
-			})
-			if (result?.error) {
-				// Manejar errores, por ejemplo mostrando un mensaje al usuario
-				console.error(result.error)
-				enqueueSnackbar(result.error, {
-					variant: Severity.Error
-				})
-				return
-			}
-			redirect.push('/', {
-				locale: otherLocale
 			})
 		})
 	}

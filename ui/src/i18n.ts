@@ -1,6 +1,6 @@
 import { getRequestConfig } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { locales } from './navigation'
+import { locales } from './i18n/routing'
 
 export default getRequestConfig(async (param) => {
 	const { locale } = param as { locale: 'en' | 'es' }
@@ -8,6 +8,6 @@ export default getRequestConfig(async (param) => {
 	if (!locales.includes(locale)) notFound()
 
 	return {
-		messages: (await import(`./locales/${locale}/index.ts`)).default
+		messages: (await import(`./i18n/locales/${locale}/index.ts`)).default
 	}
 })

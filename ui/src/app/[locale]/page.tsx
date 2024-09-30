@@ -36,7 +36,9 @@ export default async function Index() {
 			</AppDivider>
 			<code
 				style={{
-					fontSize: font.sizes.fontSizeMedium
+					fontSize: font.sizes.fontSizeMedium,
+					whiteSpace: 'pre-line',
+					wordWrap: 'break-word'
 				}}
 			>
 				{JSON.stringify(session, null, 2)}

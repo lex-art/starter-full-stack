@@ -92,7 +92,7 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 			},
 			{
 				text: 'uploadFile',
-				link: '/components/uploadFile',
+				link: '/components/upload-file',
 				icon: <AppIcons.FileUploadOutlined fontSize="small" color="primary" />
 			},
 			{
@@ -114,6 +114,11 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 				text: 'editors',
 				link: '/components/editor',
 				icon: <AppIcons.EditOutlined fontSize="small" color="primary" />
+			},
+			{
+				text: 'dragAndDrop',
+				link: '/components/drag-and-drop',
+				icon: <AppIcons.DragHandleOutlined fontSize="small" color="primary" />
 			}
 		]
 	}

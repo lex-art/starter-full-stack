@@ -5,12 +5,12 @@ import AppListItem from '@/components/Common/Menu/ListMenu/ListItem'
 import AppListItemButton from '@/components/Common/Menu/ListMenu/ListItemButton'
 import AppListItemIcon from '@/components/Common/Menu/ListMenu/ListItemIcon'
 import AppListItemText from '@/components/Common/Menu/ListMenu/ListItemText'
-import { useRouter } from '@/navigation'
+import { useRouter } from '@/i18n/routing'
 import { ISubMenuRoute } from '@/types/MenuRoute'
 import { Collapse } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { ReactNode, useState } from 'react'
-import messages from '../../../../locales/es/common.json'
+import messages from '../../../../i18n/locales/es/common.json'
 
 interface MenuItemProps {
 	text: keyof typeof messages
@@ -34,7 +34,7 @@ export default function MenuItem({
 	handleDrawerClose,
 	section,
 	defaultOpen
-}: MenuItemProps) {
+}: Readonly<MenuItemProps>) {
 	const t = useTranslations('common')
 	const [open, setOpen] = useState(defaultOpen ?? false)
 	const redirect = useRouter()

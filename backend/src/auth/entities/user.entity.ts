@@ -1,6 +1,7 @@
 import { Column, Entity, Index, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
+import { ProfileDto } from '../dto'
 import { ProfileEntity } from './profile.entity'
 
 // in DB, the table name is 'users'
@@ -59,5 +60,5 @@ export class UserEntity extends BaseEntityWithTimestamps {
 
 	@OneToOne(() => ProfileEntity, (profile) => profile.user)
 	profile: ProfileEntity
-	user: import("/Users/ochanax/Desktop/proyectos/estudio/starter-full-stack/backend/src/auth/dto/profile.dto").ProfileDto
+	user: ProfileDto
 }

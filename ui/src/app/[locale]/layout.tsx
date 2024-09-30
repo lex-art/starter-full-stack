@@ -1,7 +1,7 @@
 import PageLayout from '@/components/LayoutManager/PageLayout/PageLayout'
 import SkeletonApp from '@/components/SkeletonApp/SkeletonApp'
 import { AppThemeMUI } from '@/components/Theme/AppTheme'
-import { locales } from '@/navigation'
+import { locales } from '@/i18n/routing'
 import { PaletteMode } from '@mui/material'
 import { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider, useMessages } from 'next-intl'

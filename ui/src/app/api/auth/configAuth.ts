@@ -92,7 +92,9 @@ const configAuth = {
 	],
 	pages: {
 		signIn: '/auth/login',
-		signOut: '/auth/login'
+		signOut: '/auth/login',
+		error: '/auth/login',
+		verifyRequest: '/auth/verify-request',
 	},
 	callbacks: {
 		jwt: async ({ token, user }) => {
