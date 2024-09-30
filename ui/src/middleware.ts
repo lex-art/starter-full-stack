@@ -6,6 +6,7 @@ import { locales, routing } from './i18n/routing'
 import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
 
 const publicPages = ['/auth/*', '/api/auth', '/_next/static', '/_next/image']
+const pagesRedirectWhenLogIn = ['/auth/login', '/auth/register']
 const JWT_COOKIE_NAME = 'next-auth.session-token'
 
 const handleI18nRouting = createIntlMiddleware(routing)
@@ -43,6 +44,12 @@ export default async function middleware(request: NextRequest) {
 			.join('|')})$`,
 		'i'
 	)
+	const redirectToLoggedHome = RegExp(
+		`^(/(${locales.join('|')}))?(${pagesRedirectWhenLogIn
+			.map((p) => p.replace(/\*/g, '.*')) // Reemplazar * con .* en los patrones
+			.join('|')})$`,
+		'i'
+	)
 
 	const isPublicPage = publicPathnameRegex.test(request.nextUrl.pathname)
 	const requestHeaders = new Headers(request.headers)
@@ -52,10 +59,10 @@ export default async function middleware(request: NextRequest) {
 	})
 
 	const jwtToken = request.cookies.get(JWT_COOKIE_NAME)?.value
+	if (jwtToken && redirectToLoggedHome.test(request.nextUrl.pathname)) {
+		return NextResponse.redirect(new URL('/', request.url))
+	}
 	if (isPublicPage) {
-		if (jwtToken) {
-			return NextResponse.redirect(new URL('/', request.url))
-		}
 		return handleI18nRouting(newRequest)
 	}
 

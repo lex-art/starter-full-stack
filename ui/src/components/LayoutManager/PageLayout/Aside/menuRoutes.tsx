@@ -1,4 +1,5 @@
 import AppIcons from '@/components/Common/Icons/Icons'
+import { USER_ROLE } from '@/lib/utilities/emun'
 import { IMenuRoute } from '@/types/MenuRoute'
 
 export const MENU_ROUTES: Array<IMenuRoute> = [
@@ -8,6 +9,25 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 		rol: [],
 		link: '/',
 		icon: <AppIcons.Home />
+	},
+	{
+		section: 'userModule',
+		text: 'users',
+		defaultOpen: true,
+		rol: [USER_ROLE.SUPER_ADMIN],
+		icon: <AppIcons.PeopleAltOutlined />,
+		subMenu: [
+			{
+				text: 'list',
+				link: '/users/list',
+				icon: <AppIcons.ListOutlined fontSize="small" color="primary" />
+			},
+			{
+				text: 'add',
+				link: '/users/create',
+				icon: <AppIcons.PersonAddOutlined fontSize="small" color="primary" />
+			}
+		]
 	},
 	{
 		section: 'uiComponents',
@@ -62,7 +82,6 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 	{
 		text: 'components',
 		rol: [],
-		defaultOpen: true,
 		icon: <AppIcons.CarRentalOutlined />,
 		subMenu: [
 			{

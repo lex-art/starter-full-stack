@@ -25,6 +25,7 @@ import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
 import { AppDatePickerTheme } from '../Common/Inputs/DatePicker/DatePicker'
 import { AppStaticDatePickerTheme } from '../Common/Inputs/DatePicker/StaticDatePicker'
 import { AppDropdownTheme } from '../Common/Inputs/Dropdown/Dropdown'
+import { InputAdornmentThemeOptions } from '../Common/Inputs/NumericField/InputAdornmentThemeOptions'
 import { AppRadioTheme } from '../Common/Inputs/Radio/Radio'
 import { AppSliderTheme } from '../Common/Inputs/Slider/Slider'
 import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
@@ -114,7 +115,8 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 				AppFormGroupThem,
 				AppStepLabelThem,
 				AppThemeOptions,
-				AppAlertTheme
+				AppAlertTheme,
+				InputAdornmentThemeOptions
 			),
 		[mode]
 	)

@@ -22,7 +22,10 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 		MuiOutlinedInput: {
 			styleOverrides: {
 				root: {
-					fontSize: font.sizes.fontSizeMedium + 2
+					fontSize: font.sizes.fontSizeMedium + 2,
+					'& .MuiOutlinedInput-input': {
+						padding: '0 0.5rem'
+					}
 				}
 			}
 		},
@@ -52,9 +55,6 @@ const AppTextFieldThemeOptions: ThemeOptions = {
 					height: sizes.medium,
 					margin: '0.7rem 0',
 					padding: '0',
-					'& .MuiOutlinedInput-input': {
-						padding: '0 0.8rem'
-					},
 					'&.MuiOutlinedInput-root': {
 						paddingLeft: '0.5rem'
 					},

@@ -84,5 +84,13 @@
   "login": "Iniciar sesión",
   "email": "Correo electrónico",
   "password": "Contraseña",
-  "dragAndDrop": "Arrastrar y soltar"
+  "dragAndDrop": "Arrastrar y soltar",
+  "users": "Usuarios",
+  "userModule": "Módulo de usuarios",
+  "add": "Agregar",
+  "edit": "Editar",
+  "delete": "Eliminar",
+  "save": "Guardar",
+  "list": "Listar",
+  "view": "Ver"
 }
