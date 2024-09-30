@@ -6,6 +6,7 @@ import { locales, routing } from './i18n/routing'
 import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
 
 const publicPages = ['/auth/*', '/api/auth', '/_next/static', '/_next/image']
+const JWT_COOKIE_NAME = 'next-auth.session-token'
 
 const handleI18nRouting = createIntlMiddleware(routing)
 
@@ -35,7 +36,7 @@ const authMiddleware = withAuth(
 	}
 )
 
-export default function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
 	const publicPathnameRegex = RegExp(
 		`^(/(${locales.join('|')}))?(${publicPages
 			.map((p) => p.replace(/\*/g, '.*')) // Reemplazar * con .* en los patrones
@@ -50,9 +51,14 @@ export default function middleware(request: NextRequest) {
 		headers: requestHeaders
 	})
 
+	const jwtToken = request.cookies.get(JWT_COOKIE_NAME)?.value
 	if (isPublicPage) {
+		if (jwtToken) {
+			return NextResponse.redirect(new URL('/', request.url))
+		}
 		return handleI18nRouting(newRequest)
 	}
+
 	const role = newRequest.cookies.get('role')
 	let haveAccess = doesRoleHaveAccessToURL({
 		role: role?.value ?? 'guest',

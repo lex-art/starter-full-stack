@@ -1,6 +1,6 @@
-import Grid, { GridProps } from '@mui/material/Grid'
+import { Grid2, Grid2Props } from '@mui/material'
 import { ThemeOptions } from '@mui/material/styles'
-import { FC, forwardRef } from 'react'
+import { forwardRef, ForwardRefExoticComponent, RefAttributes } from 'react'
 
 declare module '@mui/material/styles' {
 	interface BreakpointOverrides {
@@ -22,13 +22,14 @@ export const TBGridThemeOptions: ThemeOptions = {
 	}
 }
 
-export const AppGrid: FC<GridProps> = forwardRef<HTMLDivElement, GridProps>(({ children, ...rest }, ref) => {
-	return (
-		<Grid ref={ref} {...rest}>
-			{children}
-		</Grid>
-	)
-})
+export const AppGrid: ForwardRefExoticComponent<Omit<Grid2Props, 'ref'> & RefAttributes<HTMLDivElement>> =
+	forwardRef<HTMLDivElement, Grid2Props>(({ children, ...rest }, ref) => {
+		return (
+			<Grid2 ref={ref} {...rest}>
+				{children}
+			</Grid2>
+		)
+	})
 
 AppGrid.displayName = 'AppGrid'
 export default AppGrid
