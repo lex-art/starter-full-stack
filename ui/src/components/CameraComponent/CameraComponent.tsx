@@ -1,5 +1,4 @@
 'use client'
-import { Severity } from '@/lib/types/Severity'
 import { SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { useSnackbar } from 'notistack'
@@ -8,6 +7,7 @@ import AppDropdown from '../../components/Common/Inputs/Dropdown/Dropdown'
 import AppIcons from '../Common/Icons/Icons'
 import AppButton from '../Common/Inputs/Button/Button'
 import AppGrid from '../Common/Layout/Grid/Grid'
+import { Severity } from '@/types/Severity'
 
 interface CameraComponentProps {
 	setImageSrc: Dispatch<SetStateAction<string | null>>
@@ -137,7 +137,6 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 	return (
 		<AppGrid container width="100%" height="100%">
 			<AppGrid
-				item
 				width="100%"
 				height="100%"
 				display="flex"
@@ -168,8 +167,7 @@ export const CameraComponent: FC<CameraComponentProps> = ({
 					{t('startCamera')}
 				</AppButton>
 			</AppGrid>
-			<AppGrid
-				item
+			<AppGrid				
 				marginTop="2rem"
 				width="100%"
 				height="100%"

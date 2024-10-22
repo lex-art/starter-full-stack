@@ -8,7 +8,7 @@ import AppPaper from '@/components/Common/Layout/Paper'
 
 export default function Icons() {
 	return (
-		<AppGrid item width="100%">
+		<AppGrid width="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2" fontWeight="Bold">
 					Icons

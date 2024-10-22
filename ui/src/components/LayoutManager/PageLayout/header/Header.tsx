@@ -5,7 +5,7 @@ import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
 import AppBox from '@/components/Common/Layout/Box'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
 import { AppMenuList } from '@/components/Common/Menu/MenuList'
-import { AppGlobalContext } from '@/components/Theme/AppTheme'
+import { useAppTheme } from '@/components/Theme/AppTheme'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { ClickAwayListener } from '@mui/base/ClickAwayListener' // TODO: try to remove this import and use the one from '@mui/material'
 import { Logout, PersonAdd } from '@mui/icons-material'
@@ -27,7 +27,7 @@ import {
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import { deepOrange } from '@mui/material/colors'
 import { useLocale, useTranslations } from 'next-intl'
-import { FC, useContext, useState } from 'react'
+import { FC, useState } from 'react'
 import './style.css'
 
 interface HeaderProps {
@@ -81,7 +81,7 @@ const Header: FC<HeaderProps> = ({
 }) => {
 	const theme = useTheme()
 	const t = useTranslations('common')
-	const colorMode = useContext(AppGlobalContext)
+	const colorMode = useAppTheme()
 	const locale = useLocale()
 	const redirect = useRouter()
 	const otherLocale = locale === 'es' ? 'en' : 'es'

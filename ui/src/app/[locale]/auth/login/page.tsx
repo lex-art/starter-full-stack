@@ -117,7 +117,6 @@ export default function Login() {
 
 	return (
 		<AppGrid
-			container
 			display="grid"
 			justifyContent="center"
 			alignItems="center"

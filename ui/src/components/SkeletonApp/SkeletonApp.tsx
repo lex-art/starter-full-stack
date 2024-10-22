@@ -73,7 +73,7 @@ export const SkeletonApp: FC = () => {
 				</Skeleton>
 			</AppGrid>
 			<AppGrid sx={{ bgcolor: 'grey.200' }} height="100%" className={styles.main}>
-				<AppGrid item width="100%" height="100%" flexDirection="column" className={styles.mainContainer}>
+				<AppGrid width="100%" height="100%" flexDirection="column" className={styles.mainContainer}>
 					<Skeleton
 						sx={{
 							bgcolor: 'grey.500'

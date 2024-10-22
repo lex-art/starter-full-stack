@@ -19,7 +19,7 @@ import React from 'react'
 export default function Cards() {
 	const [expanded, setExpanded] = React.useState(false)
 	return (
-		<AppGrid item width="100%">
+		<AppGrid width="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2">Cards</AppTypography>
 			</AppDivider>

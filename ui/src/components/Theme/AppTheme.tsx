@@ -1,6 +1,8 @@
 'use client'
 import { SETTINGS_TOAST } from '@/configs'
 import { makeZodI18nMap } from '@/lib/zod/zodErrorMap'
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
 import { CssBaseline, PaletteMode, createTheme } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
@@ -8,12 +10,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useLocale, useTranslations } from 'next-intl'
 import { SnackbarProvider } from 'notistack'
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
+import { ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { z } from 'zod'
 import { AppChipTheme } from '../Common/DataDisplay/Chip/Chip'
 import { AppDividerTheme } from '../Common/DataDisplay/Divider/Divider'
 import { AppTooltipTheme } from '../Common/DataDisplay/Tooltip/Tooltip'
-import { AppTypographyTheme } from '../Common/DataDisplay/Typography/Typography'
+import { AppTypographyTheme } from '../Common/DataDisplay/Typography/theme'
 import { AppAlertTheme } from '../Common/FeedBack/Alert/Alert'
 import { AppThemeOptions } from '../Common/FeedBack/Snackbar/Snackbar'
 import { AppFormGroupThem } from '../Common/FormControl/FormGroup'
@@ -50,6 +52,9 @@ const AppGlobalContext = createContext({
 	setIsLoading: (value: boolean) => {}
 })
 
+const useAppTheme = () => useContext(AppGlobalContext)
+const createCacheEmotion = createCache({ key: 'css', prepend: true })
+
 const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) => {
 	const [mode, setMode] = useState<PaletteMode>(initialThemeMode)
 	const [isLoading, setIsLoading] = useState(false)
@@ -84,7 +89,7 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 		if (initialThemeMode && initialThemeMode !== mode) {
 			setMode(initialThemeMode)
 		}
-	}, [initialThemeMode, mode])
+	}, [initialThemeMode])
 
 	const theme = useMemo(
 		() =>
@@ -123,26 +128,28 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 
 	return (
 		<AppGlobalContext.Provider value={initValuesContext}>
-			<AppRouterCacheProvider /* options={{ enableCssLayer: true }} */>
-				<ThemeProvider theme={theme}>
-					<SnackbarProvider
-						maxSnack={3}
-						variant="success"
-						anchorOrigin={SETTINGS_TOAST.anchorOrigin}
-						style={SETTINGS_TOAST.style}
-						autoHideDuration={3000}
-						preventDuplicate
-					>
-						<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
-							{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-							<CssBaseline />
-							{children}
-						</LocalizationProvider>
-					</SnackbarProvider>
-				</ThemeProvider>
-			</AppRouterCacheProvider>
+			<CacheProvider value={createCacheEmotion}>
+				<AppRouterCacheProvider /* options={{ enableCssLayer: true }} */>
+					<ThemeProvider theme={theme}>
+						{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+						<CssBaseline />
+						<SnackbarProvider
+							maxSnack={3}
+							variant="success"
+							anchorOrigin={SETTINGS_TOAST.anchorOrigin}
+							style={SETTINGS_TOAST.style}
+							autoHideDuration={3000}
+							preventDuplicate
+						>
+							<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
+								{children}
+							</LocalizationProvider>
+						</SnackbarProvider>
+					</ThemeProvider>
+				</AppRouterCacheProvider>
+			</CacheProvider>
 		</AppGlobalContext.Provider>
 	)
 }
 
-export { AppGlobalContext, AppThemeMUI }
+export { AppGlobalContext, AppThemeMUI, useAppTheme }

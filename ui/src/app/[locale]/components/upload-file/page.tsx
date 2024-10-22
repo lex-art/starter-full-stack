@@ -24,7 +24,7 @@ export default function UploadFile() {
 	const [photoSrc, setPhotoSrc] = useState<string | null>(null)
 
 	return (
-		<AppGrid item width="100%">
+		<AppGrid width="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2">Menus</AppTypography>
 			</AppDivider>

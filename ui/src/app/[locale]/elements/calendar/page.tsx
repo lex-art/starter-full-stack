@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 
 export default function Calendar() {
 	return (
-		<AppGrid item width="100%">
+		<AppGrid width="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2" fontWeight="Bold">
 					Calendar
