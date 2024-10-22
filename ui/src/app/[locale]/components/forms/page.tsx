@@ -87,7 +87,7 @@ export default function Forms() {
 		return <AppIcons.Add className={className} color={active ? 'info' : 'inherit'} />
 	}
 	return (
-		<AppGrid item width="100%">
+		<AppGrid width="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2">Form</AppTypography>
 			</AppDivider>

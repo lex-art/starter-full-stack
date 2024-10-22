@@ -26,7 +26,12 @@
             "regex": "Inválido",
             "datetime": "{validation} inválido",
             "startsWith": "Entrada inválida: debe comenzar con \"{startsWith}\"",
-            "endsWith": "Entrada inválida: debe terminar con \"{endsWith}\""
+            "endsWith": "Entrada inválida: debe terminar con \"{endsWith}\"",
+            "nanoid": "{validation} inválido",
+            "date": "{validation} inválido",
+            "time" : "{validation} inválido",
+            "duration" : "{validation} inválido",
+            "base64" : "{validation} inválido"
         },
         "too_small": {
             "array": {
@@ -103,7 +108,12 @@
         "cuid": "cuid",
         "cuid2": "cuid2",
         "regex": "regex",
-        "datetime": "datetime"
+        "datetime": "fecha y hora",
+        "nanoid": "nanoid",
+        "date": "fecha",
+        "time" : "hora",
+        "duration" : "duración",
+        "base64" : "base64"
     },
     "types": {
         "function": "función",
