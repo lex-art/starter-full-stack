@@ -17,21 +17,23 @@ import { AppDividerTheme } from '../Common/DataDisplay/Divider/Divider'
 import { AppTooltipTheme } from '../Common/DataDisplay/Tooltip/Tooltip'
 import { AppTypographyTheme } from '../Common/DataDisplay/Typography/theme'
 import { AppAlertTheme } from '../Common/FeedBack/Alert/Alert'
+import { AppCircularProgressTheme } from '../Common/FeedBack/CircularProgress/theme'
 import { AppThemeOptions } from '../Common/FeedBack/Snackbar/Snackbar'
 import { AppFormGroupThem } from '../Common/FormControl/FormGroup'
 import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
 import { AppIconsTheme } from '../Common/Icons/Icons'
 import { AppAutocompleteTheme } from '../Common/Inputs/Autocomplete/Autocomplete'
-import { AppButtonThemeOptions } from '../Common/Inputs/Button/Button'
+
 import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
 import { AppDatePickerTheme } from '../Common/Inputs/DatePicker/DatePicker'
 import { AppStaticDatePickerTheme } from '../Common/Inputs/DatePicker/StaticDatePicker'
 import { AppDropdownTheme } from '../Common/Inputs/Dropdown/Dropdown'
-import { InputAdornmentThemeOptions } from '../Common/Inputs/NumericField/InputAdornmentThemeOptions'
+import { AppInputAdornmentTheme } from '../Common/Inputs/NumericField/InputAdornmentTheme'
 import { AppRadioTheme } from '../Common/Inputs/Radio/Radio'
 import { AppSliderTheme } from '../Common/Inputs/Slider/Slider'
 import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
-import { AppTextFieldThemeOptions } from '../Common/Inputs/TextField/TextField'
+import { AppTextFieldThemeOptions } from '../Common/Inputs/TextField/theme'
+import { AppGridTheme } from '../Common/Layout/Grid/theme'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
 import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
 import { AppRatingTheme } from '../Common/Rating/Rating'
@@ -40,6 +42,7 @@ import { AppStepLabelThem } from '../Stepper/StepLabel'
 import { AppTablePaginationTheme } from '../TablePagination/TablePagination'
 import { createAppTabTheme } from '../Tabs/Tab'
 import { paletteThemeOptions } from './theme'
+import { AppButtonTheme } from '../Common/Inputs/Button/theme'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -58,7 +61,6 @@ const createCacheEmotion = createCache({ key: 'css', prepend: true })
 const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) => {
 	const [mode, setMode] = useState<PaletteMode>(initialThemeMode)
 	const [isLoading, setIsLoading] = useState(false)
-	// this configuration is for the zod error messages for global use in client sides
 	const locale = useLocale()
 	const t = useTranslations('zod')
 	const initValuesContext = useMemo(
@@ -79,6 +81,7 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 		}),
 		[isLoading]
 	)
+	// this configuration is for the zod error messages for global use in client sides
 	z.setErrorMap(
 		makeZodI18nMap({
 			t
@@ -95,7 +98,8 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 		() =>
 			createTheme(
 				paletteThemeOptions(mode),
-				AppButtonThemeOptions,
+				AppGridTheme,
+				AppButtonTheme,
 				AppTypographyTheme,
 				AppAutocompleteTheme,
 				AppTextFieldThemeOptions,
@@ -121,7 +125,8 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 				AppStepLabelThem,
 				AppThemeOptions,
 				AppAlertTheme,
-				InputAdornmentThemeOptions
+				AppInputAdornmentTheme,
+				AppCircularProgressTheme
 			),
 		[mode]
 	)

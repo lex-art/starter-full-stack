@@ -1,6 +1,6 @@
 import { ThemeOptions } from '@mui/material'
 
-export const InputAdornmentThemeOptions: ThemeOptions = {
+export const AppInputAdornmentTheme: ThemeOptions = {
 	components: {
 		MuiInputAdornment: {
 			styleOverrides: {

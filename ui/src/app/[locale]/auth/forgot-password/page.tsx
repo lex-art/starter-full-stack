@@ -1,27 +1,33 @@
 'use client'
+import { forgotPassword } from '@/actions/auth/forgot-password'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppCircularProgress from '@/components/Common/FeedBack/CircularProgress/CircularProgress'
 import AppButton from '@/components/Common/Inputs/Button/Button'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
+import { Link } from '@/i18n/routing'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
 import { useSnackbar } from 'notistack'
 import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
 import { userSchema } from '../login/schema/user'
-import { Link } from '@/i18n/routing'
 type UserSchema = z.infer<typeof userSchema>
 
+const ErrorMessages = {
+	ERROR_SENDING_EMAIL: 'ERROR_SENDING_EMAIL',
+	USER_NOT_FOUND: 'USER_NOT_FOUND'
+}
 export default function ForgotPassword() {
 	const { enqueueSnackbar } = useSnackbar()
 	const [isLoading, transaction] = useTransition()
-	const { control, handleSubmit } = useForm<UserSchema>({
+	const { control, handleSubmit, formState } = useForm<UserSchema>({
 		mode: 'onSubmit',
-		resolver: zodResolver(userSchema),
+		resolver: zodResolver(userSchema.pick({ email: true })),
 		defaultValues: {
 			email: ''
 		}
@@ -29,6 +35,28 @@ export default function ForgotPassword() {
 	const onSubmit = async (data: UserSchema) => {
 		transaction(async () => {
 			const username = data.email
+			const res: {
+				message: string
+				error?: { code: string }
+				data?: Record<string, unknown>
+			} = await forgotPassword<{
+				message: string
+				error?: { code: string }
+				data?: Record<string, unknown>
+			}>(username)
+			console.log('====================================')
+			console.log(res)
+			console.log('====================================')
+			if (res?.error?.code) {
+				enqueueSnackbar('Ocurrió un error intente más tarde', {
+					variant: 'error'
+				})
+				return
+			}
+			enqueueSnackbar('Correo enviado', {
+				variant: 'success'
+			})
+			redirect('/auth/login')
 		})
 	}
 
@@ -91,7 +119,7 @@ export default function ForgotPassword() {
 						sx={{
 							mt: 1
 						}}
-						disabled={isLoading}
+						disabled={isLoading || !formState.isValid}
 						endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
 					>
 						Recuperar

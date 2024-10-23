@@ -13,6 +13,7 @@ interface IResponse<T = any> {
 	status: number
 	data: T | Record<string, any>
 	error?: Record<string, any> | string
+	code?: string
 }
 
 class ApiService {

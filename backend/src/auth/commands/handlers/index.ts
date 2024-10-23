@@ -1,17 +1,17 @@
-import { DeleteAccountCommand } from '../command/delete-account.command'
-import { EmailVerifyOtpCommand } from '../command/email-verify-otp.command'
-import { ForgoPasswordCommand } from '../command/forgot-password.command'
-import { ResetPasswordCommand } from '../command/reset-pass.command'
 import { CreateAccountHandler } from './create-account.handler'
+import { DeleteAccountHandler } from './delete-account.command'
+import { EmailVerifyOtpHandler } from './email-verify-otp.handler'
+import { ForgotPasswordHandler } from './forgot-password.handler'
 import { LoginUserHandler } from './login-user.handler'
 import { RefreshTokenHandler } from './refresh-token.handler'
+import { ResetPasswordHandler } from './reset-pass.handler'
 
 export const CommandHandlers = [
 	CreateAccountHandler,
 	LoginUserHandler,
 	RefreshTokenHandler,
-	DeleteAccountCommand,
-	EmailVerifyOtpCommand,
-	ForgoPasswordCommand,
-	ResetPasswordCommand
+	DeleteAccountHandler,
+	EmailVerifyOtpHandler,
+	ForgotPasswordHandler,
+	ResetPasswordHandler
 ]

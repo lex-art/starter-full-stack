@@ -2,7 +2,10 @@ import { MailerService } from '@nestjs-modules/mailer'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 
-type TemplatesName = 'user/new-user.template.hbs' | 'user/verify-email.template.hbs'
+type TemplatesName =
+	| 'user/new-user.template.hbs'
+	| 'user/verify-email.template.hbs'
+	| 'user/forgot-password.template.hbs'
 interface EmailData {
 	email: string
 	from: string
@@ -20,8 +23,12 @@ export class EmailService {
 		private readonly configService: ConfigService
 	) {}
 
-	public async sendEmail({ email, from, subject, template, data }: EmailData): Promise<void> {
-		await this.mailerService
+	public async sendEmail({ email, from, subject, template, data }: EmailData): Promise<{
+		message: string
+		error?: { code: string }
+		data?: Record<string, unknown>
+	}> {
+		return await this.mailerService
 			.sendMail({
 				to: email,
 				from,
@@ -31,10 +38,18 @@ export class EmailService {
 			})
 			.then(() => {
 				this.logger.log('[Email service] Email sent')
+				return {
+					message: 'Email sent'
+				}
 			})
 			.catch((error) => {
-				this.logger.error(error)
-				throw new Error('[Email service] Error sending email =>' + error.message)
+				this.logger.error('[Email service] Error sending email =>', error)
+				return {
+					message: 'Error sending email',
+					error: {
+						code: error.message ?? 'UNKNOWN_ERROR'
+					}
+				}
 			})
 	}
 }
