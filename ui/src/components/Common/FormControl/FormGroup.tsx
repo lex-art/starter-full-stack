@@ -1,28 +1,7 @@
-import { ThemeOptions } from '@mui/material'
 import FormGroup, { FormGroupProps } from '@mui/material/FormGroup'
 import { FC } from 'react'
+import { AppFormGroupProps } from './theme'
 
-interface AppFormGroupProps {
-	gridAreaTemplateColumns?: string
-	columnGap?: string
-	rowGap?: string
-}
-
-const AppFormGroupThem: ThemeOptions = {
-	components: {
-		MuiFormGroup: {
-			styleOverrides: {
-				root: {
-					display: 'grid',
-					alignItems: 'center',
-					//gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-					columnGap: '1rem',
-					rowGap: '0.5rem'
-				}
-			}
-		}
-	}
-}
 const AppFormGroup: FC<FormGroupProps & AppFormGroupProps> = ({
 	children,
 	gridAreaTemplateColumns,
@@ -34,7 +13,8 @@ const AppFormGroup: FC<FormGroupProps & AppFormGroupProps> = ({
 	return (
 		<FormGroup
 			sx={{
-				gridTemplateColumns: gridAreaTemplateColumns ?? 'repeat(auto-fit, minmax(49%, 1fr))'
+				gridTemplateColumns:
+					gridAreaTemplateColumns ?? 'repeat(auto-fit, minmax(49%, 1fr))'
 			}}
 			{...props}
 		>
@@ -43,6 +23,5 @@ const AppFormGroup: FC<FormGroupProps & AppFormGroupProps> = ({
 	)
 }
 
-export { AppFormGroup, AppFormGroupThem }
 AppFormGroup.displayName = 'AppFormGroup'
 export default AppFormGroup

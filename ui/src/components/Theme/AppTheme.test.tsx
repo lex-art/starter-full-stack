@@ -1,5 +1,5 @@
 import { AppThemeMUI } from '@/components/Theme/AppTheme'
-import localeValues from '@/locales/es'
+import localeValues from '@/i18n/locales/en'
 import { render, screen } from '@testing-library/react'
 import { NextIntlClientProvider } from 'next-intl'
 

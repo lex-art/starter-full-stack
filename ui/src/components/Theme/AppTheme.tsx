@@ -10,7 +10,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useLocale, useTranslations } from 'next-intl'
 import { SnackbarProvider } from 'notistack'
-import { ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react'
+import {
+	ReactNode,
+	createContext,
+	useContext,
+	useEffect,
+	useMemo,
+	useState
+} from 'react'
 import { z } from 'zod'
 import { AppChipTheme } from '../Common/DataDisplay/Chip/Chip'
 import { AppDividerTheme } from '../Common/DataDisplay/Divider/Divider'
@@ -19,11 +26,14 @@ import { AppTypographyTheme } from '../Common/DataDisplay/Typography/theme'
 import { AppAlertTheme } from '../Common/FeedBack/Alert/Alert'
 import { AppCircularProgressTheme } from '../Common/FeedBack/CircularProgress/theme'
 import { AppThemeOptions } from '../Common/FeedBack/Snackbar/Snackbar'
-import { AppFormGroupThem } from '../Common/FormControl/FormGroup'
-import { AppFormLabelTheme } from '../Common/FormControl/FormLabel'
+import {
+	AppFormGroupThem,
+	AppFormLabelTheme
+} from '../Common/FormControl/theme'
 import { AppIconsTheme } from '../Common/Icons/Icons'
 import { AppAutocompleteTheme } from '../Common/Inputs/Autocomplete/Autocomplete'
 
+import { AppButtonTheme } from '../Common/Inputs/Button/theme'
 import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
 import { AppDatePickerTheme } from '../Common/Inputs/DatePicker/DatePicker'
 import { AppStaticDatePickerTheme } from '../Common/Inputs/DatePicker/StaticDatePicker'
@@ -37,12 +47,11 @@ import { AppGridTheme } from '../Common/Layout/Grid/theme'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
 import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
 import { AppRatingTheme } from '../Common/Rating/Rating'
-import { AppDataTableTheme } from '../DataTable/DataTable'
+import { AppDataTableTheme } from '../DataTable/theme'
 import { AppStepLabelThem } from '../Stepper/StepLabel'
 import { AppTablePaginationTheme } from '../TablePagination/TablePagination'
 import { createAppTabTheme } from '../Tabs/Tab'
 import { paletteThemeOptions } from './theme'
-import { AppButtonTheme } from '../Common/Inputs/Button/theme'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -58,7 +67,10 @@ const AppGlobalContext = createContext({
 const useAppTheme = () => useContext(AppGlobalContext)
 const createCacheEmotion = createCache({ key: 'css', prepend: true })
 
-const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) => {
+const AppThemeMUI = ({
+	children,
+	initialThemeMode = 'light'
+}: AppThemeProps) => {
 	const [mode, setMode] = useState<PaletteMode>(initialThemeMode)
 	const [isLoading, setIsLoading] = useState(false)
 	const locale = useLocale()
@@ -146,7 +158,10 @@ const AppThemeMUI = ({ children, initialThemeMode = 'light' }: AppThemeProps) =>
 							autoHideDuration={3000}
 							preventDuplicate
 						>
-							<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
+							<LocalizationProvider
+								dateAdapter={AdapterDayjs}
+								adapterLocale={locale}
+							>
 								{children}
 							</LocalizationProvider>
 						</SnackbarProvider>

@@ -1,9 +1,6 @@
-import FormControl, { FormControlProps } from '@mui/material/FormControl'
+import FormControl from '@mui/material/FormControl'
 import { FC } from 'react'
-
-interface AppFormControlProps extends FormControlProps {
-	align?: 'start' | 'end'
-}
+import { AppFormControlProps } from './theme'
 
 const AppFormControl: FC<AppFormControlProps> = ({ children, ...props }) => {
 	const { align, ...rest } = props
@@ -19,6 +16,5 @@ const AppFormControl: FC<AppFormControlProps> = ({ children, ...props }) => {
 	)
 }
 
-export { AppFormControl }
 AppFormControl.displayName = 'AppFormControl'
 export default AppFormControl

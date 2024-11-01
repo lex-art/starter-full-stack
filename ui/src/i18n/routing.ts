@@ -8,4 +8,4 @@ export const routing = defineRouting({
 	localePrefix: 'as-needed',
 })
 
-export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation(routing)
+export const { Link, redirect, usePathname, useRouter, permanentRedirect } = createSharedPathnamesNavigation(routing)

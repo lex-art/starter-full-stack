@@ -10,7 +10,7 @@ export const font = {
 		fontSizeLarge: 18,
 		fontSizeMedium: 14,
 		fontSizeSmall: 11,
-		fontTitle: '5vh',
+		fontTitle: '4vh',
 		fontSubtitle: '3.2rem'
 	}
 }

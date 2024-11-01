@@ -1,4 +1,4 @@
-import { refreshAccessToken } from '@/actions/auth/refreshToken'
+import { refreshAccessToken } from '@/actions/auth/refreshToken.action'
 import { API_URLS } from '@/lib/utilities/emun'
 import { IUser } from '@/types'
 import axios, { AxiosResponse } from 'axios'

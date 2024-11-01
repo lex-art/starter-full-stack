@@ -1,6 +1,12 @@
 import { colors, font, sizes } from '@/lib/designTokens'
 import { ThemeOptions } from '@mui/material'
-import { ChangeEvent, FocusEvent, InputHTMLAttributes, ReactNode, Ref } from 'react'
+import {
+	ChangeEvent,
+	FocusEvent,
+	InputHTMLAttributes,
+	ReactNode,
+	Ref
+} from 'react'
 
 export interface AppTextFieldProps {
 	id?: string
@@ -20,7 +26,9 @@ export interface AppTextFieldProps {
 	adornmentRight?: ReactNode
 	adornmentLeft?: ReactNode
 	hiddenLabel?: boolean
-	inputProps?: InputHTMLAttributes<HTMLInputElement> & { ref?: Ref<HTMLInputElement> }
+	inputProps?: InputHTMLAttributes<HTMLInputElement> & {
+		ref?: Ref<HTMLInputElement>
+	}
 	warning?: boolean
 	maxLength?: number
 	variant?: 'standard' | 'filled' | 'outlined'
@@ -77,7 +85,7 @@ export const AppTextFieldThemeOptions: ThemeOptions = {
 				root: {
 					fontSize: font.sizes.fontSizeMedium + 2,
 					height: sizes.medium,
-					margin: '0.7rem 0',
+					margin: '0.8rem 0',
 					padding: '0',
 					'&.MuiOutlinedInput-root': {
 						paddingLeft: '0.5rem'
@@ -89,9 +97,10 @@ export const AppTextFieldThemeOptions: ThemeOptions = {
 						fontSize: font.sizes.fontSizeMedium
 					},
 					//for number input
-					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
-						display: 'none'
-					},
+					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button':
+						{
+							display: 'none'
+						},
 					'& input[type=number]': {
 						MozAppearance: 'textfield'
 					}
@@ -108,9 +117,10 @@ export const AppTextFieldThemeOptions: ThemeOptions = {
 						fontSize: font.sizes.fontSizeMedium - 1
 					},
 					//for number input
-					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
-						display: 'none'
-					},
+					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button':
+						{
+							display: 'none'
+						},
 					'& input[type=number]': {
 						MozAppearance: 'textfield'
 					}

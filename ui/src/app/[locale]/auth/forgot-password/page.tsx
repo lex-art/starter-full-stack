@@ -1,5 +1,5 @@
 'use client'
-import { forgotPassword } from '@/actions/auth/forgot-password'
+import { forgotPassword } from '@/actions/auth/forgot-password.action'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppCircularProgress from '@/components/Common/FeedBack/CircularProgress/CircularProgress'
 import AppButton from '@/components/Common/Inputs/Button/Button'
@@ -44,19 +44,16 @@ export default function ForgotPassword() {
 				error?: { code: string }
 				data?: Record<string, unknown>
 			}>(username)
-			console.log('====================================')
-			console.log(res)
-			console.log('====================================')
-			if (res?.error?.code) {
-				enqueueSnackbar('Ocurrió un error intente más tarde', {
-					variant: 'error'
+			if (res.message === 'Email sent') {
+				enqueueSnackbar('Correo enviado', {
+					variant: 'success'
 				})
-				return
+				redirect('/auth/login')
 			}
-			enqueueSnackbar('Correo enviado', {
-				variant: 'success'
+			enqueueSnackbar('Ocurrió un error intente más tarde', {
+				variant: 'error'
 			})
-			redirect('/auth/login')
+			return
 		})
 	}
 
@@ -66,7 +63,7 @@ export default function ForgotPassword() {
 			display="grid"
 			justifyContent="center"
 			alignItems="center"
-			height="100vh"
+			height="100dvh"
 			sx={{
 				backgroundColor: (theme) => theme.palette.primary.main
 			}}

@@ -1,9 +1,14 @@
 {
-  "home": "Home",
-  "user": "User",
-  "switchLng": "Switch to {locale, select, de {Spanish} en {English} other {Unknown}}",
-  "item": "Item en",
-  "login": "Login",
-  "email": "Email",
-  "password": "Password"
+	"home": "Home",
+	"user": "User",
+	"switchLng": "Switch to {locale, select, de {Spanish} en {English} other {Unknown}}",
+	"item": "Item en",
+	"login": "Login",
+	"email": "Email",
+	"password": "Password",
+	"confirmPassword": "Confirm Password",
+	"submit": "Submit",
+	"components": "Components",
+	"inputs": "Inputs",
+	"selects": "Selects"
 }

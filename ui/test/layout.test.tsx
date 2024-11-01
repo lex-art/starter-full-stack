@@ -1,8 +1,4 @@
-import { render, screen } from '@testing-library/react'
-import { NextIntlClientProvider } from 'next-intl'
-import { PaletteMode } from '@mui/material'
-import LocaleLayout from '@/app/[locale]/layout'
-import localeValues from '@/locales/es'
+import localeValues from '@/i18n/locales/en'
 
 // Mock de cookies
 jest.mock('next/headers', () => ({

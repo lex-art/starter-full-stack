@@ -1,7 +1,6 @@
-import { IntlMessages } from '@/global'
-import { TableSortLabel, ThemeOptions } from '@mui/material'
+import { TableSortLabel } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import { FC, ReactNode, forwardRef } from 'react'
+import { FC, forwardRef } from 'react'
 import AppTable from '../Common/DataDisplay/Table/Table'
 import AppTableBody from '../Common/DataDisplay/Table/TableBody'
 import AppTableCell from '../Common/DataDisplay/Table/TableCell'
@@ -11,63 +10,8 @@ import AppTableRow from '../Common/DataDisplay/Table/TableRow'
 import AppTypography from '../Common/DataDisplay/Typography/Typography'
 import AppCircularLoader from '../Common/FeedBack/CircularLoader/CircularLoader'
 import AppBox from '../Common/Layout/Box'
-import AppTablePagination, { AppTablePaginationProps } from '../TablePagination/TablePagination'
-
-type Primitive = string | number | boolean | undefined | null
-
-type NestedKeyOf<ObjectType extends object> = {
-	[Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends Primitive
-		? `${Key}`
-		: ObjectType[Key] extends Array<infer ArrayType extends object>
-			? `${Key}` | `${Key}.${NestedKeyOf<ArrayType>}`
-			: ObjectType[Key] extends object
-				? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
-				: never
-}[keyof ObjectType & (string | number)]
-
-const AppDataTableTheme: ThemeOptions = {
-	components: {
-		MuiTableSortLabel: {
-			styleOverrides: {
-				root: {
-					'& .MuiTableSortLabel-icon': {
-						color: 'green ',
-						height: '2.5rem',
-						width: '2.5rem'
-					}
-				}
-			}
-		}
-	}
-}
-export interface HeadCell {
-	id: string
-	label: NestedKeyOf<IntlMessages>
-	numeric?: boolean
-	sortable?: boolean
-	context?: { count: number }
-	colSpan?: number
-	rowSpan?: number
-}
-
-export interface RowCell {
-	id: number | string
-	data: Record<string, ReactNode>
-	hover?: boolean
-	onClick?: (id: number | string) => void
-	skipBreakWordsCells?: Array<string>
-}
-
-export interface AppDataTableProps {
-	headerCells: Array<HeadCell>
-	rowsCells: Array<RowCell>
-	loading?: boolean
-	minHeightTable?: string
-	pagination?: AppTablePaginationProps
-	orderBy?: string
-	order?: 'asc' | 'desc'
-	onSort?: (orderBy: string, order: 'asc' | 'desc') => void
-}
+import AppTablePagination from '../TablePagination/TablePagination'
+import { AppDataTableProps, HeadCell, RowCell } from './theme'
 
 const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTableProps>(
 	({ headerCells, rowsCells, loading, minHeightTable, pagination, order, orderBy, onSort }, ref) => {
@@ -102,10 +46,14 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 												direction={order}
 												onClick={() => onSort && onSort(headCell.id, order === 'asc' ? 'desc' : 'asc')}
 											>
-												<AppTypography fontWeight="bold">{t(headCell.label, headCell.context)}</AppTypography>
+												<AppTypography fontWeight="bold">
+													{t(headCell.label, headCell.context)}
+												</AppTypography>
 											</TableSortLabel>
 										) : (
-											<AppTypography fontWeight="bold">{t(headCell.label, headCell.context)}</AppTypography>
+											<AppTypography fontWeight="bold">
+												{t(headCell.label, headCell.context)}
+											</AppTypography>
 										)}
 									</AppTableCell>
 								))}
@@ -126,7 +74,7 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 											colSpan={headCell.colSpan ?? 1}
 											rowSpan={headCell.rowSpan ?? 1}
 											sx={{
-												wordBreak: row?.skipBreakWordsCells?.find((value) => value === headCell.id)
+												wordBreak: row?.skipBreakWordsCells?.find((value: string) => value === headCell.id)
 													? 'normal'
 													: 'break-word'
 											}}
@@ -167,8 +115,6 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 		)
 	}
 )
-
-export { AppDataTable, AppDataTableTheme }
 
 AppDataTable.displayName = 'AppDataTable'
 export default AppDataTable

@@ -8,7 +8,7 @@ import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
-import { AppGlobalContext } from '@/components/Theme/AppTheme'
+import { useAppTheme } from '@/components/Theme/AppTheme'
 import { useRouter as i18nRouter, Link, usePathname } from '@/i18n/routing'
 import { Severity } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -20,7 +20,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useSnackbar } from 'notistack'
-import { useContext, useEffect, useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
@@ -30,7 +30,7 @@ type UserSchema = z.infer<typeof userSchema>
 export default function Login() {
 	const { enqueueSnackbar } = useSnackbar()
 	const theme = useTheme()
-	const colorMode = useContext(AppGlobalContext)
+	const colorMode = useAppTheme()
 	const t = useTranslations('common')
 	const locale = useLocale()
 	const redirect = i18nRouter()
@@ -120,7 +120,7 @@ export default function Login() {
 			display="grid"
 			justifyContent="center"
 			alignItems="center"
-			height="100vh"
+			height="100dvh"
 			sx={{
 				backgroundColor: (theme) => theme.palette.background.default
 			}}

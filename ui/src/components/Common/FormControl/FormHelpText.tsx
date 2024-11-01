@@ -5,6 +5,5 @@ const AppFormHelperText: FC<FormHelperTextProps> = (props) => {
 	return <FormHelperText {...props} />
 }
 
-export { AppFormHelperText }
 AppFormHelperText.displayName = 'AppFormHelperText'
 export default AppFormHelperText
