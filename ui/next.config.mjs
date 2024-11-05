@@ -6,7 +6,8 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig = {
 	devIndicators: {
 		buildActivity: process.env.NODE_ENV === 'development'
-	}
+	},
+	transpilePackages: ['mui-tel-input']
 }
 
 export default withNextIntl(nextConfig)

@@ -1,5 +1,7 @@
 import InputAdornment from '@mui/material/InputAdornment'
-import TextField, { TextFieldProps } from '@mui/material/TextField'
+import TextField, {
+	TextFieldProps
+} from '@mui/material/TextField'
 import { forwardRef } from 'react'
 import { AppTextFieldProps } from './theme'
 
@@ -29,7 +31,10 @@ import { AppTextFieldProps } from './theme'
  * @param variant: <'standard' | 'filled' | 'outlined'>: The variant to use. @default 'outlined'
  * @returns component
  */
-const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldProps>((props, ref) => {
+const AppTextField = forwardRef<
+	HTMLDivElement,
+	TextFieldProps & AppTextFieldProps
+>((props, ref) => {
 	const {
 		variant,
 		adornmentLeft,
@@ -58,18 +63,18 @@ const AppTextField = forwardRef<HTMLDivElement, TextFieldProps & AppTextFieldPro
 					...(adornmentRight
 						? {
 								endAdornment: (
-									<>
-										<InputAdornment position="end">{adornmentRight}</InputAdornment>
-									</>
+									<InputAdornment position="end">
+										{adornmentRight}
+									</InputAdornment>
 								)
 							}
 						: {}),
 					...(adornmentLeft
 						? {
 								startAdornment: (
-									<>
-										<InputAdornment position="start">{adornmentLeft}</InputAdornment>
-									</>
+									<InputAdornment position="start">
+										{adornmentLeft}
+									</InputAdornment>
 								)
 							}
 						: {})

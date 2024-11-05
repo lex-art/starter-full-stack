@@ -1,7 +1,11 @@
 import FormGroup, { FormGroupProps } from '@mui/material/FormGroup'
 import { FC } from 'react'
 import { AppFormGroupProps } from './theme'
-
+/**
+ * @description A wrapper variety elements with checkboxes or switches
+ * @param FormGroupProps & AppFormGroupProps> 
+ * @returns A wrapper for the FormGroup component
+ */
 const AppFormGroup: FC<FormGroupProps & AppFormGroupProps> = ({
 	children,
 	gridAreaTemplateColumns,

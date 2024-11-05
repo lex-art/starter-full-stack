@@ -3,6 +3,7 @@ import { FormControlProps, ThemeOptions } from '@mui/material'
 
 interface AppFormControlProps extends FormControlProps {
 	align?: 'start' | 'end'
+	gridAreaTemplateColumns?: string
 }
 
 interface AppFormGroupProps {
