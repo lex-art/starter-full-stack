@@ -15,7 +15,7 @@ import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
-import { userSchema } from '../login/schema/user'
+import { userSchema } from '../../../schemas/users/user'
 type UserSchema = z.infer<typeof userSchema>
 
 const ErrorMessages = {
@@ -25,13 +25,16 @@ const ErrorMessages = {
 export default function ForgotPassword() {
 	const { enqueueSnackbar } = useSnackbar()
 	const [isLoading, transaction] = useTransition()
-	const { control, handleSubmit, formState } = useForm<UserSchema>({
-		mode: 'onSubmit',
-		resolver: zodResolver(userSchema.pick({ email: true })),
-		defaultValues: {
-			email: ''
-		}
-	})
+	const { control, handleSubmit, formState } =
+		useForm<UserSchema>({
+			mode: 'onSubmit',
+			resolver: zodResolver(
+				userSchema.pick({ email: true })
+			),
+			defaultValues: {
+				email: ''
+			}
+		})
 	const onSubmit = async (data: UserSchema) => {
 		transaction(async () => {
 			const username = data.email
@@ -50,9 +53,12 @@ export default function ForgotPassword() {
 				})
 				redirect('/auth/login')
 			}
-			enqueueSnackbar('Ocurrió un error intente más tarde', {
-				variant: 'error'
-			})
+			enqueueSnackbar(
+				'Ocurrió un error intente más tarde',
+				{
+					variant: 'error'
+				}
+			)
 			return
 		})
 	}
@@ -65,7 +71,8 @@ export default function ForgotPassword() {
 			alignItems="center"
 			height="100dvh"
 			sx={{
-				backgroundColor: (theme) => theme.palette.primary.main
+				backgroundColor: (theme) =>
+					theme.palette.primary.main
 			}}
 		>
 			<AppPaper
@@ -87,8 +94,16 @@ export default function ForgotPassword() {
 					gap: 2
 				}}
 			>
-				<AppTypography variant="h4">Recupera cuenta</AppTypography>
-				<Image src={logo} alt="Logo" width={100} height={100} priority />
+				<AppTypography variant="h4">
+					Recupera cuenta
+				</AppTypography>
+				<Image
+					src={logo}
+					alt="Logo"
+					width={100}
+					height={100}
+					priority
+				/>
 				<AppTypography variant="body1" fontWeight="bold">
 					Simple Form
 				</AppTypography>
@@ -105,7 +120,13 @@ export default function ForgotPassword() {
 						control={control}
 						name="email"
 						render={({ field, fieldState: { error } }) => (
-							<AppTextField fullWidth {...field} error={!!error} helperText={error?.message} label="Email" />
+							<AppTextField
+								fullWidth
+								{...field}
+								error={!!error}
+								helperText={error?.message}
+								label="Email"
+							/>
 						)}
 					/>
 
@@ -117,7 +138,14 @@ export default function ForgotPassword() {
 							mt: 1
 						}}
 						disabled={isLoading || !formState.isValid}
-						endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+						endIcon={
+							isLoading ? (
+								<AppCircularProgress
+									size={25}
+									color="secondary"
+								/>
+							) : null
+						}
 					>
 						Recuperar
 					</AppButton>
@@ -128,7 +156,10 @@ export default function ForgotPassword() {
 					}}
 					href="/auth/login"
 				>
-					<AppTypography variant="body2" color="textSecondary">
+					<AppTypography
+						variant="body2"
+						color="textSecondary"
+					>
 						Regresar
 					</AppTypography>
 				</Link>

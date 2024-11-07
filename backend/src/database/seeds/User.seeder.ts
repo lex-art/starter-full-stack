@@ -12,7 +12,7 @@ export class UserSeeder implements Seeder {
 			email: 't642199@gmail.com',
 			password: '$2b$10$uLJ0TQGPo0PkTf/CR58QHuqc8r1qxeYelWr2ariMLueqQa.pGACJa', // 12345678
 			type: USER_TYPE.STANDARD,
-			rol: USER_ROLE.SUPER_ADMIN,
+			role: USER_ROLE.SUPER_ADMIN,
 			permissions: [
 				USER_PERMISSION.CREATE,
 				USER_PERMISSION.READ,

@@ -2,7 +2,7 @@ import { ApiException } from '@app/api/exceptions/api.exception'
 import { LoginFormDto, ResetPasswordDto } from '@app/auth/dto'
 import { BaseQueryPagination } from '@app/lib/dto/base-query-pagination'
 import { PaginationQueryDto } from '@app/lib/dto/query-pagination.dto'
-import { Body, Controller, Get, HttpException, HttpStatus, Logger, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, HttpException, HttpStatus, Logger, Patch, Post, Query } from '@nestjs/common'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { ChangePasswordCommand } from '../commands/command/change-password.command'
 import { UpdateUserCommand } from '../commands/command/update-user.command'
@@ -32,7 +32,7 @@ export class UserController {
 		}
 	}
 
-	@Get('all')
+	@Get('list')
 	async getAllUsers(
 		@Query() paginationQuery: PaginationQueryDto,
 		@Query() filtersQuery: Partial<FullUserDto & BaseQueryPagination>
@@ -52,7 +52,7 @@ export class UserController {
 		}
 	}
 
-	@Post()
+	@Patch()
 	async updateUser(@Body() body: FullUserDto) {
 		try {
 			const command = new UpdateUserCommand(body)

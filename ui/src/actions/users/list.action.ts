@@ -1,10 +1,18 @@
 'use server'
-export async function listUsersAction<T>(): Promise<T | { message: string }> {
-	try {
-		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/users')
-		return response.json()
-	} catch (error) {
-		console.error('Error:', error)
-		return { message: 'Unknown error' }
-	}
+
+import { API_URLS } from '@/lib/utilities/emun'
+import { Pagination } from '@/types'
+import apiConfig, { IResponse } from '../apiConfig'
+
+export async function listUsersAction({
+	page = 1,
+	limit = 10,
+	orderBy = 'createdAt',
+	orderColumn = 'desc'
+}: Pagination): Promise<IResponse> {
+	return apiConfig.get<any>({
+		url:
+			API_URLS.USER_LIST +
+			`?page=${page}&limit=${limit}&orderBy=${orderBy}&orderColumn=${orderColumn}`
+	})
 }

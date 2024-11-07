@@ -4,5 +4,7 @@ export enum API_URLS {
 	REGISTER = '/auth/register',
 	FORGOT_PASSWORD = '/auth/forgot-password',
 	RESET_PASSWORD = '/auth/reset-password',
-	REFRESH_TOKEN = '/auth/refresh-token'
+	REFRESH_TOKEN = '/auth/refresh-token',
+	USER = '/user',
+	USER_LIST = '/user/list',
 }

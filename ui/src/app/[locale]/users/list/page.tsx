@@ -1,10 +1,14 @@
 'use client'
+import { listUsersAction } from '@/actions/users/list.action'
 import AppDivider from '@/components/Common/DataDisplay/Divider/Divider'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
 import AppDataTable from '@/components/DataTable/DataTable'
 import { HeadCell } from '@/components/DataTable/theme'
+import { Pagination } from '@/types'
+import { useSnackbar } from 'notistack'
+import useSWR from 'swr'
 
 const header: Array<HeadCell> = [
 	{
@@ -42,7 +46,25 @@ const rows = [
 		}
 	}
 ]
+
+const fetcher = (pagination: Pagination) => listUsersAction(pagination)
+
 export default function ListUsers() {
+	const { enqueueSnackbar } = useSnackbar()
+	const { data, isLoading } = useSWR(
+		{
+			page: 1,
+			limit: 20,
+			orderBy: 'createdAt',
+			orderColumn: 'desc'
+		},
+		fetcher
+	)
+
+	console.log('====================================')
+	console.log(data?.data?.data)
+	console.log('====================================')
+
 	return (
 		<AppGrid maxWidth="100%">
 			<AppTypography variant="h1" fontWeight={400}>
@@ -54,17 +76,31 @@ export default function ListUsers() {
 			<AppPaper elevation={5}>
 				<AppDataTable
 					headerCells={header}
-					rowsCells={rows.map((item) => ({
-						id: item.id,
-						hover: true,
-						data: {
-							id: item.id,
-							name: item.data.name,
-							email: item.data.email,
-							role: item.data.role,
-							actions: item.data.actions
-						}
-					}))}
+					rowsCells={
+						data?.data?.data
+							? []
+							: data?.data?.data.map(
+									(item: {
+										id: number
+										data: {
+											name: string
+											email: string
+											role: string
+											actions: string
+										}
+									}) => ({
+										id: item.id,
+										hover: true,
+										data: {
+											id: item.id,
+											name: item.data.name,
+											email: item.data.email,
+											role: item.data.role,
+											actions: item.data.actions
+										}
+									})
+								)
+					}
 					orderBy="id"
 					order="asc"
 					onSort={() => {}}

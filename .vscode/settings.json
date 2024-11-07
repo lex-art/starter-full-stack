@@ -1,0 +1,5 @@
+{
+  "exportall.config.relExclusion": [
+    "/ui/src/types/Pagination.ts"
+  ]
+}

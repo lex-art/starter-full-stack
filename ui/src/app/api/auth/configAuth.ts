@@ -16,8 +16,16 @@ const configAuth = {
 		CredentialsProvider({
 			name: 'Credentials',
 			credentials: {
-				username: { type: 'text', placeholder: 'Email', label: 'Email' },
-				password: { type: 'password', placeholder: 'Password', label: 'Password' }
+				username: {
+					type: 'text',
+					placeholder: 'Email',
+					label: 'Email'
+				},
+				password: {
+					type: 'password',
+					placeholder: 'Password',
+					label: 'Password'
+				}
 			},
 			authorize: async (
 				credentials
@@ -37,7 +45,8 @@ const configAuth = {
 							user: IUser
 						}
 					}> = await axios.post(
-						process.env.NEXT_PUBLIC_API_URL + API_URLS.LOGIN,
+						process.env.NEXT_PUBLIC_API_URL +
+							API_URLS.LOGIN,
 						{
 							email: credentials?.username,
 							password: credentials?.password
@@ -57,7 +66,8 @@ const configAuth = {
 							refreshToken: result.data.data.refreshToken,
 							rol: result.data.data.user.rol,
 							type: result.data.data.user.type,
-							permissions: result.data.data.user.permissions,
+							permissions:
+								result.data.data.user.permissions,
 							timeZone: result.data.data.user.timeZone,
 							idUser: result.data.data.user.idUser,
 							profile: result.data.data.user.profile
@@ -67,7 +77,9 @@ const configAuth = {
 				} catch (error) {
 					if (axios.isAxiosError(error)) {
 						console.error('Error:', error.response?.data)
-						throw new Error(JSON.stringify(error.response?.data))
+						throw new Error(
+							JSON.stringify(error.response?.data)
+						)
 					}
 					console.error('Error:', error)
 					throw new Error('Error inesperado')
@@ -94,7 +106,7 @@ const configAuth = {
 		signIn: '/auth/login',
 		signOut: '/auth/login',
 		error: '/auth/login',
-		verifyRequest: '/auth/verify-request',
+		verifyRequest: '/auth/verify-request'
 	},
 	callbacks: {
 		jwt: async ({ token, user }) => {
@@ -103,11 +115,17 @@ const configAuth = {
 				token.user = rest
 				token.accessToken = accessToken
 				token.refreshToken = refreshToken
-				const decodedToken: DecodedToken = jwtDecode(user?.accessToken ?? '')
+				const decodedToken: DecodedToken = jwtDecode(
+					user?.accessToken ?? ''
+				)
 				const currentTime = Math.floor(Date.now() / 1000)
-				token.isSessionExpired = currentTime > decodedToken.exp
+				token.isSessionExpired =
+					currentTime > decodedToken.exp
 			}
-			if ((token as { isSessionExpired: number }).isSessionExpired) {
+			if (
+				(token as { isSessionExpired: number })
+					.isSessionExpired
+			) {
 				const refresh = await refreshAccessToken(token)
 				if (refresh?.error || !refresh.accessToken) {
 					token.accessToken = ''
@@ -116,6 +134,7 @@ const configAuth = {
 					token.isSessionExpired = true
 					return token
 				}
+				token.accessToken = refresh.accessToken
 				token.isSessionExpired = false
 				return token
 			}
@@ -142,7 +161,8 @@ const configAuth = {
 		}
 	},
 	session: {
-		strategy: 'jwt'
+		strategy: 'jwt',
+		maxAge: 7 * 24 * 60 * 60 // 7 days
 	},
 	secret: process.env.NEXTAUTH_SECRET
 } satisfies NextAuthOptions

@@ -1,8 +1,9 @@
 'use client'
+import { createUserAction } from '@/actions/users/create.action'
 import {
-	UserSchema,
-	userSchema
-} from '@/app/schemas/users/user.schema'
+	NewUserSchema,
+	newUserSchema
+} from '@/app/schemas/users/new-user.schema'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppFormContainer from '@/components/Common/FormControl/FormContainer'
 import AppFormControl from '@/components/Common/FormControl/FormControl'
@@ -16,17 +17,23 @@ import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useSnackbar } from 'notistack'
+import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 export default function CreateUser() {
 	const t = useTranslations()
+	const { enqueueSnackbar } = useSnackbar()
+	const route = useRouter()
+	const [isLoading, transaction] = useTransition()
 	const {
 		control,
 		register,
 		handleSubmit,
 		setValue,
-		formState: { errors }
-	} = useForm<UserSchema>({
+		formState: { errors, isValid }
+	} = useForm<NewUserSchema>({
 		mode: 'onSubmit',
 		reValidateMode: 'onChange',
 		criteriaMode: 'firstError',
@@ -46,10 +53,27 @@ export default function CreateUser() {
 			type: '',
 			permissions: []
 		},
-		resolver: zodResolver(userSchema)
+		resolver: zodResolver(newUserSchema)
 	})
-	const onSubmit = (data: UserSchema) => {
+	const onSubmit = (data: NewUserSchema) => {
 		console.log(data)
+		transaction(async () => {
+			const result = await createUserAction(data)
+			if (result.error) {
+				console.error('Error:', result.error)
+				enqueueSnackbar(
+					JSON.stringify(result.error, null, 2),
+					{
+						variant: 'error'
+					}
+				)
+				return
+			}
+			route.push('/users/list')
+			console.log('====================================')
+			console.log(result)
+			console.log('====================================')
+		})
 	}
 
 	return (
@@ -67,21 +91,28 @@ export default function CreateUser() {
 						<AppTextField
 							label="Nombre"
 							{...register('firstName')}
-							error={!!errors.email}
-							helperText={errors.email?.message}
+							error={!!errors.firstName}
+							helperText={errors.firstName?.message}
 						/>
 					</AppFormControl>
+
 					<AppFormControl>
 						<AppTextField
 							style={{ marginTop: 20 }}
-							label="username"
-							{...register('username')}
-							error={!!errors.username}
-							helperText={errors?.username?.message}
+							label="Apellido"
+							{...register('lastName')}
+							error={!!errors.firstName}
+							helperText={errors.firstName?.message}
 						/>
 					</AppFormControl>
 				</AppFormContainer>
 				<AppFormContainer gridAreaTemplateColumns="repeat(auto-fit, minmax(30rem, 1fr))">
+					<AppTextField
+						label="username"
+						{...register('username')}
+						error={!!errors.username}
+						helperText={errors?.username?.message}
+					/>
 					<Controller
 						control={control}
 						name="birthDate"
@@ -137,7 +168,13 @@ export default function CreateUser() {
 					/>
 				</AppFormContainer>
 
-				<AppFormContainer gridAreaTemplateColumns="repeat(auto-fit, minmax(30rem, 1fr))">
+				<AppFormContainer
+					gridAreaTemplateColumns="repeat(auto-fit, minmax(30rem, 1fr))"
+					sx={{
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}
+				>
 					<AppTextField
 						label="Correo electrónico"
 						{...register('email')}
@@ -152,9 +189,10 @@ export default function CreateUser() {
 							<AppDropdown
 								label="Rol"
 								options={[
-									{ name: 'Admin', value: 'admin' },
-									{ name: 'User', value: 'user' }
+									{ name: 'Admin', value: 'ADMIN' },
+									{ name: 'User', value: 'USER' }
 								]}
+								clearable
 								value={field.value}
 								error={!!fieldState.error}
 								helperText={fieldState.error?.message}
@@ -172,8 +210,9 @@ export default function CreateUser() {
 							<AppDropdown
 								label="Tipo"
 								options={[
-									{ name: 'Admin', value: 'admin' },
-									{ name: 'User', value: 'user' }
+									{ name: 'Estándar', value: 'STANDARD' },
+									{ name: 'Invitado', value: 'GUEST' },
+									{ name: 'Premium', value: 'PREMIUM' }
 								]}
 								value={field.value}
 								error={!!fieldState.error}
@@ -185,14 +224,36 @@ export default function CreateUser() {
 						)}
 					/>
 
-					<AppTextField
-						label="Permisos"
-						{...register('permissions')}
-						error={!!errors.permissions}
-						helperText={errors.permissions?.message}
+					<Controller
+						control={control}
+						name="permissions"
+						render={({ field, fieldState }) => (
+							<AppDropdown
+								label="Permisos"
+								multiple
+								options={[
+									{ name: 'Todos', value: 'all' },
+									{ name: 'leer', value: 'read' },
+									{ name: 'escribir', value: 'write' },
+									{ name: 'eliminar', value: 'delete' },
+									{ name: 'actualizar', value: 'update' },
+									{ name: 'crear', value: 'create' }
+								]}
+								value={field.value}
+								error={!!fieldState.error}
+								helperText={fieldState.error?.message}
+								onChange={(e) =>
+									field.onChange(e.target.value)
+								}
+							/>
+						)}
 					/>
 				</AppFormContainer>
-				<AppButton type="submit">
+				<AppButton
+					type="submit"
+					disabled={!isValid || !isLoading}
+					loading={isLoading}
+				>
 					{t('common.submit')}
 				</AppButton>
 			</form>

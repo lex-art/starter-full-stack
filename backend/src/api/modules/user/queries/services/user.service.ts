@@ -64,7 +64,7 @@ export class UserQueryService {
 					permissions: true,
 					type: true,
 					timeZone: true,
-					rol: true,
+					role: true,
 					createdAt: true,
 					updatedAt: true
 				}

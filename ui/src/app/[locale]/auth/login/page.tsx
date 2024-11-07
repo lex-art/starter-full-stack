@@ -9,10 +9,17 @@ import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
 import { useAppTheme } from '@/components/Theme/AppTheme'
-import { useRouter as i18nRouter, Link, usePathname } from '@/i18n/routing'
+import {
+	useRouter as i18nRouter,
+	Link,
+	usePathname
+} from '@/i18n/routing'
 import { Severity } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import {
+	Visibility,
+	VisibilityOff
+} from '@mui/icons-material'
 import { Toolbar, useTheme } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 import { signIn } from 'next-auth/react'
@@ -24,7 +31,7 @@ import { useEffect, useState, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import logo from '../../../../../public/img/react.png'
-import { userSchema } from './schema/user'
+import { userSchema } from '../../../schemas/users/user'
 type UserSchema = z.infer<typeof userSchema>
 
 export default function Login() {
@@ -87,11 +94,15 @@ export default function Login() {
 		})
 	}
 
-	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleMouseDownPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
 		event.preventDefault()
 	}
 
-	const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleMouseUpPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
 		event.preventDefault()
 	}
 
@@ -122,7 +133,8 @@ export default function Login() {
 			alignItems="center"
 			height="100dvh"
 			sx={{
-				backgroundColor: (theme) => theme.palette.background.default
+				backgroundColor: (theme) =>
+					theme.palette.background.default
 			}}
 		>
 			<MuiAppBar>
@@ -140,7 +152,11 @@ export default function Login() {
 						}}
 						color="inherit"
 					>
-						{theme.palette.mode === 'dark' ? <AppIcons.Brightness4 /> : <AppIcons.Brightness7 />}
+						{theme.palette.mode === 'dark' ? (
+							<AppIcons.Brightness4 />
+						) : (
+							<AppIcons.Brightness7 />
+						)}
 					</AppIconButton>
 					<AppIconButton
 						sx={{ ml: 1 }}
@@ -151,7 +167,11 @@ export default function Login() {
 						}
 						color="inherit"
 					>
-						{locale === 'es' ? <AppIcons.GTranslate /> : <AppIcons.GTranslateRounded />}
+						{locale === 'es' ? (
+							<AppIcons.GTranslate />
+						) : (
+							<AppIcons.GTranslateRounded />
+						)}
 					</AppIconButton>
 				</Toolbar>
 			</MuiAppBar>
@@ -173,8 +193,16 @@ export default function Login() {
 					gap: 2
 				}}
 			>
-				<AppTypography variant="h4">Iniciar sesión</AppTypography>
-				<Image src={logo} alt="Logo" width={100} height={100} priority />
+				<AppTypography variant="h4">
+					Iniciar sesión
+				</AppTypography>
+				<Image
+					src={logo}
+					alt="Logo"
+					width={100}
+					height={100}
+					priority
+				/>
 				<AppTypography variant="body1" fontWeight="bold">
 					Simple Form
 				</AppTypography>
@@ -190,7 +218,12 @@ export default function Login() {
 						control={control}
 						name="email"
 						render={({ field, fieldState: { error } }) => (
-							<AppTextField {...field} error={!!error} helperText={error?.message} label={t('email')} />
+							<AppTextField
+								{...field}
+								error={!!error}
+								helperText={error?.message}
+								label={t('email')}
+							/>
 						)}
 					/>
 					<Controller
@@ -210,7 +243,11 @@ export default function Login() {
 										onMouseDown={handleMouseDownPassword}
 										onMouseUp={handleMouseUpPassword}
 									>
-										{showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
+										{showPassword ? (
+											<Visibility fontSize="small" />
+										) : (
+											<VisibilityOff fontSize="small" />
+										)}
 									</AppIconButton>
 								}
 							/>
@@ -224,13 +261,22 @@ export default function Login() {
 							mt: 1
 						}}
 						disabled={isLoading}
-						endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+						endIcon={
+							isLoading ? (
+								<AppCircularProgress
+									size={25}
+									color="secondary"
+								/>
+							) : null
+						}
 					>
 						{t('login')}
 					</AppButton>
 				</form>
 				<AppDivider marginY="0.5rem" textAlign="center">
-					<AppTypography fontWeight="Bold">Or</AppTypography>
+					<AppTypography fontWeight="Bold">
+						Or
+					</AppTypography>
 				</AppDivider>
 				<AppButton
 					startIcon={<AppIcons.Facebook />}
@@ -238,7 +284,14 @@ export default function Login() {
 					variant="outlined"
 					onClick={loginWithFacebook}
 					disabled={isLoading}
-					endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+					endIcon={
+						isLoading ? (
+							<AppCircularProgress
+								size={25}
+								color="secondary"
+							/>
+						) : null
+					}
 				>
 					Login with Facebook
 				</AppButton>
@@ -248,13 +301,16 @@ export default function Login() {
 					fullWidth
 					variant="outlined"
 					onClick={loginWithGoogle}
-					disabled={isLoading}
-					endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+					loading={isLoading}
 				>
 					Login with Google
 				</AppButton>
 
-				<AppButton startIcon={<AppIcons.Twitter />} fullWidth variant="outlined">
+				<AppButton
+					startIcon={<AppIcons.Twitter />}
+					fullWidth
+					variant="outlined"
+				>
 					Login with Twitter
 				</AppButton>
 				<Link
@@ -263,7 +319,10 @@ export default function Login() {
 					}}
 					href="/auth/forgot-password"
 				>
-					<AppTypography variant="body2" color="textSecondary">
+					<AppTypography
+						variant="body2"
+						color="textSecondary"
+					>
 						Recuperar contraseña
 					</AppTypography>
 				</Link>

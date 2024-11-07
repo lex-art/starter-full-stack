@@ -1,8 +1,8 @@
 import { CryptoUtility } from '@app/lib/utilities'
 import { MailModule } from '@app/mail'
-import { Module, ValidationPipe } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { APP_GUARD, APP_PIPE } from '@nestjs/core'
+import { APP_GUARD } from '@nestjs/core'
 import { CqrsModule } from '@nestjs/cqrs'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
@@ -58,10 +58,6 @@ import { LocalStrategy } from './strategy/local.strategy'
 		{
 			provide: APP_GUARD,
 			useClass: TypeUserGuard
-		},
-		{
-			provide: APP_PIPE,
-			useClass: ValidationPipe
 		}
 	],
 	exports: [PassportModule, JwtStrategy]

@@ -1,10 +1,11 @@
-import { Box } from '@mui/material'
+import { Box, BoxProps } from '@mui/material'
 import { FC } from 'react'
 interface AppFormContainerProps {
 	gridAreaTemplateColumns?: string
 	columnGap?: string
 	rowGap?: string
 	children: React.ReactNode
+	sx?: BoxProps['sx']
 }
 
 /**
@@ -15,7 +16,8 @@ const AppFormContainer: FC<AppFormContainerProps> = ({
 	children,
 	gridAreaTemplateColumns,
 	columnGap,
-	rowGap
+	rowGap,
+	sx
 }) => {
 	return (
 		<Box
@@ -25,7 +27,8 @@ const AppFormContainer: FC<AppFormContainerProps> = ({
 					gridAreaTemplateColumns ??
 					'repeat(auto-fit, minmax(49%, 1fr))',
 				columnGap: columnGap ?? '1rem',
-				rowGap: rowGap ?? '0.5rem'
+				rowGap: rowGap ?? '0.5rem',
+				...sx
 			}}
 		>
 			{children}

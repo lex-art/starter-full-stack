@@ -1,6 +1,8 @@
+import { IntersectionType, OmitType } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
 import { IsArray, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from './../../types/enums'
+import { ProfileDto } from './profile.dto'
 
 export class UserDto {
 	@Type(() => Number)
@@ -22,7 +24,7 @@ export class UserDto {
 
 	@IsEnum(USER_ROLE)
 	@IsNotEmpty()
-	rol: USER_ROLE
+	role: USER_ROLE
 
 	@IsEnum(USER_TYPE)
 	@IsNotEmpty()
@@ -37,3 +39,8 @@ export class UserDto {
 	@IsString()
 	timeZone: string
 }
+
+export class RegisterUserDto extends IntersectionType(
+	OmitType(UserDto, ['idUser', 'password']),
+	OmitType(ProfileDto, ['idProfile'])
+) {}

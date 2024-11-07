@@ -21,7 +21,7 @@ import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
 import { RefreshTokenDto, ResetPasswordDto, VerifyEmailOtpDto } from '../dto'
 import { LoginFormDto } from '../dto/login.dto'
 import { ProfileDto } from '../dto/profile.dto'
-import { UserDto } from '../dto/user.dto'
+import { RegisterUserDto, UserDto } from '../dto/user.dto'
 import { AuthException } from '../exceptions'
 import { LocalAuthGuard } from '../guard/local.guard'
 
@@ -72,11 +72,14 @@ export class AuthController {
 
 	@Post('register')
 	@Public()
-	async register(@Body() body: UserDto & ProfileDto): Promise<{
+	async register(@Body() body: RegisterUserDto): Promise<{
 		message: string
 		email: string
 	}> {
 		try {
+			console.log('====================================')
+			console.log('Body:', body)
+			console.log('====================================')
 			const command = new CreateAccountCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {

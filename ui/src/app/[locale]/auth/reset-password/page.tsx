@@ -8,19 +8,32 @@ import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
 import { useAppTheme } from '@/components/Theme/AppTheme'
-import { Link, usePathname, useRouter } from '@/i18n/routing'
+import {
+	Link,
+	usePathname,
+	useRouter
+} from '@/i18n/routing'
 import { Severity } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import {
+	Visibility,
+	VisibilityOff
+} from '@mui/icons-material'
 import { useTheme } from '@mui/material'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { redirect as i18Redirect, useSearchParams } from 'next/navigation'
+import {
+	redirect as i18Redirect,
+	useSearchParams
+} from 'next/navigation'
 import { useSnackbar } from 'notistack'
 import { useEffect, useState, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import logo from '../../../../../public/img/react.png'
-import { NewPasswordSchema, newPasswordSchema } from '../login/schema/user'
+import {
+	NewPasswordSchema,
+	newPasswordSchema
+} from '../../../schemas/users/user'
 
 export default function ResetPassword() {
 	const t = useTranslations('common')
@@ -34,14 +47,15 @@ export default function ResetPassword() {
 	const [isLoading, transaction] = useTransition()
 	const [showPassword, setShowPassword] = useState(false)
 	const otherLocale = locale === 'es' ? 'en' : 'es'
-	const { control, handleSubmit } = useForm<NewPasswordSchema>({
-		mode: 'onChange',
-		resolver: zodResolver(newPasswordSchema),
-		defaultValues: {
-			password: '',
-			confirmPassword: ''
-		}
-	})
+	const { control, handleSubmit } =
+		useForm<NewPasswordSchema>({
+			mode: 'onChange',
+			resolver: zodResolver(newPasswordSchema),
+			defaultValues: {
+				password: '',
+				confirmPassword: ''
+			}
+		})
 
 	useEffect(() => {
 		transaction(() => {
@@ -75,11 +89,15 @@ export default function ResetPassword() {
 		setShowPassword((prev) => !prev)
 	}
 
-	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleMouseDownPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
 		event.preventDefault()
 	}
 
-	const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleMouseUpPassword = (
+		event: React.MouseEvent<HTMLButtonElement>
+	) => {
 		event.preventDefault()
 	}
 	return (
@@ -92,7 +110,8 @@ export default function ResetPassword() {
 			alignItems="center"
 			height="100%"
 			sx={{
-				backgroundColor: (theme) => theme.palette.primary.main
+				backgroundColor: (theme) =>
+					theme.palette.primary.main
 			}}
 		>
 			<AppPaper
@@ -113,8 +132,16 @@ export default function ResetPassword() {
 					gap: 2
 				}}
 			>
-				<AppTypography variant="h4">Cambiar Contraseña</AppTypography>
-				<Image src={logo} alt="Logo" width={100} height={100} priority />
+				<AppTypography variant="h4">
+					Cambiar Contraseña
+				</AppTypography>
+				<Image
+					src={logo}
+					alt="Logo"
+					width={100}
+					height={100}
+					priority
+				/>
 				<AppTypography variant="body1" fontWeight="bold">
 					Simple Form
 				</AppTypography>
@@ -146,7 +173,11 @@ export default function ResetPassword() {
 										onMouseDown={handleMouseDownPassword}
 										onMouseUp={handleMouseUpPassword}
 									>
-										{showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
+										{showPassword ? (
+											<Visibility fontSize="small" />
+										) : (
+											<VisibilityOff fontSize="small" />
+										)}
 									</AppIconButton>
 								}
 							/>
@@ -172,7 +203,11 @@ export default function ResetPassword() {
 										onMouseDown={handleMouseDownPassword}
 										onMouseUp={handleMouseUpPassword}
 									>
-										{showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
+										{showPassword ? (
+											<Visibility fontSize="small" />
+										) : (
+											<VisibilityOff fontSize="small" />
+										)}
 									</AppIconButton>
 								}
 							/>
@@ -185,7 +220,14 @@ export default function ResetPassword() {
 						sx={{
 							mt: 1
 						}}
-						endIcon={isLoading ? <AppCircularProgress size={25} color="secondary" /> : null}
+						endIcon={
+							isLoading ? (
+								<AppCircularProgress
+									size={25}
+									color="secondary"
+								/>
+							) : null
+						}
 					>
 						{t('resetPassword')}
 					</AppButton>
@@ -196,7 +238,10 @@ export default function ResetPassword() {
 					}}
 					href="/auth/login"
 				>
-					<AppTypography variant="body2" color="textSecondary">
+					<AppTypography
+						variant="body2"
+						color="textSecondary"
+					>
 						Regresar
 					</AppTypography>
 				</Link>

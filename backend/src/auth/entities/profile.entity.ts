@@ -37,6 +37,6 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	@Column({ type: 'varchar', length: 500 })
 	address: string
 
-	@Column({ type: 'varchar', length: 500, name: 'img_profile' })
+	@Column({ type: 'varchar', length: 500, name: 'img_profile', nullable: true })
 	imgProfile: string
 }

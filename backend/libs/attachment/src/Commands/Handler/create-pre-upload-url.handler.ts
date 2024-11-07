@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { PreUploadUrlService } from '../../services/pre-upload-url.service'
-import { CreatePreUploadUrlCommand } from '../Command/create-pre-upload-url.commad'
+import { CreatePreUploadUrlCommand } from '../command/create-pre-upload-url.command'
 
 @CommandHandler(CreatePreUploadUrlCommand)
 export class CreatePreUploadUrlHandler implements ICommandHandler<CreatePreUploadUrlCommand> {

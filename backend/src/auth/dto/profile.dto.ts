@@ -1,4 +1,5 @@
-import { IsDateString, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { Type } from 'class-transformer'
+import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 
 export class ProfileDto {
 	@IsString()
@@ -13,7 +14,8 @@ export class ProfileDto {
 	@IsOptional()
 	lastName: string
 
-	@IsDateString()
+	@Type(() => Date)
+	@IsDate()
 	@IsNotEmpty()
 	birthDate: Date
 

@@ -37,7 +37,7 @@ import { AppButtonTheme } from '../Common/Inputs/Button/theme'
 import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
 import { AppDatePickerTheme } from '../Common/Inputs/DatePicker/DatePicker'
 import { AppStaticDatePickerTheme } from '../Common/Inputs/DatePicker/StaticDatePicker'
-import { AppDropdownTheme } from '../Common/Inputs/Dropdown/Dropdown'
+import { AppDropdownTheme } from '../Common/Inputs/Dropdown/theme'
 import { AppInputAdornmentTheme } from '../Common/Inputs/NumericField/InputAdornmentTheme'
 import { AppRadioTheme } from '../Common/Inputs/Radio/Radio'
 import { AppSliderTheme } from '../Common/Inputs/Slider/Slider'
@@ -45,13 +45,14 @@ import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
 import { AppTextFieldThemeOptions } from '../Common/Inputs/TextField/theme'
 import { AppGridTheme } from '../Common/Layout/Grid/theme'
 import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
-import { AppMuiItemTheme } from '../Common/Menu/MenuItem'
+import { AppMuiItemTheme } from '../Common/Menu/theme'
 import { AppRatingTheme } from '../Common/Rating/Rating'
 import { AppDataTableTheme } from '../DataTable/theme'
 import { AppStepLabelThem } from '../Stepper/StepLabel'
 import { AppTablePaginationTheme } from '../TablePagination/TablePagination'
 import { createAppTabTheme } from '../Tabs/Tab'
 import { paletteThemeOptions } from './theme'
+import { SWRConfig } from 'swr'
 
 interface AppThemeProps {
 	children: ReactNode
@@ -65,7 +66,10 @@ const AppGlobalContext = createContext({
 })
 
 const useAppTheme = () => useContext(AppGlobalContext)
-const createCacheEmotion = createCache({ key: 'css', prepend: true })
+const createCacheEmotion = createCache({
+	key: 'css',
+	prepend: true
+})
 
 const AppThemeMUI = ({
 	children,
@@ -162,7 +166,9 @@ const AppThemeMUI = ({
 								dateAdapter={AdapterDayjs}
 								adapterLocale={locale}
 							>
-								{children}
+								<SWRConfig value={{ provider: () => new Map() }}>
+									{children}
+								</SWRConfig>
 							</LocalizationProvider>
 						</SnackbarProvider>
 					</ThemeProvider>

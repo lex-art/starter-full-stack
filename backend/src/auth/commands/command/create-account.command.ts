@@ -1,7 +1,6 @@
-import { ProfileDto } from '@app/auth/dto/profile.dto'
 import { ICommand } from '@nestjs/cqrs'
-import { UserDto } from '../../../auth/dto/user.dto'
+import { RegisterUserDto } from '../../../auth/dto/user.dto'
 
 export class CreateAccountCommand implements ICommand {
-	constructor(public readonly body: UserDto & ProfileDto) {}
+	constructor(public readonly body: RegisterUserDto) {}
 }

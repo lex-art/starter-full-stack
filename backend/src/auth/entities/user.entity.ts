@@ -26,7 +26,7 @@ export class UserEntity extends BaseEntityWithTimestamps {
 		enum: USER_ROLE,
 		nullable: true
 	})
-	rol: USER_ROLE
+	role: USER_ROLE
 
 	@Column({
 		type: 'enum',
