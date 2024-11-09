@@ -1,7 +1,5 @@
 import InputAdornment from '@mui/material/InputAdornment'
-import TextField, {
-	TextFieldProps
-} from '@mui/material/TextField'
+import TextField, { TextFieldProps } from '@mui/material/TextField'
 import { forwardRef } from 'react'
 import { AppTextFieldProps } from './theme'
 

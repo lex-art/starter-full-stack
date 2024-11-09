@@ -2,8 +2,6 @@
 import {
 	Checkbox,
 	FormControl,
-	FormHelperText,
-	InputLabel,
 	Select,
 	SelectProps,
 	Typography
@@ -12,6 +10,8 @@ import { useTranslations } from 'next-intl'
 import { forwardRef, useState } from 'react'
 import AppTypography from '../../DataDisplay/Typography/Typography'
 import AppCircularLoader from '../../FeedBack/CircularLoader/CircularLoader'
+import AppFormHelperText from '../../FormControl/FormHelpText'
+import AppInputLabel from '../../FormControl/InputLabel'
 import AppIcons from '../../Icons/Icons'
 import AppMenuItem from '../../Menu/MenuItem'
 import AppIconButton from '../IconButton/IconButton'
@@ -61,21 +61,21 @@ const AppDropdown = forwardRef<
 	}
 
 	return (
-		<FormControl
-			fullWidth={!width}
-			error={error}
-			sx={{ width, mb: 0.5 }}
-		>
-			<InputLabel
+		<FormControl fullWidth={!width} error={error} sx={{ width, mb: 0.5 }}>
+			<AppInputLabel
 				id="App-select-label"
+				size={size === 'small' ? 'small' : 'normal'}
 				sx={{
-					'&.Mui-error': {
-						top: '-1%'
-					}
+					...(size === 'small' && {
+						top: '15%',
+						'&.Mui-error': {
+							top: '13%'
+						}
+					})
 				}}
 			>
 				{label}
-			</InputLabel>
+			</AppInputLabel>
 			<Select
 				ref={ref}
 				labelId="App-select-label"
@@ -107,29 +107,20 @@ const AppDropdown = forwardRef<
 							{(selected as Array<string>)
 								.map(
 									(item) =>
-										options.find(
-											(option) => option.value === item
-										)?.name
+										options.find((option) => option.value === item)?.name
 								)
 								.join(', ')}
 						</Typography>
 					) : (
 						<Typography variant="inherit">
-							{
-								options.find(
-									(option) => option.value === selected
-								)?.name
-							}
+							{options.find((option) => option.value === selected)?.name}
 						</Typography>
 					)
 				}
 				startAdornment={
 					clearable &&
 					value !== '' && (
-						<AppIconButton
-							sx={{ right: 5 }}
-							onClick={clearOption}
-						>
+						<AppIconButton sx={{ right: 5 }} onClick={clearOption}>
 							<AppIcons.CloseOutlined
 								sx={{
 									height: '1.8rem',
@@ -155,9 +146,7 @@ const AppDropdown = forwardRef<
 			>
 				<AppMenuItem value="" disabled>
 					<AppTypography variant="inherit">
-						{options.length === 0
-							? t('noOptions')
-							: placeholder}
+						{options.length === 0 ? t('noOptions') : placeholder}
 					</AppTypography>
 				</AppMenuItem>
 				{options.map((item) => (
@@ -168,13 +157,11 @@ const AppDropdown = forwardRef<
 								checked={value.includes(item.value)}
 							/>
 						)}
-						<Typography variant="inherit">
-							{item.name}
-						</Typography>
+						<Typography variant="inherit">{item.name}</Typography>
 					</AppMenuItem>
 				))}
 			</Select>
-			<FormHelperText>{helperText}</FormHelperText>
+			<AppFormHelperText>{helperText}</AppFormHelperText>
 		</FormControl>
 	)
 })

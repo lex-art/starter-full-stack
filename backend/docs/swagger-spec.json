@@ -19,7 +19,18 @@
         }
       }
     },
-    "/user": {
+    "/user/list": {
+      "get": {
+        "operationId": "UserController_getAllUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/{email}": {
       "get": {
         "operationId": "UserController_getUser",
         "parameters": [],
@@ -28,7 +39,9 @@
             "description": ""
           }
         }
-      },
+      }
+    },
+    "/user": {
       "patch": {
         "operationId": "UserController_updateUser",
         "parameters": [],
@@ -42,17 +55,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/user/list": {
-      "get": {
-        "operationId": "UserController_getAllUsers",
-        "parameters": [],
         "responses": {
           "200": {
             "description": ""

@@ -6,5 +6,6 @@ export enum API_URLS {
 	RESET_PASSWORD = '/auth/reset-password',
 	REFRESH_TOKEN = '/auth/refresh-token',
 	USER = '/user',
-	USER_LIST = '/user/list',
+	USER_GET = '/user/:email',
+	USER_LIST = '/user/list'
 }

@@ -25,7 +25,7 @@ export const colors = {
 		warningDark: '#E65100'
 	},
 	dark: {
-		primary: '#43a57b',
+		primary: '#44A67B',
 		primaryLight: '#445875',
 		primaryDark: '#0a2f51',
 		contrastText: '#f0f0f0',

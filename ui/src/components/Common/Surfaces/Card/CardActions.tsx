@@ -10,5 +10,4 @@ const AppCardActions = forwardRef<HTMLElement, CardActionsProps>(({ children, ..
 })
 
 AppCardActions.displayName = 'AppCardActions'
-export { AppCardActions }
 export default AppCardActions

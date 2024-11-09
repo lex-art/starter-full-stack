@@ -10,5 +10,6 @@
 	"submit": "Submit",
 	"components": "Components",
 	"inputs": "Inputs",
-	"selects": "Selects"
+	"selects": "Selects",
+	"update": "Update"
 }

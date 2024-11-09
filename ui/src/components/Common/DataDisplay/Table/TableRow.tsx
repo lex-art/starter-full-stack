@@ -5,6 +5,5 @@ const AppTableRow: FC<TableRowProps> = ({ children, ...props }) => {
 	return <TableRow {...props}>{children}</TableRow>
 }
 
-export { AppTableRow }
 AppTableRow.displayName = 'AppTableRow'
 export default AppTableRow

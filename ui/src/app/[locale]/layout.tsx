@@ -1,6 +1,6 @@
 import PageLayout from '@/components/LayoutManager/PageLayout/PageLayout'
 import SkeletonApp from '@/components/SkeletonApp/SkeletonApp'
-import { AppThemeMUI } from '@/components/Theme/AppTheme'
+import AppThemeMUI from '@/components/Theme/AppTheme'
 import { locales } from '@/i18n/routing'
 import { PaletteMode } from '@mui/material'
 import { Metadata, Viewport } from 'next'
@@ -30,7 +30,10 @@ export const viewport: Viewport = {
 	initialScale: 1
 }
 
-export default function LocaleLayout({ children, params: { locale } }: Props) {
+export default function LocaleLayout({
+	children,
+	params: { locale }
+}: Props) {
 	const messages = useMessages()
 	const header = headers()
 	const cookieStore = cookies()
@@ -39,7 +42,8 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 		`^(/(${locales.join('|')}))?(${excludePaths.map((p) => p.replace(/\*/g, '.*')).join('|')})$`,
 		'i'
 	).test(currentPath)
-	const initialThemeMode = (cookieStore.get('theme')?.value || 'light') as PaletteMode
+	const initialThemeMode = (cookieStore.get('theme')?.value ||
+		'light') as PaletteMode
 	const isOpenDrawer = cookieStore.get('drawerOpen')?.value === 'true'
 
 	return (
@@ -52,7 +56,9 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 							{isExcludeLayout ? (
 								<main>{children}</main>
 							) : (
-								<PageLayout isOpenDrawer={isOpenDrawer}>{children}</PageLayout>
+								<PageLayout isOpenDrawer={isOpenDrawer}>
+									{children}
+								</PageLayout>
 							)}
 						</Suspense>
 					</AppThemeMUI>

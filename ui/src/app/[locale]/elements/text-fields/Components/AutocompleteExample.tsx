@@ -9,7 +9,10 @@ import { useRef, useState } from 'react'
 type valueMultiple = Record<string, unknown>
 
 export default function AutocompleteExample() {
-	const [value, setValue] = useState<{ name: string; value: string } | null>({
+	const [value, setValue] = useState<{
+		name: string
+		value: string
+	} | null>({
 		name: 'Angola',
 		value: 'AO'
 	})
@@ -20,7 +23,9 @@ export default function AutocompleteExample() {
 	const [isLoading, setIsLoading] = useState(false)
 	const debounceRef = useRef<ReturnType<typeof setTimeout>>()
 
-	const handleChange = (event: { name: string; value: string } | string) => {
+	const handleChange = (
+		event: { name: string; value: string } | string
+	) => {
 		if (typeof event === 'string') {
 			setValue(null)
 			return
@@ -64,7 +69,7 @@ export default function AutocompleteExample() {
 				onSelectValue={handleChange}
 				loading={isLoading}
 				onInputValueChange={handleOnInputValueChange}
-				getOptionLabel={(option: any) => option?.name ?? ''}
+				getOptionLabel={(option: any) => option?.name || ''}
 				isOptionEqualToValue={(option, value) => (option as any)?.name}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 			/>
@@ -76,9 +81,10 @@ export default function AutocompleteExample() {
 				onSelectValue={handleMultipleChange}
 				loading={isLoading}
 				onInputValueChange={handleOnInputValueChange}
-				getOptionLabel={(option: any) => option?.name ?? ''}
+				getOptionLabel={(option: any) => option?.name || ''}
 				isOptionEqualToValue={(option, value) =>
-					(option as valueMultiple)?.name === (value as valueMultiple)?.name
+					(option as valueMultiple)?.name ===
+					(value as valueMultiple)?.name
 				}
 				clearIcon={!isLoading && <ClearIcon fontSize="small" />}
 				variant="standard"
@@ -90,6 +96,7 @@ export default function AutocompleteExample() {
 					throw new Error('Function not implemented.')
 				}}
 				variant="filled"
+				getOptionLabel={(option: any) => option?.name || ''}
 			/>
 			<AppAutocomplete
 				options={suggestionsArrayExample}
@@ -99,6 +106,7 @@ export default function AutocompleteExample() {
 				}}
 				error
 				helperText="This is an error message"
+				getOptionLabel={(option: any) => option?.name || ''}
 			/>
 		</AppPaper>
 	)

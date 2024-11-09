@@ -1,38 +1,11 @@
 import { font } from '@/lib/designTokens'
-import { ThemeOptions, colors } from '@mui/material'
+import { colors } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import { FC, ReactElement, ReactNode, forwardRef } from 'react'
 
 declare module '@mui/material/Tooltip' {
 	interface TooltipProps {
 		variant?: 'light' | 'bootstrap'
-	}
-}
-
-const AppTooltipTheme: ThemeOptions = {
-	components: {
-		MuiTooltip: {
-			styleOverrides: {
-				tooltip: {
-					fontSize: font.sizes.fontSizeMedium
-				}
-			},
-			variants: [
-				{
-					props: { variant: 'light' },
-					style: {
-						'&.MuiTooltip-tooltip': {
-							backgroundColor: 'blue',
-							color: 'rgba(0, 0, 0, 0.87)',
-							fontSize: font.sizes.fontSizeMedium,
-							'&.MuiTooltip-arrow': {
-								backgroundColor: 'red'
-							}
-						}
-					}
-				}
-			]
-		}
 	}
 }
 
@@ -64,48 +37,47 @@ interface AppTooltipProps {
 	children: ReactElement
 	variant?: 'light' | 'bootstrap'
 }
-const AppTooltip: FC<AppTooltipProps> = forwardRef<HTMLDivElement, AppTooltipProps>(
-	({ children, variant, ...rest }, ref) => {
-		return (
-			<Tooltip
-				ref={ref}
-				hidden={false}
-				arrow={true}
-				slotProps={{
-					arrow: {
-						sx: {
-							...(variant === 'light' && {
-								color: colors.grey[300]
-							}),
-							...(variant === 'bootstrap' && {
-								color: colors.common.black
-							})
-						}
-					},
-					tooltip: {
-						sx: {
-							...(variant === 'light' && {
-								backgroundColor: colors.grey[300],
-								color: 'rgba(0, 0, 0, 0.87)',
-								fontSize: font.sizes.fontSizeMedium
-							}),
-							...(variant === 'bootstrap' && {
-								backgroundColor: colors.common.black,
-								color: colors.common.white,
-								fontSize: font.sizes.fontSizeMedium
-							})
-						}
+const AppTooltip: FC<AppTooltipProps> = forwardRef<
+	HTMLDivElement,
+	AppTooltipProps
+>(({ children, variant, ...rest }, ref) => {
+	return (
+		<Tooltip
+			ref={ref}
+			hidden={false}
+			arrow={true}
+			slotProps={{
+				arrow: {
+					sx: {
+						...(variant === 'light' && {
+							color: colors.grey[300]
+						}),
+						...(variant === 'bootstrap' && {
+							color: colors.common.black
+						})
 					}
-				}}
-				{...rest}
-			>
-				{children}
-			</Tooltip>
-		)
-	}
-)
-
-export { AppTooltip, AppTooltipTheme }
+				},
+				tooltip: {
+					sx: {
+						...(variant === 'light' && {
+							backgroundColor: colors.grey[300],
+							color: 'rgba(0, 0, 0, 0.87)',
+							fontSize: font.sizes.fontSizeMedium
+						}),
+						...(variant === 'bootstrap' && {
+							backgroundColor: colors.common.black,
+							color: colors.common.white,
+							fontSize: font.sizes.fontSizeMedium
+						})
+					}
+				}
+			}}
+			{...rest}
+		>
+			{children}
+		</Tooltip>
+	)
+})
 
 AppTooltip.displayName = 'AppTooltip'
 export default AppTooltip

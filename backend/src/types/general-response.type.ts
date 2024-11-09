@@ -1,4 +1,4 @@
-export interface GeneralResponse {
+export interface GeneralResponse<T = Record<string, unknown>> {
 	message: string
-	data: Record<string, unknown>
+	data: T
 }

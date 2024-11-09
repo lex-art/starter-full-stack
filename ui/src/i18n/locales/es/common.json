@@ -95,5 +95,6 @@
 	"list": "Listar",
 	"view": "Ver",
 	"submit": "Enviar",
-	"resetPassword": "Restablecer contraseña"
+	"resetPassword": "Restablecer contraseña",
+	"update": "Actualizar"
 }

@@ -20,7 +20,7 @@ export class CreateUserService {
 				user.role = body.role
 				user.type = body.type
 				user.permissions = body.permissions
-				user.userName = body.userName
+				user.username = body.username
 				user.timeZone = body.timeZone
 				const tempPassword: string = passwordGenerator()
 				user.password = await encrypt(tempPassword)

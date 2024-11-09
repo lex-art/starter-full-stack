@@ -1,3 +1,4 @@
+import { font } from '@/lib/designTokens'
 import { ThemeOptions } from '@mui/material'
 
 const AppDropdownTheme: ThemeOptions = {
@@ -26,7 +27,8 @@ const AppDropdownTheme: ThemeOptions = {
 				},
 				icon: {
 					height: '4.5rem',
-					width: '3rem'
+					width: '3rem',
+					fontSize: font.sizes.fontSizeMedium
 				}
 			},
 			variants: [

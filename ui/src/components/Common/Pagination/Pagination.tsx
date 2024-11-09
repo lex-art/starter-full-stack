@@ -43,5 +43,4 @@ const AppPagination: FC<AppPaginationProps> = ({ page, setPage, next, previous }
 }
 
 AppPagination.displayName = 'AppPagination'
-export { AppPagination }
 export default AppPagination

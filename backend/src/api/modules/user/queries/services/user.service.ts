@@ -10,7 +10,10 @@ import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
 export class UserQueryService {
-	async get(data: Pick<LoginFormDto, 'email'>): Promise<GeneralResponse> {
+	async get(data: Pick<LoginFormDto, 'email'>): Promise<Record<string, unknown>> {
+		if (!data.email) {
+			throw new ApiException('Email is required', 'EMAIL_REQUIRED')
+		}
 		const user: UserEntity = await UserEntity.findOne({ where: { email: data.email } })
 		if (!user) {
 			throw new ApiException('User not found', 'USER_NOT_FOUND')
@@ -26,11 +29,8 @@ export class UserQueryService {
 		delete user.password
 
 		return {
-			message: 'User updated successfully',
-			data: {
-				...user,
-				...profile
-			}
+			...user,
+			...profile
 		}
 	}
 
@@ -60,7 +60,7 @@ export class UserQueryService {
 				user: {
 					idUser: true,
 					email: true,
-					password: true,
+					username: true,
 					permissions: true,
 					type: true,
 					timeZone: true,

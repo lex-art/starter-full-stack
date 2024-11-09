@@ -77,13 +77,19 @@ export default function TextFieldTypes() {
 			</AppTypography>
 			<br />
 			<AppBox gap={2} display="flex" flexWrap="wrap">
-				<AppTelInput fullWidth={false} defaultCountryCode="US" value="" onChange={() => {}} label="Phone" />
+				<AppTelInput
+					fullWidth={false}
+					defaultCountryCode="US"
+					value=""
+					onChange={() => {}}
+					label="Phone"
+				/>
 				<AppTelInput
 					fullWidth={false}
 					defaultCountryCode="MX"
 					value=""
 					onChange={() => {}}
-					label="Phone"
+					placeholder="Phone"
 					variant="filled"
 				/>
 				<AppTelInput
@@ -93,10 +99,16 @@ export default function TextFieldTypes() {
 					defaultCountryCode="CL"
 					value=""
 					onChange={() => {}}
-					label="Phone"
+					placeholder="Phone"
 					disabled
 				/>
-				<AppTelInput fullWidth={false} defaultCountryCode="GT" value="" onChange={() => {}} label="Phone" />
+				<AppTelInput
+					fullWidth={false}
+					defaultCountryCode="GT"
+					value=""
+					onChange={() => {}}
+					label="Phone"
+				/>
 				<AppTelInput
 					fullWidth={false}
 					defaultCountryCode="ES"

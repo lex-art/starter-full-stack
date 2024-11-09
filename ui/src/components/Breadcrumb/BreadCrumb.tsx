@@ -32,5 +32,4 @@ const AppBreadcrumb = () => {
 	)
 }
 
-export { AppBreadcrumb }
 export default AppBreadcrumb

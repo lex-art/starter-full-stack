@@ -9,7 +9,7 @@ export async function createUserAction(
 ): Promise<IResponse> {
 	try {
 		const response = await apiConfig.post<any>({
-			url: API_URLS.REGISTER,
+			url: API_URLS.USER,
 			body: data
 		})
 		return response

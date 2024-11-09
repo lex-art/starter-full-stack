@@ -77,7 +77,14 @@ export default function Selects() {
 				>
 					<AppTypography variant="subtitle2">Sizes</AppTypography>
 					<AppBox display="flex" gap="2rem">
-						<AppDropdown value="" label="Select disabled" options={[]} width="49%" disabled size="medium" />
+						<AppDropdown
+							value=""
+							label="Select disabled"
+							options={[]}
+							width="49%"
+							disabled
+							size="medium"
+						/>
 						<AppDropdown
 							value=""
 							label="Select disabled"
@@ -89,7 +96,15 @@ export default function Selects() {
 						/>
 					</AppBox>
 					<AppBox display="flex" gap="2rem">
-						<AppDropdown value="" label="Select medium" options={[]} width="49%" />
+						<AppDropdown
+							value=""
+							label="Select medium"
+							options={[]}
+							width="49%"
+							error
+							helperText="This field is required"
+							size="small"
+						/>
 						<AppDropdown
 							label="Select small whit error"
 							value=""
@@ -102,8 +117,22 @@ export default function Selects() {
 						/>
 					</AppBox>
 					<AppBox display="flex" gap="2rem">
-						<AppDropdown value="" label="Select medium" options={[]} width="49%" size="medium" />
-						<AppDropdown value="" label="Select small" options={[]} width="49%" size="small" pills loading />
+						<AppDropdown
+							value=""
+							label="Select small"
+							options={[]}
+							width="49%"
+							size="small"
+						/>
+						<AppDropdown
+							value=""
+							label="Select small"
+							options={[]}
+							width="49%"
+							size="small"
+							pills
+							loading
+						/>
 					</AppBox>
 				</AppPaper>
 				<AppPaper
@@ -115,8 +144,19 @@ export default function Selects() {
 				>
 					<AppTypography variant="subtitle2">Adornment</AppTypography>
 					<AppBox display="flex" gap="2rem">
-						<AppDropdown value="" label="Select clerable" options={suggestionsArrayExample} clearable />
-						<AppDropdown value="" label="Select pills" options={suggestionsArrayExample} pills loading />
+						<AppDropdown
+							value=""
+							label="Select clerable"
+							options={suggestionsArrayExample}
+							clearable
+						/>
+						<AppDropdown
+							value=""
+							label="Select pills"
+							options={suggestionsArrayExample}
+							pills
+							loading
+						/>
 					</AppBox>
 				</AppPaper>
 			</AppGrid>

@@ -7,7 +7,7 @@ import AppBox from '@/components/Common/Layout/Box'
 import { checkBoxGroupExample } from '@/lib/utilities/constants'
 import { useState } from 'react'
 
-export default function CheclBoxGroup() {
+export default function CheckBoxGroup() {
 	const [checked, setChecked] = useState<string>('')
 	const handleChange = (value: string) => {
 		setChecked(value)

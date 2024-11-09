@@ -187,6 +187,7 @@ export default function TextFieldsError() {
 					</AppFormLabel>
 					<AppTextField
 						fullWidth={false}
+						label="Outlined"
 						variant="outlined"
 						placeholder="Search"
 						adornmentLeft={
@@ -213,6 +214,7 @@ export default function TextFieldsError() {
 					</AppFormLabel>
 					<AppTextField
 						fullWidth={false}
+						label="Filled"
 						variant="filled"
 						placeholder="Search"
 						adornmentRight={

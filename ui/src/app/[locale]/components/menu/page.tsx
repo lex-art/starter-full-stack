@@ -8,7 +8,7 @@ import AppPaper from '@/components/Common/Layout/Paper'
 import AppListItem from '@/components/Common/Menu/ListMenu/ListItem'
 import AppMenu from '@/components/Common/Menu/Menu'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
-import { AppMenuList } from '@/components/Common/Menu/MenuList'
+import AppMenuList from '@/components/Common/Menu/MenuList'
 import { Logout, PersonAdd } from '@mui/icons-material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Avatar, IconButton } from '@mui/material'
@@ -73,21 +73,30 @@ export default function Menus() {
 	}
 
 	const handleClose = (event: Event | React.SyntheticEvent) => {
-		if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+		if (
+			anchorRef.current &&
+			anchorRef.current.contains(event.target as HTMLElement)
+		) {
 			return
 		}
 		setOpen(false)
 	}
 
 	const handleClose2 = (event: Event | React.SyntheticEvent) => {
-		if (anchorRef2.current && anchorRef2.current.contains(event.target as HTMLElement)) {
+		if (
+			anchorRef2.current &&
+			anchorRef2.current.contains(event.target as HTMLElement)
+		) {
 			return
 		}
 		setOpen2(false)
 	}
 
 	const handleClose3 = (event: Event | React.SyntheticEvent) => {
-		if (anchorRef3.current && anchorRef3.current.contains(event.target as HTMLElement)) {
+		if (
+			anchorRef3.current &&
+			anchorRef3.current.contains(event.target as HTMLElement)
+		) {
 			return
 		}
 		setOpen3(false)
@@ -98,7 +107,7 @@ export default function Menus() {
 	}
 
 	return (
-		<AppGrid item width="100%">
+		<AppGrid width="100%">
 			<AppDivider marginY="0.5rem" textAlign="left">
 				<AppTypography variant="subtitle2">Menus</AppTypography>
 			</AppDivider>
@@ -112,7 +121,12 @@ export default function Menus() {
 					<AppTypography variant="body1" fontWeight="bold">
 						Menu types
 					</AppTypography>
-					<AppBox gap={2} display="flex" flexWrap="wrap" alignItems="center">
+					<AppBox
+						gap={2}
+						display="flex"
+						flexWrap="wrap"
+						alignItems="center"
+					>
 						<AppButton
 							ref={anchorRef}
 							variant="text"
@@ -124,7 +138,11 @@ export default function Menus() {
 						>
 							Menu example
 						</AppButton>
-						<AppMenu anchorEl={anchorRef.current} open={open} onClose={handleClose}>
+						<AppMenu
+							anchorEl={anchorRef.current}
+							open={open}
+							onClose={handleClose}
+						>
 							<AppMenuList>
 								<AppMenuItem>Item 1</AppMenuItem>
 							</AppMenuList>
@@ -137,7 +155,10 @@ export default function Menus() {
 							aria-expanded={open2 ? 'true' : undefined}
 							onClick={handleToggle2}
 						>
-							<Avatar sx={{ bgcolor: deepOrange[500] }} style={{ cursor: 'pointer' }}>
+							<Avatar
+								sx={{ bgcolor: deepOrange[500] }}
+								style={{ cursor: 'pointer' }}
+							>
 								OC
 							</Avatar>
 						</IconButton>
@@ -177,7 +198,10 @@ export default function Menus() {
 							anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 						>
 							<AppMenuItem>
-								<Avatar sx={{ bgcolor: deepOrange[500] }} style={{ cursor: 'pointer' }}>
+								<Avatar
+									sx={{ bgcolor: deepOrange[500] }}
+									style={{ cursor: 'pointer' }}
+								>
 									OC
 								</Avatar>
 								Profile
@@ -229,7 +253,11 @@ export default function Menus() {
 							anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 						>
 							{options.map((option) => (
-								<AppMenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose3}>
+								<AppMenuItem
+									key={option}
+									selected={option === 'Pyxis'}
+									onClick={handleClose3}
+								>
 									{option}
 								</AppMenuItem>
 							))}
@@ -245,28 +273,44 @@ export default function Menus() {
 					<AppTypography variant="body1" fontWeight="bold">
 						Menu context
 					</AppTypography>
-					<div onContextMenu={handleContextMenu} style={{ cursor: 'context-menu' }}>
+					<div
+						onContextMenu={handleContextMenu}
+						style={{ cursor: 'context-menu' }}
+					>
 						<AppTypography>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ipsum purus, bibendum sit amet
-							vulputate eget, porta semper ligula. Donec bibendum vulputate erat, ac fringilla mi finibus nec.
-							Donec ac dolor sed dolor porttitor blandit vel vel purus. Fusce vel malesuada ligula. Nam quis
-							vehicula ante, eu finibus est. Proin ullamcorper fermentum orci, quis finibus massa. Nunc
-							lobortis, massa ut rutrum ultrices, metus metus finibus ex, sit amet facilisis neque enim sed
-							neque. Quisque accumsan metus vel maximus consequat. Suspendisse lacinia tellus a libero
-							volutpat maximus.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Nullam ipsum purus, bibendum sit amet vulputate eget, porta
+							semper ligula. Donec bibendum vulputate erat, ac fringilla mi
+							finibus nec. Donec ac dolor sed dolor porttitor blandit vel
+							vel purus. Fusce vel malesuada ligula. Nam quis vehicula
+							ante, eu finibus est. Proin ullamcorper fermentum orci, quis
+							finibus massa. Nunc lobortis, massa ut rutrum ultrices, metus
+							metus finibus ex, sit amet facilisis neque enim sed neque.
+							Quisque accumsan metus vel maximus consequat. Suspendisse
+							lacinia tellus a libero volutpat maximus.
 						</AppTypography>
 						<AppMenu
 							open={contextMenu !== null}
 							onClose={handleClose}
 							anchorReference="anchorPosition"
 							anchorPosition={
-								contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
+								contextMenu !== null
+									? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+									: undefined
 							}
 						>
-							<AppMenuItem onClick={handleCloseContextMenu}>Copy</AppMenuItem>
-							<AppMenuItem onClick={handleCloseContextMenu}>Print</AppMenuItem>
-							<AppMenuItem onClick={handleCloseContextMenu}>Highlight</AppMenuItem>
-							<AppMenuItem onClick={handleCloseContextMenu}>Email</AppMenuItem>
+							<AppMenuItem onClick={handleCloseContextMenu}>
+								Copy
+							</AppMenuItem>
+							<AppMenuItem onClick={handleCloseContextMenu}>
+								Print
+							</AppMenuItem>
+							<AppMenuItem onClick={handleCloseContextMenu}>
+								Highlight
+							</AppMenuItem>
+							<AppMenuItem onClick={handleCloseContextMenu}>
+								Email
+							</AppMenuItem>
 						</AppMenu>
 					</div>
 				</AppPaper>

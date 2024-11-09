@@ -30,7 +30,7 @@ export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordComma
 				from: 'app <app@app.com>',
 				subject: 'Password Reset',
 				data: {
-					name: user.userName,
+					name: user.username,
 					token: user.idUser,
 					url
 				},

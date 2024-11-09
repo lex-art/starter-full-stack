@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs'
-import * as timezone from 'dayjs/plugin/timezone'
-import * as utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
 const DATE_UNITS = {
 	year: 31536000,

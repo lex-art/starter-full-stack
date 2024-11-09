@@ -114,7 +114,7 @@ export const AppTextFieldThemeOptions: ThemeOptions = {
 						padding: '0 .9rem'
 					},
 					'& .MuiOutlinedInput-notchedOutline > legend': {
-						fontSize: font.sizes.fontSizeMedium - 1
+						fontSize: font.sizes.fontSizeSmall + 1
 					},
 					//for number input
 					'& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button':
@@ -157,11 +157,10 @@ export const AppTextFieldThemeOptions: ThemeOptions = {
 					}
 				},
 				sizeSmall: {
-					'&.MuiInputLabel-outlined': {
-						top: '10%',
-						'&.Mui-focused, &.MuiFormLabel-filled': {
-							transform: 'translate(14px, -8px) scale(0.9)'
-						}
+					top: '10%',
+					fontSize: font.sizes.fontSizeMedium,
+					'&.Mui-focused, &.MuiFormLabel-filled': {
+						transform: 'translate(14px, -4px) scale(0.9)'
 					}
 				}
 			}

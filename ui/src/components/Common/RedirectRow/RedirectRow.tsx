@@ -24,5 +24,4 @@ const AppRedirectRow: FC<AppRedirectRowProps> = ({ to = '#', text = '' }) => {
 }
 
 AppRedirectRow.displayName = 'AppRedirectRow'
-export { AppRedirectRow }
 export default AppRedirectRow

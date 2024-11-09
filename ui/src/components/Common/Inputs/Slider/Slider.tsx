@@ -11,20 +11,7 @@ interface AppSliderProps extends SliderProps {
 	width?: string | number
 }
 
-const AppSliderTheme: ThemeOptions = {
-	components: {
-		MuiSlider: {
-			defaultProps: {
-				color: 'primary'
-			},
-			styleOverrides: {
-				root: {
-					fontSize: font.sizes.fontSizeLarge * 2
-				}
-			}
-		}
-	}
-}
+
 const AppSlider = forwardRef<HTMLDivElement, AppSliderProps>((props, ref) => {
 	const { rightIcon, leftIcon, label, width, ...rest } = props
 	return (
@@ -49,5 +36,4 @@ const AppSlider = forwardRef<HTMLDivElement, AppSliderProps>((props, ref) => {
 })
 
 AppSlider.displayName = 'AppSlider'
-export { AppSlider, AppSliderTheme }
 export default AppSlider

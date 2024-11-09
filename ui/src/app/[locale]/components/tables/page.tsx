@@ -4,13 +4,14 @@ import AppTable from '@/components/Common/DataDisplay/Table/Table'
 import AppTableBody from '@/components/Common/DataDisplay/Table/TableBody'
 import AppTableCell from '@/components/Common/DataDisplay/Table/TableCell'
 import AppTableContainer from '@/components/Common/DataDisplay/Table/TableContainer'
-import { AppTableHead } from '@/components/Common/DataDisplay/Table/TableHead'
+import AppTableHead from '@/components/Common/DataDisplay/Table/TableHead'
 import AppTableRow from '@/components/Common/DataDisplay/Table/TableRow'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppBox from '@/components/Common/Layout/Box'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
-import AppDataTable, { HeadCell } from '@/components/DataTable/DataTable'
+import AppDataTable from '@/components/DataTable/DataTable'
+import { HeadCell } from '@/components/DataTable/theme'
 
 export const headerCells: Array<HeadCell> = [
 	{
@@ -71,16 +72,24 @@ export default function Tables() {
 							<AppTableHead>
 								<AppTableRow>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 1</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 1
+										</AppTypography>
 									</AppTableCell>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 2</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 2
+										</AppTypography>
 									</AppTableCell>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 3</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 3
+										</AppTypography>
 									</AppTableCell>
 									<AppTableCell rowSpan={2}>
-										<AppTypography fontWeight="bold">Header 4</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 4
+										</AppTypography>
 									</AppTableCell>
 								</AppTableRow>
 							</AppTableHead>
@@ -132,16 +141,24 @@ export default function Tables() {
 							<AppTableHead>
 								<AppTableRow>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 1</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 1
+										</AppTypography>
 									</AppTableCell>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 2</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 2
+										</AppTypography>
 									</AppTableCell>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 3</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 3
+										</AppTypography>
 									</AppTableCell>
 									<AppTableCell>
-										<AppTypography fontWeight="bold">Header 4</AppTypography>
+										<AppTypography fontWeight="bold">
+											Header 4
+										</AppTypography>
 									</AppTableCell>
 								</AppTableRow>
 							</AppTableHead>

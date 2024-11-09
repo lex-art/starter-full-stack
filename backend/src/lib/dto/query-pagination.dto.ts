@@ -1,22 +1,22 @@
 import { Type } from 'class-transformer'
-import { IsInt, IsNotEmpty, IsString } from 'class-validator'
+import { IsInt, IsOptional, IsString } from 'class-validator'
 
 export class PaginationQueryDto {
 	@Type(() => Number)
 	@IsInt()
-	@IsNotEmpty()
+	@IsOptional()
 	page: number
 
 	@Type(() => Number)
 	@IsInt()
-	@IsNotEmpty()
+	@IsOptional()
 	limit: number
 
 	@IsString()
-	@IsNotEmpty()
+	@IsOptional()
 	orderBy: string
 
 	@IsString()
-	@IsNotEmpty()
+	@IsOptional()
 	orderColumn: 'asc' | 'desc'
 }

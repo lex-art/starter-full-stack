@@ -10,27 +10,6 @@ import { Dayjs } from 'dayjs'
 import 'dayjs/locale/es'
 import { FC, forwardRef } from 'react'
 
-const AppDatePickerTheme: ThemeOptions = {
-	components: {
-		MuiDateCalendar: {
-			styleOverrides: {
-				root: {
-					borderWidth: 0
-				}
-			}
-		},
-		MuiDayCalendar: {
-			styleOverrides: {
-				root: {
-					borderRadius: '0.5rem'
-				}
-			}
-		},
-		MuiDatePicker: {
-			defaultProps: {}
-		}
-	}
-}
 
 const StyledButton = styled(IconButton)(({ theme }) => ({
 	borderRadius: theme.shape.borderRadius,
@@ -118,5 +97,4 @@ const AppDatePicker: FC<IDatePickerProps> = forwardRef<HTMLDivElement, IDatePick
 )
 
 AppDatePicker.displayName = 'App Date Picker'
-export { AppDatePicker, AppDatePickerTheme }
 export default AppDatePicker

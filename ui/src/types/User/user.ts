@@ -1,4 +1,8 @@
-import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '@/lib/utilities/emun'
+import {
+	USER_PERMISSION,
+	USER_ROLE,
+	USER_TYPE
+} from '@/lib/utilities/emun'
 
 export interface IProfile {
 	// ProfileDto properties
@@ -11,18 +15,21 @@ export interface IProfile {
 	imgProfile?: string
 	countryCode?: string
 	countryCallingCode?: string
-
 }
 
 export interface IUser {
 	// UserDto properties
 	idUser: number
 	email: string
-	userName?: string
+	username?: string
 	password?: string
-	rol: USER_ROLE
+	role: USER_ROLE
 	type: USER_TYPE
 	permissions?: USER_PERMISSION[]
 	timeZone?: string
 	profile: IProfile
+}
+
+export interface IFullUser extends IProfile {
+	user: IUser
 }

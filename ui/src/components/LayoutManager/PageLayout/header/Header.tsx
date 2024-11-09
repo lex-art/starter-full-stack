@@ -4,8 +4,8 @@ import AppIcons from '@/components/Common/Icons/Icons'
 import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
 import AppBox from '@/components/Common/Layout/Box'
 import AppMenuItem from '@/components/Common/Menu/MenuItem'
-import { AppMenuList } from '@/components/Common/Menu/MenuList'
-import { useAppTheme } from '@/components/Theme/AppTheme'
+import AppMenuList from '@/components/Common/Menu/MenuList'
+import { useAppTheme } from '@/components/Theme/appTheme.context'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { ClickAwayListener } from '@mui/base/ClickAwayListener' // TODO: try to remove this import and use the one from '@mui/material'
 import { Logout, PersonAdd } from '@mui/icons-material'
@@ -24,7 +24,9 @@ import {
 	styled,
 	useTheme
 } from '@mui/material'
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import MuiAppBar, {
+	AppBarProps as MuiAppBarProps
+} from '@mui/material/AppBar'
 import { deepOrange } from '@mui/material/colors'
 import { useLocale, useTranslations } from 'next-intl'
 import { FC, useState } from 'react'
@@ -87,7 +89,7 @@ const Header: FC<HeaderProps> = ({
 	const otherLocale = locale === 'es' ? 'en' : 'es'
 	const pathname = usePathname()
 	const avatar = 'https://avatars.githubusercontent.com/u/333?v=5'
-	const userName = 'John Doe'
+	const username = 'John Doe'
 	const [open, setOpen] = useState(false)
 
 	const AppBar = styled(MuiAppBar, {
@@ -151,7 +153,11 @@ const Header: FC<HeaderProps> = ({
 						left: -15
 					}}
 				>
-					{!openDrawer ? <ChevronRightIcon fontSize="large" /> : <ChevronLeftIcon fontSize="large" />}
+					{!openDrawer ? (
+						<ChevronRightIcon fontSize="large" />
+					) : (
+						<ChevronLeftIcon fontSize="large" />
+					)}
 				</AppIconButton>
 				<AppIconButton
 					color="inherit"
@@ -177,19 +183,34 @@ const Header: FC<HeaderProps> = ({
 								}
 								color="inherit"
 							>
-								{locale === 'es' ? <AppIcons.GTranslate /> : <AppIcons.GTranslateRounded />}
+								{locale === 'es' ? (
+									<AppIcons.GTranslate />
+								) : (
+									<AppIcons.GTranslateRounded />
+								)}
 							</AppIconButton>
 							<AppIconButton
 								sx={{ ml: 1 }}
 								onClick={() => {
 									colorMode.toggleColorMode()
-									window.localStorage.setItem('colorMode', theme.palette.mode === 'dark' ? 'light' : 'dark')
+									window.localStorage.setItem(
+										'colorMode',
+										theme.palette.mode === 'dark' ? 'light' : 'dark'
+									)
 								}}
 								color="inherit"
 							>
-								{theme.palette.mode === 'dark' ? <AppIcons.Brightness4 /> : <AppIcons.Brightness7 />}
+								{theme.palette.mode === 'dark' ? (
+									<AppIcons.Brightness4 />
+								) : (
+									<AppIcons.Brightness7 />
+								)}
 							</AppIconButton>
-							<AppIconButton sx={{ ml: 1 }} onClick={logOut} color="inherit">
+							<AppIconButton
+								sx={{ ml: 1 }}
+								onClick={logOut}
+								color="inherit"
+							>
 								<AppIcons.Logout />
 							</AppIconButton>
 							<IconButton id="header" type="button" onClick={handleClick}>
@@ -207,7 +228,7 @@ const Header: FC<HeaderProps> = ({
 										src={avatar!}
 										style={{ cursor: 'pointer' }}
 									>
-										{!avatar && getUserInitials(userName)}
+										{!avatar && getUserInitials(username)}
 									</Avatar>
 								</AppStyledBadge>
 							</IconButton>
@@ -215,7 +236,11 @@ const Header: FC<HeaderProps> = ({
 								<Paper sx={styles}>
 									<AppMenuList>
 										<AppMenuItem>
-											<Avatar sx={{ bgcolor: deepOrange[500] }} alt="User" src={avatar!} />
+											<Avatar
+												sx={{ bgcolor: deepOrange[500] }}
+												alt="User"
+												src={avatar!}
+											/>
 											{t('profile')}
 										</AppMenuItem>
 										<AppMenuItem>
@@ -241,4 +266,4 @@ const Header: FC<HeaderProps> = ({
 	)
 }
 
-export { Header }
+export default Header

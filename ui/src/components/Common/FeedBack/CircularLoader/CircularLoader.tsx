@@ -25,5 +25,4 @@ const AppCircularLoader = forwardRef<HTMLDivElement, TBLoaderProps>((props, ref)
 })
 
 AppCircularLoader.displayName = 'AppCircularLoader'
-export { AppCircularLoader }
 export default AppCircularLoader

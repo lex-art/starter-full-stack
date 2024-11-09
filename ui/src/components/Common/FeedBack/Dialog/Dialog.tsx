@@ -1,5 +1,10 @@
 import { colors, font } from '@/lib/designTokens'
-import { AlertColor, DialogTitle, useMediaQuery, useTheme } from '@mui/material'
+import {
+	AlertColor,
+	DialogTitle,
+	useMediaQuery,
+	useTheme
+} from '@mui/material'
 import Dialog, { DialogProps } from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -43,7 +48,7 @@ const AppDialog = ({
 			{...rest}
 		>
 			{headerTitleSeverity ? (
-				<AppAlert alertColor={headerTitleSeverity}>
+				<AppAlert severity={headerTitleSeverity}>
 					<DialogTitle
 						sx={{
 							padding: '1rem 0'
@@ -97,14 +102,22 @@ const AppDialog = ({
 					)}
 				</>
 			)}
-			<DialogContent style={{ fontSize: font.sizes.fontSizeMedium, minWidth: minWidth ?? '600px' }}>
+			<DialogContent
+				style={{
+					fontSize: font.sizes.fontSizeMedium,
+					minWidth: minWidth ?? '600px'
+				}}
+			>
 				{children}
 			</DialogContent>
-			{actionButtons && <DialogActions sx={{ padding: '1.6rem' }}>{actionButtons}</DialogActions>}
+			{actionButtons && (
+				<DialogActions sx={{ padding: '1.6rem' }}>
+					{actionButtons}
+				</DialogActions>
+			)}
 		</Dialog>
 	)
 }
 
 AppDialog.displayName = 'AppDialog'
-export { AppDialog }
 export default AppDialog

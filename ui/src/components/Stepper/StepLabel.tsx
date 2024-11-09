@@ -2,18 +2,6 @@ import { font } from '@/lib/designTokens'
 import { StepLabel, StepLabelProps, ThemeOptions } from '@mui/material'
 import { forwardRef } from 'react'
 
-const AppStepLabelThem: ThemeOptions = {
-	components: {
-		MuiStepLabel: {
-			styleOverrides: {
-				label: {
-					fontSize: font.sizes.fontSizeMedium
-				}
-			}
-		}
-	}
-}
-
 const AppStepLabel = forwardRef<HTMLDivElement, StepLabelProps>((props, ref) => {
 	const { children, ...rest } = props
 	return (
@@ -23,5 +11,4 @@ const AppStepLabel = forwardRef<HTMLDivElement, StepLabelProps>((props, ref) => 
 	)
 })
 AppStepLabel.displayName = 'AppStepLabel'
-export { AppStepLabel, AppStepLabelThem }
 export default AppStepLabel

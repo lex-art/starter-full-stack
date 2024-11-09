@@ -19,12 +19,12 @@ export const MENU_ROUTES: Array<IMenuRoute> = [
 		subMenu: [
 			{
 				text: 'list',
-				link: '/users/list',
+				link: '/user/list',
 				icon: <AppIcons.ListOutlined fontSize="small" color="primary" />
 			},
 			{
 				text: 'add',
-				link: '/users/create',
+				link: '/user/create',
 				icon: <AppIcons.PersonAddOutlined fontSize="small" color="primary" />
 			}
 		]

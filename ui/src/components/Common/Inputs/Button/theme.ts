@@ -1,5 +1,5 @@
-import { colors, font, sizes } from "@/lib/designTokens"
-import { ThemeOptions } from "@mui/material"
+import { colors, font, sizes } from '@/lib/designTokens'
+import { ThemeOptions } from '@mui/material'
 
 declare module '@mui/material/Button' {
 	interface ButtonPropsVariantOverrides {
@@ -22,7 +22,8 @@ export const AppButtonTheme: ThemeOptions = {
 			styleOverrides: {
 				root: {
 					borderRadius: '0.7rem',
-					paddingBottom: '0.3rem',
+					paddingTop: '0.05rem',
+					paddingBottom: '0.1rem',
 					minHeight: sizes.medium
 				},
 				contained: {

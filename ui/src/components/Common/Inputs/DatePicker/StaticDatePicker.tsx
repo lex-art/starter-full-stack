@@ -5,17 +5,6 @@ import { StaticDatePicker, StaticDatePickerProps } from '@mui/x-date-pickers'
 import { Dayjs } from 'dayjs'
 import { FC, forwardRef } from 'react'
 
-const AppStaticDatePickerTheme: ThemeOptions = {
-	components: {
-		MuiDateCalendar: {
-			styleOverrides: {
-				root: {
-					fontSize: font.sizes.fontSizeMedium
-				}
-			}
-		}
-	}
-}
 
 interface AppStaticDatePickerProps extends StaticDatePickerProps<Dayjs> {
 	error?: boolean
@@ -57,5 +46,4 @@ const AppStaticDatePicker: FC<AppStaticDatePickerProps> = forwardRef<
 })
 
 AppStaticDatePicker.displayName = 'AppStaticDatePicker'
-export { AppStaticDatePicker, AppStaticDatePickerTheme }
 export default AppStaticDatePicker

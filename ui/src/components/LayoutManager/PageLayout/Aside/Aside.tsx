@@ -148,4 +148,4 @@ const Aside: FC<AsideProps> = ({
 	)
 }
 
-export { Aside }
+export default Aside

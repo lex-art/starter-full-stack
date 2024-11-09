@@ -8,18 +8,11 @@ import AppIconButton from '@/components/Common/Inputs/IconButton/IconButton'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppPaper from '@/components/Common/Layout/Paper'
-import { useAppTheme } from '@/components/Theme/AppTheme'
-import {
-	useRouter as i18nRouter,
-	Link,
-	usePathname
-} from '@/i18n/routing'
+import { useAppTheme } from '@/components/Theme/appTheme.context'
+import { useRouter as i18nRouter, Link, usePathname } from '@/i18n/routing'
 import { Severity } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-	Visibility,
-	VisibilityOff
-} from '@mui/icons-material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { Toolbar, useTheme } from '@mui/material'
 import MuiAppBar from '@mui/material/AppBar'
 import { signIn } from 'next-auth/react'
@@ -133,8 +126,7 @@ export default function Login() {
 			alignItems="center"
 			height="100dvh"
 			sx={{
-				backgroundColor: (theme) =>
-					theme.palette.background.default
+				backgroundColor: (theme) => theme.palette.background.default
 			}}
 		>
 			<MuiAppBar>
@@ -193,16 +185,8 @@ export default function Login() {
 					gap: 2
 				}}
 			>
-				<AppTypography variant="h4">
-					Iniciar sesión
-				</AppTypography>
-				<Image
-					src={logo}
-					alt="Logo"
-					width={100}
-					height={100}
-					priority
-				/>
+				<AppTypography variant="h4">Iniciar sesión</AppTypography>
+				<Image src={logo} alt="Logo" width={100} height={100} priority />
 				<AppTypography variant="body1" fontWeight="bold">
 					Simple Form
 				</AppTypography>
@@ -263,10 +247,7 @@ export default function Login() {
 						disabled={isLoading}
 						endIcon={
 							isLoading ? (
-								<AppCircularProgress
-									size={25}
-									color="secondary"
-								/>
+								<AppCircularProgress size={25} color="secondary" />
 							) : null
 						}
 					>
@@ -274,9 +255,7 @@ export default function Login() {
 					</AppButton>
 				</form>
 				<AppDivider marginY="0.5rem" textAlign="center">
-					<AppTypography fontWeight="Bold">
-						Or
-					</AppTypography>
+					<AppTypography fontWeight="Bold">Or</AppTypography>
 				</AppDivider>
 				<AppButton
 					startIcon={<AppIcons.Facebook />}
@@ -286,10 +265,7 @@ export default function Login() {
 					disabled={isLoading}
 					endIcon={
 						isLoading ? (
-							<AppCircularProgress
-								size={25}
-								color="secondary"
-							/>
+							<AppCircularProgress size={25} color="secondary" />
 						) : null
 					}
 				>
@@ -319,10 +295,7 @@ export default function Login() {
 					}}
 					href="/auth/forgot-password"
 				>
-					<AppTypography
-						variant="body2"
-						color="textSecondary"
-					>
+					<AppTypography variant="body2" color="textSecondary">
 						Recuperar contraseña
 					</AppTypography>
 				</Link>

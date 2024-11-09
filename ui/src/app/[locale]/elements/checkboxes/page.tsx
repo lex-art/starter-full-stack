@@ -10,7 +10,7 @@ import AppBox from '@/components/Common/Layout/Box'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
 import AppRating from '@/components/Common/Rating/Rating'
 import { Favorite, FavoriteBorder, VolumeDown, VolumeUp } from '@mui/icons-material'
-import CheclBoxGroup from './Components/CheckoxGroup'
+import CheckBoxGroup from './Components/CheckoxGroup'
 import CustomSwitches from './Components/CustomSwitches'
 
 export default function Checkboxes() {
@@ -35,7 +35,7 @@ export default function Checkboxes() {
 			>
 				<AppCheckbox label="Checkbox" />
 				<AppCheckbox label="Checkbox custom" icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-				<CheclBoxGroup />
+				<CheckBoxGroup />
 				<AppBox>
 					<AppRating label="Raiting samall" value={3} size="small" />
 					<AppRating label="Raiting medium" value={5} size="medium" />

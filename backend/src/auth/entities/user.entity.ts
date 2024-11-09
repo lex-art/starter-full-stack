@@ -42,11 +42,11 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	permissions: USER_PERMISSION[]
 
 	@Column({
-		name: 'user_name',
+		name: 'username',
 		type: 'varchar',
 		nullable: true
 	})
-	userName?: string
+	username?: string
 
 	@Column({ type: 'bool', default: false })
 	verified: boolean

@@ -1,5 +1,7 @@
 'use client'
 import { createUserAction } from '@/actions/users/create.action'
+import { getUserAction } from '@/actions/users/get-user.action'
+import { updateUserAction } from '@/actions/users/update.action'
 import {
 	NewUserSchema,
 	newUserSchema
@@ -14,24 +16,41 @@ import AppDropdown from '@/components/Common/Inputs/Dropdown/Dropdown'
 import AppTelInput from '@/components/Common/Inputs/TelInput/TelInput'
 import AppTextField from '@/components/Common/Inputs/TextField/TextField'
 import AppGrid from '@/components/Common/Layout/Grid/Grid'
+import { useAppTheme } from '@/components/Theme/appTheme.context'
+import { API_URLS } from '@/lib/utilities/emun'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useSnackbar } from 'notistack'
-import { useTransition } from 'react'
+import { useEffect, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import useSWR from 'swr'
 
-export default function CreateUser() {
+const fetcher = async (url: string) => getUserAction(url)
+
+export default function CreateUser({
+	params
+}: {
+	params: { email: string }
+}) {
 	const t = useTranslations()
 	const { enqueueSnackbar } = useSnackbar()
+	const { setIsLoading } = useAppTheme()
 	const route = useRouter()
 	const [isLoading, transaction] = useTransition()
+	const idEmail = atob(params.email)
+	const isEditMode = params.email !== 'create'
+	const { data } = useSWR(
+		isEditMode ? API_URLS.USER_GET.replace(':email', idEmail) : null,
+		fetcher
+	)
 	const {
 		control,
 		register,
 		handleSubmit,
 		setValue,
+		reset,
 		formState: { errors, isValid }
 	} = useForm<NewUserSchema>({
 		mode: 'onSubmit',
@@ -55,54 +74,98 @@ export default function CreateUser() {
 		},
 		resolver: zodResolver(newUserSchema)
 	})
+	useEffect(() => {
+		setIsLoading(isEditMode)
+		if (data?.error) {
+			enqueueSnackbar(JSON.stringify(data.error), {
+				variant: 'error'
+			})
+			setIsLoading(false)
+		}
+		if (data?.data) {
+			const {
+				firstName,
+				lastName,
+				birthDate,
+				phone,
+				address,
+				countryCode,
+				countryCallingCode,
+				email,
+				username,
+				role,
+				type,
+				permissions
+			} = data.data
+
+			reset({
+				firstName,
+				lastName,
+				birthDate,
+				phone,
+				address,
+				countryCode,
+				countryCallingCode,
+				email,
+				username,
+				role,
+				type,
+				permissions
+			})
+			setIsLoading(false)
+		}
+	}, [data?.data, isLoading])
+
 	const onSubmit = (data: NewUserSchema) => {
-		console.log(data)
 		transaction(async () => {
-			const result = await createUserAction(data)
+			const result = isEditMode
+				? await updateUserAction(data)
+				: await createUserAction(data)
 			if (result.error) {
 				console.error('Error:', result.error)
-				enqueueSnackbar(
-					JSON.stringify(result.error, null, 2),
-					{
-						variant: 'error'
-					}
-				)
+				enqueueSnackbar(JSON.stringify(result.error, null, 2), {
+					variant: 'error'
+				})
 				return
 			}
-			route.push('/users/list')
-			console.log('====================================')
-			console.log(result)
-			console.log('====================================')
+			route.push('/user/list')
 		})
 	}
 
 	return (
 		<AppGrid spacing={2}>
-			<AppTypography variant="subtitle1">
-				Create User
-			</AppTypography>
+			<AppTypography variant="subtitle1">Create User</AppTypography>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<AppFormContainer>
 					<AppFormControl>
-						<AppFormLabel>
-							Información del usuario
-						</AppFormLabel>
-
-						<AppTextField
-							label="Nombre"
-							{...register('firstName')}
-							error={!!errors.firstName}
-							helperText={errors.firstName?.message}
+						<AppFormLabel>Información del usuario</AppFormLabel>
+						<Controller
+							control={control}
+							name="firstName"
+							render={({ field, fieldState }) => (
+								<AppTextField
+									label="Nombre"
+									{...field}
+									error={!!fieldState.error}
+									helperText={fieldState.error?.message}
+								/>
+							)}
 						/>
 					</AppFormControl>
 
 					<AppFormControl>
-						<AppTextField
-							style={{ marginTop: 20 }}
-							label="Apellido"
-							{...register('lastName')}
-							error={!!errors.firstName}
-							helperText={errors.firstName?.message}
+						<Controller
+							control={control}
+							name="lastName"
+							render={({ field, fieldState }) => (
+								<AppTextField
+									style={{ marginTop: 20 }}
+									label="Apellido"
+									{...field}
+									error={!!fieldState.error}
+									helperText={fieldState.error?.message}
+								/>
+							)}
 						/>
 					</AppFormControl>
 				</AppFormContainer>
@@ -141,14 +204,8 @@ export default function CreateUser() {
 								{...field}
 								onChange={(value, info) => {
 									field.onChange(value)
-									if (
-										info.countryCode &&
-										info.countryCallingCode
-									) {
-										setValue(
-											'countryCode',
-											info?.countryCode
-										)
+									if (info.countryCode && info.countryCallingCode) {
+										setValue('countryCode', info?.countryCode)
 										setValue(
 											'countryCallingCode',
 											info?.countryCallingCode
@@ -160,11 +217,17 @@ export default function CreateUser() {
 							/>
 						)}
 					/>
-					<AppTextField
-						label="Dirección"
-						{...register('address')}
-						error={!!errors.address}
-						helperText={errors.address?.message}
+					<Controller
+						control={control}
+						name="address"
+						render={({ field, fieldState }) => (
+							<AppTextField
+								label="Dirección"
+								{...field}
+								error={!!fieldState.error}
+								helperText={fieldState.error?.message}
+							/>
+						)}
 					/>
 				</AppFormContainer>
 
@@ -175,11 +238,17 @@ export default function CreateUser() {
 						justifyContent: 'center'
 					}}
 				>
-					<AppTextField
-						label="Correo electrónico"
-						{...register('email')}
-						error={!!errors.email}
-						helperText={errors.email?.message}
+					<Controller
+						control={control}
+						name="email"
+						render={({ field, fieldState }) => (
+							<AppTextField
+								label="Correo electrónico"
+								{...field}
+								error={!!fieldState.error}
+								helperText={fieldState.error?.message}
+							/>
+						)}
 					/>
 
 					<Controller
@@ -196,9 +265,7 @@ export default function CreateUser() {
 								value={field.value}
 								error={!!fieldState.error}
 								helperText={fieldState.error?.message}
-								onChange={(e) =>
-									field.onChange(e.target.value)
-								}
+								onChange={(e) => field.onChange(e.target.value)}
 							/>
 						)}
 					/>
@@ -217,9 +284,7 @@ export default function CreateUser() {
 								value={field.value}
 								error={!!fieldState.error}
 								helperText={fieldState.error?.message}
-								onChange={(e) =>
-									field.onChange(e.target.value)
-								}
+								onChange={(e) => field.onChange(e.target.value)}
 							/>
 						)}
 					/>
@@ -230,6 +295,7 @@ export default function CreateUser() {
 						render={({ field, fieldState }) => (
 							<AppDropdown
 								label="Permisos"
+								clearable
 								multiple
 								options={[
 									{ name: 'Todos', value: 'all' },
@@ -242,9 +308,7 @@ export default function CreateUser() {
 								value={field.value}
 								error={!!fieldState.error}
 								helperText={fieldState.error?.message}
-								onChange={(e) =>
-									field.onChange(e.target.value)
-								}
+								onChange={(e) => field.onChange(e.target.value)}
 							/>
 						)}
 					/>
@@ -254,7 +318,7 @@ export default function CreateUser() {
 					disabled={!isValid || !isLoading}
 					loading={isLoading}
 				>
-					{t('common.submit')}
+					{isEditMode ? t('common.update') : t('common.submit')}
 				</AppButton>
 			</form>
 		</AppGrid>

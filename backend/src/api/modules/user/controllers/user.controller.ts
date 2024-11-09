@@ -2,7 +2,18 @@ import { ApiException } from '@app/api/exceptions/api.exception'
 import { LoginFormDto, ResetPasswordDto } from '@app/auth/dto'
 import { BaseQueryPagination } from '@app/lib/dto/base-query-pagination'
 import { PaginationQueryDto } from '@app/lib/dto/query-pagination.dto'
-import { Body, Controller, Get, HttpException, HttpStatus, Logger, Patch, Post, Query } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Get,
+	HttpException,
+	HttpStatus,
+	Logger,
+	Param,
+	Patch,
+	Post,
+	Query
+} from '@nestjs/common'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { ChangePasswordCommand } from '../commands/command/change-password.command'
 import { UpdateUserCommand } from '../commands/command/update-user.command'
@@ -18,20 +29,6 @@ export class UserController {
 		private readonly queryBus: QueryBus
 	) {}
 
-	@Get()
-	async getUser(@Body() body: Pick<LoginFormDto, 'email'>) {
-		try {
-			const query = new GetUserQuery(body)
-			return await this.queryBus.execute(query)
-		} catch (error) {
-			this.logger.error(error)
-			if (error instanceof ApiException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
-		}
-	}
-
 	@Get('list')
 	async getAllUsers(
 		@Query() paginationQuery: PaginationQueryDto,
@@ -42,6 +39,21 @@ export class UserController {
 				paginationQuery,
 				filtersQuery: filtersQuery
 			})
+			const result = await this.queryBus.execute(query)
+			return result
+		} catch (error) {
+			this.logger.error(error)
+			if (error instanceof ApiException) {
+				throw new HttpException(error, HttpStatus.BAD_REQUEST)
+			}
+			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+		}
+	}
+
+	@Get(':email')
+	async getUser(@Param() param: Pick<LoginFormDto, 'email'>) {
+		try {
+			const query = new GetUserQuery(param)
 			return await this.queryBus.execute(query)
 		} catch (error) {
 			this.logger.error(error)

@@ -1,8 +1,8 @@
 'use client'
 import AppTypography from '@/components/Common/DataDisplay/Typography/Typography'
 import AppCheckbox from '@/components/Common/Inputs/CheckBox/AppCheckBox'
+import AppSwitch from '@/components/Common/Inputs/Switch/Switch'
 import AppBox from '@/components/Common/Layout/Box'
-import AppSwitch from '@/components/Common/Switch/Switch'
 import { Stack, Switch, styled } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 
@@ -24,7 +24,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 			},
 			'& + .MuiSwitch-track': {
 				opacity: 1,
-				backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be'
+				backgroundColor:
+					theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be'
 			}
 		}
 	},
@@ -73,7 +74,8 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 			color: '#fff',
 			'& + .MuiSwitch-track': {
 				opacity: 1,
-				backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff'
+				backgroundColor:
+					theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff'
 			}
 		}
 	},
@@ -89,7 +91,10 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 	'& .MuiSwitch-track': {
 		borderRadius: 16 / 2,
 		opacity: 1,
-		backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+		backgroundColor:
+			theme.palette.mode === 'dark'
+				? 'rgba(255,255,255,.35)'
+				: 'rgba(0,0,0,.25)',
 		boxSizing: 'border-box'
 	}
 }))
@@ -132,8 +137,16 @@ export default function CustomSwitches() {
 					onChange={handleChange1}
 				/>
 				<AppBox sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-					<AppSwitch label="Child 1" checked={checked[0]} onChange={handleChange2} />
-					<AppSwitch label="Child 2" checked={checked[1]} onChange={handleChange3} />
+					<AppSwitch
+						label="Child 1"
+						checked={checked[0]}
+						onChange={handleChange2}
+					/>
+					<AppSwitch
+						label="Child 2"
+						checked={checked[1]}
+						onChange={handleChange3}
+					/>
 				</AppBox>
 			</AppBox>
 		</>

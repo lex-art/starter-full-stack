@@ -43,5 +43,4 @@ const AppInputLabel = forwardRef<HTMLLabelElement, AppInputLabelProps>((props, r
 })
 
 AppInputLabel.displayName = 'AppInputLabel'
-export { AppInputLabel }
 export default AppInputLabel

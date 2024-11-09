@@ -1,18 +1,17 @@
 import { ThemeOptions } from '@mui/material'
-import { MessageKeys } from 'next-intl'
 import { ReactNode } from 'react'
-import { AppTablePaginationProps } from '../TablePagination/TablePagination'
+import { AppTablePaginationProps } from '../TablePagination/theme'
 
-type Paths<Schema, Path extends string = ""> = Schema extends string
-  ? Path
-  : Schema extends object
-  ? {
-      [K in keyof Schema & string]: Paths<
-        Schema[K],
-        `${Path}${Path extends "" ? "" : "."}${K}`
-      >;
-    }[keyof Schema & string]
-  : never;
+type Paths<Schema, Path extends string = ''> = Schema extends string
+	? Path
+	: Schema extends object
+		? {
+				[K in keyof Schema & string]: Paths<
+					Schema[K],
+					`${Path}${Path extends '' ? '' : '.'}${K}`
+				>
+			}[keyof Schema & string]
+		: never
 
 interface HeadCell {
 	id: string

@@ -94,5 +94,4 @@ const AppImageViewer = ({ imageUrl, alt = 'Image', width = 275, className }: App
 }
 
 AppImageViewer.displayName = 'AppImageViewer'
-export { AppImageViewer }
 export default AppImageViewer

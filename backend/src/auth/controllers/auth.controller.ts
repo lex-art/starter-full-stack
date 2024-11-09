@@ -77,9 +77,6 @@ export class AuthController {
 		email: string
 	}> {
 		try {
-			console.log('====================================')
-			console.log('Body:', body)
-			console.log('====================================')
 			const command = new CreateAccountCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {

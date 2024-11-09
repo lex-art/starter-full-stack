@@ -10,5 +10,4 @@ const AppCollapse = forwardRef<HTMLDivElement, CollapseProps>(({ children, ...re
 })
 
 AppCollapse.displayName = 'AppCollapse'
-export { AppCollapse }
 export default AppCollapse

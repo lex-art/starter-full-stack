@@ -5,7 +5,7 @@ import AppTable from '../Common/DataDisplay/Table/Table'
 import AppTableBody from '../Common/DataDisplay/Table/TableBody'
 import AppTableCell from '../Common/DataDisplay/Table/TableCell'
 import AppTableContainer from '../Common/DataDisplay/Table/TableContainer'
-import { AppTableHead } from '../Common/DataDisplay/Table/TableHead'
+import AppTableHead from '../Common/DataDisplay/Table/TableHead'
 import AppTableRow from '../Common/DataDisplay/Table/TableRow'
 import AppTypography from '../Common/DataDisplay/Typography/Typography'
 import AppCircularLoader from '../Common/FeedBack/CircularLoader/CircularLoader'
@@ -13,8 +13,23 @@ import AppBox from '../Common/Layout/Box'
 import AppTablePagination from '../TablePagination/TablePagination'
 import { AppDataTableProps, HeadCell, RowCell } from './theme'
 
-const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTableProps>(
-	({ headerCells, rowsCells, loading, minHeightTable, pagination, order, orderBy, onSort }, ref) => {
+const AppDataTable: FC<AppDataTableProps> = forwardRef<
+	HTMLDivElement,
+	AppDataTableProps
+>(
+	(
+		{
+			headerCells,
+			rowsCells,
+			loading,
+			minHeightTable,
+			pagination,
+			order,
+			orderBy,
+			onSort
+		},
+		ref
+	) => {
 		const t = useTranslations()
 		return (
 			<AppBox>
@@ -44,7 +59,13 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 											<TableSortLabel
 												active={orderBy === headCell.id}
 												direction={order}
-												onClick={() => onSort && onSort(headCell.id, order === 'asc' ? 'desc' : 'asc')}
+												onClick={() =>
+													onSort &&
+													onSort(
+														headCell.id,
+														order === 'asc' ? 'desc' : 'asc'
+													)
+												}
 											>
 												<AppTypography fontWeight="bold">
 													{t(headCell.label, headCell.context)}
@@ -64,7 +85,9 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 								<AppTableRow
 									key={row.id}
 									hover={!!row.onClick || !!row.hover}
-									onClick={() => (row.onClick ? row.onClick(row.id) : null)}
+									onClick={() =>
+										row.onClick ? row.onClick(row.id) : null
+									}
 									sx={{ cursor: row.onClick ? 'pointer' : 'default' }}
 								>
 									{headerCells.map((headCell: HeadCell) => (
@@ -74,12 +97,16 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 											colSpan={headCell.colSpan ?? 1}
 											rowSpan={headCell.rowSpan ?? 1}
 											sx={{
-												wordBreak: row?.skipBreakWordsCells?.find((value: string) => value === headCell.id)
+												wordBreak: row?.skipBreakWordsCells?.find(
+													(value: string) => value === headCell.id
+												)
 													? 'normal'
 													: 'break-word'
 											}}
 										>
-											<AppTypography>{row?.data[headCell.id]}</AppTypography>
+											<AppTypography>
+												{row?.data[headCell.id]}
+											</AppTypography>
 										</AppTableCell>
 									))}
 								</AppTableRow>
@@ -90,9 +117,12 @@ const AppDataTable: FC<AppDataTableProps> = forwardRef<HTMLDivElement, AppDataTa
 										height: 100
 									}}
 								>
-									<AppTableCell align="center" colSpan={headerCells.length}>
+									<AppTableCell
+										align="center"
+										colSpan={headerCells.length}
+									>
 										{loading ? (
-											<AppCircularLoader color="secondary" />
+											<AppCircularLoader />
 										) : (
 											<AppTypography fontWeight="bold" textAlign="center">
 												{t('components.noResults')}

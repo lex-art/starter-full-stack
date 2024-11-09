@@ -5,4 +5,5 @@ const AppTableHead: FC<TableHeadProps> = ({ children, ...props }) => {
 	return <TableHead {...props}>{children}</TableHead>
 }
 
-export { AppTableHead }
+AppTableHead.displayName = 'AppTableHead'
+export default AppTableHead

@@ -22,5 +22,4 @@ const AppLoader: FC<ITBLoaderProps> = ({ isLoading }) => {
 	)
 }
 
-export { AppLoader }
 export default AppLoader

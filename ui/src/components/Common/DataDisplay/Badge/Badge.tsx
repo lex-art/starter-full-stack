@@ -29,5 +29,4 @@ const AppStyledBadge = styled(Badge)(({ theme }) => ({
 	}
 }))
 
-export { AppStyledBadge }
 export default AppStyledBadge

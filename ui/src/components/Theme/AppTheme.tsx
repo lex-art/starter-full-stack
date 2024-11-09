@@ -10,62 +10,52 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useLocale, useTranslations } from 'next-intl'
 import { SnackbarProvider } from 'notistack'
-import {
-	ReactNode,
-	createContext,
-	useContext,
-	useEffect,
-	useMemo,
-	useState
-} from 'react'
+import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { z } from 'zod'
-import { AppChipTheme } from '../Common/DataDisplay/Chip/Chip'
-import { AppDividerTheme } from '../Common/DataDisplay/Divider/Divider'
-import { AppTooltipTheme } from '../Common/DataDisplay/Tooltip/Tooltip'
+import { AppChipTheme } from '../Common/DataDisplay/Chip/theme'
+import { AppDividerTheme } from '../Common/DataDisplay/Divider/theme'
+import { AppTooltipTheme } from '../Common/DataDisplay/Tooltip/theme'
 import { AppTypographyTheme } from '../Common/DataDisplay/Typography/theme'
-import { AppAlertTheme } from '../Common/FeedBack/Alert/Alert'
+import { AppAlertTheme } from '../Common/FeedBack/Alert/theme'
 import { AppCircularProgressTheme } from '../Common/FeedBack/CircularProgress/theme'
-import { AppThemeOptions } from '../Common/FeedBack/Snackbar/Snackbar'
+import { AppThemeOptions } from '../Common/FeedBack/Snackbar/theme'
 import {
 	AppFormGroupThem,
 	AppFormLabelTheme
 } from '../Common/FormControl/theme'
-import { AppIconsTheme } from '../Common/Icons/Icons'
-import { AppAutocompleteTheme } from '../Common/Inputs/Autocomplete/Autocomplete'
+import { AppIconsTheme } from '../Common/Icons/theme'
+import { AppAutocompleteTheme } from '../Common/Inputs/Autocomplete/theme'
 
+import { SWRConfig } from 'swr'
+import { AppTableCellTheme } from '../Common/DataDisplay/Table/theme'
 import { AppButtonTheme } from '../Common/Inputs/Button/theme'
-import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/AppCheckBox'
-import { AppDatePickerTheme } from '../Common/Inputs/DatePicker/DatePicker'
-import { AppStaticDatePickerTheme } from '../Common/Inputs/DatePicker/StaticDatePicker'
+import { AppCheckboxTheme } from '../Common/Inputs/CheckBox/theme'
+import {
+	AppDatePickerTheme,
+	AppStaticDatePickerTheme
+} from '../Common/Inputs/DatePicker/theme'
 import { AppDropdownTheme } from '../Common/Inputs/Dropdown/theme'
 import { AppInputAdornmentTheme } from '../Common/Inputs/NumericField/InputAdornmentTheme'
-import { AppRadioTheme } from '../Common/Inputs/Radio/Radio'
-import { AppSliderTheme } from '../Common/Inputs/Slider/Slider'
-import { AppSwitchTheme } from '../Common/Inputs/Switch/Switch'
+import { AppRadioTheme } from '../Common/Inputs/Radio/theme'
+import { AppSliderTheme } from '../Common/Inputs/Slider/theme'
+import { AppSwitchTheme } from '../Common/Inputs/Switch/theme'
 import { AppTextFieldThemeOptions } from '../Common/Inputs/TextField/theme'
 import { AppGridTheme } from '../Common/Layout/Grid/theme'
-import { AppListItemIconTheme } from '../Common/Menu/ListMenu/ListItemIcon'
+import { AppListItemIconTheme } from '../Common/Menu/ListMenu/theme'
 import { AppMuiItemTheme } from '../Common/Menu/theme'
-import { AppRatingTheme } from '../Common/Rating/Rating'
+import { AppRatingTheme } from '../Common/Rating/theme'
 import { AppDataTableTheme } from '../DataTable/theme'
-import { AppStepLabelThem } from '../Stepper/StepLabel'
-import { AppTablePaginationTheme } from '../TablePagination/TablePagination'
-import { createAppTabTheme } from '../Tabs/Tab'
+import { AppStepLabelThem } from '../Stepper/theme'
+import { AppTablePaginationTheme } from '../TablePagination/theme'
+import { createAppTabTheme } from '../Tabs/theme'
 import { paletteThemeOptions } from './theme'
-import { SWRConfig } from 'swr'
+import { AppGlobalContext } from './appTheme.context'
 
 interface AppThemeProps {
 	children: ReactNode
 	initialThemeMode: PaletteMode
 }
 
-const AppGlobalContext = createContext({
-	toggleColorMode: () => {},
-	isLoading: false,
-	setIsLoading: (value: boolean) => {}
-})
-
-const useAppTheme = () => useContext(AppGlobalContext)
 const createCacheEmotion = createCache({
 	key: 'css',
 	prepend: true
@@ -142,7 +132,8 @@ const AppThemeMUI = ({
 				AppThemeOptions,
 				AppAlertTheme,
 				AppInputAdornmentTheme,
-				AppCircularProgressTheme
+				AppCircularProgressTheme,
+				AppTableCellTheme
 			),
 		[mode]
 	)
@@ -178,4 +169,4 @@ const AppThemeMUI = ({
 	)
 }
 
-export { AppGlobalContext, AppThemeMUI, useAppTheme }
+export default AppThemeMUI

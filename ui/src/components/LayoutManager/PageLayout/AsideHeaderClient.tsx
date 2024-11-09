@@ -1,18 +1,21 @@
 'use client'
 import AppLoader from '@/components/Loader/Loader'
-import { AppGlobalContext } from '@/components/Theme/AppTheme'
+import { useAppTheme } from '@/components/Theme/appTheme.context'
 import { signOut } from 'next-auth/react'
-import { useContext, useState } from 'react'
-import { Aside } from './Aside/Aside'
-import { Header } from './header/Header'
+import { useState } from 'react'
+import Aside from './Aside/Aside'
+import Header from './header/Header'
 
 interface AsideHeaderClientProps {
 	readonly drawerWidth: number
 	readonly isOpenDrawer: boolean
 }
 
-export default function AsideHeaderClient({ drawerWidth, isOpenDrawer }: AsideHeaderClientProps) {
-	const { isLoading } = useContext(AppGlobalContext)
+export default function AsideHeaderClient({
+	drawerWidth,
+	isOpenDrawer
+}: AsideHeaderClientProps) {
+	const { isLoading } = useAppTheme()
 	const [mobileOpen, setMobileOpen] = useState(false)
 	const [isClosing, setIsClosing] = useState(false)
 	const [open, setOpen] = useState(isOpenDrawer)

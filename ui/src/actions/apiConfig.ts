@@ -9,6 +9,7 @@ import { refreshAccessToken } from './auth/refreshToken.action'
 interface IApi<T = any> {
 	url: API_URLS | string
 	body?: T | Record<string, any>
+	params?: Record<string, any>
 }
 
 interface User extends IUser {
@@ -105,16 +106,17 @@ class ApiService {
 			return {
 				status: error.response?.status || 500,
 				error: error.response?.data || 'Error desconocido',
-				data: error.response?.data
+				data: {}
 			}
 		}
 		return { status: 500, error: error as string, data: {} }
 	}
 
-	async get<T>({ url, body }: IApi): Promise<IResponse<T>> {
+	async get<T>({ url, body, params }: IApi): Promise<IResponse<T>> {
 		try {
 			const response = await this.apiClient.get(url, {
-				data: body
+				data: body,
+				params
 			})
 			return {
 				status: response?.status,
@@ -168,7 +170,7 @@ class ApiService {
 			})
 			return {
 				status: response?.status,
-				data: response?.data
+				data: response?.data?.data
 			}
 		} catch (error) {
 			return this.handleError(error)

@@ -13,4 +13,4 @@ const AppMenuList = forwardRef<
 })
 
 AppMenuList.displayName = 'AppMenuList'
-export { AppMenuList }
+export default AppMenuList

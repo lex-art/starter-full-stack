@@ -1,7 +1,7 @@
 import { CardContent, CardContentProps } from '@mui/material'
 import { FC, forwardRef } from 'react'
 
-const AppCardContent: FC<CardContentProps> = forwardRef<HTMLDivElement, CardContentProps>(
+const AppCardContent = forwardRef<HTMLDivElement, CardContentProps>(
 	({ children, ...rest }, ref) => {
 		return (
 			<CardContent ref={ref} component="div" {...rest}>
@@ -12,5 +12,4 @@ const AppCardContent: FC<CardContentProps> = forwardRef<HTMLDivElement, CardCont
 )
 
 AppCardContent.displayName = 'AppCardContent'
-export { AppCardContent }
 export default AppCardContent

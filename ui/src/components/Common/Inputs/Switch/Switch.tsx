@@ -8,20 +8,6 @@ type AppSwitchProps = SwitchProps & {
 	CustomSwitch?: JSX.ElementType
 }
 
-const AppSwitchTheme: ThemeOptions = {
-	components: {
-		MuiSwitch: {
-			defaultProps: {
-				color: 'primary'
-			},
-			styleOverrides: {
-				root: {
-					'& .MuiSvgIcon-root': { fontSize: font.sizes.fontSizeLarge }
-				}
-			}
-		}
-	}
-}
 const AppSwitch = forwardRef<HTMLDivElement, AppSwitchProps>((props, ref) => {
 	const { label, CustomSwitch, ...rest } = props
 	const controlProps = { ...rest } as SwitchProps
@@ -35,5 +21,4 @@ const AppSwitch = forwardRef<HTMLDivElement, AppSwitchProps>((props, ref) => {
 })
 
 AppSwitch.displayName = 'AppSwitch'
-export { AppSwitch, AppSwitchTheme }
 export default AppSwitch

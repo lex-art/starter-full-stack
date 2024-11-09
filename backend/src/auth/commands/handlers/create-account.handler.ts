@@ -15,7 +15,7 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 	async execute(command: CreateAccountCommand) {
 		try {
 			return await this.createUserService.createUser(command.body).then(async (response) => {
-				await this.eventBus.publish(new UserCreatedEvent(response.user.email, command.body.userName))
+				await this.eventBus.publish(new UserCreatedEvent(response.user.email, command.body.username))
 				return {
 					message: 'User created successfully',
 					data: response

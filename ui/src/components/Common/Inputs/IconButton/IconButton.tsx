@@ -33,5 +33,4 @@ const AppIconButton = forwardRef<HTMLButtonElement, AppIconButtonProps>(
 )
 
 AppIconButton.displayName = 'AppBoxIconButton'
-export { AppIconButton }
 export default AppIconButton

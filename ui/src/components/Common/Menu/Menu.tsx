@@ -1,7 +1,7 @@
 import Menu, { MenuProps } from '@mui/material/Menu'
 import { FC, forwardRef } from 'react'
 
-const AppMenu: FC<MenuProps> = forwardRef<HTMLDivElement, MenuProps>(({ children, ...rest }, ref) => {
+const AppMenu = forwardRef<HTMLDivElement, MenuProps>(({ children, ...rest }, ref) => {
 	return (
 		<Menu ref={ref} {...rest}>
 			{children}
@@ -10,5 +10,4 @@ const AppMenu: FC<MenuProps> = forwardRef<HTMLDivElement, MenuProps>(({ children
 })
 
 AppMenu.displayName = 'AppMenu'
-export { AppMenu }
 export default AppMenu
