@@ -1,17 +1,22 @@
-import { withAuth } from 'next-auth/middleware'
-import { getSession } from 'next-auth/react'
+/* import { withAuth } from 'next-auth/middleware' */
+import { auth } from '@/auth'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
 import { locales, routing } from './i18n/routing'
 import { doesRoleHaveAccessToURL } from './lib/accessControl/accessControl'
 
-const publicPages = ['/auth/*', '/api/auth', '/_next/static', '/_next/image']
+const publicPages = [
+	'/auth/*',
+	'/api/auth',
+	'/_next/static',
+	'/_next/image'
+]
 const pagesRedirectWhenLogIn = ['/auth/login', '/auth/register']
 const JWT_COOKIE_NAME = 'next-auth.session-token'
 
 const handleI18nRouting = createIntlMiddleware(routing)
 
-const authMiddleware = withAuth(
+/* const authMiddleware = withAuth(
 	// Note that this callback is only invoked if
 	// the `authorized` callback has returned `true`
 	// and not for pages listed in `pages`.
@@ -35,9 +40,9 @@ const authMiddleware = withAuth(
 		},
 		secret: process.env.NEXTAUTH_SECRET
 	}
-)
+) */
 
-export default async function middleware(request: NextRequest) {
+export default auth((request: NextRequest) => {
 	const publicPathnameRegex = RegExp(
 		`^(/(${locales.join('|')}))?(${publicPages
 			.map((p) => p.replace(/\*/g, '.*')) // Reemplazar * con .* en los patrones
@@ -76,8 +81,9 @@ export default async function middleware(request: NextRequest) {
 		return NextResponse.rewrite(new URL('/403', request.url))
 	}
 
-	return (authMiddleware as any)(newRequest)
-}
+	/* return (authMiddleware as any)(newRequest) */
+	return handleI18nRouting(newRequest)
+})
 
 export const config = {
 	// Skip all paths that should not be internationalized

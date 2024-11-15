@@ -1,55 +1,35 @@
-import { Column, Entity, Index, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
-import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '../../types/enums'
-import { ProfileDto } from '../dto'
-import { ProfileEntity } from './profile.entity'
+import { AccountEntity } from './accounts.entity'
 
 // in DB, the table name is 'users'
 @Entity('users')
 @Index('email', ['email'], { unique: true })
 // for a entity class, should be call in singular
 export class UserEntity extends BaseEntityWithTimestamps {
-	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_user' })
-	idUser: number
+	@PrimaryGeneratedColumn('uuid', {
+		name: 'user_id'
+	})
+	userId!: string
 
 	@Column({
 		length: 100,
 		unique: true
 	})
-	email: string
+	email!: string
 
 	@Column({ type: 'varchar' })
-	password: string
-
-	@Column({
-		type: 'enum',
-		enum: USER_ROLE,
-		nullable: true
-	})
-	role: USER_ROLE
-
-	@Column({
-		type: 'enum',
-		enum: USER_TYPE,
-		default: USER_TYPE.STANDARD
-	})
-	type: USER_TYPE
-
-	@Column({
-		type: 'simple-array',
-		nullable: true
-	})
-	permissions: USER_PERMISSION[]
+	password!: string
 
 	@Column({
 		name: 'username',
 		type: 'varchar',
 		nullable: true
 	})
-	username?: string
+	username!: string
 
 	@Column({ type: 'bool', default: false })
-	verified: boolean
+	verified!: boolean
 
 	@Column({
 		name: 'time_zone',
@@ -58,7 +38,7 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	})
 	timeZone?: string
 
-	@OneToOne(() => ProfileEntity, (profile) => profile.user)
-	profile: ProfileEntity
-	user: ProfileDto
+	// add plural name for the relation if yo wan to use multiple accounts
+	@OneToMany(() => AccountEntity, (account) => account.user)
+	account!: AccountEntity[]
 }

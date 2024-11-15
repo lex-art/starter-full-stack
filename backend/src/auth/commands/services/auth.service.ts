@@ -1,13 +1,12 @@
 import { LoginFormDto } from '@app/auth/dto/login.dto'
-import { ProfileDto } from '@app/auth/dto/profile.dto'
-import { UserDto } from '@app/auth/dto/user.dto'
-import { ProfileEntity, UserEntity } from '@app/auth/entities'
+import { CurrentUserDto, UserDto } from '@app/auth/dto/main-user.dto'
+import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { compare } from '@app/lib/utilities'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { instanceToPlain, plainToClass } from 'class-transformer'
+import { plainToClass } from 'class-transformer'
 
 @Injectable()
 export class AuthService {
@@ -16,67 +15,97 @@ export class AuthService {
 		private readonly configService: ConfigService
 	) {}
 
-	async loginUser(data: { user: UserDto; profile: ProfileDto }): Promise<{
-		message: string
-		data: {
-			accessToken: string
-			refreshToken: string
-			user: UserDto & {
-				profile: ProfileDto
-			}
-		}
+	async loginUser(data: UserDto): Promise<{
+		accessToken: string
+		refreshToken: string
+		user: UserDto
 	}> {
-		const payload: Record<string, unknown> = instanceToPlain(data.user)
+		const payload: CurrentUserDto = {
+			userId: data.userId,
+			email: data.email,
+			accountId: data.account.accountId,
+			profileId: data.account.profile.profileId,
+			role: data.account.role,
+			permissions: data.account.permissions,
+			type: data.account.type
+		}
+		console.log('====================================')
+		console.log('AuthService -> loginUser -> payload', payload)
+		console.log('====================================')
 		const accessToken = this.jwtService.sign(payload, {
 			expiresIn: this.configService.get('JWT_EXPIRATION_TIME')
 		})
 
 		const refreshToken = this.jwtService.sign(payload, {
-			expiresIn: this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME')
+			expiresIn: this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
+			secret: this.configService.get('JWT_REFRESH_SECRET')
 		})
 
 		return {
-			message: 'Login successful',
-			data: {
-				accessToken,
-				refreshToken,
-				user: {
-					...data.user,
-					profile: data.profile
-				}
-			}
+			accessToken,
+			refreshToken,
+			user: data
 		}
 	}
 
-	async validateUser({ email, password }: LoginFormDto): Promise<{
-		user: UserDto
-		profile: ProfileDto
-	}> {
+	async validateLocalUser({ email, password }: LoginFormDto): Promise<UserDto> {
 		const user = await UserEntity.findOne({
-			where: { email }
+			where: { email },
+			select: {
+				isActive: true,
+				userId: true,
+				email: true,
+				username: true,
+				verified: true,
+				timeZone: true,
+				password: true,
+				account: {
+					accountId: true,
+					provider: true,
+					role: true,
+					type: true,
+					permissions: true,
+					createdAt: true,
+					profile: {
+						profileId: true,
+						firstName: true,
+						lastName: true,
+						phone: true,
+						address: true,
+						countryCallingCode: true,
+						countryCode: true,
+						createdAt: true,
+						image: true
+					}
+				}
+			},
+			relations: {
+				account: {
+					profile: true
+				}
+			}
 		})
-		if (!user) {
-			throw new AuthException('User not found', 'USER_NOT_FOUND')
-		}
+
 		const isMatchPassword = await compare(password, user.password)
 		if (!isMatchPassword) {
 			throw new AuthException('Invalid password', 'INVALID_PASSWORD')
 		}
 
-		const profile = await ProfileEntity.findOneBy({
-			user: {
-				idUser: user.idUser
-			}
-		})
+		const validators = {
+			user_not_exist: (user: UserEntity) => !user,
+			account_not_exist: (user: UserEntity) => !user.account.length,
+			user_not_verified: (user: UserEntity) => user.verified // change this when you have a verification system
+		}
 
-		if (!profile) {
-			throw new AuthException('Profile not found', 'PROFILE_NOT_FOUND')
+		const error = Object.entries(validators).find(([, validator]) => validator(user))
+		if (error) {
+			const [key] = error
+			throw new AuthException(key, key.toUpperCase())
 		}
 		delete user.password
-
-		return {
-			user: plainToClass(UserDto, user),
-			profile: plainToClass(ProfileDto, profile)
-		}
+		return plainToClass(UserDto, {
+			...user,
+			account: user.account[0]
+		})
 	}
 }

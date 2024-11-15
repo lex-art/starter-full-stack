@@ -1,9 +1,9 @@
 import { EmailService } from '@app/mail'
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs'
-import { UserCreatedEvent } from '../event/notification-email-user.event'
+import { UserCreatedEvent } from '../event/notification-email-user-created.event'
 
 @EventsHandler(UserCreatedEvent)
-export class NotificationEmailUserHandler implements IEventHandler<UserCreatedEvent> {
+export class NotificationVerifyAccountHandler implements IEventHandler<UserCreatedEvent> {
 	constructor(private readonly emailService: EmailService) {}
 
 	async handle(event: UserCreatedEvent) {
@@ -14,7 +14,7 @@ export class NotificationEmailUserHandler implements IEventHandler<UserCreatedEv
 			data: {
 				username: event.username
 			},
-			template: 'user/new-user.template.hbs'
+			template: 'user/verify-account.template.hbs'
 		})
 	}
 }

@@ -1,11 +1,11 @@
 'use server'
-import { IProfile, IUser } from '@/types'
+import { NewUserSchema } from '@/app/schemas/users/new-user.schema'
 import apiConfig, { IResponse } from '../apiConfig'
 
 export async function getUserAction(
 	url: string
-): Promise<IResponse<IUser & IProfile>> {
-	return apiConfig.get<IUser & IProfile>({
+): Promise<IResponse<NewUserSchema>> {
+	return apiConfig.get<NewUserSchema>({
 		url
 	})
 }

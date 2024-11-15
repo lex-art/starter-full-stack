@@ -1,3 +1,4 @@
+import { AuthException } from '@app/auth/exceptions'
 import { Logger } from '@nestjs/common'
 import { CommandHandler } from '@nestjs/cqrs'
 import { LoginUserCommand } from '../command/login-user.command'
@@ -10,13 +11,10 @@ export class LoginUserHandler {
 
 	async execute(command: LoginUserCommand) {
 		try {
-			return await this.loginUser.loginUser({
-				user: command.body.user,
-				profile: command.body.profile
-			})
+			return await this.loginUser.loginUser(command.body)
 		} catch (error) {
 			this.logger.error(error.message)
-			return error
+			throw new AuthException(error.message, 'LOGIN_FAILED')
 		}
 	}
 }

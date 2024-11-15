@@ -1,17 +1,15 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
-import { UserEntity } from './user.entity'
+import { AccountEntity } from './accounts.entity'
 
 // in DB, the table name is 'profiles'
 @Entity('profiles')
 // for a entity class, should be call in singular
 export class ProfileEntity extends BaseEntityWithTimestamps {
-	@PrimaryGeneratedColumn('identity', { generatedIdentity: 'ALWAYS', name: 'id_profile' })
-	idProfile: number
-
-	@OneToOne(() => UserEntity, (user) => user.profile, { nullable: false })
-	@JoinColumn({ name: 'user' })
-	user: UserEntity
+	@PrimaryGeneratedColumn('uuid', {
+		name: 'profile_id'
+	})
+	profileId: string
 
 	@Column({ type: 'varchar', name: 'first_name' })
 	firstName: string
@@ -37,6 +35,11 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	@Column({ type: 'varchar', length: 500 })
 	address: string
 
-	@Column({ type: 'varchar', length: 500, name: 'img_profile', nullable: true })
-	imgProfile: string
+	@Column({ type: 'varchar', length: 500, name: 'profile', nullable: true })
+	image: string
+
+	@OneToOne(() => AccountEntity, (account) => account.profileId, {
+		createForeignKeyConstraints: true
+	})
+	account!: AccountEntity
 }

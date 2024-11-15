@@ -64,7 +64,7 @@ const configAuth = {
 							email: result.data.data.user.email,
 							accessToken: result.data.data.accessToken,
 							refreshToken: result.data.data.refreshToken,
-							rol: result.data.data.user.rol,
+							role: result.data.data.user.role,
 							type: result.data.data.user.type,
 							permissions:
 								result.data.data.user.permissions,

@@ -1,11 +1,12 @@
 import { ApiException } from '@app/api/exceptions/api.exception'
 import { LoginFormDto } from '@app/auth/dto'
-import { ProfileEntity, UserEntity } from '@app/auth/entities'
+import { UserEntity } from '@app/auth/entities'
 import { Paginate } from '@app/decorator'
 import { encrypt } from '@app/lib/utilities'
 import { GeneralResponse } from '@app/types'
 import { PaginateOptions } from '@app/types/pagination'
 import { Injectable } from '@nestjs/common'
+import { instanceToPlain } from 'class-transformer'
 import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
@@ -18,20 +19,10 @@ export class UserQueryService {
 		if (!user) {
 			throw new ApiException('User not found', 'USER_NOT_FOUND')
 		}
-		const profile: ProfileEntity = await ProfileEntity.findOne({
-			where: {
-				user: {
-					idUser: user.idUser
-				}
-			}
-		})
 
 		delete user.password
 
-		return {
-			...user,
-			...profile
-		}
+		return instanceToPlain(user)
 	}
 
 	@Paginate({
@@ -44,33 +35,33 @@ export class UserQueryService {
 		paginationOptions,
 		filtersOptions
 	}: {
-		paginationOptions: PaginateOptions<ProfileEntity>
-		filtersOptions: FindOptionsWhere<ProfileEntity>[]
-	}): Promise<[ProfileEntity[], number]> {
-		return await ProfileEntity.findAndCount({
+		paginationOptions: PaginateOptions<UserEntity>
+		filtersOptions: FindOptionsWhere<UserEntity>[]
+	}): Promise<[UserEntity[], number]> {
+		return await UserEntity.findAndCount({
 			where: filtersOptions,
 			select: {
-				idProfile: true,
-				firstName: true,
-				lastName: true,
-				phone: true,
-				address: true,
 				createdAt: true,
 				updatedAt: true,
-				user: {
-					idUser: true,
-					email: true,
-					username: true,
-					permissions: true,
-					type: true,
-					timeZone: true,
+				email: true,
+				username: true,
+				account: {
+					provider: true,
 					role: true,
-					createdAt: true,
-					updatedAt: true
+					type: true,
+					permissions: true,
+					profile: {
+						firstName: true,
+						lastName: true,
+						phone: true,
+						address: true
+					}
 				}
 			},
 			relations: {
-				user: true
+				account: {
+					profile: true
+				}
 			},
 			...paginationOptions
 		}).catch((error) => {

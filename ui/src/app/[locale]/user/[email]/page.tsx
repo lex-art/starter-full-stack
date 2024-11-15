@@ -97,7 +97,22 @@ export default function CreateUser({
 				type,
 				permissions
 			} = data.data
-
+			console.log('====================================')
+			console.log({
+				firstName,
+				lastName,
+				birthDate,
+				phone,
+				address,
+				countryCode,
+				countryCallingCode,
+				email,
+				username,
+				role,
+				type,
+				permissions
+			})
+			console.log('====================================')
 			reset({
 				firstName,
 				lastName,
@@ -117,6 +132,9 @@ export default function CreateUser({
 	}, [data?.data, isLoading])
 
 	const onSubmit = (data: NewUserSchema) => {
+		console.log('====================================')
+		console.log('data', data)
+		console.log('====================================')
 		transaction(async () => {
 			const result = isEditMode
 				? await updateUserAction(data)
@@ -134,7 +152,9 @@ export default function CreateUser({
 
 	return (
 		<AppGrid spacing={2}>
-			<AppTypography variant="subtitle1">Create User</AppTypography>
+			<AppTypography variant="subtitle1">
+				Create User {JSON.stringify(errors, null, 2)}
+			</AppTypography>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<AppFormContainer>
 					<AppFormControl>

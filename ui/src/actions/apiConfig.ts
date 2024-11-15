@@ -118,6 +118,9 @@ class ApiService {
 				data: body,
 				params
 			})
+			console.log('====================================')
+			console.log(response.data)
+			console.log('====================================')
 			return {
 				status: response?.status,
 				data: response?.data

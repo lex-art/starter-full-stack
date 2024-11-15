@@ -1,4 +1,4 @@
-import { Public } from '@app/decorator'
+import { CurrentUser, Public } from '@app/decorator'
 import {
 	Body,
 	Controller,
@@ -18,11 +18,11 @@ import { ForgoPasswordCommand } from '../commands/command/forgot-password.comman
 import { LoginUserCommand } from '../commands/command/login-user.command'
 import { RefreshTokenCommand } from '../commands/command/refresh-token.command'
 import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
-import { RefreshTokenDto, ResetPasswordDto, VerifyEmailOtpDto } from '../dto'
-import { LoginFormDto } from '../dto/login.dto'
-import { ProfileDto } from '../dto/profile.dto'
-import { RegisterUserDto, UserDto } from '../dto/user.dto'
+import { ResetPasswordDto, VerifyEmailOtpDto } from '../dto'
+import { EmailDto, LoginFormDto } from '../dto/login.dto'
+import { CreateUserDto, CurrentUserDto, UserDto } from '../dto/main-user.dto'
 import { AuthException } from '../exceptions'
+import { JwtRefreshAuthGuard } from '../guard/jwt-refresh.guard'
 import { LocalAuthGuard } from '../guard/local.guard'
 
 @Controller('auth')
@@ -33,46 +33,46 @@ export class AuthController {
 		private readonly commandBus: CommandBus
 	) {}
 
+	handleGeneralException(error: any): HttpException {
+		this.logger.error(error)
+		if (error instanceof AuthException) {
+			return new HttpException(
+				{
+					message: error.message,
+					code: error.code
+				},
+				HttpStatus.BAD_REQUEST
+			)
+		}
+		return new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+	}
+
+	@Post('login')
 	@Public()
 	@UseGuards(LocalAuthGuard)
-	@Post('login')
 	async login(
 		@Request()
 		req: {
-			user: {
-				user: UserDto
-				profile: ProfileDto
-			}
+			user: UserDto
 		}
 	): Promise<{
-		message: string
-		data: {
-			accessToken: string
-			refreshToken: string
-			user: UserDto & {
-				profile: ProfileDto
-			}
-		}
+		accessToken: string
+		refreshToken: string
+		user: UserDto
 	}> {
 		try {
-			const command = new LoginUserCommand({
-				user: req.user.user,
-				profile: req.user.profile
-			})
+			const command = new LoginUserCommand(req.user)
 			return await this.commandBus.execute(command)
 		} catch (error) {
-			this.logger.error(error)
-			if (error instanceof AuthException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-
-			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+			throw this.handleGeneralException(error)
 		}
 	}
 
+	// this method when the app need to register a new user without an admin
 	@Post('register')
 	@Public()
-	async register(@Body() body: RegisterUserDto): Promise<{
+	//@UseGuards(AuthGuard('jwt')) // this is an example of how to use jwt guard
+	async register(@Body() body: CreateUserDto): Promise<{
 		message: string
 		email: string
 	}> {
@@ -80,11 +80,7 @@ export class AuthController {
 			const command = new CreateAccountCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {
-			this.logger.error(error)
-			if (error instanceof AuthException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-			throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR)
+			throw this.handleGeneralException(error)
 		}
 	}
 
@@ -99,25 +95,22 @@ export class AuthController {
 
 	@Post('refresh-token')
 	@Public()
-	async refreshToken(@Body() body: RefreshTokenDto): Promise<{
+	@UseGuards(JwtRefreshAuthGuard)
+	async refreshToken(@CurrentUser() user: CurrentUserDto): Promise<{
 		message: string
 		email: string
 	}> {
 		try {
-			const command = new RefreshTokenCommand(body.refreshToken)
+			const command = new RefreshTokenCommand(user)
 			return await this.commandBus.execute(command)
 		} catch (error) {
-			this.logger.error(error)
-			if (error instanceof AuthException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+			throw this.handleGeneralException(error)
 		}
 	}
 
 	@Post('forgot-password')
 	@Public()
-	async forgotPassword(@Body() body: Pick<LoginFormDto, 'email'>): Promise<{
+	async forgotPassword(@Body() body: EmailDto): Promise<{
 		message: string
 		email: string
 	}> {
@@ -125,11 +118,7 @@ export class AuthController {
 			const command = new ForgoPasswordCommand(body.email)
 			return await this.commandBus.execute(command)
 		} catch (error) {
-			this.logger.error(error)
-			if (error instanceof AuthException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+			throw this.handleGeneralException(error)
 		}
 	}
 
@@ -143,10 +132,7 @@ export class AuthController {
 			const command = new ResetPasswordCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {
-			if (error instanceof AuthException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+			throw this.handleGeneralException(error)
 		}
 	}
 
@@ -159,10 +145,7 @@ export class AuthController {
 			const command = new EmailVerifyOtpCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {
-			if (error instanceof AuthException) {
-				throw new HttpException(error, HttpStatus.BAD_REQUEST)
-			}
-			throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+			throw this.handleGeneralException(error)
 		}
 	}
 
@@ -175,7 +158,7 @@ export class AuthController {
 			const command = new DeleteAccountCommand(body.email)
 			return this.commandBus.execute(command)
 		} catch (error) {
-			throw new HttpException(error.message, error.status)
+			throw this.handleGeneralException(error)
 		}
 	}
 }

@@ -1,13 +1,13 @@
-import { EmailVerificationCodeEntity } from '@app/auth/entities'
+import { VerificationTokenEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class EmailVerifyOtpService {
 	async verifyOtp(email: string, otp: string): Promise<boolean> {
-		const emailVerificationCode = await EmailVerificationCodeEntity.findOne({
+		const emailVerificationCode = await VerificationTokenEntity.findOne({
 			where: {
-				email
+				identifier: email
 			}
 		})
 
@@ -19,7 +19,7 @@ export class EmailVerifyOtpService {
 			throw new AuthException('Invalid OTP', 'INVALID_OTP')
 		}
 
-		if (emailVerificationCode.expiresAt < new Date()) {
+		if (emailVerificationCode.expires < new Date()) {
 			throw new AuthException('OTP expired', 'OTP_EXPIRED')
 		}
 

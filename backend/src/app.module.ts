@@ -28,11 +28,12 @@ import { DatabaseModule } from './database/database.module'
 		{
 			provide: APP_PIPE,
 			useValue: new ValidationPipe({
+				whitelist: true, // remove unknown properties
 				transform: true,
 				transformOptions: {
 					enableImplicitConversion: true
 				},
-				forbidNonWhitelisted: true
+				forbidNonWhitelisted: true // throw error when unknown properties are present
 			})
 		},
 		{

@@ -1,4 +1,4 @@
-import { ProfileEntity } from '@app/auth/entities'
+import { UserEntity } from '@app/auth/entities'
 import { mapPagination } from '@app/lib/utilities'
 import { PaginateOptions } from '@app/types/pagination'
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs'
@@ -10,12 +10,12 @@ import { UserQueryService } from '../services/user.service'
 export class GetAllUserHandler implements IQueryHandler<GetAllUserQuery> {
 	constructor(private readonly userQueryService: UserQueryService) {}
 
-	async execute(query: GetAllUserQuery): Promise<Promise<[ProfileEntity[], number]>> {
+	async execute(query: GetAllUserQuery): Promise<Promise<[UserEntity[], number]>> {
 		try {
 			const filtersQuery = query.body.filtersQuery
 			const paginationQuery = query.body.paginationQuery
 
-			const paginationOptions: PaginateOptions<ProfileEntity> = mapPagination(paginationQuery)
+			const paginationOptions: PaginateOptions<UserEntity> = mapPagination(paginationQuery)
 
 			let createdAt: Date | FindOperator<Date> = undefined
 			if (filtersQuery.since && filtersQuery.until) {
@@ -33,18 +33,22 @@ export class GetAllUserHandler implements IQueryHandler<GetAllUserQuery> {
 						]
 					: undefined
 
-			const filtersOptions: FindOptionsWhere<ProfileEntity>[] = [
+			const filtersOptions: FindOptionsWhere<UserEntity>[] = [
 				{
 					isActive: true,
-					firstName: query.body?.filtersQuery?.firstName
-						? Like(`%${query.body.filtersQuery.firstName}%`)
-						: undefined,
-					lastName: query.body?.filtersQuery?.lastName
-						? Like(`%${query.body.filtersQuery.lastName}%`)
-						: undefined,
-					phone: query.body?.filtersQuery?.phone
-						? Like(`%${query.body.filtersQuery.phone}%`)
-						: undefined,
+					account: {
+						profile: {
+							firstName: query.body?.filtersQuery?.firstName
+								? Like(`%${query.body.filtersQuery.firstName}%`)
+								: undefined,
+							lastName: query.body?.filtersQuery?.lastName
+								? Like(`%${query.body.filtersQuery.lastName}%`)
+								: undefined,
+							phone: query.body?.filtersQuery?.phone
+								? Like(`%${query.body.filtersQuery.phone}%`)
+								: undefined
+						}
+					},
 					createdAt: createdAt,
 					...(nameCondition ? { Or: nameCondition } : {})
 				}

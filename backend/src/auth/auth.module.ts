@@ -13,6 +13,7 @@ import { AuthController } from './controllers/auth.controller'
 import { ProfileSubscriber } from './encrypt/profile.subscriber'
 import { AuthEntities } from './entities'
 import { EventsHandlers } from './events/handlers'
+import { JwtRefreshAuthGuard } from './guard/jwt-refresh.guard'
 import { JwtAuthGuard } from './guard/jwt.guard'
 import { LocalAuthGuard } from './guard/local.guard'
 import { RolesGuard } from './guard/role.guard'
@@ -45,6 +46,7 @@ import { LocalStrategy } from './strategy/local.strategy'
 		JwtStrategy,
 		LocalStrategy,
 		LocalAuthGuard,
+		JwtRefreshAuthGuard,
 		CryptoUtility,
 		ProfileSubscriber,
 		{

@@ -93,7 +93,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterUserDto"
+                "$ref": "#/components/schemas/CreateUserDto"
               }
             }
           }
@@ -120,16 +120,6 @@
       "post": {
         "operationId": "AuthController_refreshToken",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshTokenDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": ""
@@ -141,6 +131,16 @@
       "post": {
         "operationId": "AuthController_forgotPassword",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -283,11 +283,11 @@
         "type": "object",
         "properties": {}
       },
-      "RegisterUserDto": {
+      "CreateUserDto": {
         "type": "object",
         "properties": {}
       },
-      "RefreshTokenDto": {
+      "EmailDto": {
         "type": "object",
         "properties": {}
       },

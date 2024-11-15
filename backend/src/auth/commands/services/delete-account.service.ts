@@ -1,4 +1,4 @@
-import { ProfileEntity, UserEntity } from '@app/auth/entities'
+import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { Injectable } from '@nestjs/common'
 
@@ -13,19 +13,6 @@ export class DeleteAccountService {
 			throw new AuthException('User not found', 'USER_NOT_FOUND')
 		}
 
-		const profile = await ProfileEntity.findOne({
-			where: {
-				user: {
-					idUser: user.idUser
-				}
-			}
-		})
-
-		if (!profile) {
-			throw new AuthException('Profile not found', 'PROFILE_NOT_FOUND')
-		}
-
-		await profile.remove()
 		await user.remove()
 
 		return {

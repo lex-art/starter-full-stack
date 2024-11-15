@@ -1,3 +1,4 @@
+import { AuthException } from '@app/auth/exceptions'
 import { EmailService } from '@app/mail'
 import { ConfigService } from '@nestjs/config'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
@@ -18,7 +19,7 @@ export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordComma
 		try {
 			const user = await this.findUSer.getUser(command.email)
 			const tokenForResetPass = this.jwtService.sign(
-				{ idUser: user.idUser, email: user.email },
+				{ userId: user.userId, email: user.email },
 				{
 					expiresIn: this.configService.get('JWT_EXPIRATION_FORGOT_PASS_TIME')
 				}
@@ -31,18 +32,19 @@ export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordComma
 				subject: 'Password Reset',
 				data: {
 					name: user.username,
-					token: user.idUser,
+					token: user.userId,
 					url
 				},
 				template: 'user/forgot-password.template.hbs'
 			})
 		} catch (error) {
-			return {
+			/* return {
 				message: 'Error sending email from here',
 				error: {
 					code: error?.message ?? 'UNKNOWN_ERROR'
 				}
-			}
+			} */
+			throw new AuthException(error.message, 'FORGOT_PASSWORD_ERROR_HANDLER')
 		}
 	}
 }

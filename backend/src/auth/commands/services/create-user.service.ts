@@ -1,10 +1,14 @@
-import { RegisterUserDto } from '@app/auth/dto/user.dto'
+import { AccountDto, CreateUserDto, ProfileDto, UserDto } from '@app/auth/dto/main-user.dto'
 import { ProfileEntity, UserEntity } from '@app/auth/entities'
+import { AccountEntity } from '@app/auth/entities/accounts.entity'
 import { AuthException } from '@app/auth/exceptions'
 import { encrypt, passwordGenerator } from '@app/lib/utilities'
+import { TYPE_PROVIDER } from '@app/types/enums'
 import { Injectable, Logger } from '@nestjs/common'
+import { OmitType } from '@nestjs/swagger'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { plainToClass } from 'class-transformer'
+import { EntityManager, Repository } from 'typeorm'
 
 @Injectable()
 export class CreateUserService {
@@ -12,39 +16,53 @@ export class CreateUserService {
 
 	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
-	async createUser(body: RegisterUserDto): Promise<{ user: UserEntity; profile: ProfileEntity }> {
+	async createUser(body: CreateUserDto): Promise<Omit<UserDto, 'password'>> {
 		return await this.userRepository.manager
-			.transaction(async (transactionalEntityManager) => {
-				const user = new UserEntity()
+			.transaction(async (transactionalEntityManager: EntityManager) => {
+				const user: UserEntity = new UserEntity()
 				user.email = body.email
-				user.role = body.role
-				user.type = body.type
-				user.permissions = body.permissions
 				user.username = body.username
 				user.timeZone = body.timeZone
-				const tempPassword: string = passwordGenerator()
+				const tempPassword: string = body.password ?? passwordGenerator()
 				user.password = await encrypt(tempPassword)
+				await transactionalEntityManager.save(user)
 
-				const profile = new ProfileEntity()
+				const profile: ProfileEntity = new ProfileEntity()
 				profile.firstName = body.firstName
 				profile.lastName = body.lastName
-				profile.user = user
 				profile.phone = body.phone
 				profile.countryCode = body.countryCode
 				profile.countryCallingCode = body.countryCallingCode
 				profile.birthDate = body.birthDate
 				profile.address = body.address
-				profile.imgProfile = body.imgProfile
-				await transactionalEntityManager.save(user)
+				profile.image = body.image
+
 				await transactionalEntityManager.save(profile)
-				return {
-					user,
-					profile
-				}
+
+				const account = new AccountEntity()
+				account.provider = body.provider
+				account.token_type = 'JWT' // this can be a constant, now is hardcode
+				account.role = body.role
+				account.type = body.type
+				account.permissions = body.permissions
+				account.userId = user.userId
+				account.profileId = profile.profileId
+				account.provider = body.password ? TYPE_PROVIDER.CREDENTIALS : TYPE_PROVIDER.LOCAL
+
+				await transactionalEntityManager.save(account)
+				delete user.password
+				delete account.userId
+				delete account.profileId
+
+				const newUser = plainToClass(OmitType(UserDto, ['password']), user)
+				newUser.account = plainToClass(AccountDto, account)
+				newUser.account.profile = plainToClass(ProfileDto, profile)
+
+				return newUser
 			})
 			.catch((error) => {
 				this.logger.error(error)
-				throw new AuthException('ERROR_CREATING_USER', error.message ?? 'Error creating user')
+				throw new AuthException(error.message ?? 'Error creating user', 'CREATE_USER_ERROR_SERVICE')
 			})
 	}
 }

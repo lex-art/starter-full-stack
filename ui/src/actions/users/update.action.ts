@@ -8,7 +8,7 @@ export async function updateUserAction(
 	data: NewUserSchema
 ): Promise<IResponse> {
 	try {
-		const response = await apiConfig.patch<any>({
+		const response = await apiConfig.patch<NewUserSchema>({
 			url: API_URLS.REGISTER,
 			body: data
 		})

@@ -9,3 +9,10 @@ export interface PaginateOptions<T> {
 	orderBy: string
 	orderColumn: 'asc' | 'desc'
 }
+/* 
+export interface Pagination {
+	take: number
+	skip: number
+	order: Record<string, 'asc' | 'desc'>
+}
+ */
