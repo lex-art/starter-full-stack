@@ -1,40 +1,78 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <title>Email</title>
-    <meta charset="utf-8">
-    <style>
-        * {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        p {
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-    <table border="0" width="100%" border='0' cellspacing='0' cellpadding='0' style="background: #1976D2;">
-        <tbody style="height: 650px;">
-            <tr>
-                <td style='text-align: center; font-family: Arial, sans-serif;'>
-                    <div
-                        style='display: inline-block; background-color: #ffffff; border-radius: 10px; padding: 20px; text-align: center; max-width: 400px; box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);'>
-                        <div align="center" style="border: 0; margin: 10px; padding: 0;">
-                            <img class='logo' src='https://tikal-box-spaces.sfo3.digitaloceanspaces.com/logo.png'
-                                alt='Tu Logo' style='max-width: 150px; height: auto; margin: 0 20px; display: block;' />
-                        </div>
-                        <h1 style="font-weight: bold; margin:10px 0;
-                                text-align: center;">Recuperación de contraseña</h1>
-                        <p style="font-size:16px; margin: 20px 15px 0 15px; text-align: center;">Hemos recibido una
-                            solicitud para restablecer la contraseña de su cuenta en <strong>Tikal Box</strong>.</p>
-                        <p style="font-size:16px; margin: 20px 15px 0 15px; text-align: center;">
-                            Para continuar con el proceso de recuperación de contraseña, haga clic en el enlace a
-                            continuación:</p>
-                    </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</body>
+<html lang='es'>
+
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<title>Verifica tu correo</title>
+		<style>
+			/* Estilos básicos para correos */ body { margin: 0; padding: 0; background-color: #f9f9f9;
+			font-family: Arial, sans-serif; } table { border-spacing: 0; border-collapse: collapse; } a {
+			text-decoration: none; }
+		</style>
+	</head>
+
+	<body style='margin: 0; padding: 0; background-color: #f9f9f9; font-family: Arial, sans-serif;'>
+		<table
+			width='100%'
+			height='100%'
+			cellpadding='0'
+			cellspacing='0'
+			border='0'
+			style='background-color: #f9f9f9;'
+		>
+			<tr>
+				<td align='center' style='padding: 20px;'>
+					<table
+						width='600'
+						cellpadding='0'
+						cellspacing='0'
+						border='0'
+						style='background-color: #ffffff; border: 1px solid #ddd;'
+					>
+						<tr>
+							<td
+								align='center'
+								style='padding: 20px; font-size: 24px; font-weight: bold; color: #333;'
+							>
+								¡Bienvenido a nuestro sistema!
+							</td>
+						</tr>
+						<tr>
+							<td style='padding: 20px; font-size: 16px; color: #666;'>
+								Hola
+								{{username}},
+								haz sido invitado a unirte a nuestro sistema, ingresa con las siguientes
+								credenciales:
+								<p>
+									<strong>Usuario:</strong>
+									{{email}}
+								</p>
+								<p>
+									<strong>Contraseña:</strong>
+									{{password}}
+								</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td align='center' style='padding: 20px;'>
+								<a
+									href='{{url}}'
+									style='background-color: #007BFF; color: #ffffff; padding: 10px 20px; text-decoration: none; font-size: 16px; border-radius: 5px;'
+								>
+									Ingresar
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td style='padding: 20px; font-size: 14px; color: #999;'>
+								Si no solicitaste este correo, ignóralo. Gracias por usar nuestra app.
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+
 </html>

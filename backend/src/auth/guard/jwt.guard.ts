@@ -1,14 +1,17 @@
-import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common'
+import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { Reflector } from '@nestjs/core'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
+import { plainToClass } from 'class-transformer'
+import { validate } from 'class-validator'
 import { Request } from 'express'
 import { IS_PUBLIC_KEY } from 'src/decorator'
-import { ICurrentUser } from 'src/types/user.type'
+import { CurrentUserDto } from '../dto'
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
+	private readonly logger = new Logger(JwtAuthGuard.name)
 	constructor(
 		private readonly jwtService: JwtService,
 		private readonly configService: ConfigService,
@@ -33,12 +36,30 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 			throw new UnauthorizedException()
 		}
 		try {
-			const payload: ICurrentUser = await this.jwtService.verifyAsync(token, {
+			const payload: CurrentUserDto = await this.jwtService.verifyAsync(token, {
 				secret: this.configService.get<string>('JWT_SECRET')
 			})
+			const dtoUserInstance = plainToClass(CurrentUserDto, payload)
+			const errors = await validate(dtoUserInstance)
+			if (errors.length > 0) {
+				throw new UnauthorizedException({
+					message: 'Invalid token payload',
+					code: 'JWT_ERROR'
+				})
+			}
+			if (!dtoUserInstance.verified) {
+				throw new UnauthorizedException({
+					message: 'User not verified',
+					code: 'JWT_ERROR'
+				})
+			}
 			request['user'] = payload
-		} catch (error: unknown) {
-			throw new UnauthorizedException()
+		} catch (error: any) {
+			this.logger.error(error)
+			throw new UnauthorizedException({
+				message: error.message,
+				code: 'JWT_ERROR'
+			})
 		}
 		return true
 	}

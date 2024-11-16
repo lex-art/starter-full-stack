@@ -18,6 +18,8 @@ import { JwtAuthGuard } from './guard/jwt.guard'
 import { LocalAuthGuard } from './guard/local.guard'
 import { RolesGuard } from './guard/role.guard'
 import { TypeUserGuard } from './guard/type-user.guard'
+import { QueryUserHandler } from './queries/handlers'
+import { EmailVerifyService } from './queries/services/email-verify.service'
 import { JwtStrategy } from './strategy/jwt.strategy'
 import { LocalStrategy } from './strategy/local.strategy'
 
@@ -42,7 +44,9 @@ import { LocalStrategy } from './strategy/local.strategy'
 	providers: [
 		...CommandHandlers,
 		...CommandServices,
+		...QueryUserHandler,
 		...EventsHandlers,
+		EmailVerifyService,
 		JwtStrategy,
 		LocalStrategy,
 		LocalAuthGuard,

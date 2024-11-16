@@ -4,9 +4,9 @@ import { ConfigService } from '@nestjs/config'
 
 type TemplatesName =
 	| 'user/new-user.template.hbs'
-	| 'user/verify-email.template.hbs'
 	| 'user/forgot-password.template.hbs'
 	| 'user/verify-account.template.hbs'
+
 interface EmailData {
 	email: string
 	from: string

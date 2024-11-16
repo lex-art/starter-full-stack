@@ -132,9 +132,6 @@ export default function CreateUser({
 	}, [data?.data, isLoading])
 
 	const onSubmit = (data: NewUserSchema) => {
-		console.log('====================================')
-		console.log('data', data)
-		console.log('====================================')
 		transaction(async () => {
 			const result = isEditMode
 				? await updateUserAction(data)

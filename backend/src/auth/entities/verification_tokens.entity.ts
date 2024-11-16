@@ -19,9 +19,6 @@ export class VerificationTokenEntity extends BaseEntityWithTimestamps {
 	@Column()
 	expires!: Date
 
-	@Column({ name: 'is_used' })
+	@Column({ name: 'is_used', default: false })
 	isUsed!: boolean
-
-	@Column()
-	otp!: string
 }

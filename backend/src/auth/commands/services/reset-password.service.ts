@@ -12,7 +12,6 @@ export class ResetPasswordService {
 	async resetPassword({
 		password,
 		confirmPassword,
-		email,
 		token
 	}: {
 		password: string
@@ -27,9 +26,6 @@ export class ResetPasswordService {
 				throw new AuthException('Invalid token', 'INVALID_TOKEN')
 			}
 			user = await UserEntity.findOne({ where: { email: dataUser.email } })
-		}
-		if (email) {
-			user = await UserEntity.findOne({ where: { email } })
 		}
 
 		if (!user) {

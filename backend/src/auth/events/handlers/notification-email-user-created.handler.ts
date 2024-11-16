@@ -12,7 +12,9 @@ export class NotificationEmailUserHandler implements IEventHandler<UserCreatedEv
 			from: '"Support Team" <support@gmail.com>',
 			subject: 'Welcome to the platform',
 			data: {
-				username: event.username
+				username: event.email,
+				password: event.data.password,
+				url: event.data.url
 			},
 			template: 'user/new-user.template.hbs'
 		})

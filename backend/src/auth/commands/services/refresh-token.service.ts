@@ -37,7 +37,8 @@ export class RefreshTokenService {
 				profileId: validateUser.account[0].profile.profileId,
 				role: validateUser.account[0].role,
 				permissions: validateUser.account[0].permissions,
-				type: validateUser.account[0].type
+				type: validateUser.account[0].type,
+				verified: validateUser.verified
 			}
 			const token = this.jwtService.sign(payload, {
 				expiresIn: this.configService.get('JWT_EXPIRATION_TIME')

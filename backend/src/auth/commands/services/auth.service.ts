@@ -27,11 +27,9 @@ export class AuthService {
 			profileId: data.account.profile.profileId,
 			role: data.account.role,
 			permissions: data.account.permissions,
-			type: data.account.type
+			type: data.account.type,
+			verified: data.verified
 		}
-		console.log('====================================')
-		console.log('AuthService -> loginUser -> payload', payload)
-		console.log('====================================')
 		const accessToken = this.jwtService.sign(payload, {
 			expiresIn: this.configService.get('JWT_EXPIRATION_TIME')
 		})

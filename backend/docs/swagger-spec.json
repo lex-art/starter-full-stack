@@ -169,22 +169,12 @@
         }
       }
     },
-    "/auth/verify-email": {
-      "post": {
+    "/auth/verify-account": {
+      "get": {
         "operationId": "AuthController_verifyEmail",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VerifyEmailOtpDto"
-              }
-            }
-          }
-        },
         "responses": {
-          "201": {
+          "200": {
             "description": ""
           }
         }
@@ -292,10 +282,6 @@
         "properties": {}
       },
       "ResetPasswordDto": {
-        "type": "object",
-        "properties": {}
-      },
-      "VerifyEmailOtpDto": {
         "type": "object",
         "properties": {}
       }

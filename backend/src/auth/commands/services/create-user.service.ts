@@ -5,7 +5,6 @@ import { AuthException } from '@app/auth/exceptions'
 import { encrypt, passwordGenerator } from '@app/lib/utilities'
 import { TYPE_PROVIDER } from '@app/types/enums'
 import { Injectable, Logger } from '@nestjs/common'
-import { OmitType } from '@nestjs/swagger'
 import { InjectRepository } from '@nestjs/typeorm'
 import { plainToClass } from 'class-transformer'
 import { EntityManager, Repository } from 'typeorm'
@@ -16,7 +15,7 @@ export class CreateUserService {
 
 	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
-	async createUser(body: CreateUserDto): Promise<Omit<UserDto, 'password'>> {
+	async createUser(body: CreateUserDto): Promise<UserDto> {
 		return await this.userRepository.manager
 			.transaction(async (transactionalEntityManager: EntityManager) => {
 				const user: UserEntity = new UserEntity()
@@ -50,11 +49,10 @@ export class CreateUserService {
 				account.provider = body.password ? TYPE_PROVIDER.CREDENTIALS : TYPE_PROVIDER.LOCAL
 
 				await transactionalEntityManager.save(account)
-				delete user.password
 				delete account.userId
 				delete account.profileId
 
-				const newUser = plainToClass(OmitType(UserDto, ['password']), user)
+				const newUser = plainToClass(UserDto, user)
 				newUser.account = plainToClass(AccountDto, account)
 				newUser.account.profile = plainToClass(ProfileDto, profile)
 

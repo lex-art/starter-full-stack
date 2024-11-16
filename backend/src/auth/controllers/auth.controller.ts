@@ -3,34 +3,40 @@ import {
 	Body,
 	Controller,
 	Delete,
+	Get,
 	HttpException,
 	HttpStatus,
 	Logger,
 	Post,
+	Query,
 	Request,
+	Res,
 	UseGuards
 } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
+import { Response } from 'express'
 import { CreateAccountCommand } from '../commands/command/create-account.command'
 import { DeleteAccountCommand } from '../commands/command/delete-account.command'
-import { EmailVerifyOtpCommand } from '../commands/command/email-verify-otp.command'
 import { ForgoPasswordCommand } from '../commands/command/forgot-password.command'
 import { LoginUserCommand } from '../commands/command/login-user.command'
 import { RefreshTokenCommand } from '../commands/command/refresh-token.command'
 import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
-import { ResetPasswordDto, VerifyEmailOtpDto } from '../dto'
+import { ResetPasswordDto, TokenDto } from '../dto'
 import { EmailDto, LoginFormDto } from '../dto/login.dto'
 import { CreateUserDto, CurrentUserDto, UserDto } from '../dto/main-user.dto'
 import { AuthException } from '../exceptions'
 import { JwtRefreshAuthGuard } from '../guard/jwt-refresh.guard'
 import { LocalAuthGuard } from '../guard/local.guard'
+import { VerifyAccountQuery } from '../queries/query/verify-account.query'
 
 @Controller('auth')
 export class AuthController {
 	private readonly logger = new Logger(AuthController.name)
 	constructor(
 		private readonly queryBus: QueryBus,
-		private readonly commandBus: CommandBus
+		private readonly commandBus: CommandBus,
+		private readonly configService: ConfigService
 	) {}
 
 	handleGeneralException(error: any): HttpException {
@@ -124,7 +130,10 @@ export class AuthController {
 
 	@Post('reset-password')
 	@Public()
-	async resetPassword(@Body() body: ResetPasswordDto): Promise<{
+	async resetPassword(
+		@Body() body: ResetPasswordDto,
+		@Query() token: TokenDto
+	): Promise<{
 		message: string
 		email: string
 	}> {
@@ -136,14 +145,20 @@ export class AuthController {
 		}
 	}
 
-	@Post('verify-email')
-	async verifyEmail(@Body() body: VerifyEmailOtpDto): Promise<{
-		message: string
-		email: string
-	}> {
+	@Get('verify-account')
+	@Public()
+	async verifyEmail(@Query() token: TokenDto, @Res() res: Response) {
 		try {
-			const command = new EmailVerifyOtpCommand(body)
-			return await this.commandBus.execute(command)
+			const command = new VerifyAccountQuery(token)
+			const verified = await this.queryBus.execute(command)
+			if (verified) {
+				return res.redirect(
+					this.configService.get('URL_FRONTEND') + '/auth/login?message=account_verified'
+				)
+			}
+			return res.redirect(
+				this.configService.get('URL_FRONTEND') + '/auth/login?message=account_not_verified'
+			)
 		} catch (error) {
 			throw this.handleGeneralException(error)
 		}

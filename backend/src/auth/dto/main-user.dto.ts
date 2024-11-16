@@ -128,7 +128,7 @@ class UserDto extends IntersectionType(
 }
 
 class CurrentUserDto extends IntersectionType(
-	PickType(UserDto, ['userId', 'email']),
+	PickType(UserDto, ['userId', 'email', 'verified']),
 	PickType(AccountDto, ['accountId', 'role', 'type', 'permissions']),
 	PickType(ProfileDto, ['profileId'])
 ) {}

@@ -85,7 +85,8 @@ class ApiService {
 							'next-auth.session-token',
 							await encode({
 								token: data as unknown as JWT,
-								secret: process.env.NEXTAUTH_SECRET ?? ''
+								secret: process.env.NEXTAUTH_SECRET ?? '',
+								salt: process.env.NEXTAUTH_SALT ?? ''
 							})
 						)
 						originalRequest.headers.Authorization = `Bearer ${refresh.accessToken}`
@@ -118,9 +119,6 @@ class ApiService {
 				data: body,
 				params
 			})
-			console.log('====================================')
-			console.log(response.data)
-			console.log('====================================')
 			return {
 				status: response?.status,
 				data: response?.data
