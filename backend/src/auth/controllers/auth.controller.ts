@@ -132,12 +132,13 @@ export class AuthController {
 	@Public()
 	async resetPassword(
 		@Body() body: ResetPasswordDto,
-		@Query() token: TokenDto
+		@Query() params: TokenDto
 	): Promise<{
 		message: string
 		email: string
 	}> {
 		try {
+			body.token = params.token
 			const command = new ResetPasswordCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {
