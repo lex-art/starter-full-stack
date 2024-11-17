@@ -1,5 +1,5 @@
 import { ApiException } from '@app/api/exceptions/api.exception'
-import { LoginFormDto, ResetPasswordDto } from '@app/auth/dto'
+import { LoginFormDto } from '@app/auth/dto'
 import { BaseQueryPagination } from '@app/lib/dto/base-query-pagination'
 import { PaginationQueryDto } from '@app/lib/dto/query-pagination.dto'
 import {
@@ -79,7 +79,7 @@ export class UserController {
 	}
 
 	@Post('change-password')
-	async changePassword(@Body() body: Pick<ResetPasswordDto, 'password' | 'email'>) {
+	async changePassword(@Body() body: LoginFormDto) {
 		try {
 			const command = new ChangePasswordCommand(body)
 			return await this.commandBus.execute(command)

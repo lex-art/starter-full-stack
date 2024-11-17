@@ -1,6 +1,7 @@
 import { CurrentUserDto } from '@app/auth/dto'
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
+import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { GeneralResponse } from '@app/types'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -26,8 +27,11 @@ export class RefreshTokenService {
 					}
 				}
 			})
-			if (!validateUser) {
-				throw new AuthException('User not found', 'USER_NOT_FOUND')
+
+			const error = Object.entries(userValidator).find(([, validator]) => validator(validateUser))
+			if (error) {
+				const [key] = error
+				throw new AuthException(key, key.toUpperCase())
 			}
 
 			const payload: CurrentUserDto = {

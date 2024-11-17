@@ -39,6 +39,9 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	timeZone?: string
 
 	// add plural name for the relation if yo wan to use multiple accounts
-	@OneToMany(() => AccountEntity, (account) => account.user)
+	@OneToMany(() => AccountEntity, (account) => account.user, {
+		cascade: true
+		/* onDelete: 'CASCADE' */
+	})
 	account!: AccountEntity[]
 }

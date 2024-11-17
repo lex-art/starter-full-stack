@@ -15,7 +15,7 @@ export class UserQueryService {
 		if (!data.email) {
 			throw new ApiException('Email is required', 'EMAIL_REQUIRED')
 		}
-		const user: UserEntity = await UserEntity.findOne({ where: { email: data.email } })
+		const user: UserEntity = await UserEntity.findOne({ where: { email: data.email, isActive: true } })
 		if (!user) {
 			throw new ApiException('User not found', 'USER_NOT_FOUND')
 		}

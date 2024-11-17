@@ -20,7 +20,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 				password
 			})
 			if (!data) {
-				throw new UnauthorizedException('Invalid credentials')
+				throw new UnauthorizedException({
+					message: 'Invalid email or password',
+					code: 'INVALID_CREDENTIALS'
+				})
 			}
 			return data
 		} catch (error) {

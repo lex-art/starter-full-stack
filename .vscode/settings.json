@@ -1,6 +1,7 @@
 {
   "exportall.config.relExclusion": [
-    "/ui/src/types/Pagination.ts"
+    "/ui/src/types/Pagination.ts",
+    "/backend/src/types/enums/type-verification-token.enum.ts"
   ],
   "a-file-icon-vscode.opacity": 0.7
 }

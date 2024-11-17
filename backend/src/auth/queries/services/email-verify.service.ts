@@ -1,4 +1,5 @@
-import { VerificationTokenEntity } from '@app/auth/entities'
+import { TokenVerificationService } from '@app/auth/commands/services/token-verification.service'
+import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { Injectable, Logger } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
@@ -6,34 +7,28 @@ import { JwtService } from '@nestjs/jwt'
 @Injectable()
 export class EmailVerifyService {
 	private readonly logger = new Logger(EmailVerifyService.name)
-	constructor(private readonly jwtService: JwtService) {}
+	constructor(
+		private readonly jwtService: JwtService,
+		private readonly tokenVerificationService: TokenVerificationService
+	) {}
 
 	async verify(token: string): Promise<boolean> {
 		try {
 			const { email } = this.jwtService.verify(token)
-			const tokenValidation = await VerificationTokenEntity.findOne({
-				where: {
-					identifier: email
-				}
+			if (!email) {
+				throw new AuthException('Invalid token', 'INVALID_TOKEN')
+			}
+			await this.tokenVerificationService.verificationEmail(email, token)
+			const user = await UserEntity.findOne({
+				where: { email }
 			})
 
-			if (!tokenValidation) {
-				throw new AuthException('Token not found', 'TOKEN_NOT_FOUND')
+			if (!user) {
+				throw new AuthException('This user does not own this token', 'TOKEN_USER_MISMATCH')
 			}
 
-			if (tokenValidation.token !== token) {
-				throw new AuthException('Token not valid', 'TOKEN_NOT_VALID')
-			}
-			if (tokenValidation.expires < new Date()) {
-				throw new AuthException('Token expired', 'TOKEN_EXPIRED')
-			}
-
-			if (tokenValidation.isUsed) {
-				throw new AuthException('Token already used ', 'TOKEN_USED')
-			}
-
-			tokenValidation.isUsed = true
-			await tokenValidation.save()
+			user.verified = true
+			await user.save()
 			return true
 		} catch (error) {
 			this.logger.error(error)

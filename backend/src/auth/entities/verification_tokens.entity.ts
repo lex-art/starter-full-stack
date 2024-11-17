@@ -1,4 +1,5 @@
 import { BaseEntityWithTimestamps } from '@app/lib/entity/Base-entity'
+import { TYPE_VERIFICATION_TOKEN } from '@app/types/enums'
 import { Type } from 'class-transformer'
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
@@ -21,4 +22,10 @@ export class VerificationTokenEntity extends BaseEntityWithTimestamps {
 
 	@Column({ name: 'is_used', default: false })
 	isUsed!: boolean
+
+	@Column({
+		type: 'enum',
+		enum: TYPE_VERIFICATION_TOKEN
+	})
+	type: TYPE_VERIFICATION_TOKEN
 }

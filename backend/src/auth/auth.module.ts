@@ -10,7 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { CommandHandlers } from './commands/handlers'
 import { CommandServices } from './commands/services'
 import { AuthController } from './controllers/auth.controller'
-import { ProfileSubscriber } from './encrypt/profile.subscriber'
+import { EncryptEntitiesSubscriber } from './encrypt'
 import { AuthEntities } from './entities'
 import { EventsHandlers } from './events/handlers'
 import { JwtRefreshAuthGuard } from './guard/jwt-refresh.guard'
@@ -46,13 +46,13 @@ import { LocalStrategy } from './strategy/local.strategy'
 		...CommandServices,
 		...QueryUserHandler,
 		...EventsHandlers,
+		...EncryptEntitiesSubscriber,
 		EmailVerifyService,
 		JwtStrategy,
 		LocalStrategy,
 		LocalAuthGuard,
 		JwtRefreshAuthGuard,
 		CryptoUtility,
-		ProfileSubscriber,
 		{
 			provide: APP_GUARD, // this is to use global guard
 			useClass: JwtAuthGuard

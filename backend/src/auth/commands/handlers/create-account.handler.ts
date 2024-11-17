@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config'
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs'
 import { CreateAccountCommand } from '../command/create-account.command'
 import { CreateUserService } from '../services/create-user.service'
-import { GenerateVerificationService } from './../services/generate-verification.service'
+import { TokenVerificationService } from '../services/token-verification.service'
 
 @CommandHandler(CreateAccountCommand)
 export class CreateAccountHandler implements ICommandHandler<CreateAccountCommand> {
@@ -15,7 +15,7 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 	constructor(
 		private readonly eventBus: EventBus,
 		private readonly createUserService: CreateUserService,
-		private readonly generateVerificationService: GenerateVerificationService,
+		private readonly tokenVerificationService: TokenVerificationService,
 		private readonly configService: ConfigService
 	) {}
 
@@ -31,7 +31,9 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 						})
 					)
 				} else if (response.account.provider === TYPE_PROVIDER.CREDENTIALS) {
-					const token = await this.generateVerificationService.generate(response.email)
+					const token = await this.tokenVerificationService.generateVerificationEmail(
+						response.email
+					)
 					const url = `${this.configService.get<string>('URL_FRONTEND')}/auth/verify-account?token=${token}`
 					await this.eventBus.publish(
 						new VerifyAccountEvent(response.email, {

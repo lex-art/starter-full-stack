@@ -66,6 +66,16 @@
       "post": {
         "operationId": "UserController_changePassword",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginFormDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -184,6 +194,16 @@
       "delete": {
         "operationId": "AuthController_deleteAccount",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -270,6 +290,10 @@
   "components": {
     "schemas": {
       "FullUserDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "LoginFormDto": {
         "type": "object",
         "properties": {}
       },

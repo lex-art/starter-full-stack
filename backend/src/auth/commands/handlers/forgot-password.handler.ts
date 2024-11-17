@@ -3,9 +3,9 @@ import { EmailService } from '@app/mail'
 import { Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
-import { JwtService } from '@nestjs/jwt'
 import { ForgoPasswordCommand } from '../command/forgot-password.command'
 import { FindUserService } from '../services/find-user.service'
+import { TokenVerificationService } from '../services/token-verification.service'
 
 @CommandHandler(ForgoPasswordCommand)
 export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordCommand> {
@@ -13,21 +13,18 @@ export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordComma
 	constructor(
 		private readonly emailService: EmailService,
 		private readonly findUSer: FindUserService,
-		private readonly jwtService: JwtService,
-		private readonly configService: ConfigService
+		private readonly configService: ConfigService,
+		private readonly tokenVerificationService: TokenVerificationService
 	) {}
 
 	async execute(command: ForgoPasswordCommand) {
 		try {
 			const user = await this.findUSer.getUser(command.email)
-			const tokenForResetPass = this.jwtService.sign(
-				{ userId: user.userId, email: user.email },
-				{
-					expiresIn: this.configService.get('JWT_EXPIRATION_FORGOT_PASS_TIME')
-				}
+			const tokenForResetPass = await this.tokenVerificationService.generateVerificationResetPassword(
+				user.email
 			)
 			const url = `${this.configService.get('URL_FRONTEND')}/auth/reset-password?token=${tokenForResetPass}`
-			// TODO: still need to implement the correct template email
+
 			return await this.emailService.sendEmail({
 				email: user.email,
 				from: 'app <app@app.com>',

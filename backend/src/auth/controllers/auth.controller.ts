@@ -23,7 +23,7 @@ import { LoginUserCommand } from '../commands/command/login-user.command'
 import { RefreshTokenCommand } from '../commands/command/refresh-token.command'
 import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
 import { ResetPasswordDto, TokenDto } from '../dto'
-import { EmailDto, LoginFormDto } from '../dto/login.dto'
+import { EmailDto } from '../dto/login.dto'
 import { CreateUserDto, CurrentUserDto, UserDto } from '../dto/main-user.dto'
 import { AuthException } from '../exceptions'
 import { JwtRefreshAuthGuard } from '../guard/jwt-refresh.guard'
@@ -130,15 +130,11 @@ export class AuthController {
 
 	@Post('reset-password')
 	@Public()
-	async resetPassword(
-		@Body() body: ResetPasswordDto,
-		@Query() params: TokenDto
-	): Promise<{
+	async resetPassword(@Body() body: ResetPasswordDto): Promise<{
 		message: string
 		email: string
 	}> {
 		try {
-			body.token = params.token
 			const command = new ResetPasswordCommand(body)
 			return await this.commandBus.execute(command)
 		} catch (error) {
@@ -166,7 +162,8 @@ export class AuthController {
 	}
 
 	@Delete('delete-account')
-	async deleteAccount(@Body() body: Pick<LoginFormDto, 'email'>): Promise<{
+	@Public()
+	async deleteAccount(@Body() body: EmailDto): Promise<{
 		message: string
 		email: string
 	}> {

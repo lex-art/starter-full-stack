@@ -2,6 +2,7 @@ import { LoginFormDto } from '@app/auth/dto/login.dto'
 import { CurrentUserDto, UserDto } from '@app/auth/dto/main-user.dto'
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
+import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { compare } from '@app/lib/utilities'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -35,8 +36,8 @@ export class AuthService {
 		})
 
 		const refreshToken = this.jwtService.sign(payload, {
-			expiresIn: this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
-			secret: this.configService.get('JWT_REFRESH_SECRET')
+			expiresIn: this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
+			secret: this.configService.get<string>('JWT_REFRESH_SECRET')
 		})
 
 		return {
@@ -84,21 +85,14 @@ export class AuthService {
 			}
 		})
 
-		const isMatchPassword = await compare(password, user.password)
-		if (!isMatchPassword) {
-			throw new AuthException('Invalid password', 'INVALID_PASSWORD')
-		}
-
-		const validators = {
-			user_not_exist: (user: UserEntity) => !user,
-			account_not_exist: (user: UserEntity) => !user.account.length,
-			user_not_verified: (user: UserEntity) => user.verified // change this when you have a verification system
-		}
-
-		const error = Object.entries(validators).find(([, validator]) => validator(user))
+		const error = Object.entries(userValidator).find(([, validator]) => validator(user))
 		if (error) {
 			const [key] = error
 			throw new AuthException(key, key.toUpperCase())
+		}
+		const isMatchPassword = await compare(password, user.password)
+		if (!isMatchPassword) {
+			throw new AuthException('Invalid password', 'INVALID_PASSWORD')
 		}
 		delete user.password
 		return plainToClass(UserDto, {

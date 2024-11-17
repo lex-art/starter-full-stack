@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common'
+import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
@@ -7,6 +7,7 @@ import { ICurrentUser } from 'src/types/user.type'
 
 @Injectable()
 export class JwtRefreshAuthGuard extends AuthGuard('jwt') {
+	private readonly Logger = new Logger(JwtRefreshAuthGuard.name)
 	constructor(
 		private readonly jwtService: JwtService,
 		private readonly configService: ConfigService
@@ -22,12 +23,16 @@ export class JwtRefreshAuthGuard extends AuthGuard('jwt') {
 			throw new UnauthorizedException()
 		}
 		try {
-			const payload: ICurrentUser = await this.jwtService.verifyAsync(token, {
+			const payload: ICurrentUser = this.jwtService.verify(token, {
 				secret: this.configService.get<string>('JWT_REFRESH_SECRET')
 			})
 			request['user'] = payload
-		} catch (error: unknown) {
-			throw new UnauthorizedException()
+		} catch (error: any) {
+			this.Logger.error(error)
+			throw new UnauthorizedException({
+				message: error?.message,
+				code: 'INVALID_TOKEN'
+			})
 		}
 		return true
 	}

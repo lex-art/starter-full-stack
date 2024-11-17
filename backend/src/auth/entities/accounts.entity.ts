@@ -47,19 +47,28 @@ export class AccountEntity extends BaseEntityWithTimestamps {
 	type!: USER_TYPE
 
 	@Column({
-		type: 'simple-array',
-		nullable: true
+		type: 'enum',
+		enum: USER_PERMISSION,
+		array: true,
+		default: [USER_PERMISSION.ALL]
 	})
 	permissions!: USER_PERMISSION[]
 
 	@ManyToOne(() => UserEntity, (user) => user.account, {
 		createForeignKeyConstraints: true
+		/* onDelete: 'CASCADE' // Propaga el borrado desde la base de datos */
 	})
 	@JoinColumn({ name: 'user_id' })
 	user!: UserEntity
 
 	// this can be a one-to-one relationship if you want depending on your use case
-	@OneToOne(() => ProfileEntity, (profileDto) => profileDto.account)
+	@OneToOne(
+		() => ProfileEntity,
+		(profileDto) => profileDto.account /* {
+		cascade: true, // Propaga operaciones de persistencia y eliminación
+		onDelete: 'CASCADE' // Borra el perfil al eliminar la cuenta
+	} */
+	)
 	@JoinColumn({ name: 'profile_id' })
 	profile!: ProfileEntity
 }

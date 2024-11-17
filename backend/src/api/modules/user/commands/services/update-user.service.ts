@@ -1,4 +1,4 @@
-import { ResetPasswordDto, UserDto } from '@app/auth/dto'
+import { LoginFormDto, UserDto } from '@app/auth/dto'
 import { UserEntity } from '@app/auth/entities'
 import { encrypt } from '@app/lib/utilities'
 import { GeneralResponse } from '@app/types'
@@ -26,7 +26,7 @@ export class UpdateUserService {
 		}
 	}
 
-	async changePassword(data: Pick<ResetPasswordDto, 'password' | 'email'>): Promise<GeneralResponse> {
+	async changePassword(data: LoginFormDto): Promise<GeneralResponse> {
 		const user: UserEntity = await UserEntity.findOne({ where: { email: data.email } })
 		user.password = await encrypt(data.password)
 		await user.save()

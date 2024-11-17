@@ -1,13 +1,20 @@
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
-import { encrypt } from '@app/lib/utilities'
+import { userValidator } from '@app/auth/lib/validators'
 import { GeneralResponse } from '@app/types'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { compare, encrypt } from './../../../lib/utilities'
+import { FindUserService } from './find-user.service'
+import { TokenVerificationService } from './token-verification.service'
 
 @Injectable()
 export class ResetPasswordService {
-	constructor(private readonly jwtService: JwtService) {}
+	constructor(
+		private readonly jwtService: JwtService,
+		private readonly tokenVerificationService: TokenVerificationService,
+		private readonly findUSer: FindUserService
+	) {}
 
 	async resetPassword({
 		password,
@@ -19,31 +26,38 @@ export class ResetPasswordService {
 		email?: string
 		token?: string
 	}): Promise<GeneralResponse> {
-		let user: UserEntity = null
-		if (token) {
-			const dataUser: UserEntity = this.jwtService.verify(token)
-			if (!dataUser) {
-				throw new AuthException('Invalid token', 'INVALID_TOKEN')
-			}
-			user = await UserEntity.findOne({ where: { email: dataUser.email } })
+		const { email }: UserEntity = this.jwtService.verify(token)
+		if (!email) {
+			throw new AuthException('Invalid token', 'INVALID_TOKEN')
 		}
 
-		if (!user) {
-			throw new AuthException('User not found', 'USER_NOT_FOUND')
+		const user = await this.findUSer.getUser(email)
+
+		const error = Object.entries(userValidator).find(([, validator]) => validator(user))
+		if (error) {
+			const [key] = error
+			throw new AuthException(key, key.toUpperCase())
 		}
 
 		if (password !== confirmPassword) {
 			throw new AuthException('Password and confirm password do not match', 'PASSWORD_MISMATCH')
 		}
 
+		const comparePassword = await compare(password, user.password)
+		if (comparePassword) {
+			throw new AuthException(
+				'New password must be different from the old password',
+				'SAME_PASSWORD_ERROR'
+			)
+		}
+
+		await this.tokenVerificationService.verificationResetPassword(email, token)
 		user.password = await encrypt(password)
 		await user.save()
 
 		return {
 			message: 'Password reset successfully',
-			data: {
-				email: user.email
-			}
+			email: user.email
 		}
 	}
 }
