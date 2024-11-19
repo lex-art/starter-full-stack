@@ -97,6 +97,8 @@
     "/auth/register": {
       "post": {
         "operationId": "AuthController_register",
+        "summary": "Register a new user",
+        "description": "This is the method to register a new user without an admin",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -179,17 +181,6 @@
         }
       }
     },
-    "/auth/verify-account": {
-      "get": {
-        "operationId": "AuthController_verifyEmail",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/auth/delete-account": {
       "delete": {
         "operationId": "AuthController_deleteAccount",
@@ -206,6 +197,94 @@
         },
         "responses": {
           "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/verify-account": {
+      "get": {
+        "operationId": "AuthController_verifyEmail",
+        "summary": "Verify account by email",
+        "description": "This is the one of the method to verify account by email, the other is by OTP (One Time Password) by email",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The account has been verified successfully"
+          }
+        }
+      }
+    },
+    "/auth/resend-verification": {
+      "post": {
+        "operationId": "AuthController_resendVerification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/verify-otp": {
+      "post": {
+        "operationId": "AuthController_verifyOtp",
+        "summary": "Verify account by OTP",
+        "description": "This is the one of the method to verify account by OTP (One Time Password) by email, the other is by email verification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyEmailOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The account has been verified successfully"
+          }
+        }
+      }
+    },
+    "/auth/resend-otp": {
+      "post": {
+        "operationId": "AuthController_resendOtp",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
             "description": ""
           }
         }
@@ -306,6 +385,14 @@
         "properties": {}
       },
       "ResetPasswordDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "TokenDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "VerifyEmailOtpDto": {
         "type": "object",
         "properties": {}
       }

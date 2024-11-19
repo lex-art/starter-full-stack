@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
+import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { json, urlencoded } from 'express'
 import { writeFileSync } from 'fs'
@@ -10,7 +11,9 @@ declare const module: any
 async function bootstrap() {
 	const logger: Logger = new Logger('bootstrap')
 	try {
-		const app = await NestFactory.create(AppModule)
+		const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+			cors: true
+		})
 		app.use(
 			helmet({
 				contentSecurityPolicy: {

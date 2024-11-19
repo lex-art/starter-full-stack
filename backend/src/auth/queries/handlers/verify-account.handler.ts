@@ -6,9 +6,7 @@ import { EmailVerifyService } from '../services/email-verify.service'
 export class VerifyAccountHandler implements IQueryHandler<VerifyAccountQuery> {
 	constructor(private readonly emailVerifyService: EmailVerifyService) {}
 
-	async execute(query: VerifyAccountQuery): Promise<Promise<any>> {
-
-
+	async execute(query: VerifyAccountQuery): Promise<Promise<boolean>> {
 		return await this.emailVerifyService.verify(query.body.token)
 	}
 }

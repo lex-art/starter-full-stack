@@ -1,15 +1,16 @@
 import { TokenVerificationService } from '@app/auth/commands/services/token-verification.service'
-import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { Injectable, Logger } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { FindUserService } from './../../commands/services/find-user.service'
 
 @Injectable()
 export class EmailVerifyService {
 	private readonly logger = new Logger(EmailVerifyService.name)
 	constructor(
 		private readonly jwtService: JwtService,
-		private readonly tokenVerificationService: TokenVerificationService
+		private readonly tokenVerificationService: TokenVerificationService,
+		private readonly findUserService: FindUserService
 	) {}
 
 	async verify(token: string): Promise<boolean> {
@@ -19,13 +20,7 @@ export class EmailVerifyService {
 				throw new AuthException('Invalid token', 'INVALID_TOKEN')
 			}
 			await this.tokenVerificationService.verificationEmail(email, token)
-			const user = await UserEntity.findOne({
-				where: { email }
-			})
-
-			if (!user) {
-				throw new AuthException('This user does not own this token', 'TOKEN_USER_MISMATCH')
-			}
+			const user = await this.findUserService.getUser(email)
 
 			user.verified = true
 			await user.save()

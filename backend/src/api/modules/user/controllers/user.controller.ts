@@ -1,5 +1,5 @@
 import { ApiException } from '@app/api/exceptions/api.exception'
-import { LoginFormDto } from '@app/auth/dto'
+import { EmailDto, LoginFormDto } from '@app/auth/dto'
 import { BaseQueryPagination } from '@app/lib/dto/base-query-pagination'
 import { PaginationQueryDto } from '@app/lib/dto/query-pagination.dto'
 import {
@@ -15,12 +15,20 @@ import {
 	Query
 } from '@nestjs/common'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
+import { SkipThrottle } from '@nestjs/throttler'
 import { ChangePasswordCommand } from '../commands/command/change-password.command'
 import { UpdateUserCommand } from '../commands/command/update-user.command'
 import { FullUserDto } from '../dto/user.dot'
 import { GetAllUserQuery } from '../queries/query/get-all-user.query'
 import { GetUserQuery } from '../queries/query/get-user.query'
 
+@SkipThrottle() // SkipThrottle is a custom decorator to skip the rate limiter, Also we can use @SkipThrottle() in the specific method (route) to skip the rate limiter
+/* @Throttle({
+	default: {
+		limit: 10,
+		ttl: 60
+	}
+})  */ // Throttle is a custom decorator to limit the request rate, the first parameter is the limit and the second is the time frame in seconds
 @Controller('user')
 export class UserController {
 	private readonly logger = new Logger(UserController.name)
@@ -51,7 +59,7 @@ export class UserController {
 	}
 
 	@Get(':email')
-	async getUser(@Param() param: Pick<LoginFormDto, 'email'>) {
+	async getUser(@Param() param: EmailDto) {
 		try {
 			const query = new GetUserQuery(param)
 			return await this.queryBus.execute(query)

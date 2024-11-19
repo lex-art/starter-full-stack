@@ -10,7 +10,7 @@ export class NotificationVerifyAccountHandler implements IEventHandler<VerifyAcc
 		return this.emailService.sendEmail({
 			email: event.email,
 			from: '"Support Team" <support@gmail.com>',
-			subject: 'Welcome to the platform',
+			subject: 'Verify your account',
 			data: {
 				username: event.data.username,
 				url: event.data.url

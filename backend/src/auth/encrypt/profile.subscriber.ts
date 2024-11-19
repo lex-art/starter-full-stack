@@ -70,4 +70,16 @@ export class ProfileSubscriber implements EntitySubscriberInterface<ProfileEntit
 			throw new AuthException('Error encrypting data', 'ERROR_ENCRYPTING_DATA')
 		}
 	}
+
+	async afterInsert(event: InsertEvent<ProfileEntity>) {
+		this.logger.debug(`After insert event on entity ${event.entity.constructor.name}`)
+		try {
+			event.entity = await this._crypto.decryptEntityData<ProfileEntity>(
+				event.entity,
+				this.fieldsToEncrypt
+			)
+		} catch (error) {
+			this.logger.error(`Error after insert event on entity ${event.entity.constructor.name}`, error)
+		}
+	}
 }

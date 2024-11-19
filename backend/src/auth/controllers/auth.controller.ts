@@ -1,4 +1,5 @@
 import { CurrentUser, Public } from '@app/decorator'
+import { GeneralResponse } from '@app/types'
 import {
 	Body,
 	Controller,
@@ -15,14 +16,19 @@ import {
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
+import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { SkipThrottle, Throttle } from '@nestjs/throttler'
 import { Response } from 'express'
 import { CreateAccountCommand } from '../commands/command/create-account.command'
 import { DeleteAccountCommand } from '../commands/command/delete-account.command'
 import { ForgoPasswordCommand } from '../commands/command/forgot-password.command'
 import { LoginUserCommand } from '../commands/command/login-user.command'
 import { RefreshTokenCommand } from '../commands/command/refresh-token.command'
+import { ResendOtpCommand } from '../commands/command/resend-otp.command'
+import { ResendVerificationCommand } from '../commands/command/resend-verification.command'
 import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
-import { ResetPasswordDto, TokenDto } from '../dto'
+import { VerifyOtpCommand } from '../commands/command/verify-otp.command'
+import { ResetPasswordDto, TokenDto, VerifyEmailOtpDto } from '../dto'
 import { EmailDto } from '../dto/login.dto'
 import { CreateUserDto, CurrentUserDto, UserDto } from '../dto/main-user.dto'
 import { AuthException } from '../exceptions'
@@ -53,6 +59,18 @@ export class AuthController {
 		return new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
 	}
 
+	@Throttle({
+		default: {
+			limit: 5,
+			ttl: 60
+		}
+	})
+	@Throttle({
+		default: {
+			limit: 20,
+			ttl: 3600
+		}
+	})
 	@Post('login')
 	@Public()
 	@UseGuards(LocalAuthGuard)
@@ -74,7 +92,10 @@ export class AuthController {
 		}
 	}
 
-	// this method when the app need to register a new user without an admin
+	@ApiOperation({
+		summary: 'Register a new user',
+		description: 'This is the method to register a new user without an admin'
+	})
 	@Post('register')
 	@Public()
 	//@UseGuards(AuthGuard('jwt')) // this is an example of how to use jwt guard
@@ -99,6 +120,7 @@ export class AuthController {
 		}
 	}
 
+	@SkipThrottle()
 	@Post('refresh-token')
 	@Public()
 	@UseGuards(JwtRefreshAuthGuard)
@@ -114,6 +136,18 @@ export class AuthController {
 		}
 	}
 
+	@Throttle({
+		default: {
+			limit: 5,
+			ttl: 60
+		}
+	})
+	@Throttle({
+		default: {
+			limit: 20,
+			ttl: 3600
+		}
+	})
 	@Post('forgot-password')
 	@Public()
 	async forgotPassword(@Body() body: EmailDto): Promise<{
@@ -142,6 +176,32 @@ export class AuthController {
 		}
 	}
 
+	@Delete('delete-account')
+	@Public()
+	async deleteAccount(@Body() body: EmailDto): Promise<{
+		message: string
+		email: string
+	}> {
+		try {
+			const command = new DeleteAccountCommand(body.email)
+			return this.commandBus.execute(command)
+		} catch (error) {
+			throw this.handleGeneralException(error)
+		}
+	}
+
+	@ApiOperation({
+		summary: 'Verify account by email',
+		description:
+			'This is the one of the method to verify account by email, the other is by OTP (One Time Password) by email'
+	})
+	@ApiBody({
+		type: TokenDto
+	})
+	@ApiResponse({
+		status: 200,
+		description: 'The account has been verified successfully'
+	})
 	@Get('verify-account')
 	@Public()
 	async verifyEmail(@Query() token: TokenDto, @Res() res: Response) {
@@ -161,15 +221,69 @@ export class AuthController {
 		}
 	}
 
-	@Delete('delete-account')
+	@Throttle({
+		default: {
+			limit: 1,
+			ttl: 60
+		}
+	})
+	@Post('resend-verification')
 	@Public()
-	async deleteAccount(@Body() body: EmailDto): Promise<{
+	async resendVerification(@Body() body: EmailDto): Promise<{
 		message: string
 		email: string
 	}> {
 		try {
-			const command = new DeleteAccountCommand(body.email)
-			return this.commandBus.execute(command)
+			const command = new ResendVerificationCommand(body)
+			return await this.commandBus.execute(command)
+		} catch (error) {
+			throw this.handleGeneralException(error)
+		}
+	}
+
+	@ApiOperation({
+		summary: 'Verify account by OTP',
+		description:
+			'This is the one of the method to verify account by OTP (One Time Password) by email, the other is by email verification'
+	})
+	@ApiBody({
+		type: VerifyEmailOtpDto
+	})
+	@ApiResponse({
+		status: 200,
+		description: 'The account has been verified successfully'
+	})
+	@Post('verify-otp')
+	@Public()
+	async verifyOtp(@Body() body: VerifyEmailOtpDto): Promise<GeneralResponse> {
+		try {
+			const command = new VerifyOtpCommand(body)
+			const verified = await this.commandBus.execute(command)
+			if (verified) {
+				return {
+					message: 'OTP verified successfully'
+				}
+			}
+			return {
+				message: 'OTP verification failed'
+			}
+		} catch (error) {
+			throw this.handleGeneralException(error)
+		}
+	}
+
+	@Throttle({
+		default: {
+			limit: 1,
+			ttl: 60
+		}
+	})
+	@Post('resend-otp')
+	@Public()
+	async resendOtp(@Body() body: EmailDto): Promise<GeneralResponse> {
+		try {
+			const command = new ResendOtpCommand(body)
+			return await this.commandBus.execute(command)
 		} catch (error) {
 			throw this.handleGeneralException(error)
 		}

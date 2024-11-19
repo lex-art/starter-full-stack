@@ -1,6 +1,6 @@
 import { EmailDto } from '@app/auth/dto'
-import { IQuery } from '@nestjs/cqrs'
+import { ICommand } from '@nestjs/cqrs'
 
-export class GetUserQuery implements IQuery {
+export class ResendOtpCommand implements ICommand {
 	constructor(public readonly body: EmailDto) {}
 }

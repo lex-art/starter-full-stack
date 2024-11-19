@@ -1,11 +1,11 @@
 import { CurrentUserDto } from '@app/auth/dto'
-import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { GeneralResponse } from '@app/types'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
+import { FindUserService } from './find-user.service'
 
 @Injectable()
 export class RefreshTokenService {
@@ -13,20 +13,14 @@ export class RefreshTokenService {
 
 	constructor(
 		private readonly jwtService: JwtService,
-		private readonly configService: ConfigService
+		private readonly configService: ConfigService,
+		private readonly findUserService: FindUserService
 	) {}
 
 	async refreshToken(user: CurrentUserDto): Promise<GeneralResponse> {
 		try {
 			const { email, userId } = user
-			const validateUser = await UserEntity.findOne({
-				where: { email, userId },
-				relations: {
-					account: {
-						profile: true
-					}
-				}
-			})
+			const validateUser = await this.findUserService.getUser(email, userId)
 
 			const error = Object.entries(userValidator).find(([, validator]) => validator(validateUser))
 			if (error) {

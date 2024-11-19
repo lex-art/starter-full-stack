@@ -1,3 +1,4 @@
+import { NotificationEmailOTPEvent } from '@app/auth/events/event/notification-email-otp-verify.event'
 import { UserCreatedEvent } from '@app/auth/events/event/notification-email-user-created.event'
 import { VerifyAccountEvent } from '@app/auth/events/event/notification-email-verify-account.even'
 import { AuthException } from '@app/auth/exceptions'
@@ -31,16 +32,28 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 						})
 					)
 				} else if (response.account.provider === TYPE_PROVIDER.CREDENTIALS) {
-					const token = await this.tokenVerificationService.generateVerificationEmail(
-						response.email
-					)
-					const url = `${this.configService.get<string>('URL_FRONTEND')}/auth/verify-account?token=${token}`
-					await this.eventBus.publish(
-						new VerifyAccountEvent(response.email, {
-							username: response.username,
-							url
-						})
-					)
+					// This flag would be in another place or method of flagMethodVerify
+					const flagMethodVerify = this.configService.get<string>('FLAG_METHOD_VERIFY')
+					if (flagMethodVerify === 'OTP') {
+						const generateOtp = await this.tokenVerificationService.generateOTP(response.email)
+						await this.eventBus.publish(
+							new NotificationEmailOTPEvent(response.email, {
+								username: response.username,
+								otp: generateOtp.otp
+							})
+						)
+					} else {
+						const token = await this.tokenVerificationService.generateVerificationEmail(
+							response.email
+						)
+						const url = `${this.configService.get<string>('URL_FRONTEND')}/auth/verify-account?token=${token}`
+						await this.eventBus.publish(
+							new VerifyAccountEvent(response.email, {
+								username: response.username,
+								url
+							})
+						)
+					}
 				}
 				delete response.password
 				return {

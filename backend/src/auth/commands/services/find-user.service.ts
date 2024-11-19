@@ -5,9 +5,10 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class FindUserService {
-	async getUser(email: string) {
+	async getUser(email?: string, userId?: string): Promise<UserEntity> {
 		const user = await UserEntity.findOne({
-			where: { email },
+			...(email && { where: { email } }),
+			...(userId && { where: { userId } }),
 			relations: {
 				account: {
 					profile: true
@@ -18,6 +19,22 @@ export class FindUserService {
 		if (error) {
 			const [key] = error
 			throw new AuthException(key, key.toUpperCase())
+		}
+		return user
+	}
+
+	async getRawUser(email?: string, userId?: string): Promise<UserEntity> {
+		const user = await UserEntity.findOne({
+			...(email && { where: { email } }),
+			...(userId && { where: { userId } }),
+			relations: {
+				account: {
+					profile: true
+				}
+			}
+		})
+		if (!user) {
+			throw new AuthException('User not found', 'USER_NOT_FOUND')
 		}
 		return user
 	}

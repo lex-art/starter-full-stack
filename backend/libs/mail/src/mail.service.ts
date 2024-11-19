@@ -1,11 +1,13 @@
 import { MailerService } from '@nestjs-modules/mailer'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { EmailException } from './exceptions'
 
 type TemplatesName =
 	| 'user/new-user.template.hbs'
 	| 'user/forgot-password.template.hbs'
 	| 'user/verify-account.template.hbs'
+	| 'user/verify-otp.template.hbs'
 
 interface EmailData {
 	email: string
@@ -29,28 +31,22 @@ export class EmailService {
 		error?: { code: string }
 		data?: Record<string, unknown>
 	}> {
-		return await this.mailerService
-			.sendMail({
+		try {
+			await this.mailerService.sendMail({
 				to: email,
 				from,
 				subject,
 				template,
 				context: data
 			})
-			.then(() => {
-				this.logger.log('[Email service] Email sent')
-				return {
-					message: 'Email sent'
-				}
-			})
-			.catch((error) => {
-				this.logger.error('[Email service] Error sending email =>', error)
-				return {
-					message: 'Error sending email',
-					error: {
-						code: error.message ?? 'UNKNOWN_ERROR'
-					}
-				}
-			})
+
+			this.logger.log('[Email service] Email sent')
+			return {
+				message: 'Email sent'
+			}
+		} catch (error) {
+			this.logger.error('[Email service] Error sending email =>', error)
+			throw new EmailException('Error sending email', 'EMAIL_ERROR')
+		}
 	}
 }

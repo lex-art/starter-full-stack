@@ -3,11 +3,13 @@ import { FileCreationModule } from '@app/file-creation'
 import { MailModule } from '@app/mail'
 import { Module, ValidationPipe } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { APP_PIPE } from '@nestjs/core'
+import { APP_GUARD, APP_PIPE } from '@nestjs/core'
+import { ThrottlerModule } from '@nestjs/throttler'
 import { ApiModule } from './api/api.module'
 import { AppController } from './app.controller'
 import { AuthModule } from './auth/auth.module'
 import { DatabaseModule } from './database/database.module'
+import { CustomThrottlerGuard } from './lib/Guard/throttler.guard'
 
 @Module({
 	imports: [
@@ -21,7 +23,25 @@ import { DatabaseModule } from './database/database.module'
 		AuthModule,
 		AttachmentModule,
 		FileCreationModule,
-		MailModule
+		MailModule,
+		// Control rate limit
+		ThrottlerModule.forRoot([
+			{
+				name: 'short',
+				ttl: 1000, // 1 second
+				limit: 5
+			},
+			{
+				name: 'medium',
+				ttl: 10000, // 10 seconds
+				limit: 25
+			},
+			{
+				name: 'long',
+				ttl: 60000,
+				limit: 250 // 1 minute
+			}
+		])
 	],
 	controllers: [AppController],
 	providers: [
@@ -37,8 +57,8 @@ import { DatabaseModule } from './database/database.module'
 			})
 		},
 		{
-			provide: APP_PIPE,
-			useClass: ValidationPipe
+			provide: APP_GUARD,
+			useClass: CustomThrottlerGuard // or => ThrottlerGuard
 		}
 	]
 })
