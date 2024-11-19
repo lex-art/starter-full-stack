@@ -91,7 +91,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/register": {
@@ -114,7 +117,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/logout": {
@@ -125,7 +131,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/refresh-token": {
@@ -136,7 +145,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/forgot-password": {
@@ -157,7 +169,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/reset-password": {
@@ -178,7 +193,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/delete-account": {
@@ -199,7 +217,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/verify-account": {
@@ -222,7 +243,10 @@
           "200": {
             "description": "The account has been verified successfully"
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/resend-verification": {
@@ -243,7 +267,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/verify-otp": {
@@ -266,7 +293,10 @@
           "200": {
             "description": "The account has been verified successfully"
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/auth/resend-otp": {
@@ -287,7 +317,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/upload": {

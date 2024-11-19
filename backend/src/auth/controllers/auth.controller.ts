@@ -16,7 +16,7 @@ import {
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { SkipThrottle, Throttle } from '@nestjs/throttler'
 import { Response } from 'express'
 import { CreateAccountCommand } from '../commands/command/create-account.command'
@@ -36,6 +36,7 @@ import { JwtRefreshAuthGuard } from '../guard/jwt-refresh.guard'
 import { LocalAuthGuard } from '../guard/local.guard'
 import { VerifyAccountQuery } from '../queries/query/verify-account.query'
 
+@ApiTags('Auth') // this is for swagger documentation
 @Controller('auth')
 export class AuthController {
 	private readonly logger = new Logger(AuthController.name)
