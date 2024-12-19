@@ -18,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@app/components/ui/sidebar"
+import { ModeToggle } from "@app/components/mode-toggle"
 
 export function TeamSwitcher({
   teams,
@@ -50,6 +51,7 @@ export function TeamSwitcher({
                 <span className="truncate text-xs">{activeTeam.plan}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
+              
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -82,6 +84,7 @@ export function TeamSwitcher({
               <div className="font-medium text-muted-foreground">Add team</div>
             </DropdownMenuItem>
           </DropdownMenuContent>
+          <ModeToggle />
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>

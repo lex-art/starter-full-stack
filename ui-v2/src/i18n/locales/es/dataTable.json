@@ -1,0 +1,24 @@
+{
+	"head": {
+		"title": "Título",
+		"description": "Descripción",
+		"status": "Estado",
+		"actions": "Acciones",
+		"id": "ID",
+		"name": "Nombre",
+		"lastName": "Apellido",
+		"username": "Nombre de usuario",
+		"email": "Correo electrónico",
+		"phone": "Teléfono",
+		"address": "Dirección",
+		"city": "Ciudad",
+		"state": "Estado",
+		"zip": "Código postal",
+		"country": "País",
+		"company": "Empresa",
+		"jobTitle": "Título del trabajo",
+		"department": "Departamento",
+		"manager": "Gerente",
+		"role": "Rol"
+	}
+}
