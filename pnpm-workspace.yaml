@@ -1,4 +1,4 @@
 packages:
   - backend
-  - ui
   - ui-v2
+  # - ui
