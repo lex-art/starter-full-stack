@@ -96,5 +96,8 @@
 	"view": "Ver",
 	"submit": "Enviar",
 	"resetPassword": "Restablecer contraseña",
-	"update": "Actualizar"
+	"update": "Actualizar",
+	"dashboard": "Tablero",
+	"spanish": "Español",
+	"english": "Inglés"
 }

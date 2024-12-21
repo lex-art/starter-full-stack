@@ -8,23 +8,28 @@ import {
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
-import { locales, usePathname, useRouter } from '@/i18n/routing'
-import { useLocale } from 'next-intl'
+import { usePathname, useRouter } from '@/i18n/routing'
+import { useLocale, useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 export function LangToggle() {
+	const t = useTranslations()
 	const locale = useLocale()
 	const redirect = useRouter()
 	const otherLocale = locale === 'es' ? 'en' : 'es'
 	const pathname = usePathname()
-	console.log('====================================')
-	console.log(otherLocale)
-	console.log('====================================')
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline" size="icon">
-					<span className="h-[1.8rem] w-[1.8rem] text-xl  transition-all">
-						{locale === 'es' ? '🇬🇹' : '🇺🇸'}
+					<span className="h-[1.8rem] w-[1.8rem] text-xl  transition-all flex items-center justify-center">
+						<Image
+							src={`/img/flags/${locale}.png`}
+							alt={locale === 'es' ? 'Spanish Flag' : 'English Flag'}
+							width={25}
+							height={25}
+						/>
 					</span>
 
 					<span className="sr-only">Toggle theme</span>
@@ -36,14 +41,14 @@ export function LangToggle() {
 						redirect.push(pathname ?? '/', { locale: otherLocale })
 					}
 				>
-					Español
+					{t('common.spanish')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					onClick={() =>
 						redirect.push(pathname ?? '/', { locale: otherLocale })
 					}
 				>
-					Ingles
+					{t('common.english')}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

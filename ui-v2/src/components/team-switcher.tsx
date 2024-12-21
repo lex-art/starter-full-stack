@@ -18,8 +18,6 @@ import {
 	SidebarMenuItem,
 	useSidebar
 } from '@/components/ui/sidebar'
-import { LangToggle } from './lang-switcher'
-import { ModeToggle } from './toogle-switcher'
 
 export function TeamSwitcher({
 	teams
@@ -86,10 +84,6 @@ export function TeamSwitcher({
 							</div>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
-					<div className="flex justify-end gap-2">
-						<LangToggle />
-						<ModeToggle />
-					</div>
 				</DropdownMenu>
 			</SidebarMenuItem>
 		</SidebarMenu>
