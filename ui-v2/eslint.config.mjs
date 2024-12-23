@@ -1,5 +1,5 @@
 import { FlatCompat } from '@eslint/eslintrc'
-import { rules } from 'eslint-config-prettier'
+import eslintPluginPrettier from 'eslint-plugin-prettier'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -17,10 +17,11 @@ const eslintConfig = [
 		'plugin:storybook/recommended'
 	),
 	{
-		plugins: ['prettier'],
+		plugins: {
+			prettier: eslintPluginPrettier
+		},
 		rules: {
-			...rules,
-			'prettier/prettier': 'error'
+			...eslintPluginPrettier.configs.recommended.rules
 		}
 	}
 ]
