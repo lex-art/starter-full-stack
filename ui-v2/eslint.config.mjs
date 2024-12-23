@@ -21,7 +21,8 @@ const eslintConfig = [
 			prettier: eslintPluginPrettier
 		},
 		rules: {
-			...eslintPluginPrettier.configs.recommended.rules
+			...eslintPluginPrettier.configs.recommended.rules,
+			'@typescript-eslint/no-explicit-any': 'off'
 		}
 	}
 ]

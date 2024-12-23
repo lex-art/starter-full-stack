@@ -130,7 +130,7 @@ export const menuRoutes: Array<IMenuSidebar> = [
 					{
 						role: [],
 						title: 'common.uploadFile',
-						url: '/components/uploadFile'
+						url: '/components/upload-file'
 					},
 					{
 						role: [],

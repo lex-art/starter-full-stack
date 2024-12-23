@@ -49,7 +49,7 @@ export function NavMain({
 							>
 								<SidebarMenuItem>
 									<CollapsibleTrigger asChild>
-										<Link href={item.url}>
+										<Link href={item.url} className="w-full">
 											<SidebarMenuButton
 												tooltip={t(item.title)}
 												className="hover:bg-primary-foreground py-3 rounded-lg"
