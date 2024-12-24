@@ -21,6 +21,7 @@ interface IMenuRoute {
 	role?: Array<USER_ROLE>
 	icon?: LucideIcon
 	isActive?: boolean
+	currentPathname?: string
 	items?: Array<{
 		title: IMessagesKey
 		url: string

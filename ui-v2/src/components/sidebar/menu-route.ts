@@ -53,6 +53,7 @@ export const menuRoutes: Array<IMenuSidebar> = [
 				title: 'common.elements',
 				url: '#',
 				icon: Command,
+				isActive: true,
 				items: [
 					{
 						role: [],
