@@ -22,7 +22,7 @@ export function LangToggle() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="outline" size="icon">
+				<Button variant="ghost" size="icon">
 					<span className="h-[1.8rem] w-[1.8rem] text-xl  transition-all flex items-center justify-center">
 						<Image
 							src={`/img/flags/${locale}.png`}

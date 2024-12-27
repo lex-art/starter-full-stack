@@ -18,7 +18,7 @@ export function NavItem({
 					<Link href={url} className="w-full">
 						<SidebarMenuButton
 							tooltip={t(title)}
-							className={`${url === currentPathname ? 'bg-primary-foreground' : ''}  hover:bg-primary-foreground  py-1 rounded-lg`}
+							className={`${url === currentPathname ? 'bg-primary-foreground' : ''}  hover:bg-primary-foreground py-5 rounded-lg`}
 						>
 							{Icon && <Icon />}
 							<span>{t(title)}</span>

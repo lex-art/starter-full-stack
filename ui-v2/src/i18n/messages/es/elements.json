@@ -40,5 +40,12 @@
 	"muted": "Silenciado",
 	"list": "Lista",
 	"blockquote": "Cita",
-	"headings": "Encabezados"
+	"headings": "Encabezados",
+	"solid": "Sólido",
+	"link": "Enlace",
+	"textField": "Campo de texto",
+	"types": "Tipos",
+	"variant": "{count, plural, =1 {Variante} other {Variantes}}",
+	"standard": "Estándar",
+	"filled": "Relleno"
 }

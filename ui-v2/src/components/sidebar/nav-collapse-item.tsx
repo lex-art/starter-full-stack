@@ -54,7 +54,7 @@ export function NavCollapsibleItem({
 							.map((subItem) => (
 								<SidebarMenuSubItem
 									key={subItem.title}
-									className={`${subItem.url === currentPathname ? 'bg-primary-foreground' : ''}  hover:bg-primary-foreground  py-1 rounded-lg`}
+									className={`${subItem.url === currentPathname ? 'bg-primary-foreground' : ''}  hover:bg-primary-foreground py-1 rounded-lg`}
 								>
 									<SidebarMenuSubButton asChild>
 										<Link href={subItem.url}>
