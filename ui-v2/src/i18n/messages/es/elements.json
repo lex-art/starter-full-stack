@@ -48,5 +48,7 @@
 	"variant": "{count, plural, =1 {Variante} other {Variantes}}",
 	"standard": "Estándar",
 	"filled": "Relleno",
-	"icons": "Iconos"
+	"icons": "Iconos",
+	"select": "Seleccionar",
+	"selectAnOption": "Seleccionar una opción"
 }
