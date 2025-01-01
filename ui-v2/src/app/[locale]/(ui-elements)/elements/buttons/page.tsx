@@ -17,31 +17,35 @@ export default function InputPage() {
 					<Typography variant="h2">{t('elements.solid')}</Typography>
 
 					<div className="py-4 gap-4 flex">
-						<Button variant="default" color="primary">
+						<Button variant="contained" color="primary">
 							Primary
 						</Button>
 
-						<Button variant="default" color="secondary">
+						<Button variant="contained" color="secondary">
 							Secondary
 						</Button>
 
-						<Button variant="default" color="success">
+						<Button variant="contained" color="success">
 							Success
 						</Button>
 
-						<Button variant="default" color="warning">
+						<Button variant="contained" color="warning">
 							Warning
 						</Button>
 
-						<Button variant="default" color="error">
+						<Button variant="contained" color="info">
+							Warning
+						</Button>
+
+						<Button variant="contained" color="error">
 							error
 						</Button>
 
-						<Button variant="default" color="light">
+						<Button variant="contained" color="light">
 							Light
 						</Button>
 
-						<Button variant="default" color="dark">
+						<Button variant="contained" color="dark">
 							Dark
 						</Button>
 					</div>
@@ -49,31 +53,31 @@ export default function InputPage() {
 				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
 					<Typography variant="h2">{t('elements.outlined')}</Typography>
 					<div className="py-4 gap-4 flex">
-						<Button variant="outline" color="primary">
+						<Button variant="outlined" color="primary">
 							Primary
 						</Button>
 
-						<Button variant="outline" color="secondary">
+						<Button variant="outlined" color="secondary">
 							Secondary
 						</Button>
 
-						<Button variant="outline" color="success">
+						<Button variant="outlined" color="success">
 							Success
 						</Button>
 
-						<Button variant="outline" color="warning">
+						<Button variant="outlined" color="warning">
 							Warning
 						</Button>
 
-						<Button variant="outline" color="error">
+						<Button variant="outlined" color="error">
 							error
 						</Button>
 
-						<Button variant="outline" color="light">
+						<Button variant="outlined" color="light">
 							Light
 						</Button>
 
-						<Button variant="outline" color="dark">
+						<Button variant="outlined" color="dark">
 							Dark
 						</Button>
 					</div>
@@ -96,6 +100,10 @@ export default function InputPage() {
 
 						<Button variant="text" color="warning">
 							Warning
+						</Button>
+
+						<Button variant="text" color="info">
+							Info
 						</Button>
 
 						<Button variant="text" color="error">
@@ -185,8 +193,8 @@ export default function InputPage() {
 							Icon
 						</Button>
 
-						<Button color="primary" size="default">
-							Default
+						<Button color="primary" size="md">
+							contained
 						</Button>
 
 						<Button color="warning" size="sm">

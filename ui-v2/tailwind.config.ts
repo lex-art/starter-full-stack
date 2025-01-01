@@ -60,7 +60,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				success: '#22c55e',
+				warning: '#f59e0b',
+				error: '#f43f5e',
+				info: '#0ea5e9',
+				light: '#e2e8f0',
+				dark: '#111827'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

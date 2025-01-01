@@ -47,5 +47,6 @@
 	"types": "Tipos",
 	"variant": "{count, plural, =1 {Variante} other {Variantes}}",
 	"standard": "Estándar",
-	"filled": "Relleno"
+	"filled": "Relleno",
+	"icons": "Iconos"
 }

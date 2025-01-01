@@ -9,8 +9,8 @@ import { IMenuRoute } from '@/types/Menu-sidebar'
 import { IMessagesKey } from '@/types/Messages'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
-import { NavItem } from './nav-item'
 import { NavCollapsibleItem } from './nav-collapse-item'
+import { NavItem } from './nav-item'
 
 export function NavMain({
 	items,

@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { forwardRef } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 
 const typographyVariants = cva('', {
 	variants: {
@@ -12,11 +12,12 @@ const typographyVariants = cva('', {
 			body: 'leading-7 [&:not(:first-child)]:mt-6',
 			blockquote: 'mt-6 border-l-2 pl-6 italic',
 			list: 'my-6 ml-6 list-disc [&>li]:mt-2',
-      small: 'text-sm font-medium leading-none',
-      large: 'text-lg font-semibold',
-			helper: 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+			small: 'text-sm font-medium leading-none',
+			large: 'text-lg font-semibold',
+			helper:
+				'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
 		},
-		customColor: {
+		color: {
 			primary: 'text-primary-foreground',
 			secondary: 'text-secondary-foreground',
 			success: 'text-green-500',
@@ -24,38 +25,45 @@ const typographyVariants = cva('', {
 			error: 'text-rose-500',
 			light: 'text-gray-100',
 			dark: 'text-gray-800',
-			default: 'text-secondary-foreground',
+			default: 'text-secondary-foreground'
 		},
-    weight: {
+		weight: {
 			bold: 'font-bold',
 			extrabold: 'font-extrabold',
 			semibold: 'font-semibold',
-      medium: 'font-medium',
-      regular: 'font-normal',
-      light: 'font-light',
-    },
+			medium: 'font-medium',
+			regular: 'font-normal',
+			light: 'font-light'
+		},
 		muted: {
 			true: 'text-muted-foreground'
 		}
 	},
 	defaultVariants: {
-    weight: 'regular',
+		weight: 'regular',
 		variant: 'body'
 	}
 })
 
-export interface TypographyProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof typographyVariants> {
-  children: React.ReactNode;
-}
+type TypographyProps = HTMLAttributes<HTMLElement> &
+	VariantProps<typeof typographyVariants> & {
+		children: React.ReactNode
+	}
 
 const h1 = forwardRef<HTMLHeadingElement, TypographyProps>(
-	({ children, weight, muted, className, customColor, ...props }, ref) => {
+	({ children, weight, muted, className, color, ...props }, ref) => {
 		return (
 			<h1
 				ref={ref}
-				className={
-					cn(typographyVariants({ variant: 'h1', weight, muted, customColor, className }))
-				}
+				className={cn(
+					typographyVariants({
+						variant: 'h1',
+						weight,
+						muted,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -63,14 +71,22 @@ const h1 = forwardRef<HTMLHeadingElement, TypographyProps>(
 		)
 	}
 )
+h1.displayName = 'TypographyH1'
+
 const h2 = forwardRef<HTMLHeadingElement, TypographyProps>(
-	({ children, weight, muted, className, customColor, ...props }, ref) => {
+	({ children, weight, muted, className, color, ...props }, ref) => {
 		return (
 			<h2
 				ref={ref}
-				className={
-          cn(typographyVariants({ variant: 'h2', weight, muted, customColor, className }))
-        }
+				className={cn(
+					typographyVariants({
+						variant: 'h2',
+						weight,
+						muted,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -79,14 +95,22 @@ const h2 = forwardRef<HTMLHeadingElement, TypographyProps>(
 	}
 )
 
+h2.displayName = 'TypographyH2'
+
 const h3 = forwardRef<HTMLHeadingElement, TypographyProps>(
-	({ children, weight,muted, className, customColor, ...props }, ref) => {
+	({ children, weight, muted, className, color, ...props }, ref) => {
 		return (
 			<h3
 				ref={ref}
-				className={
-          cn(typographyVariants({ variant: 'h3', weight, muted,customColor, className }))
-        }
+				className={cn(
+					typographyVariants({
+						variant: 'h3',
+						weight,
+						muted,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -95,14 +119,22 @@ const h3 = forwardRef<HTMLHeadingElement, TypographyProps>(
 	}
 )
 
+h3.displayName = 'TypographyH3'
+
 const h4 = forwardRef<HTMLHeadingElement, TypographyProps>(
-	({ children, weight,muted, className, customColor, ...props }, ref) => {
+	({ children, weight, muted, className, color, ...props }, ref) => {
 		return (
 			<h4
 				ref={ref}
-				className={
-          cn(typographyVariants({ variant: 'h4', weight, muted,customColor, className }))
-        }
+				className={cn(
+					typographyVariants({
+						variant: 'h4',
+						weight,
+						muted,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -110,13 +142,21 @@ const h4 = forwardRef<HTMLHeadingElement, TypographyProps>(
 		)
 	}
 )
+h4.displayName = 'TypographyH4'
 
 const body = forwardRef<HTMLParagraphElement, TypographyProps>(
-	({ children, weight, className, customColor,...props }, ref) => {
+	({ children, weight, className, color, ...props }, ref) => {
 		return (
 			<p
 				ref={ref}
-				className={cn(typographyVariants({ variant: 'body', weight,customColor, className }))}
+				className={cn(
+					typographyVariants({
+						variant: 'body',
+						weight,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -124,15 +164,22 @@ const body = forwardRef<HTMLParagraphElement, TypographyProps>(
 		)
 	}
 )
+body.displayName = 'TypographyBody'
 
 const blockquote = forwardRef<HTMLQuoteElement, TypographyProps>(
-	({ children,weight, muted, className, customColor,...props }, ref) => {
+	({ children, weight, muted, className, color, ...props }, ref) => {
 		return (
 			<blockquote
 				ref={ref}
-				className={
-          cn(typographyVariants({ variant: 'blockquote', weight, muted,customColor, className }))
-        }
+				className={cn(
+					typographyVariants({
+						variant: 'blockquote',
+						weight,
+						muted,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -140,36 +187,67 @@ const blockquote = forwardRef<HTMLQuoteElement, TypographyProps>(
 		)
 	}
 )
+blockquote.displayName = 'TypographyBlockquote'
 
 const small = forwardRef<HTMLHeadingElement, TypographyProps>(
-  ({ children, weight, className,customColor, ...props }, ref) => {
-    return (
-      <small
-        ref={ref}
-        className={cn(typographyVariants({ variant: 'small', weight, customColor, className }))}
-        {...props}
-      >
-        {children}
-      </small>
-    )
-  }
+	({ children, weight, className, color, ...props }, ref) => {
+		return (
+			<small
+				ref={ref}
+				className={cn(
+					typographyVariants({
+						variant: 'small',
+						weight,
+						color,
+						className
+					})
+				)}
+				{...props}
+			>
+				{children}
+			</small>
+		)
+	}
 )
 
+small.displayName = 'TypographySmall'
+
 const large = forwardRef<HTMLDivElement, TypographyProps>(
-  ({ children, weight, className, customColor, ...props }, ref) => {
-    return (
-      <div ref={ref} className={
-				cn(typographyVariants({ variant: 'large', weight, customColor, className }))
-			} {...props }>{children}</div>
-    )
-  })
+	({ children, weight, className, color, ...props }, ref) => {
+		return (
+			<div
+				ref={ref}
+				className={cn(
+					typographyVariants({
+						variant: 'large',
+						weight,
+						color,
+						className
+					})
+				)}
+				{...props}
+			>
+				{children}
+			</div>
+		)
+	}
+)
+
+large.displayName = 'TypographyLarge'
 
 const list = forwardRef<HTMLUListElement, TypographyProps>(
-	({ children, weight, className, customColor, ...props }, ref) => {
+	({ children, weight, className, color, ...props }, ref) => {
 		return (
 			<ul
 				ref={ref}
-				className={cn(typographyVariants({ variant: 'list', weight,customColor, className }))}
+				className={cn(
+					typographyVariants({
+						variant: 'list',
+						weight,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -178,12 +256,21 @@ const list = forwardRef<HTMLUListElement, TypographyProps>(
 	}
 )
 
+list.displayName = 'TypographyList'
+
 const helper = forwardRef<HTMLLabelElement, TypographyProps>(
-	({ children, weight, className,customColor, ...props }, ref) => {
+	({ children, weight, className, color, ...props }, ref) => {
 		return (
 			<span
 				ref={ref}
-				className={cn(typographyVariants({ variant: 'helper', weight,customColor, className }))}
+				className={cn(
+					typographyVariants({
+						variant: 'helper',
+						weight,
+						color,
+						className
+					})
+				)}
 				{...props}
 			>
 				{children}
@@ -191,6 +278,7 @@ const helper = forwardRef<HTMLLabelElement, TypographyProps>(
 		)
 	}
 )
+helper.displayName = 'TypographyHelper'
 
 const variants = {
 	h1,
@@ -198,8 +286,8 @@ const variants = {
 	h3,
 	h4,
 	body,
-  small,
-  large,
+	small,
+	large,
 	blockquote,
 	list,
 	helper
@@ -216,4 +304,5 @@ const Typography = forwardRef<HTMLHeadingElement, TypographyProps>(
 	}
 )
 
+Typography.displayName = 'Typography'
 export { Typography }
