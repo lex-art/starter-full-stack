@@ -11,10 +11,10 @@ const inputVariants = cva(
 		variants: {
 			variant: {
 				default: 'border-input focus-visible:ring-ring shadow-sm ',
-				outline: 'border-[--color] focus-visible:ring-[--color] shadow-sm',
+				outline: 'shadow-sm',
 				pill: 'rounded-full shadow-sm',
 				standard:
-					'rounded-none focus-visible:ring-0 border-b-1 focus-visible:border-b-2  border-t-0 border-l-0 border-r-0 ',
+					'rounded-none focus-visible:ring-0 border-b-1 focus-visible:border-b-2 border-t-0 border-l-0 border-r-0 ',
 				text: 'border-0 focus-visible:ring-0 !text-[--color]'
 			},
 			color: {
@@ -82,7 +82,7 @@ const inputVariants = cva(
 		defaultVariants: {
 			variant: 'default',
 			size: 'default',
-			color: 'primary'
+			color: 'default'
 		}
 	}
 )

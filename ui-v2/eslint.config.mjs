@@ -17,6 +17,7 @@ const eslintConfig = [
 		'next/core-web-vitals',
 		'next/typescript',
 		'plugin:storybook/recommended',
+		'plugin:@typescript-eslint/recommended',
 		'prettier'
 	),
 	typeScriptEsLintPlugin,
@@ -28,6 +29,7 @@ const eslintConfig = [
 		rules: {
 			...eslintPluginPrettier.configs.recommended.rules,
 			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-unsafe-declaration-merging': 'error',
 			'unused-imports/no-unused-imports': 'warn',
 			'prettier/prettier': [
 				'error',

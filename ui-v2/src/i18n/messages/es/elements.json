@@ -50,5 +50,6 @@
 	"filled": "Relleno",
 	"icons": "Iconos",
 	"select": "Seleccionar",
-	"selectAnOption": "Seleccionar una opción"
+	"selectAnOption": "Seleccionar una opción",
+	"noOptions": "Sin opciones"
 }

@@ -312,13 +312,13 @@ const buttonVariants = cva(
     }
 )
 
-export interface ButtonProps
+export interface Props
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color' | 'disabled' >,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, Props>(
 	(
 		{ className, variant, size, asChild = false, color, disabled, ...props },
 		ref

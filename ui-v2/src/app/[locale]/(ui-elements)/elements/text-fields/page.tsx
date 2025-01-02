@@ -56,7 +56,12 @@ export default function InputPage() {
 					</Typography>
 
 					<div className="py-4 gap-4 flex flex-wrap">
-						<Input placeholder="Primary" labelText="Primary" fullWidth />
+						<Input
+							placeholder="Primary"
+							color="primary"
+							labelText="Primary"
+							fullWidth
+						/>
 						<Input
 							variant="outline"
 							placeholder="Success"
