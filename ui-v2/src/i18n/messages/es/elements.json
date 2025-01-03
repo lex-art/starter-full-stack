@@ -1,7 +1,7 @@
 {
 	"button": "{count, plural, =1 {Botón} other {Botones}}",
 	"contained": "Contenido",
-	"outlined": "Contorno",
+	"outline": "Contorno",
 	"text": "Texto",
 	"sizes": "Tamaños",
 	"small": "Pequeño",

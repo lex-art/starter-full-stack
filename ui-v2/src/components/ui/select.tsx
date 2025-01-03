@@ -19,26 +19,67 @@ const selectVariants = cva(
 		variants: {
 			variant: {
 				default: 'border-input focus-visible:ring-primary',
-				outline: '!border-primary focus-visible:ring-primary shadow-sm',
-				pill: 'rounded-full shadow-sm',
+				outline: 'border-input shadow-sm',
+				pill: 'border-input rounded-full shadow-sm',
 				text: 'border-0 focus:ring-0 shadow-none',
 				standard:
 					'rounded-none focus:ring-0 border-b-1 focus:border-b-2  border-t-0 border-l-0 border-r-0'
 			},
 			color: {
-				default: ['border-input', 'focus-visible:ring-ring'],
-				primary: ['focus-visible:ring-primary', 'border-primary'],
-				secondary: [
-					'border-secondary',
-					'focus-visible:ring-secondary-foreground'
-				],
-				success: ['border-green-500', 'focus-visible:ring-green-500'],
-				warning: ['border-orange-500'],
-				info: ['border-blue-500', 'focus-visible:ring-blue-500'],
-				error: ['border-rose-500', 'focus-visible:ring-rose-500'],
-				light: ['bg-gray-100', 'border-gray-100', 'hover:bg-gray-200']
+				default: '',
+				primary: '',
+				secondary: '',
+				success: '',
+				warning: '',
+				info: '',
+				error: '',
+				light: ''
 			}
 		},
+		compoundVariants: [
+			{
+				color: 'default',
+				variant: 'default',
+				className: 'focus-visible:ring-primary'
+			},
+			{
+				color: 'primary',
+				variant: ['outline', 'pill'],
+				className: '!border-primary !focus-visible:ring-primary bg-primary'
+			},
+			{
+				color: 'secondary',
+				variant: ['outline', 'pill'],
+				className:
+					'border-secondary focus-visible:ring-secondary-foreground'
+			},
+			{
+				color: 'success',
+				variant: ['outline', 'pill'],
+				className: 'border-green-500 focus-visible:ring-green-500'
+			},
+			{
+				color: 'warning',
+				variant: ['outline', 'pill'],
+				className: 'border-orange-500'
+			},
+			{
+				color: 'info',
+				variant: ['outline', 'pill'],
+				className: 'border-blue-500 focus-visible:ring-blue-500'
+			},
+			{
+				color: 'error',
+				variant: ['outline', 'pill'],
+				className:
+					'border-rose-500 focus-visible:ring-rose-500 bg-rose-500'
+			},
+			{
+				color: 'light',
+				variant: ['outline', 'pill'],
+				className: 'border-gray-300 focus-visible:ring-gray-300'
+			}
+		],
 		defaultVariants: {
 			variant: 'default',
 			color: 'default'
