@@ -51,5 +51,6 @@
 	"icons": "Iconos",
 	"select": "Seleccionar",
 	"selectAnOption": "Seleccionar una opción",
-	"noOptions": "Sin opciones"
+	"noOptions": "Sin opciones",
+	"multiselect": "Selección múltiple"
 }

@@ -16,7 +16,7 @@ export default function InputPage() {
 				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
 					<Typography variant="h2">{t('elements.solid')}</Typography>
 
-					<div className="py-4 gap-4 flex">
+					<div className="py-4 gap-4 flex flex-wrap">
 						<Button variant="contained" color="primary">
 							Primary
 						</Button>
@@ -85,7 +85,7 @@ export default function InputPage() {
 
 				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
 					<Typography variant="h2">{t('elements.text')}</Typography>
-					<div className="py-4 gap-4 flex">
+					<div className="py-4 gap-4 flex flex-wrap">
 						<Button variant="text" color="primary">
 							Primary
 						</Button>

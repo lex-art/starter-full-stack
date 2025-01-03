@@ -14,6 +14,7 @@ const buttonVariants = cva(
           outlined: "border border-input bg-transparent text-accent-foreground  shadow-sm",
           pill: "rounded-full shadow",
           text: "bg-transparent",
+          ghost: "shadow ",
           link: "bg-transparent underline-offset-4 underline hover:scale-105",
         },
         color: {

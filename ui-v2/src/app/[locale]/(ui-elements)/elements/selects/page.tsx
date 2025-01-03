@@ -1,6 +1,18 @@
+'use client'
 import SelectMain, { OptionsSelect } from '@/components/select-main'
+import { MultiSelect } from '@/components/ui/multi-select'
 import { Typography } from '@/components/ui/typography'
+import {
+	Cat,
+	Dog,
+	Fish,
+	Loader2Icon,
+	Rabbit,
+	Search,
+	Turtle
+} from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 const data: OptionsSelect = [
 	{ label: 'Option 1', value: 'option1' },
@@ -16,7 +28,19 @@ const data: OptionsSelect = [
 	}
 ]
 
+const frameworksList = [
+	{ value: 'react', label: 'React', icon: Turtle },
+	{ value: 'angular', label: 'Angular', icon: Cat },
+	{ value: 'vue', label: 'Vue', icon: Dog },
+	{ value: 'svelte', label: 'Svelte', icon: Rabbit },
+	{ value: 'ember', label: 'Ember', icon: Fish }
+]
+
 export default function SelectPage() {
+	const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
+		'react',
+		'angular'
+	])
 	const t = useTranslations()
 	return (
 		<div className="w-full h-full p-4">
@@ -64,6 +88,57 @@ export default function SelectPage() {
 							variant="text"
 							fullWidth
 						/>
+					</div>
+				</div>
+				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
+					<Typography variant="h2">{t('elements.icons')}</Typography>
+
+					<div className="py-4 gap-4 flex flex-wrap">
+						<SelectMain
+							label="Default"
+							placeholder="Select an option"
+							options={data}
+							variant="default"
+							fullWidth
+							iconLeft={Search}
+						/>
+						<SelectMain
+							label="Default"
+							placeholder="Select an option"
+							options={data}
+							variant="outline"
+							color="secondary"
+							fullWidth
+							iconRight={Loader2Icon}
+						/>
+						<SelectMain
+							label="Default"
+							placeholder="Select an option"
+							options={data}
+							variant="pill"
+							color="error"
+							fullWidth
+							iconLeft={Search}
+							iconRight={Loader2Icon}
+						/>
+					</div>
+				</div>
+
+				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
+					<Typography variant="h2">{t('elements.multiselect')}</Typography>
+
+					<div className="py-4 gap-4 flex flex-wrap">
+						<div className="p-4 max-w-xl">
+							<MultiSelect
+								options={frameworksList}
+								onValueChange={setSelectedFrameworks}
+								defaultValue={selectedFrameworks}
+								placeholder="Select frameworks"
+								variant="inverted"
+								animation={2}
+								maxCount={3}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

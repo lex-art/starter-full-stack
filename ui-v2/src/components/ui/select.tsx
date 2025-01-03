@@ -1,7 +1,7 @@
 'use client'
 
 import * as SelectPrimitive from '@radix-ui/react-select'
-import { Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { Check, ChevronDown, ChevronUp, LucideIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -46,7 +46,10 @@ const selectVariants = cva(
 	}
 )
 
-type SelectVariants = VariantProps<typeof selectVariants>
+type SelectVariants = VariantProps<typeof selectVariants> & {
+	iconLeft?: LucideIcon
+	iconRight?: LucideIcon
+}
 
 const SelectTrigger = forwardRef<
 	ComponentRef<typeof SelectPrimitive.Trigger>,

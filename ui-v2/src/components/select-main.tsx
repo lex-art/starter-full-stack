@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { LucideIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Label } from './ui/label'
 import {
@@ -32,6 +33,8 @@ export default function SelectMain({
 	options,
 	className,
 	fullWidth,
+	iconRight: IconRight,
+	iconLeft: IconLeft,
 	...props
 }: {
 	label: string
@@ -41,6 +44,8 @@ export default function SelectMain({
 	fullWidth?: boolean
 	color?: string
 	variant?: string
+	iconRight?: LucideIcon
+	iconLeft?: LucideIcon
 } & SelectVariants) {
 	const t = useTranslations()
 	return (
@@ -48,9 +53,13 @@ export default function SelectMain({
 			<Label>{label}</Label>
 			<Select>
 				<SelectTrigger className={className} {...props}>
-					<SelectValue
-						placeholder={placeholder ?? t('elements.selectAnOption')}
-					/>
+					<div className="flex gap-2 items-center w-full">
+						{IconLeft && <IconLeft />}
+						<SelectValue
+							placeholder={placeholder ?? t('elements.selectAnOption')}
+						/>
+					</div>
+					{IconRight && <IconRight />}
 				</SelectTrigger>
 				<SelectContent position="popper">
 					<SelectGroup>
