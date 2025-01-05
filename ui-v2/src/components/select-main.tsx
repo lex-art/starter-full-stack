@@ -46,6 +46,7 @@ export default function SelectMain({
 	variant?: string
 	iconRight?: LucideIcon
 	iconLeft?: LucideIcon
+	disabled?: boolean
 } & SelectVariants) {
 	const t = useTranslations()
 	return (

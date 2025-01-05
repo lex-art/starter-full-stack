@@ -52,5 +52,7 @@
 	"select": "Seleccionar",
 	"selectAnOption": "Seleccionar una opción",
 	"noOptions": "Sin opciones",
-	"multiselect": "Selección múltiple"
+	"multiselect": "Selección múltiple",
+	"checkbox": "Casilla de verificación",
+	"calendar": "Calendario"
 }

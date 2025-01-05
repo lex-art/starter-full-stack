@@ -14,7 +14,7 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 const selectVariants = cva(
-	'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 min-w-[280px]',
+	'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
 	{
 		variants: {
 			variant: {
@@ -32,57 +32,74 @@ const selectVariants = cva(
 				success: '',
 				warning: '',
 				info: '',
-				error: '',
+				error: 'border-rose-500 focus-visible:ring-rose-500',
 				light: ''
+			},
+			size: {
+				sm: 'h-7',
+				md: 'h-9',
+				lg: 'h-11'
+			},
+			disabled: {
+				true: 'cursor-not-allowed',
+				false: 'cursor-pointer'
 			}
 		},
 		compoundVariants: [
 			{
-				color: 'default',
 				variant: 'default',
+				color: 'default',
+				disabled: false,
 				className: 'focus-visible:ring-primary'
 			},
 			{
-				color: 'primary',
 				variant: ['outline', 'pill'],
-				className: '!border-primary !focus-visible:ring-primary bg-primary'
+				color: 'primary',
+				disabled: false,
+				className: 'border-primary focus-visible:ring-primary'
 			},
 			{
 				color: 'secondary',
 				variant: ['outline', 'pill'],
+				disabled: false,
 				className:
 					'border-secondary focus-visible:ring-secondary-foreground'
 			},
 			{
 				color: 'success',
 				variant: ['outline', 'pill'],
+				disabled: false,
 				className: 'border-green-500 focus-visible:ring-green-500'
 			},
 			{
 				color: 'warning',
 				variant: ['outline', 'pill'],
+				disabled: false,
 				className: 'border-orange-500'
 			},
 			{
-				color: 'info',
 				variant: ['outline', 'pill'],
+				color: 'info',
+				disabled: false,
 				className: 'border-blue-500 focus-visible:ring-blue-500'
 			},
 			{
-				color: 'error',
 				variant: ['outline', 'pill'],
-				className:
-					'border-rose-500 focus-visible:ring-rose-500 bg-rose-500'
+				color: 'error',
+				disabled: false,
+				className: 'border-rose-500 focus-visible:ring-rose-500'
 			},
 			{
 				color: 'light',
 				variant: ['outline', 'pill'],
+				disabled: false,
 				className: 'border-gray-300 focus-visible:ring-gray-300'
 			}
 		],
 		defaultVariants: {
 			variant: 'default',
-			color: 'default'
+			color: 'default',
+			disabled: false
 		}
 	}
 )
@@ -95,23 +112,31 @@ type SelectVariants = VariantProps<typeof selectVariants> & {
 const SelectTrigger = forwardRef<
 	ComponentRef<typeof SelectPrimitive.Trigger>,
 	ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & SelectVariants
->(({ className, children, variant, ...props }, ref) => (
-	<SelectPrimitive.Trigger
-		ref={ref}
-		className={cn(
-			selectVariants({
-				variant,
-				className
-			})
-		)}
-		{...props}
-	>
-		{children}
-		<SelectPrimitive.Icon asChild>
-			<ChevronDown className="h-4 w-4 opacity-50" />
-		</SelectPrimitive.Icon>
-	</SelectPrimitive.Trigger>
-))
+>(
+	(
+		{ className, children, variant, color, disabled, size, ...props },
+		ref
+	) => (
+		<SelectPrimitive.Trigger
+			ref={ref}
+			className={cn(
+				selectVariants({
+					variant,
+					color,
+					disabled,
+					size,
+					className
+				})
+			)}
+			{...props}
+		>
+			{children}
+			<SelectPrimitive.Icon asChild>
+				<ChevronDown className="h-4 w-4 opacity-50" />
+			</SelectPrimitive.Icon>
+		</SelectPrimitive.Trigger>
+	)
+)
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
 const SelectScrollUpButton = forwardRef<

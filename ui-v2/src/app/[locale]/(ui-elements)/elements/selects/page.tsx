@@ -95,10 +95,11 @@ export default function SelectPage() {
 
 					<div className="py-4 gap-4 flex flex-wrap">
 						<SelectMain
-							label="Default"
+							label="Outline"
 							placeholder="Select an option"
 							options={data}
-							variant="default"
+							variant="outline"
+							color="primary"
 							fullWidth
 							iconLeft={Search}
 						/>

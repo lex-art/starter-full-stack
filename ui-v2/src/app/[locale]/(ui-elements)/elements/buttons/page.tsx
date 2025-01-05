@@ -51,33 +51,33 @@ export default function InputPage() {
 					</div>
 				</div>
 				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
-					<Typography variant="h2">{t('elements.outlined')}</Typography>
+					<Typography variant="h2">{t('elements.outline')}</Typography>
 					<div className="py-4 gap-4 flex">
-						<Button variant="outlined" color="primary">
+						<Button variant="outline" color="primary">
 							Primary
 						</Button>
 
-						<Button variant="outlined" color="secondary">
+						<Button variant="outline" color="secondary">
 							Secondary
 						</Button>
 
-						<Button variant="outlined" color="success">
+						<Button variant="outline" color="success">
 							Success
 						</Button>
 
-						<Button variant="outlined" color="warning">
+						<Button variant="outline" color="warning">
 							Warning
 						</Button>
 
-						<Button variant="outlined" color="error">
+						<Button variant="outline" color="error">
 							error
 						</Button>
 
-						<Button variant="outlined" color="light">
+						<Button variant="outline" color="light">
 							Light
 						</Button>
 
-						<Button variant="outlined" color="dark">
+						<Button variant="outline" color="dark">
 							Dark
 						</Button>
 					</div>
