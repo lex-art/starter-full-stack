@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 export default function InputPage() {
@@ -17,36 +18,20 @@ export default function InputPage() {
 					<Typography variant="h2">{t('elements.solid')}</Typography>
 
 					<div className="py-4 gap-4 flex flex-wrap">
-						<Button variant="contained" color="primary">
-							Primary
-						</Button>
+						<Button variant="default">Primary</Button>
 
-						<Button variant="contained" color="secondary">
-							Secondary
-						</Button>
+						<Button variant="secondary">Secondary</Button>
 
-						<Button variant="contained" color="success">
-							Success
-						</Button>
+						<Button variant="destructive">Destructive</Button>
 
-						<Button variant="contained" color="warning">
-							Warning
-						</Button>
+						<Button variant="outline">Outline</Button>
 
-						<Button variant="contained" color="info">
-							Warning
-						</Button>
+						<Button variant="ghost">Ghost</Button>
 
-						<Button variant="contained" color="error">
-							error
-						</Button>
+						<Button variant="link">Link</Button>
 
-						<Button variant="contained" color="light">
-							Light
-						</Button>
-
-						<Button variant="contained" color="dark">
-							Dark
+						<Button variant="outline" size="icon">
+							<ChevronRight />
 						</Button>
 					</div>
 				</div>
@@ -193,8 +178,8 @@ export default function InputPage() {
 							Icon
 						</Button>
 
-						<Button color="primary" size="md">
-							contained
+						<Button color="primary" size="md" isLoading>
+							Default
 						</Button>
 
 						<Button color="warning" size="sm">

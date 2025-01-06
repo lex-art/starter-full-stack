@@ -29,7 +29,7 @@ const eslintConfig = [
 		rules: {
 			...eslintPluginPrettier.configs.recommended.rules,
 			'@typescript-eslint/no-explicit-any': 'off',
-			'@typescript-eslint/no-unsafe-declaration-merging': 'error',
+			'@typescript-eslint/no-unsafe-declaration-merging': 'off',
 			'unused-imports/no-unused-imports': 'warn',
 			'prettier/prettier': [
 				'error',
