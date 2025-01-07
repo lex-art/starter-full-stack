@@ -140,8 +140,8 @@ export const menuRoutes: Array<IMenuSidebar> = [
 					},
 					{
 						role: [],
-						title: 'common.snackbar',
-						url: '/components/snackbar'
+						title: 'common.toast',
+						url: '/components/toast'
 					},
 					{
 						role: [],
@@ -152,6 +152,11 @@ export const menuRoutes: Array<IMenuSidebar> = [
 						role: [],
 						title: 'common.editors',
 						url: '/components/editors'
+					},
+					{
+						role: [],
+						title: 'common.dragAndDrop',
+						url: '/components/drag-and-drop'
 					}
 				]
 			}

@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { Roboto, Roboto_Mono } from 'next/font/google'
 import { ThemeProvider } from '../theme-provider'
+import { Toaster } from '../ui/toaster'
 
 const roboto = Roboto({
 	variable: '--font-roboto',
@@ -39,6 +40,7 @@ export default async function BaseLayout({
 						disableTransitionOnChange
 					>
 						{children}
+						<Toaster />
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>

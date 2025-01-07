@@ -59,5 +59,12 @@
 	"card": "Tarjeta",
 	"menu": "Menú",
 	"dialog": "Diálogo",
-	"toast": "Tostada"
+	"toast": "Tostada",
+	"tables": "Tablas",
+	"tabs": "Pestañas",
+	"upload": "Subir",
+	"forms": "Formularios",
+	"skeleton": "Esqueleto",
+	"editors": "Editores",
+	"dragAndDrop": "Arrastrar y soltar"
 }

@@ -3,7 +3,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { locales } from '@/i18n/routing'
 import { headers } from 'next/headers'
 import { HeaderMain } from '../header-main'
-import RootLayout from './BaseLayout'
+import BaseLayout from './BaseLayout'
 
 const excludePaths = ['/auth/*', '/landing']
 
@@ -22,7 +22,7 @@ export default async function MainLayout({
 	).test(currentPath)
 
 	return (
-		<RootLayout locale={locale}>
+		<BaseLayout locale={locale}>
 			{isExcludeLayout ? (
 				<main>{children}</main>
 			) : (
@@ -36,6 +36,6 @@ export default async function MainLayout({
 					</SidebarInset>
 				</SidebarProvider>
 			)}
-		</RootLayout>
+		</BaseLayout>
 	)
 }

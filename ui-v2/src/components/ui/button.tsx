@@ -108,27 +108,27 @@ const buttonVariants = cva(
 				variant: 'outline',
 				color: 'primary',
 				disabled: false,
-				className: 'border-primary text-primary hover:bg-primary/15'
+				className: 'border-primary !text-primary hover:bg-primary/15'
 			},
 			{
 				variant: 'outline',
 				color: 'secondary',
 				disabled: false,
 				className:
-					'border-secondary-foreground text-accent-foreground hover:bg-gray-400/15'
+					'border-secondary-foreground !text-accent-foreground hover:bg-gray-400/15'
 			},
 			{
 				variant: 'outline',
 				color: 'success',
 				disabled: false,
-				className: 'border-green-500 text-green-500 hover:bg-green-500/15'
+				className: 'border-green-500 !text-green-500 hover:bg-green-500/15'
 			},
 			{
 				variant: 'outline',
 				color: 'warning',
 				disabled: false,
 				className:
-					'border-orange-500 text-orange-500 hover:bg-orange-500/15'
+					'border-orange-500 !text-orange-500 hover:bg-orange-500/15'
 			},
 			{
 				variant: 'outline',
@@ -140,14 +140,14 @@ const buttonVariants = cva(
 				variant: 'outline',
 				color: 'error',
 				disabled: false,
-				className: 'border-rose-500 text-rose-500 hover:bg-rose-500/15'
+				className: 'border-rose-500 !text-rose-500 hover:bg-rose-500/15'
 			},
 			{
 				variant: 'outline',
 				color: 'light',
 				disabled: false,
 				className:
-					'border-gray-200 text-accent-foreground hover:bg-gray-200'
+					'border-gray-200 !text-accent-foreground hover:bg-gray-200'
 			},
 			{
 				variant: 'outline',
