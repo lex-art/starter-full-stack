@@ -54,5 +54,10 @@
 	"noOptions": "Sin opciones",
 	"multiselect": "Selección múltiple",
 	"checkbox": "Casilla de verificación",
-	"calendar": "Calendario"
+	"calendar": "Calendario",
+	"badge": "Insignia",
+	"card": "Tarjeta",
+	"menu": "Menú",
+	"dialog": "Diálogo",
+	"toast": "Tostada"
 }

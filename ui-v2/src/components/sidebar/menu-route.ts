@@ -87,8 +87,8 @@ export const menuRoutes: Array<IMenuSidebar> = [
 					},
 					{
 						role: [],
-						title: 'common.chips',
-						url: '/elements/chips'
+						title: 'common.badge',
+						url: '/elements/badge'
 					},
 					{
 						role: [],

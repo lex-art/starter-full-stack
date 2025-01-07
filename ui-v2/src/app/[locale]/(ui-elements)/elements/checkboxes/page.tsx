@@ -1,7 +1,14 @@
 import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { Typography } from '@/components/ui/typography'
 import { useTranslations } from 'next-intl'
+
+const data = [
+	{ label: 'Default', value: 'default' },
+	{ label: 'Comfortable', value: 'comfortable' },
+	{ label: 'Compact', value: 'compact' }
+]
 
 export default function CheckboxPage() {
 	const t = useTranslations()
@@ -41,6 +48,13 @@ export default function CheckboxPage() {
 						<div className="flex items-center space-x-2">
 							<Switch id="airplane-mode" label="Airplane Mode" />
 						</div>
+					</div>
+				</div>
+
+				<div className="w-full h-full rounded-xl bg-muted/50 p-4">
+					<Typography variant="h2">Radio Group</Typography>
+					<div className="py-4 gap-4 flex flex-wrap">
+						<RadioGroup data={data} />
 					</div>
 				</div>
 			</div>

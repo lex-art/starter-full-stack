@@ -1,6 +1,6 @@
 'use client'
 import SelectMain, { OptionsSelect } from '@/components/select-main'
-import { MultiSelect } from '@/components/ui/multi-select'
+import { MultiSelect } from '@/components/multi-select'
 import { Typography } from '@/components/ui/typography'
 import {
 	Cat,
