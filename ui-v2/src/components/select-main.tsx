@@ -3,11 +3,11 @@ import { LucideIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Label } from './ui/label'
 import {
-	Select,
 	SelectContent,
 	SelectGroup,
 	SelectItem,
 	SelectLabel,
+	SelectRoot,
 	SelectTrigger,
 	SelectValue,
 	SelectVariants
@@ -52,7 +52,7 @@ export default function SelectMain({
 	return (
 		<div className={cn(fullWidth && 'min-w-full')}>
 			<Label>{label}</Label>
-			<Select>
+			<SelectRoot>
 				<SelectTrigger className={className} {...props}>
 					<div className="flex gap-2 items-center w-full">
 						{IconLeft && <IconLeft />}
@@ -88,7 +88,7 @@ export default function SelectMain({
 							)}
 					</SelectGroup>
 				</SelectContent>
-			</Select>
+			</SelectRoot>
 		</div>
 	)
 }

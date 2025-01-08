@@ -30,6 +30,7 @@ const eslintConfig = [
 			...eslintPluginPrettier.configs.recommended.rules,
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-unsafe-declaration-merging': 'off',
+			'react-hooks/exhaustive-deps': 'off',
 			'unused-imports/no-unused-imports': 'warn',
 			'prettier/prettier': [
 				'error',

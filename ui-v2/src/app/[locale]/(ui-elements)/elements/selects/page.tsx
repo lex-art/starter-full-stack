@@ -1,6 +1,6 @@
 'use client'
-import SelectMain, { OptionsSelect } from '@/components/select-main'
 import { MultiSelect } from '@/components/multi-select'
+import Select, { OptionsSelect } from '@/components/select-main'
 import { Typography } from '@/components/ui/typography'
 import {
 	Cat,
@@ -53,35 +53,35 @@ export default function SelectPage() {
 					<Typography variant="h2">{t('elements.solid')}</Typography>
 
 					<div className="py-4 gap-4 flex flex-wrap">
-						<SelectMain
+						<Select
 							label="Default"
 							placeholder="Select an option"
 							options={data}
 							variant="default"
 							fullWidth
 						/>
-						<SelectMain
+						<Select
 							label="Outline"
 							placeholder="Select an option"
 							options={data}
 							variant="outline"
 							fullWidth
 						/>
-						<SelectMain
+						<Select
 							label="Pill"
 							placeholder="Select an option"
 							options={data}
 							variant="pill"
 							fullWidth
 						/>
-						<SelectMain
+						<Select
 							label="standard"
 							placeholder="Select an option"
 							options={data}
 							variant="standard"
 							fullWidth
 						/>
-						<SelectMain
+						<Select
 							label="Text"
 							placeholder="Select an option"
 							options={data}
@@ -94,7 +94,7 @@ export default function SelectPage() {
 					<Typography variant="h2">{t('elements.icons')}</Typography>
 
 					<div className="py-4 gap-4 flex flex-wrap">
-						<SelectMain
+						<Select
 							label="Outline"
 							placeholder="Select an option"
 							options={data}
@@ -103,7 +103,7 @@ export default function SelectPage() {
 							fullWidth
 							iconLeft={Search}
 						/>
-						<SelectMain
+						<Select
 							label="Default"
 							placeholder="Select an option"
 							options={data}
@@ -112,7 +112,7 @@ export default function SelectPage() {
 							fullWidth
 							iconRight={Loader2Icon}
 						/>
-						<SelectMain
+						<Select
 							label="Default"
 							placeholder="Select an option"
 							options={data}

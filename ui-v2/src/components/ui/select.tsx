@@ -5,9 +5,11 @@ import { Check, ChevronDown, ChevronUp, LucideIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { useTranslations } from 'next-intl'
 import { ComponentPropsWithoutRef, ComponentRef, forwardRef } from 'react'
+import { Label } from './label'
 
-const Select = SelectPrimitive.Root
+const SelectRoot = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -114,7 +116,15 @@ const SelectTrigger = forwardRef<
 	ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & SelectVariants
 >(
 	(
-		{ className, children, variant, color, disabled, size, ...props },
+		{
+			className,
+			children,
+			variant,
+			color = 'default',
+			disabled,
+			size,
+			...props
+		},
 		ref
 	) => (
 		<SelectPrimitive.Trigger
@@ -253,12 +263,110 @@ const SelectSeparator = forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+type OptionsSelect = Array<
+	| {
+			label: string
+			value: string
+	  }
+	| {
+			group: string
+			options: {
+				label: string
+				value: string
+			}[]
+	  }
+>
+
+const Select = forwardRef<
+	ComponentRef<typeof SelectPrimitive.Trigger>,
+	ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> &
+		SelectVariants & {
+			label: string
+			placeholder?: string
+			options: OptionsSelect
+			fullWidth?: boolean
+			iconRight?: LucideIcon
+			iconLeft?: LucideIcon
+			className?: string
+			onChangeValue?: (value: string) => void
+			defaultValue?: string
+		}
+>(
+	(
+		{
+			className,
+			fullWidth,
+			label,
+			iconLeft: IconLeft,
+			iconRight: IconRight,
+			placeholder,
+			options,
+			defaultValue,
+			onChangeValue,
+			...props
+		},
+		ref
+	) => {
+		const t = useTranslations()
+		return (
+			<div className={cn(fullWidth && 'min-w-full')}>
+				<Label>{label}</Label>
+				<SelectRoot
+					defaultValue={defaultValue}
+					onValueChange={(value) => onChangeValue?.(value)}
+				>
+					<SelectTrigger ref={ref} className={className} {...props}>
+						<div className="flex gap-2 items-center w-full">
+							{IconLeft && <IconLeft />}
+							<SelectValue
+								placeholder={placeholder ?? t('elements.selectAnOption')}
+							/>
+						</div>
+						{IconRight && <IconRight />}
+					</SelectTrigger>
+					<SelectContent position="popper">
+						<SelectGroup>
+							{options.length === 0 && (
+								<SelectItem value="none" disabled>
+									{t('elements.noOptions')}
+								</SelectItem>
+							)}
+							{options?.length > 0 &&
+								options?.map((option) =>
+									'group' in option ? (
+										<SelectGroup key={option.group}>
+											<SelectLabel>{option.group}</SelectLabel>
+											{option.options.map((option) => (
+												<SelectItem
+													key={option.value}
+													value={option.value}
+												>
+													{option.label}
+												</SelectItem>
+											))}
+										</SelectGroup>
+									) : (
+										<SelectItem key={option.value} value={option.value}>
+											{option.label}
+										</SelectItem>
+									)
+								)}
+						</SelectGroup>
+					</SelectContent>
+				</SelectRoot>
+			</div>
+		)
+	}
+)
+Select.displayName = SelectRoot.displayName
+
 export {
 	Select,
 	SelectContent,
 	SelectGroup,
 	SelectItem,
 	SelectLabel,
+	SelectRoot,
 	SelectScrollDownButton,
 	SelectScrollUpButton,
 	SelectSeparator,
@@ -266,4 +374,4 @@ export {
 	SelectValue
 }
 
-export type { SelectVariants }
+export type { OptionsSelect, SelectVariants }
