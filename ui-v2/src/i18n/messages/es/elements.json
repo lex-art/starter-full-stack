@@ -66,5 +66,9 @@
 	"forms": "Formularios",
 	"skeleton": "Esqueleto",
 	"editors": "Editores",
-	"dragAndDrop": "Arrastrar y soltar"
+	"dragAndDrop": "Arrastrar y soltar",
+	"uploadAnyFile": "Subir cualquier archivo",
+	"uploadMultipleFiles": "Subir varios archivos",
+	"takePhotoWithCamera": "Tomar una foto con la cámara",
+	"takePhoto": "Tomar una foto"
 }

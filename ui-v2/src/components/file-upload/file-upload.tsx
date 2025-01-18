@@ -1,5 +1,11 @@
-import { Close } from '@radix-ui/react-toast'
-import { Camera, CameraOff, FileText, Upload } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import {
+	Camera,
+	CameraOff,
+	CircleX,
+	FileAxis3d,
+	Upload
+} from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import {
 	ChangeEvent,
@@ -13,7 +19,7 @@ import {
 	useEffect,
 	useState
 } from 'react'
-import { Button } from '../button'
+import { Button } from '../ui/button'
 import {
 	Dialog,
 	DialogContent,
@@ -21,12 +27,13 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger
-} from '../dialog'
-import { Label } from '../label'
-import { Typography } from '../typography'
+} from '../ui/dialog'
+import { Label } from '../ui/label'
+import { Typography } from '../ui/typography'
+import { ImageViewer } from './image-viewer'
 
 const CameraComponent = lazy(() =>
-	import('../../camera-component').then((module) => ({
+	import('../camera-component').then((module) => ({
 		default: module.CameraComponent
 	}))
 )
@@ -69,7 +76,8 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 			clearable = true,
 			showTakePhoto,
 			showUploadButton = true,
-			index
+			index,
+			error
 		},
 		ref
 	) => {
@@ -236,7 +244,9 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 			return file.type.startsWith('image/')
 		}
 
-		const openPdfInNewTab = () => {
+		const openPdfInNewTab = (event: MouseEvent) => {
+			event.preventDefault()
+			event.stopPropagation()
 			if (pdfSrc) {
 				const pdfWindow = window.open()
 				pdfWindow?.document.write(
@@ -261,7 +271,7 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 
 		return (
 			<div
-				className="w-full h-full flex justify-start "
+				className="w-full h-full flex justify-start flex-row sm:flex-col gap-2 "
 				ref={ref}
 				key={'fileUpload-' + index}
 			>
@@ -272,13 +282,14 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 					accept={acceptFileTypes}
 					onClick={resetInput}
 					onChange={onChange}
+					className="hidden"
 				/>
 
 				{!viewFiles && urlAttachment ? (
 					<>{/* <AppImageViewer imageUrl={urlAttachment} /> */}</>
 				) : (
-					<div className="flex flex-col items-center w-full">
-						<input
+					<div className="w-full flex flex-col items-center">
+						<div
 							onDragEnter={onDragEnter}
 							onDragOver={onDragOver}
 							onDrop={onDrop}
@@ -291,9 +302,12 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 										? 'not-allowed'
 										: 'pointer'
 							}}
-							/* className={classNames(styles.containerSelectedFiles, {
-								[styles.error]: error
-							})} */
+							className={cn(
+								'w-full p-4 flex flex-col items-start  border-dashed border-2 border-secondary-foreground rounded-lg bg-secondary/10 transition-all',
+								{
+									'border-2 border-dashed border-rose-500': error
+								}
+							)}
 							onClick={() => {
 								if (
 									!(
@@ -306,52 +320,61 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 							}}
 						>
 							{viewFiles && viewFiles?.length > 0 ? (
-								<div className="w-full">
+								<div className="w-full flex justify-between items-center gap-2 flex-col  ">
 									{Array.from(viewFiles).map(
 										(file, index) =>
 											(acceptMultipleFiles || index === 0) && (
 												<div
-													className="flex items-center justify-start"
-													key={index + 'container'}
+													className="w-full flex justify-between items-center gap-2  bg-secondary rounded-lg p-2"
+													key={index + '-container'}
 												>
-													{(() => {
-														if (isImageFile(file)) {
-															return (
-																<>
-																	{/* 
-																<AppImageViewer
-																	imageUrl={URL.createObjectURL(file)}
-																	alt={file.name}
-																	className={styles.imgSelectedFile}
-																/> */}
-																</>
-															)
-														} else if (file.type === 'application/pdf') {
-															return (
-																<Button
-																	onClick={openPdfInNewTab}
-																	color="secondary"
-																>
-																	<FileText size={64} />
-																</Button>
-															)
-														} else {
-															return <Upload size={64} />
-														}
-													})()}
-													<Typography variant="body">
-														{viewFiles[0].name}
-													</Typography>
+													<div className="flex items-center gap-4 flex-wrap">
+														{(() => {
+															if (isImageFile(file)) {
+																return (
+																	<ImageViewer
+																		imageUrl={URL.createObjectURL(file)}
+																		alt={file.name}
+																	/>
+																)
+															} else if (file.type === 'application/pdf') {
+																return (
+																	<Button
+																		onClick={openPdfInNewTab}
+																		variant="ghost"
+																		size="lg"
+																	>
+																		<FileAxis3d
+																			size={64}
+																			className="size-40"
+																			absoluteStrokeWidth
+																		/>
+																	</Button>
+																)
+															} else {
+																return (
+																	<Upload
+																		size={34}
+																		className="text-secondary-foreground"
+																	/>
+																)
+															}
+														})()}
+														<Typography variant="helper">
+															{viewFiles[0].name}
+														</Typography>
+													</div>
 													{clearable && (
 														<Button
 															aria-label="close"
 															size="icon"
+															variant="ghost"
 															onClick={(event) => {
 																event.stopPropagation()
 																removeFileAtIndex(index)
 															}}
 														>
-															<Close />
+															<CircleX size={64} />
 														</Button>
 													)}
 												</div>
@@ -363,13 +386,13 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 									{placeholder ?? t('dragAndDropText')}
 								</Typography>
 							)}
-						</input>
+						</div>
 						<Label className="m-2" color="error">
 							{helperText}
 						</Label>
 					</div>
 				)}
-				<div className="flex items-center justify-center mr-6 gap-4">
+				<div className="flex items-center justify-center ">
 					{showUploadButton && (
 						<Button
 							variant="outline"
@@ -381,7 +404,10 @@ const FileUpload: FC<FileUploadProps> = forwardRef<
 						</Button>
 					)}
 					{showTakePhoto && (
-						<Dialog>
+						<Dialog
+							open={cameraModalOpen}
+							onOpenChange={setCameraModalOpen}
+						>
 							<DialogTrigger asChild>
 								<Button variant="outline" disabled={disabled}>
 									<Camera />

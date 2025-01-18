@@ -10,9 +10,9 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
-	Select,
 	SelectContent,
 	SelectItem,
+	SelectRoot,
 	SelectTrigger,
 	SelectValue
 } from '@/components/ui/select'
@@ -67,7 +67,7 @@ export default function CardPage() {
 										</div>
 										<div className="flex flex-col space-y-1.5">
 											<Label htmlFor="framework">Framework</Label>
-											<Select>
+											<SelectRoot>
 												<SelectTrigger id="framework">
 													<SelectValue placeholder="Select" />
 												</SelectTrigger>
@@ -79,7 +79,7 @@ export default function CardPage() {
 													<SelectItem value="astro">Astro</SelectItem>
 													<SelectItem value="nuxt">Nuxt.js</SelectItem>
 												</SelectContent>
-											</Select>
+											</SelectRoot>
 										</div>
 									</div>
 								</form>
