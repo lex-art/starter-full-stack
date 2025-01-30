@@ -16,6 +16,7 @@ import { useState } from 'react'
 export default function CalendarPage() {
 	const t = useTranslations()
 	const [date, setDate] = useState<Date | undefined>(new Date())
+	const [date2, setDate2] = useState<Date | undefined>(new Date())
 	const [isOpen, setIsOpen] = useState(false)
 
 	return (
@@ -59,8 +60,8 @@ export default function CalendarPage() {
 						<Calendar
 							mode="single"
 							captionLayout="dropdown"
-							selected={date}
-							onSelect={setDate}
+							selected={date2}
+							onSelect={setDate2}
 							fromYear={2000}
 							toYear={2025}
 						/>

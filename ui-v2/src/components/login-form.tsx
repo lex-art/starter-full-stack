@@ -63,7 +63,7 @@ export function LoginForm({
 									<Input
 										id="email"
 										type="email"
-										placeholder="m@example.com"
+										placeholder="user@example.com"
 										required
 									/>
 								</div>
@@ -77,7 +77,12 @@ export function LoginForm({
 											Forgot your password?
 										</a>
 									</div>
-									<Input id="password" type="password" required />
+									<Input
+										id="password"
+										type="password"
+										required
+										placeholder="Password"
+									/>
 								</div>
 								<Button type="submit" className="w-full">
 									Login
@@ -93,7 +98,7 @@ export function LoginForm({
 					</form>
 				</CardContent>
 			</Card>
-			<div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
+			<div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary  ">
 				By clicking continue, you agree to our{' '}
 				<a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
 				.

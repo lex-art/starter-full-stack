@@ -64,7 +64,7 @@ export default function SelectMain({
 				</SelectTrigger>
 				<SelectContent position="popper">
 					<SelectGroup>
-						{options.length === 0 && (
+						{options?.length === 0 && (
 							<SelectItem value="none" disabled>
 								{t('elements.noOptions')}
 							</SelectItem>

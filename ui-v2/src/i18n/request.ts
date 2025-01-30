@@ -12,6 +12,29 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
 	return {
 		locale,
-		messages: (await import(`./messages/${locale}/index.ts`)).default
+		messages: (await import(`./messages/${locale}/index.ts`)).default,
+		formats: {
+			dateTime: {
+				short: {
+					day: 'numeric',
+					month: 'short',
+					year: 'numeric'
+				}
+			},
+			number: {
+				precise: {
+					maximumFractionDigits: 5
+				}
+			},
+			list: {
+				enumeration: {
+					style: 'long',
+					type: 'conjunction'
+				}
+			}
+		},
+		onError(error) {
+			console.warn('Error de traducción:', error)
+		}
 	}
 })

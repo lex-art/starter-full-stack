@@ -3,9 +3,9 @@
 import { buttonVariants } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import {
-	Select,
 	SelectContent,
 	SelectItem,
+	SelectRoot,
 	SelectTrigger,
 	SelectValue
 } from '@/components/ui/select'
@@ -79,7 +79,7 @@ function Calendar({
 						onChange?.(changeEvent)
 					}
 					return (
-						<Select
+						<SelectRoot
 							value={value?.toString()}
 							onValueChange={(value) => {
 								handleChange(value)
@@ -100,7 +100,7 @@ function Calendar({
 									))}
 								</ScrollArea>
 							</SelectContent>
-						</Select>
+						</SelectRoot>
 					)
 				},
 				IconLeft: ({ className, ...props }) => (

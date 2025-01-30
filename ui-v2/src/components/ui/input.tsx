@@ -6,16 +6,16 @@ import { ComponentProps, forwardRef } from 'react'
 import { Typography } from './typography'
 
 const inputVariants = cva(
-	'flex h-9 w-full rounded-md border bg-transparent px-3 py-1 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1  disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+	'flex h-9 w-full rounded-md border bg-transparent px-3 py-1 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1  disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
 	{
 		variants: {
 			variant: {
-				default: 'border-input focus-visible:ring-ring shadow-sm ',
-				outline: 'shadow-sm',
-				pill: 'rounded-full shadow-sm',
+				default: 'border-input focus-visible:ring-ring shadow-xs ',
+				outline: 'shadow-xs',
+				pill: 'rounded-full shadow-xs',
 				standard:
 					'rounded-none focus-visible:ring-0 border-b-1 focus-visible:border-b-2 border-t-0 border-l-0 border-r-0 ',
-				text: 'border-0 focus-visible:ring-0 !text-[--color]'
+				text: 'border-0 focus-visible:ring-0 text-(--color)!'
 			},
 			color: {
 				primary: [
@@ -62,7 +62,7 @@ const inputVariants = cva(
 				dark: [
 					'bg-gray-800',
 					'text-primary-foreground',
-					'dark:!text-white',
+					'dark:text-white!',
 					'border-gray-800',
 					'hover:bg-gray-900/80',
 					colors.dark

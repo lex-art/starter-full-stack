@@ -16,13 +16,13 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 const selectVariants = cva(
-	'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+	'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
 	{
 		variants: {
 			variant: {
 				default: 'border-input focus-visible:ring-primary',
-				outline: 'border-input shadow-sm',
-				pill: 'border-input rounded-full shadow-sm',
+				outline: 'border-input shadow-xs',
+				pill: 'border-input rounded-full shadow-xs',
 				text: 'border-0 focus:ring-0 shadow-none',
 				standard:
 					'rounded-none focus:ring-0 border-b-1 focus:border-b-2  border-t-0 border-l-0 border-r-0'
@@ -236,7 +236,7 @@ const SelectItem = forwardRef<
 	<SelectPrimitive.Item
 		ref={ref}
 		className={cn(
-			'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+			'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
 			className
 		)}
 		{...props}
@@ -326,7 +326,7 @@ const Select = forwardRef<
 					</SelectTrigger>
 					<SelectContent position="popper">
 						<SelectGroup>
-							{options.length === 0 && (
+							{options?.length === 0 && (
 								<SelectItem value="none" disabled>
 									{t('elements.noOptions')}
 								</SelectItem>

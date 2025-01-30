@@ -107,7 +107,7 @@ export const AutoComplete = ({
 			<div className="relative mt-1">
 				<div
 					className={cn(
-						'animate-in fade-in-0 zoom-in-95 absolute top-0 z-10 w-full rounded-xl bg-white outline-none',
+						'animate-in fade-in-0 zoom-in-95 absolute top-0 z-10 w-full rounded-xl bg-white outline-hidden',
 						isOpen ? 'block' : 'hidden'
 					)}
 				>
@@ -119,7 +119,7 @@ export const AutoComplete = ({
 								</div>
 							</CommandPrimitive.Loading>
 						) : null}
-						{options.length > 0 && !isLoading ? (
+						{options?.length > 0 && !isLoading ? (
 							<CommandGroup>
 								{options.map((option) => {
 									const isSelected = selected?.value === option.value

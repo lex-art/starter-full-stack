@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getTimeZone } from 'next-intl/server'
 import { Roboto, Roboto_Mono } from 'next/font/google'
 import { ThemeProvider } from '../theme-provider'
 import { Toaster } from '../ui/toaster'
@@ -27,12 +27,18 @@ export default async function BaseLayout({
 	// Providing all messages to the client
 	// side is the easiest way to get started
 	const messages = await getMessages()
+	const timeZone = await getTimeZone()
 	return (
 		<html lang={locale} suppressHydrationWarning>
 			<body
 				className={`${roboto.variable} ${robotoMono.variable} antialiased`}
 			>
-				<NextIntlClientProvider locale={locale} messages={messages}>
+				<NextIntlClientProvider
+					locale={locale}
+					messages={messages}
+					timeZone={timeZone}
+					now={new Date()}
+				>
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="system"

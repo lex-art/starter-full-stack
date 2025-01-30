@@ -6,22 +6,22 @@ import { cn } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 
 const buttonVariants = cva(
-	'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+	'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 	{
 		variants: {
 			variant: {
 				default:
-					'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+					'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90',
 				destructive:
-					'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+					'bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90',
 				outline:
-					'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+					'border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground',
 				secondary:
-					'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary-foreground/10',
+					'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary-foreground/10',
 				ghost: 'hover:bg-accent hover:text-accent-foreground',
 				link: 'text-primary underline-offset-4 hover:underline',
-				contained: 'shadow',
-				pill: 'rounded-full shadow',
+				contained: 'shadow-sm',
+				pill: 'rounded-full shadow-sm',
 				text: 'bg-transparent'
 			},
 			size: {
@@ -52,7 +52,7 @@ const buttonVariants = cva(
 				color: 'primary',
 				disabled: false,
 				className:
-					'bg-primary text-primary-foreground shadow hover:bg-primary/90'
+					'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90'
 			},
 			{
 				variant: 'contained',
@@ -108,27 +108,27 @@ const buttonVariants = cva(
 				variant: 'outline',
 				color: 'primary',
 				disabled: false,
-				className: 'border-primary !text-primary hover:bg-primary/15'
+				className: 'border-primary text-primary! hover:bg-primary/15'
 			},
 			{
 				variant: 'outline',
 				color: 'secondary',
 				disabled: false,
 				className:
-					'border-secondary-foreground !text-accent-foreground hover:bg-gray-400/15'
+					'border-secondary-foreground text-accent-foreground! hover:bg-gray-400/15'
 			},
 			{
 				variant: 'outline',
 				color: 'success',
 				disabled: false,
-				className: 'border-green-500 !text-green-500 hover:bg-green-500/15'
+				className: 'border-green-500 text-green-500! hover:bg-green-500/15'
 			},
 			{
 				variant: 'outline',
 				color: 'warning',
 				disabled: false,
 				className:
-					'border-orange-500 !text-orange-500 hover:bg-orange-500/15'
+					'border-orange-500 text-orange-500! hover:bg-orange-500/15'
 			},
 			{
 				variant: 'outline',
@@ -140,14 +140,14 @@ const buttonVariants = cva(
 				variant: 'outline',
 				color: 'error',
 				disabled: false,
-				className: 'border-rose-500 !text-rose-500 hover:bg-rose-500/15'
+				className: 'border-rose-500 text-rose-500! hover:bg-rose-500/15'
 			},
 			{
 				variant: 'outline',
 				color: 'light',
 				disabled: false,
 				className:
-					'border-gray-200 !text-accent-foreground hover:bg-gray-200'
+					'border-gray-200 text-accent-foreground! hover:bg-gray-200'
 			},
 			{
 				variant: 'outline',
