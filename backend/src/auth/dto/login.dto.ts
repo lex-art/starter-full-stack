@@ -1,5 +1,6 @@
+import { TYPE_PROVIDER } from '@app/types/enums'
 import { IntersectionType, PickType } from '@nestjs/swagger'
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator'
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator'
 
 export class LoginFormDto {
 	@IsString()
@@ -11,6 +12,10 @@ export class LoginFormDto {
 	@IsNotEmpty()
 	@MinLength(8)
 	password: string
+
+	@IsEnum(TYPE_PROVIDER)
+	@IsOptional()
+	provider?: TYPE_PROVIDER
 }
 
 export class EmailDto extends IntersectionType(PickType(LoginFormDto, ['email'])) {}

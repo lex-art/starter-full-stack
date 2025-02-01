@@ -1,6 +1,6 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
-import { AccountEntity } from './accounts.entity'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
+import { UserEntity } from './user.entity'
 
 // in DB, the table name is 'profiles'
 @Entity('profiles')
@@ -38,8 +38,7 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	@Column({ type: 'varchar', length: 500, name: 'profile', nullable: true })
 	image: string
 
-	@OneToOne(() => AccountEntity, (account) => account.profileId, {
-		createForeignKeyConstraints: true
-	})
-	account!: AccountEntity
+	@OneToOne(() => UserEntity, (user) => user.profile)
+	@JoinColumn({ name: 'user_id' })
+	user: UserEntity
 }

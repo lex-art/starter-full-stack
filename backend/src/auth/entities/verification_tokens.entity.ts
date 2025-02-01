@@ -1,4 +1,4 @@
-import { BaseEntityWithTimestamps } from '@app/lib/entity/Base-entity'
+import { BaseEntityWithTimestamps } from '@app/common/entity/Base-entity'
 import { TYPE_VERIFICATION_TOKEN } from '@app/types/enums'
 import { Type } from 'class-transformer'
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'

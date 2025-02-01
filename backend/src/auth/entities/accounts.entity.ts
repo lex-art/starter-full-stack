@@ -1,21 +1,15 @@
-import { BaseEntityWithTimestamps } from '@app/lib/entity/Base-entity'
+import { BaseEntityWithTimestamps } from '@app/common/entity/Base-entity'
 import { TYPE_PROVIDER, USER_PERMISSION, USER_ROLE, USER_TYPE } from '@app/types/enums'
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { ProfileEntity } from './profile.entity'
+import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { UserEntity } from './user.entity'
 
 @Entity({ name: 'accounts' })
+@Index(['provider', 'providerAccountId'], { unique: true })
 export class AccountEntity extends BaseEntityWithTimestamps {
 	@PrimaryGeneratedColumn('uuid', {
 		name: 'account_id'
 	})
 	accountId!: string
-
-	@Column({ type: 'uuid', name: 'user_id' })
-	userId!: string
-
-	@Column({ type: 'uuid', name: 'profile_id' })
-	profileId!: string
 
 	@Column({
 		type: 'enum',
@@ -55,20 +49,9 @@ export class AccountEntity extends BaseEntityWithTimestamps {
 	permissions!: USER_PERMISSION[]
 
 	@ManyToOne(() => UserEntity, (user) => user.account, {
-		createForeignKeyConstraints: true
-		/* onDelete: 'CASCADE' // Propaga el borrado desde la base de datos */
+		createForeignKeyConstraints: true,
+		onDelete: 'CASCADE' // Propaga el borrado desde la base de datos
 	})
 	@JoinColumn({ name: 'user_id' })
 	user!: UserEntity
-
-	// this can be a one-to-one relationship if you want depending on your use case
-	@OneToOne(
-		() => ProfileEntity,
-		(profileDto) => profileDto.account /* {
-		cascade: true, // Propaga operaciones de persistencia y eliminación
-		onDelete: 'CASCADE' // Borra el perfil al eliminar la cuenta
-	} */
-	)
-	@JoinColumn({ name: 'profile_id' })
-	profile!: ProfileEntity
 }

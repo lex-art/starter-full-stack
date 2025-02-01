@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm'
+import { BaseEntity, Column, CreateDateColumn, Entity, Index, UpdateDateColumn } from 'typeorm'
 
 @Entity()
 export abstract class BaseEntityWithTimestamps extends BaseEntity {
@@ -12,6 +12,7 @@ export abstract class BaseEntityWithTimestamps extends BaseEntity {
 	})
 	updatedAt: Date
 
+	@Index()
 	@Column({ name: 'is_active', default: true })
 	isActive: boolean
 }

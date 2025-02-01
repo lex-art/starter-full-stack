@@ -29,7 +29,11 @@ export default async function BaseLayout({
 	const messages = await getMessages()
 	const timeZone = await getTimeZone()
 	return (
-		<html lang={locale} suppressHydrationWarning>
+		<html
+			lang={locale}
+			suppressHydrationWarning
+			suppressContentEditableWarning
+		>
 			<body
 				className={`${roboto.variable} ${robotoMono.variable} antialiased`}
 			>

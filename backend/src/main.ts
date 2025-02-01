@@ -6,6 +6,7 @@ import { json, urlencoded } from 'express'
 import { writeFileSync } from 'fs'
 import helmet from 'helmet'
 import { AppModule } from './app.module'
+import { envs } from './config/envs'
 
 declare const module: any
 async function bootstrap() {
@@ -61,7 +62,8 @@ async function bootstrap() {
 
 		writeFileSync('./docs/swagger-spec.json', JSON.stringify(document, null, 2))
 		app.setGlobalPrefix('api')
-		await app.listen(3002)
+		await app.listen(+envs.PORT || 3002)
+		// Hot Module Replacement, if the module is hot, accept the changes and close the app
 		if (module.hot) {
 			module.hot.accept()
 			module.hot.dispose(() => app.close())

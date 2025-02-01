@@ -1,10 +1,11 @@
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { BaseEntityWithTimestamps } from '../../lib/entity/Base-entity'
+import { Column, Entity, Index, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { AccountEntity } from './accounts.entity'
+import { ProfileEntity } from './profile.entity'
 
 // in DB, the table name is 'users'
 @Entity('users')
-@Index('email', ['email'], { unique: true })
+
 // for a entity class, should be call in singular
 export class UserEntity extends BaseEntityWithTimestamps {
 	@PrimaryGeneratedColumn('uuid', {
@@ -16,10 +17,11 @@ export class UserEntity extends BaseEntityWithTimestamps {
 		length: 100,
 		unique: true
 	})
+	@Index({ unique: true })
 	email!: string
 
-	@Column({ type: 'varchar' })
-	password!: string
+	@Column({ type: 'varchar', nullable: true })
+	password?: string
 
 	@Column({
 		name: 'username',
@@ -40,8 +42,11 @@ export class UserEntity extends BaseEntityWithTimestamps {
 
 	// add plural name for the relation if yo wan to use multiple accounts
 	@OneToMany(() => AccountEntity, (account) => account.user, {
-		cascade: true
-		/* onDelete: 'CASCADE' */
+		cascade: ['insert', 'update'],
+		onDelete: 'CASCADE'
 	})
 	account!: AccountEntity[]
+
+	@OneToOne(() => ProfileEntity, (profile) => profile.user)
+	profile: ProfileEntity
 }

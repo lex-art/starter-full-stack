@@ -46,7 +46,7 @@ import { CustomThrottlerGuard } from './lib/Guard/throttler.guard'
 	controllers: [AppController],
 	providers: [
 		{
-			provide: APP_PIPE,
+			provide: APP_PIPE, // global pipe
 			useValue: new ValidationPipe({
 				whitelist: true, // remove unknown properties
 				transform: true,

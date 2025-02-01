@@ -44,13 +44,9 @@ export class CreateUserService {
 				account.role = body.role
 				account.type = body.type
 				account.permissions = body.permissions
-				account.userId = user.userId
-				account.profileId = profile.profileId
 				account.provider = body.password ? TYPE_PROVIDER.CREDENTIALS : TYPE_PROVIDER.LOCAL
 
 				await transactionalEntityManager.save(account)
-				delete account.userId
-				delete account.profileId
 
 				const newUser = plainToClass(UserDto, user)
 				newUser.account = plainToClass(AccountDto, account)

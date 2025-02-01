@@ -1,7 +1,7 @@
 import { ApiException } from '@app/api/exceptions/api.exception'
 import { EmailDto, LoginFormDto } from '@app/auth/dto'
-import { BaseQueryPagination } from '@app/lib/dto/base-query-pagination'
-import { PaginationQueryDto } from '@app/lib/dto/query-pagination.dto'
+import { BaseQueryPagination } from '@app/common/dto/base-query-pagination'
+import { PaginationQueryDto } from '@app/common/dto/query-pagination.dto'
 import {
 	Body,
 	Controller,

@@ -1,5 +1,6 @@
+import { AuthResponseDto } from '@app/auth/dto/auth-response.dto'
 import { LoginFormDto } from '@app/auth/dto/login.dto'
-import { CurrentUserDto, UserDto } from '@app/auth/dto/main-user.dto'
+import { AccountDto, CurrentUserDto, ProfileDto, UserDto } from '@app/auth/dto/main-user.dto'
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { userValidator } from '@app/auth/lib/validators/user.validator'
@@ -8,6 +9,7 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { plainToClass } from 'class-transformer'
+import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
 export class AuthService {
@@ -16,20 +18,12 @@ export class AuthService {
 		private readonly configService: ConfigService
 	) {}
 
-	async loginUser(data: UserDto): Promise<{
-		accessToken: string
-		refreshToken: string
-		user: UserDto
-	}> {
+	async loginUser(data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>): Promise<AuthResponseDto> {
 		const payload: CurrentUserDto = {
-			userId: data.userId,
-			email: data.email,
-			accountId: data.account.accountId,
-			profileId: data.account.profile.profileId,
-			role: data.account.role,
-			permissions: data.account.permissions,
-			type: data.account.type,
-			verified: data.verified
+			userId: data.user.userId,
+			accountId: data.auth.accountId,
+			profileId: data.profile.profileId,
+			verified: data.user.verified
 		}
 		const accessToken = this.jwtService.sign(payload, {
 			expiresIn: this.configService.get('JWT_EXPIRATION_TIME')
@@ -43,13 +37,22 @@ export class AuthService {
 		return {
 			accessToken,
 			refreshToken,
-			user: data
+			...data
 		}
 	}
 
-	async validateLocalUser({ email, password }: LoginFormDto): Promise<UserDto> {
+	async validateLocalUser({ email, password, provider }: LoginFormDto): Promise<{
+		user: UserDto
+		profile: ProfileDto
+		auth: AccountDto
+	}> {
+		const where: FindOptionsWhere<UserEntity> = { email }
+
+		if (provider) {
+			where.account = { provider }
+		}
 		const user = await UserEntity.findOne({
-			where: { email },
+			where,
 			select: {
 				isActive: true,
 				userId: true,
@@ -64,24 +67,23 @@ export class AuthService {
 					role: true,
 					type: true,
 					permissions: true,
+					createdAt: true
+				},
+				profile: {
+					profileId: true,
+					firstName: true,
+					lastName: true,
+					phone: true,
+					address: true,
+					countryCallingCode: true,
+					countryCode: true,
 					createdAt: true,
-					profile: {
-						profileId: true,
-						firstName: true,
-						lastName: true,
-						phone: true,
-						address: true,
-						countryCallingCode: true,
-						countryCode: true,
-						createdAt: true,
-						image: true
-					}
+					image: true
 				}
 			},
 			relations: {
-				account: {
-					profile: true
-				}
+				account: true,
+				profile: true
 			}
 		})
 
@@ -94,10 +96,10 @@ export class AuthService {
 		if (!isMatchPassword) {
 			throw new AuthException('Invalid password', 'INVALID_PASSWORD')
 		}
-		delete user.password
-		return plainToClass(UserDto, {
-			...user,
-			account: user.account[0]
-		})
+		return {
+			user: plainToClass(UserDto, user),
+			profile: plainToClass(ProfileDto, user.profile),
+			auth: plainToClass(AccountDto, user.account[0]) //if you want to use multiple accounts, you should change this
+		}
 	}
 }

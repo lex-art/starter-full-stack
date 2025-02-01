@@ -3,7 +3,10 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
+import { ZodError } from 'zod'
 import { API_URLS } from './lib/emun'
+import { AuthSession } from './types/Auth/auth-session'
+import { signInSchema } from './zod/schemas/sign-in'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
@@ -23,18 +26,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			},
 			authorize: async (credentials) => {
 				try {
+					const { email, password } = await signInSchema.parseAsync({
+						email: credentials?.username,
+						password: credentials?.password
+					})
+
 					const result: AxiosResponse<{
 						message: string
-						data: {
-							accessToken: string
-							refreshToken: string
-							user: any // IUser
-						}
+						data: AuthSession
 					}> = await axios.post(
 						process.env.NEXT_PUBLIC_API_URL + API_URLS.LOGIN,
 						{
-							email: credentials?.username,
-							password: credentials?.password
+							email,
+							password
 						},
 						{
 							headers: {
@@ -44,23 +48,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 					)
 					if (result.data) {
 						return {
-							id: result.data.data.user.idUser.toString(),
-							name: result.data.data.user.profile.firstName,
-							email: result.data.data.user.email,
 							accessToken: result.data.data.accessToken,
 							refreshToken: result.data.data.refreshToken,
-							role: result.data.data.user.role,
-							type: result.data.data.user.type,
-							permissions: result.data.data.user.permissions,
-							timeZone: result.data.data.user.timeZone,
-							idUser: result.data.data.user.idUser,
-							profile: result.data.data.user.profile
+							user: result.data.data.user,
+							profile: result.data.data.profile,
+							auth: result.data.data.auth,
+							verified: result.data.data.user.verified
 						}
 					}
 					return null
 				} catch (error) {
+					if (error instanceof ZodError) {
+						console.error('Zod error:', error.errors)
+						throw new Error(error.errors[0].message)
+					}
 					if (axios.isAxiosError(error)) {
-						console.error('Error:', error.response?.data)
+						console.error('Axios error:', error.response?.data)
 						throw new Error(JSON.stringify(error.response?.data))
 					}
 					console.error('Error:', error)
