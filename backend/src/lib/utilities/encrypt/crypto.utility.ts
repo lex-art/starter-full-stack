@@ -88,8 +88,8 @@ export class CryptoUtility {
 }
  */
 
+import { configuration } from '@app/config/configuration'
 import { Injectable, Logger } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import * as crypto from 'crypto'
 
 @Injectable()
@@ -99,17 +99,17 @@ export class CryptoUtility {
 	private key: Buffer // Clave de cifrado
 	private iv: Buffer // Vector de inicialización
 
-	constructor(private readonly configService: ConfigService) {
+	constructor() {
 		// Inicializar clave y IV (se debe asegurar que estos valores estén configurados correctamente)
-		const keyHex = this.configService.get<string>('CRYPT_KEY') //process.env.CRYPT_KEY;
+		const { algorithm, key: keyHex, iv: ivHex } = configuration.crypto
 		if (!keyHex || keyHex.length !== 64) {
 			throw new Error('CRYPT_KEY debe ser de 64 caracteres hexadecimales')
 		}
-		const ivHex = this.configService.get<string>('CRYPT_KEY_16') //process.env.CRYPT_KEY_16;
+
 		if (!ivHex || ivHex.length !== 32) {
-			throw new Error('CRYPT_KEY_16 debe ser de 32 caracteres hexadecimales')
+			throw new Error('CRYPT_KEY_16 should be 32 hexadecimal characters')
 		}
-		const algorithm = this.configService.get<string>('CRYPT_ALGORITHM') //process.env.CRYPT_ALGORITHM;
+
 		if (!algorithm) {
 			throw new Error('CRYPT_ALGORITHM no está configurado')
 		}

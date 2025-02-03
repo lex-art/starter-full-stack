@@ -1,5 +1,5 @@
+import { configuration } from '@app/config/configuration'
 import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
 import { Request } from 'express'
@@ -8,10 +8,7 @@ import { ICurrentUser } from 'src/types/user.type'
 @Injectable()
 export class JwtRefreshAuthGuard extends AuthGuard('jwt') {
 	private readonly Logger = new Logger(JwtRefreshAuthGuard.name)
-	constructor(
-		private readonly jwtService: JwtService,
-		private readonly configService: ConfigService
-	) {
+	constructor(private readonly jwtService: JwtService) {
 		super()
 	}
 
@@ -24,7 +21,7 @@ export class JwtRefreshAuthGuard extends AuthGuard('jwt') {
 		}
 		try {
 			const payload: ICurrentUser = this.jwtService.verify(token, {
-				secret: this.configService.get<string>('JWT_REFRESH_SECRET')
+				secret: configuration.jwt.secretRefresh
 			})
 			request['user'] = payload
 		} catch (error: any) {

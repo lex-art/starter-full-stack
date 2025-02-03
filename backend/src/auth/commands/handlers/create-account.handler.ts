@@ -2,9 +2,10 @@ import { NotificationEmailOTPEvent } from '@app/auth/events/event/notification-e
 import { UserCreatedEvent } from '@app/auth/events/event/notification-email-user-created.event'
 import { VerifyAccountEvent } from '@app/auth/events/event/notification-email-verify-account.even'
 import { AuthException } from '@app/auth/exceptions'
+import { configuration } from '@app/config/configuration'
+import { envs } from '@app/config/env/envs'
 import { TYPE_PROVIDER } from '@app/types/enums'
 import { Logger } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs'
 import { CreateAccountCommand } from '../command/create-account.command'
 import { CreateUserService } from '../services/create-user.service'
@@ -16,8 +17,7 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 	constructor(
 		private readonly eventBus: EventBus,
 		private readonly createUserService: CreateUserService,
-		private readonly tokenVerificationService: TokenVerificationService,
-		private readonly configService: ConfigService
+		private readonly tokenVerificationService: TokenVerificationService
 	) {}
 
 	async execute(command: CreateAccountCommand) {
@@ -28,12 +28,12 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 						new UserCreatedEvent(response.email, {
 							username: response.username,
 							password: response.password,
-							url: this.configService.get<string>('URL_FRONTEND')
+							url: envs.URL_FRONTEND
 						})
 					)
 				} else if (response.account.provider === TYPE_PROVIDER.CREDENTIALS) {
 					// This flag would be in another place or method of flagMethodVerify
-					const flagMethodVerify = this.configService.get<string>('FLAG_METHOD_VERIFY')
+					const flagMethodVerify = configuration.flags.methodVerify
 					if (flagMethodVerify === 'OTP') {
 						const generateOtp = await this.tokenVerificationService.generateOTP(response.email)
 						await this.eventBus.publish(
@@ -46,7 +46,7 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 						const token = await this.tokenVerificationService.generateVerificationEmail(
 							response.email
 						)
-						const url = `${this.configService.get<string>('URL_FRONTEND')}/auth/verify-account?token=${token}`
+						const url = `${envs.URL_FRONTEND}/auth/verify-account?token=${token}`
 						await this.eventBus.publish(
 							new VerifyAccountEvent(response.email, {
 								username: response.username,
@@ -56,10 +56,7 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 					}
 				}
 				delete response.password
-				return {
-					message: 'User created successfully',
-					user: response
-				}
+				return response
 			})
 		} catch (error) {
 			this.logger.error(error.message)

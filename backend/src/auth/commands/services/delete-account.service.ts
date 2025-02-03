@@ -19,9 +19,9 @@ export class DeleteAccountService {
 		}
 
 		user.isActive = false
+		user.profile.isActive = false
 		user.account = user.account.map((account) => {
 			account.isActive = false
-			account.profile.isActive = false
 			return account
 		})
 

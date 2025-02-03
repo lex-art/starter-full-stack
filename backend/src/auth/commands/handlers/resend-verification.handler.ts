@@ -1,7 +1,7 @@
 import { AuthException } from '@app/auth/exceptions'
+import { envs } from '@app/config/env/envs'
 import { EmailService } from '@app/mail'
 import { Logger } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { ResendVerificationCommand } from '../command/resend-verification.command'
 import { FindUserService } from '../services/find-user.service'
@@ -14,8 +14,7 @@ export class ResendVerificationHandler implements ICommandHandler<ResendVerifica
 	constructor(
 		private readonly findUserService: FindUserService,
 		private readonly emailService: EmailService,
-		private readonly tokenVerificationService: TokenVerificationService,
-		private readonly configService: ConfigService
+		private readonly tokenVerificationService: TokenVerificationService
 	) {}
 	async execute(command: ResendVerificationCommand) {
 		const body = command.body
@@ -27,7 +26,7 @@ export class ResendVerificationHandler implements ICommandHandler<ResendVerifica
 			throw new AuthException('User is not active', 'USER_NOT_ACTIVE')
 		}
 		const token = await this.tokenVerificationService.generateVerificationEmail(body.email)
-		const url = `${this.configService.get<string>('URL_FRONTEND')}/auth/verify-account?token=${token}`
+		const url = `${envs.URL_FRONTEND}/auth/verify-account?token=${token}`
 
 		await this.emailService.sendEmail({
 			email: user.email,

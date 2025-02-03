@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common'
 import 'dotenv/config'
 import { z } from 'zod'
 
@@ -12,7 +13,7 @@ interface Env {
 	JWT_SECRET: string
 	JWT_REFRESH_SECRET: string
 	JWT_EXPIRATION_IN: string
-	JWT_EXPIRATION_FORGOT_PASS_TIME: string
+	JWT_REFRESH_EXPIRATION_IN: string
 	CRYPT_KEY: string
 	CRYPT_KEY_16: string
 	CRYPT_ALGORITHM: string
@@ -21,8 +22,6 @@ interface Env {
 	EMAIL_SECURE: string
 	EMAIL_USER: string
 	EMAIL_PASSWORD: string
-	JWT_EXPIRATION_TIME: string
-	JWT_REFRESH_TOKEN_EXPIRATION_TIME: string
 	AWS_BUCKET_NAME: string
 	AWS_ACCESS_KEY_ID: string
 	AWS_SECRET_ACCESS_KEY: string
@@ -31,7 +30,7 @@ interface Env {
 	DESTINATION_PATH: string
 	URL_FRONTEND: string
 	FLAG_METHOD_VERIFY: string
-	PORT: string
+	PORT: number
 }
 
 const envSchema = z.object({
@@ -45,6 +44,7 @@ const envSchema = z.object({
 	JWT_SECRET: z.string().nonempty(),
 	JWT_REFRESH_SECRET: z.string().nonempty(),
 	JWT_EXPIRATION_IN: z.string().nonempty(),
+	JWT_REFRESH_EXPIRATION_IN: z.string().nonempty(),
 	JWT_EXPIRATION_FORGOT_PASS_TIME: z.string().nonempty(),
 	CRYPT_KEY: z.string().nonempty(),
 	CRYPT_KEY_16: z.string().nonempty(),
@@ -54,8 +54,6 @@ const envSchema = z.object({
 	EMAIL_SECURE: z.string().nonempty(),
 	EMAIL_USER: z.string().nonempty(),
 	EMAIL_PASSWORD: z.string().nonempty(),
-	JWT_EXPIRATION_TIME: z.string().nonempty(),
-	JWT_REFRESH_TOKEN_EXPIRATION_TIME: z.string().nonempty(),
 	AWS_BUCKET_NAME: z.string().nonempty(),
 	AWS_ACCESS_KEY_ID: z.string().nonempty(),
 	AWS_SECRET_ACCESS_KEY: z.string().nonempty(),
@@ -64,13 +62,15 @@ const envSchema = z.object({
 	DESTINATION_PATH: z.string().nonempty(),
 	URL_FRONTEND: z.string().nonempty(),
 	FLAG_METHOD_VERIFY: z.string().nonempty(),
-	PORT: z.string().nonempty()
+	PORT: z.coerce.number().min(0)
 })
 
 const { error, data } = envSchema.safeParse(process.env)
 
 if (error) {
-	throw new Error(`Config validation error:  ${error.errors[0].message}`)
+	const logger = new Logger('Config')
+	logger.error(`Config validation error:  ${JSON.stringify(error.errors)}`)
+	throw new Error(`Config validation error:  ${JSON.stringify(error.errors)}`)
 }
 
 export const envs = data as Env

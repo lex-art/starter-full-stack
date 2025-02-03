@@ -1,15 +1,15 @@
 import { PreUploadUrlDto } from '@app/attachment/dto/pre-upload-url.dto'
+import { envs } from '@app/config/env/envs'
 import { GeneralResponse } from '@app/types'
 import { PutObjectCommand, PutObjectCommandInput, S3 } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { randomBytes } from 'crypto'
 
 @Injectable()
 export class PreUploadUrlService {
 	private s3Client: S3
-	constructor(private readonly configService: ConfigService) {}
+	constructor() {}
 	async generatePreUploadUrl({
 		extension,
 		typeFile,
@@ -18,7 +18,7 @@ export class PreUploadUrlService {
 		const rawBytes = randomBytes(16)
 		const fileName = `${bucketFolder}/${rawBytes.toString('hex')}.${extension}`
 		const bucketParams: PutObjectCommandInput = {
-			Bucket: this.configService.get('AWS_BUCKET_NAME'),
+			Bucket: envs.AWS_BUCKET_NAME,
 			Key: fileName,
 			ContentType: typeFile
 		}

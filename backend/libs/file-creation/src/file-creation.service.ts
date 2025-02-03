@@ -1,5 +1,5 @@
+import { envs } from '@app/config/env/envs'
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { RenderFunction, template } from 'dot'
 import { Column, Workbook } from 'exceljs'
 import { readFileSync } from 'fs'
@@ -10,7 +10,7 @@ import { excelUtil } from './utils/excel-util'
 
 @Injectable()
 export class FileCreationService {
-	constructor(private readonly configService: ConfigService) {}
+	constructor() {}
 
 	public async generateExcelFile({
 		rows,
@@ -61,8 +61,7 @@ export class FileCreationService {
 	public async generateHTMLPdfFile(dataFile: Record<string, unknown>) {
 		const browser = await launch({
 			headless: true,
-			executablePath:
-				this.configService.get('NODE_ENV') === 'production' ? '/usr/bin/chromium-browser' : undefined,
+			executablePath: envs.NODE_ENV === 'production' ? '/usr/bin/chromium-browser' : undefined,
 			ignoreDefaultArgs: ['--disable-extensions']
 		})
 		const page = await browser.newPage()

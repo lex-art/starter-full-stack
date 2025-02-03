@@ -4,34 +4,32 @@ import { AccountDto, CurrentUserDto, ProfileDto, UserDto } from '@app/auth/dto/m
 import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { userValidator } from '@app/auth/lib/validators/user.validator'
+import { configuration } from '@app/config/configuration'
 import { compare } from '@app/lib/utilities'
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { plainToClass } from 'class-transformer'
 import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
 export class AuthService {
-	constructor(
-		private readonly jwtService: JwtService,
-		private readonly configService: ConfigService
-	) {}
+	constructor(private readonly jwtService: JwtService) {}
 
 	async loginUser(data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>): Promise<AuthResponseDto> {
 		const payload: CurrentUserDto = {
 			userId: data.user.userId,
+			email: data.user.email,
 			accountId: data.auth.accountId,
 			profileId: data.profile.profileId,
 			verified: data.user.verified
 		}
 		const accessToken = this.jwtService.sign(payload, {
-			expiresIn: this.configService.get('JWT_EXPIRATION_TIME')
+			expiresIn: configuration.jwt.signOptions.expiresIn
 		})
 
 		const refreshToken = this.jwtService.sign(payload, {
-			expiresIn: this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
-			secret: this.configService.get<string>('JWT_REFRESH_SECRET')
+			expiresIn: configuration.jwt.signOptions.expiresIn,
+			secret: configuration.jwt.secret
 		})
 
 		return {
@@ -47,6 +45,13 @@ export class AuthService {
 		auth: AccountDto
 	}> {
 		const where: FindOptionsWhere<UserEntity> = { email }
+		console.log('====================================')
+		console.log({
+			email,
+			password,
+			provider
+		})
+		console.log('====================================')
 
 		if (provider) {
 			where.account = { provider }

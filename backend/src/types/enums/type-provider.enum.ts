@@ -5,7 +5,7 @@ export enum TYPE_PROVIDER {
 	TWITTER = 'TWITTER',
 	LINKEDIN = 'LINKEDIN',
 	APPLE = 'APPLE',
-	EMAIL_PROVIDER = 'EMAIL_PROVIDER',
-	CREDENTIALS = 'CREDENTIALS',
+	EMAIL_PROVIDER = 'EMAIL',
+	CREDENTIALS = 'CREDENTIALS', // for example as a token of a external provider ex: "credential_token"
 	LOCAL = 'LOCAL' // local account when an admin creates an account for a user
 }

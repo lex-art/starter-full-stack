@@ -30,7 +30,6 @@ export class UserSeeder implements Seeder {
 
 		const account = accountRepository.create({
 			user: user,
-			profile: profile,
 			provider: 'CREDENTIALS'
 			//type: 'STANDARD'
 		})

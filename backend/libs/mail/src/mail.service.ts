@@ -1,6 +1,5 @@
 import { MailerService } from '@nestjs-modules/mailer'
 import { Injectable, Logger } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { EmailException } from './exceptions'
 
 type TemplatesName =
@@ -21,10 +20,7 @@ interface EmailData {
 export class EmailService {
 	private readonly logger = new Logger(EmailService.name)
 
-	constructor(
-		private mailerService: MailerService,
-		private readonly configService: ConfigService
-	) {}
+	constructor(private mailerService: MailerService) {}
 
 	public async sendEmail({ email, from, subject, template, data }: EmailData): Promise<{
 		message: string

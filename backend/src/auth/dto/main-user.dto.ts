@@ -1,6 +1,6 @@
 import { USER_PERMISSION, USER_ROLE, USER_TYPE } from '@app/types/enums'
 import { IntersectionType, PartialType, PickType } from '@nestjs/swagger'
-import { Exclude, Type } from 'class-transformer'
+import { Type } from 'class-transformer'
 import {
 	IsArray,
 	IsBoolean,
@@ -20,7 +20,7 @@ class CreateUserDto {
 	@IsEmail()
 	email!: string
 
-	@Exclude() // when use plainToClass, this field will be excluded
+	//@Exclude() // when use plainToClass, this field will be excluded
 	@IsString()
 	@MaxLength(72) // bcrypt max length is 72, if you change this, you need to change the bcrypt hash because it will fail
 	password!: string
@@ -129,7 +129,7 @@ class UserDto extends IntersectionType(
 }
 
 class CurrentUserDto extends IntersectionType(
-	PickType(UserDto, ['userId', /*  'email', */ 'verified']),
+	PickType(UserDto, ['userId', 'email', 'verified']),
 	PickType(AccountDto, ['accountId' /* 'role', 'type', 'permissions' */]),
 	PickType(ProfileDto, ['profileId'])
 ) {}

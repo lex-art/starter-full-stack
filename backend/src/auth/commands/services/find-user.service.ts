@@ -10,9 +10,8 @@ export class FindUserService {
 			...(email && { where: { email } }),
 			...(userId && { where: { userId } }),
 			relations: {
-				account: {
-					profile: true
-				}
+				account: true,
+				profile: true
 			}
 		})
 		const error = Object.entries(userValidator).find(([, validator]) => validator(user))
@@ -28,9 +27,8 @@ export class FindUserService {
 			...(email && { where: { email } }),
 			...(userId && { where: { userId } }),
 			relations: {
-				account: {
-					profile: true
-				}
+				account: true,
+				profile: true
 			}
 		})
 		if (!user) {

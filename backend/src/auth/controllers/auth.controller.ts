@@ -1,3 +1,4 @@
+import { envs } from '@app/config/env/envs'
 import { CurrentUser, Public } from '@app/decorator'
 import { GeneralResponse } from '@app/types'
 import {
@@ -14,7 +15,6 @@ import {
 	Res,
 	UseGuards
 } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { SkipThrottle, Throttle } from '@nestjs/throttler'
@@ -29,6 +29,7 @@ import { ResendVerificationCommand } from '../commands/command/resend-verificati
 import { ResetPasswordCommand } from '../commands/command/reset-pass.command'
 import { VerifyOtpCommand } from '../commands/command/verify-otp.command'
 import { ResetPasswordDto, TokenDto, VerifyEmailOtpDto } from '../dto'
+import { AuthResponseDto } from '../dto/auth-response.dto'
 import { EmailDto } from '../dto/login.dto'
 import { CreateUserDto, CurrentUserDto, UserDto } from '../dto/main-user.dto'
 import { AuthException } from '../exceptions'
@@ -42,8 +43,7 @@ export class AuthController {
 	private readonly logger = new Logger(AuthController.name)
 	constructor(
 		private readonly queryBus: QueryBus,
-		private readonly commandBus: CommandBus,
-		private readonly configService: ConfigService
+		private readonly commandBus: CommandBus
 	) {}
 
 	handleGeneralException(error: any): HttpException {
@@ -78,7 +78,7 @@ export class AuthController {
 	async login(
 		@Request()
 		req: {
-			user: UserDto
+			user: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>
 		}
 	): Promise<{
 		accessToken: string
@@ -210,13 +210,9 @@ export class AuthController {
 			const command = new VerifyAccountQuery(token)
 			const verified = await this.queryBus.execute(command)
 			if (verified) {
-				return res.redirect(
-					this.configService.get('URL_FRONTEND') + '/auth/login?message=account_verified'
-				)
+				return res.redirect(envs.URL_FRONTEND + '/auth/login?message=account_verified')
 			}
-			return res.redirect(
-				this.configService.get('URL_FRONTEND') + '/auth/login?message=account_not_verified'
-			)
+			return res.redirect(envs.URL_FRONTEND + '/auth/login?message=account_not_verified')
 		} catch (error) {
 			throw this.handleGeneralException(error)
 		}

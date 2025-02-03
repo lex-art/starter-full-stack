@@ -1,20 +1,16 @@
-import { ConfigService } from '@nestjs/config'
-import { config } from 'dotenv'
+import { envs } from '@app/config/env/envs'
 import { DataSource, DataSourceOptions } from 'typeorm'
 import { SeederOptions } from 'typeorm-extension'
 import { MainSeeder } from './seeds/Main.seeder'
 
-config()
-const configService = new ConfigService()
-
 const options: DataSourceOptions & SeederOptions = {
 	type: 'postgres',
-	host: configService.getOrThrow('DATABASE_HOST'),
-	port: configService.getOrThrow('DATABASE_PORT'),
-	username: configService.getOrThrow('DATABASE_USERNAME'),
-	password: configService.getOrThrow('DATABASE_PASSWORD'),
-	database: configService.getOrThrow('DATABASE_NAME'),
-	schema: configService.getOrThrow('DATABASE_SCHEMA'),
+	host: envs.DATABASE_HOST,
+	port: +envs.DATABASE_PORT,
+	username: envs.DATABASE_USERNAME,
+	password: envs.DATABASE_PASSWORD,
+	database: envs.DATABASE_NAME,
+	schema: envs.DATABASE_SCHEMA,
 	migrations: ['./src/database/migrations/*{.js,.ts}'],
 	entities: ['./src/**/*.entity{.ts,.js}'],
 	seeds: [MainSeeder],

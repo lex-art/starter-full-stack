@@ -1,3 +1,4 @@
+import { configuration } from '@app/config/configuration'
 import { CryptoUtility } from '@app/lib/utilities'
 import { MailModule } from '@app/mail'
 import { Module } from '@nestjs/common'
@@ -32,10 +33,8 @@ import { LocalStrategy } from './strategy/local.strategy'
 		JwtModule.registerAsync({
 			global: true,
 			imports: [ConfigModule],
-			useFactory: (configService: ConfigService) => ({
-				global: true,
-				secret: configService.get<string>('JWT_SECRET'),
-				signOptions: { expiresIn: configService.get<string>('JWT_EXPIRATION_IN') }
+			useFactory: () => ({
+				...configuration.jwt
 			}),
 			inject: [ConfigService]
 		})

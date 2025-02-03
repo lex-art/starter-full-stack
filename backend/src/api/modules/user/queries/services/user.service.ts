@@ -49,19 +49,18 @@ export class UserQueryService {
 					provider: true,
 					role: true,
 					type: true,
-					permissions: true,
-					profile: {
-						firstName: true,
-						lastName: true,
-						phone: true,
-						address: true
-					}
+					permissions: true
+				},
+				profile: {
+					firstName: true,
+					lastName: true,
+					phone: true,
+					address: true
 				}
 			},
 			relations: {
-				account: {
-					profile: true
-				}
+				profile: true,
+				account: true
 			},
 			...paginationOptions
 		}).catch((error) => {

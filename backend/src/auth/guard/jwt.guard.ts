@@ -1,5 +1,5 @@
+import { configuration } from '@app/config/configuration'
 import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { Reflector } from '@nestjs/core'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
@@ -14,7 +14,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 	private readonly logger = new Logger(JwtAuthGuard.name)
 	constructor(
 		private readonly jwtService: JwtService,
-		private readonly configService: ConfigService,
 		private reflector: Reflector
 	) {
 		super()
@@ -37,7 +36,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 		}
 		try {
 			const payload: CurrentUserDto = await this.jwtService.verifyAsync(token, {
-				secret: this.configService.get<string>('JWT_SECRET')
+				secret: configuration.jwt.secret
 			})
 			const dtoUserInstance = plainToClass(CurrentUserDto, payload)
 			const errors = await validate(dtoUserInstance)

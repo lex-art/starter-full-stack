@@ -30,24 +30,22 @@ export class GetAllUserHandler implements IQueryHandler<GetAllUserQuery> {
 					? [
 							{ firstName: Like(`%${filtersQuery.firstName}%`) },
 							{ lastName: Like(`%${filtersQuery.lastName}%`) }
-						]
+					  ]
 					: undefined
 
 			const filtersOptions: FindOptionsWhere<UserEntity>[] = [
 				{
 					isActive: true,
-					account: {
-						profile: {
-							firstName: query.body?.filtersQuery?.firstName
-								? Like(`%${query.body.filtersQuery.firstName}%`)
-								: undefined,
-							lastName: query.body?.filtersQuery?.lastName
-								? Like(`%${query.body.filtersQuery.lastName}%`)
-								: undefined,
-							phone: query.body?.filtersQuery?.phone
-								? Like(`%${query.body.filtersQuery.phone}%`)
-								: undefined
-						}
+					profile: {
+						firstName: query.body?.filtersQuery?.firstName
+							? Like(`%${query.body.filtersQuery.firstName}%`)
+							: undefined,
+						lastName: query.body?.filtersQuery?.lastName
+							? Like(`%${query.body.filtersQuery.lastName}%`)
+							: undefined,
+						phone: query.body?.filtersQuery?.phone
+							? Like(`%${query.body.filtersQuery.phone}%`)
+							: undefined
 					},
 					createdAt: createdAt,
 					...(nameCondition ? { Or: nameCondition } : {})

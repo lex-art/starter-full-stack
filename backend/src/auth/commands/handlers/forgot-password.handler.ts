@@ -1,7 +1,7 @@
 import { AuthException } from '@app/auth/exceptions'
+import { envs } from '@app/config/env/envs'
 import { EmailService } from '@app/mail'
 import { Logger } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { ForgoPasswordCommand } from '../command/forgot-password.command'
 import { FindUserService } from '../services/find-user.service'
@@ -13,7 +13,6 @@ export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordComma
 	constructor(
 		private readonly emailService: EmailService,
 		private readonly findUSer: FindUserService,
-		private readonly configService: ConfigService,
 		private readonly tokenVerificationService: TokenVerificationService
 	) {}
 
@@ -23,7 +22,7 @@ export class ForgotPasswordHandler implements ICommandHandler<ForgoPasswordComma
 			const tokenForResetPass = await this.tokenVerificationService.generateVerificationResetPassword(
 				user.email
 			)
-			const url = `${this.configService.get('URL_FRONTEND')}/auth/reset-password?token=${tokenForResetPass}`
+			const url = `${envs.URL_FRONTEND}/auth/reset-password?token=${tokenForResetPass}`
 
 			return await this.emailService.sendEmail({
 				email: user.email,
