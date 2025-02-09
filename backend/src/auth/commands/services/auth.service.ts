@@ -45,13 +45,6 @@ export class AuthService {
 		auth: AccountDto
 	}> {
 		const where: FindOptionsWhere<UserEntity> = { email }
-		console.log('====================================')
-		console.log({
-			email,
-			password,
-			provider
-		})
-		console.log('====================================')
 
 		if (provider) {
 			where.account = { provider }

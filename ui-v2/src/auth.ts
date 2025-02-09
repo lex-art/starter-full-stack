@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import NextAuth from 'next-auth'
+import NextAuth, { CredentialsSignin } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
@@ -7,6 +7,14 @@ import { ZodError } from 'zod'
 import { API_URLS } from './lib/emun'
 import { AuthSession } from './types/Auth/auth-session'
 import { signInSchema } from './zod/schemas/sign-in'
+
+class AuthenticateError extends CredentialsSignin {
+	constructor(message: string, code?: string) {
+		super()
+		this.message = message
+		this.code = code ?? 'unexpected_error'
+	}
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
@@ -60,14 +68,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				} catch (error) {
 					if (error instanceof ZodError) {
 						console.error('Zod error:', error.errors)
-						throw new Error(error.errors[0].message)
+						throw new AuthenticateError(error.errors[0].message)
 					}
 					if (axios.isAxiosError(error)) {
 						console.error('Axios error:', error.response?.data)
-						throw new Error(JSON.stringify(error.response?.data))
+						throw new AuthenticateError(
+							error.response?.data.message,
+							error.response?.data.code
+						)
 					}
 					console.error('Error:', error)
-					throw new Error('Error inesperado')
+					throw new AuthenticateError('Error inesperado')
 				}
 			}
 		}),

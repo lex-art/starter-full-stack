@@ -1,4 +1,4 @@
-import { Column, Entity, Index, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, Index, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { AccountEntity } from './accounts.entity'
 import { ProfileEntity } from './profile.entity'
@@ -47,6 +47,12 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	})
 	account!: AccountEntity[]
 
-	@OneToOne(() => ProfileEntity, (profile) => profile.user)
-	profile: ProfileEntity
+	@OneToOne(() => ProfileEntity, (profile) => profile.user, {
+		cascade: ['insert', 'update'],
+		onDelete: 'CASCADE'
+	})
+	@JoinColumn({
+		name: 'profile_id'
+	})
+	profile!: ProfileEntity
 }

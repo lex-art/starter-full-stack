@@ -21,7 +21,7 @@ export class UserSubscriber implements EntitySubscriberInterface<UserEntity> {
 		private readonly _crypto: CryptoUtility
 	) {
 		this._dataSource.subscribers.push(this)
-		this.fieldsToEncrypt = ['username']
+		this.fieldsToEncrypt = ['username', 'email', 'password', 'timeZone']
 	}
 
 	listenTo() {

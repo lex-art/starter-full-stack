@@ -18,14 +18,6 @@ export class CreateUserService {
 	async createUser(body: CreateUserDto): Promise<UserDto> {
 		return await this.userRepository.manager
 			.transaction(async (transactionalEntityManager: EntityManager) => {
-				const user: UserEntity = new UserEntity()
-				user.email = body.email
-				user.username = body.username
-				user.timeZone = body.timeZone
-				const tempPassword: string = body.password ?? passwordGenerator()
-				user.password = await encrypt(tempPassword)
-				await transactionalEntityManager.save(user)
-
 				const profile: ProfileEntity = new ProfileEntity()
 				profile.firstName = body.firstName
 				profile.lastName = body.lastName
@@ -47,6 +39,19 @@ export class CreateUserService {
 				account.provider = body.password ? TYPE_PROVIDER.CREDENTIALS : TYPE_PROVIDER.LOCAL
 
 				await transactionalEntityManager.save(account)
+
+				const user: UserEntity = new UserEntity()
+				user.email = body.email
+				user.username = body.username
+				user.timeZone = body.timeZone
+				const tempPassword: string = body.password ?? passwordGenerator()
+				user.password = await encrypt(tempPassword)
+
+				//relations
+				user.account = [account]
+				user.profile = profile
+
+				await transactionalEntityManager.save(user)
 
 				const newUser = plainToClass(UserDto, user)
 				newUser.account = plainToClass(AccountDto, account)

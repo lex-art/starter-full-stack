@@ -24,7 +24,8 @@
     "typeorm:run": "pnpm exec typeorm-ts-node-commonjs migration:run -d ./src/database/data-source.ts",
     "typeorm:revert": "pnpm exec typeorm-ts-node-commonjs migration:revert -d src/database/data-source.ts",
     "typeorm:seed:dev": "pnpm run build && pnpm exec typeorm-extension seed:run -d src/database/data-source.ts",
-    "typeorm:seed": "pnpm exec typeorm-extension seed:run -d src/database/data-source.ts"
+    "typeorm:seed": "pnpm exec typeorm-extension seed:run -d src/database/data-source.ts",
+    "compose:up": "docker compose up -d"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.654.0",

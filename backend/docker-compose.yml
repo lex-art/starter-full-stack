@@ -1,0 +1,16 @@
+##  IMPORTANT: This file no use in production, only for development,for production use a another service o service like AWS RDS, Google Cloud SQL, etc. or use a docker-compose.override.yml file
+version: '3'
+
+services:
+  app-db:
+    image: postgres:16
+    container_name: app-db
+    restart: always # restart the container if it crashes or each time the system restarts
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data # persist the data in the host machine, so ./data is my local directory and /var/lib/postgresql/data is the directory in the container, so this a connection between the two directories
