@@ -28,7 +28,7 @@ export class CreateUserService {
 				profile.address = body.address
 				profile.image = body.image
 
-				await transactionalEntityManager.save(profile)
+				// await transactionalEntityManager.save(profile)
 
 				const account = new AccountEntity()
 				account.provider = body.provider
@@ -38,7 +38,7 @@ export class CreateUserService {
 				account.permissions = body.permissions
 				account.provider = body.password ? TYPE_PROVIDER.CREDENTIALS : TYPE_PROVIDER.LOCAL
 
-				await transactionalEntityManager.save(account)
+				// await transactionalEntityManager.save(account)
 
 				const user: UserEntity = new UserEntity()
 				user.email = body.email
@@ -50,6 +50,7 @@ export class CreateUserService {
 				//relations
 				user.account = [account]
 				user.profile = profile
+				profile.user = user
 
 				await transactionalEntityManager.save(user)
 

@@ -1,4 +1,5 @@
 import { configuration } from '@app/config/configuration'
+import { ALLOW_UNVERIFIED } from '@app/decorator/allow-unverified.decorator'
 import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { JwtService } from '@nestjs/jwt'
@@ -14,7 +15,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 	private readonly logger = new Logger(JwtAuthGuard.name)
 	constructor(
 		private readonly jwtService: JwtService,
-		private reflector: Reflector
+		private readonly reflector: Reflector
 	) {
 		super()
 	}
@@ -46,7 +47,13 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 					code: 'JWT_ERROR'
 				})
 			}
-			if (!dtoUserInstance.verified) {
+
+			const allowUnverified = this.reflector.getAllAndOverride<boolean>(ALLOW_UNVERIFIED, [
+				context.getHandler(),
+				context.getClass()
+			])
+
+			if (!allowUnverified && !dtoUserInstance.verified) {
 				throw new UnauthorizedException({
 					message: 'User not verified',
 					code: 'JWT_ERROR'

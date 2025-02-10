@@ -14,6 +14,7 @@ interface Env {
 	JWT_REFRESH_SECRET: string
 	JWT_EXPIRATION_IN: string
 	JWT_REFRESH_EXPIRATION_IN: string
+	JWT_VERIFY_EXPIRATION_IN: string
 	CRYPT_KEY: string
 	CRYPT_KEY_16: string
 	CRYPT_ALGORITHM: string
@@ -45,6 +46,7 @@ const envSchema = z.object({
 	JWT_REFRESH_SECRET: z.string().nonempty(),
 	JWT_EXPIRATION_IN: z.string().nonempty(),
 	JWT_REFRESH_EXPIRATION_IN: z.string().nonempty(),
+	JWT_VERIFY_EXPIRATION_IN: z.string().nonempty(),
 	JWT_EXPIRATION_FORGOT_PASS_TIME: z.string().nonempty(),
 	CRYPT_KEY: z.string().nonempty(),
 	CRYPT_KEY_16: z.string().nonempty(),

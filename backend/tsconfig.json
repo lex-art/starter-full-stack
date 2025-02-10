@@ -1,63 +1,36 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "types": [
-      "jest",
-      "node"
-    ],
-    "moduleResolution": "node",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "resolveJsonModule": true,
-    "paths": {
-      "@app/": [
-        "src/"
-      ],
-      "@app/*": [
-        "src/*"
-      ],
-      "@app/attachment": [
-        "libs/attachment/src"
-      ],
-      "@app/attachment/*": [
-        "libs/attachment/src/*"
-      ],
-      "@app/file-creation": [
-        "libs/file-creation/src"
-      ],
-      "@app/file-creation/*": [
-        "libs/file-creation/src/*"
-      ],
-      "@app/mail": [
-        "libs/mail/src"
-      ],
-      "@app/mail/*": [
-        "libs/mail/src/*"
-      ]
-    }
-  },
-  "include": [
-    "src/**/*.ts",
-    "test/**/*.ts",
-    "libs/**/*.ts",
-    "libs/test/**/*.json"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+	"compilerOptions": {
+		"module": "ES2022",
+		"target": "ES2022",
+		"types": ["jest", "node"],
+		"moduleResolution": "node",
+		"declaration": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./",
+		"incremental": true,
+		"skipLibCheck": true,
+		"strictNullChecks": false,
+		"noImplicitAny": false,
+		"strictBindCallApply": false,
+		"forceConsistentCasingInFileNames": false,
+		"noFallthroughCasesInSwitch": false,
+		"resolveJsonModule": true,
+		"paths": {
+			"@app/": ["src/"],
+			"@app/*": ["src/*"],
+			"@app/attachment": ["libs/attachment/src"],
+			"@app/attachment/*": ["libs/attachment/src/*"],
+			"@app/file-creation": ["libs/file-creation/src"],
+			"@app/file-creation/*": ["libs/file-creation/src/*"],
+			"@app/mail": ["libs/mail/src"],
+			"@app/mail/*": ["libs/mail/src/*"]
+		}
+	},
+	"include": ["src/**/*.ts", "test/**/*.ts", "libs/**/*.ts", "libs/test/**/*.json"],
+	"exclude": ["node_modules", "dist"]
 }

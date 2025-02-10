@@ -39,12 +39,51 @@ export class AuthService {
 		}
 	}
 
-	async validateLocalUser({ email, password, provider }: LoginFormDto): Promise<{
+	async generateVerificationUser(
+		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>
+	): Promise<AuthResponseDto> {
+		const payload = {
+			userId: data.user.userId,
+			email: data.user.email,
+			verified: data.user.verified
+		}
+		const accessToken = this.jwtService.sign(payload, {
+			expiresIn: configuration.jwt.expiresVerifyIn
+		})
+
+		const refreshToken = ''
+
+		return {
+			accessToken,
+			refreshToken,
+			user: plainToClass(UserDto, data),
+			profile: plainToClass(ProfileDto, data.profile),
+			auth: plainToClass(AccountDto, data.auth)
+		}
+	}
+
+	async validateLocalUser({
+		email,
+		password,
+		provider,
+		skipVerification = false
+	}: LoginFormDto & {
+		skipVerification?: boolean
+	}): Promise<{
 		user: UserDto
 		profile: ProfileDto
 		auth: AccountDto
 	}> {
 		const where: FindOptionsWhere<UserEntity> = { email }
+
+		console.log('====================================')
+		console.log({
+			email,
+			password,
+			provider,
+			skipVerification
+		})
+		console.log('====================================')
 
 		if (provider) {
 			where.account = { provider }
@@ -85,6 +124,15 @@ export class AuthService {
 			}
 		})
 
+		console.log('====================================')
+		console.log({
+			user,
+			skipVerification
+		})
+		console.log('====================================')
+		if (skipVerification) {
+			delete userValidator.user_not_verified
+		}
 		const error = Object.entries(userValidator).find(([, validator]) => validator(user))
 		if (error) {
 			const [key] = error

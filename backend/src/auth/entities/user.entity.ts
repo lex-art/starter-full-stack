@@ -1,7 +1,17 @@
-import { Column, Entity, Index, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+	Column,
+	Entity,
+	Index,
+	JoinColumn,
+	OneToMany,
+	OneToOne,
+	PrimaryGeneratedColumn,
+	Relation
+} from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { AccountEntity } from './accounts.entity'
 import { ProfileEntity } from './profile.entity'
+
 
 // in DB, the table name is 'users'
 @Entity('users')
@@ -41,18 +51,17 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	timeZone?: string
 
 	// add plural name for the relation if yo wan to use multiple accounts
-	@OneToMany(() => AccountEntity, (account) => account.user, {
-		cascade: ['insert', 'update'],
+	@OneToMany(()=> AccountEntity, (account: AccountEntity) => account.user, {
 		onDelete: 'CASCADE'
 	})
-	account!: AccountEntity[]
+	account!: Relation<AccountEntity[]>
 
-	@OneToOne(() => ProfileEntity, (profile) => profile.user, {
-		cascade: ['insert', 'update'],
-		onDelete: 'CASCADE'
+	@OneToOne(()=> ProfileEntity, (profile: ProfileEntity) => profile.user, {
+		onDelete: 'CASCADE',
+		lazy: true
 	})
 	@JoinColumn({
 		name: 'profile_id'
 	})
-	profile!: ProfileEntity
+	profile!: Relation<ProfileEntity>
 }

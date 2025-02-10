@@ -10,6 +10,7 @@ export interface IConfig {
 	jwt: JwtModuleOptions & {
 		secretRefresh: string
 		expiresRefreshIn: string
+		expiresVerifyIn: string
 	}
 	mail: MailerOptions
 	crypto: {
@@ -49,7 +50,8 @@ const configuration: IConfig = {
 			expiresIn: envs.JWT_EXPIRATION_IN
 		},
 		secretRefresh: envs.JWT_REFRESH_SECRET,
-		expiresRefreshIn: envs.JWT_REFRESH_EXPIRATION_IN
+		expiresRefreshIn: envs.JWT_REFRESH_EXPIRATION_IN,
+		expiresVerifyIn: envs.JWT_VERIFY_EXPIRATION_IN
 	},
 	mail: {
 		transport: {
@@ -59,6 +61,9 @@ const configuration: IConfig = {
 			auth: {
 				user: envs.EMAIL_USER,
 				pass: envs.EMAIL_PASSWORD
+			},
+			tls: {
+				minVersion: 'TLSv1.2' // Asegura que usa TLS 1.2+
 			}
 		},
 		defaults: {

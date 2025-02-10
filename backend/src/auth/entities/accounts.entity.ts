@@ -1,6 +1,6 @@
-import { BaseEntityWithTimestamps } from '@app/common/entity/Base-entity'
 import { TYPE_PROVIDER, USER_PERMISSION, USER_ROLE, USER_TYPE } from '@app/types/enums'
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Relation } from 'typeorm'
+import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { UserEntity } from './user.entity'
 
 @Entity({ name: 'accounts' })
@@ -48,10 +48,9 @@ export class AccountEntity extends BaseEntityWithTimestamps {
 	})
 	permissions!: USER_PERMISSION[]
 
-	@ManyToOne(() => UserEntity, (user) => user.account, {
-		createForeignKeyConstraints: true,
-		onDelete: 'CASCADE' // Propaga el borrado desde la base de datos
+	@ManyToOne(()=> UserEntity, (user: UserEntity) => user.account, {
+		createForeignKeyConstraints: true
 	})
 	@JoinColumn({ name: 'user_id' })
-	user!: UserEntity
+	user!: Relation<UserEntity>
 }

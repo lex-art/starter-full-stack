@@ -17,6 +17,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 	async validate(payload: CurrentUserDto) {
 		//You can add another validation for each user
+		if (payload.verified === false) {
+			return false
+		}
 		return payload
 	}
 }

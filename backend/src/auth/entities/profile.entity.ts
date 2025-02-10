@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Relation } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { UserEntity } from './user.entity'
+
 
 // in DB, the table name is 'profiles'
 @Entity('profiles')
@@ -38,7 +39,9 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	@Column({ type: 'varchar', length: 500, name: 'profile', nullable: true })
 	image: string
 
-	@OneToOne(() => UserEntity, (user) => user.profile)
+	@OneToOne(() => UserEntity, (user) => user.profile
+	//@OneToOne('UserEntity', (user: UserEntity) => user.profile, {
+	)
 	@JoinColumn({ name: 'user_id' })
-	user: UserEntity
+	user: Relation<UserEntity>
 }

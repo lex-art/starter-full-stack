@@ -1,5 +1,6 @@
 import { envs } from '@app/config/env/envs'
 import { CurrentUser, Public } from '@app/decorator'
+import { AllowUnverified } from '@app/decorator/allow-unverified.decorator'
 import { GeneralResponse } from '@app/types'
 import {
 	Body,
@@ -221,7 +222,7 @@ export class AuthController {
 	@Throttle({
 		default: {
 			limit: 1,
-			ttl: 60
+			ttl: 60 * 15 // 15 minutes
 		}
 	})
 	@Post('resend-verification')
@@ -251,7 +252,7 @@ export class AuthController {
 		description: 'The account has been verified successfully'
 	})
 	@Post('verify-otp')
-	@Public()
+	@AllowUnverified()
 	async verifyOtp(@Body() body: VerifyEmailOtpDto): Promise<GeneralResponse> {
 		try {
 			const command = new VerifyOtpCommand(body)

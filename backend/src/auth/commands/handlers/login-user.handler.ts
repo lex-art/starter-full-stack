@@ -11,7 +11,10 @@ export class LoginUserHandler {
 
 	async execute(command: LoginUserCommand) {
 		try {
-			return await this.loginUser.loginUser(command.body)
+			if (command.body.user.verified) {
+				return await this.loginUser.loginUser(command.body)
+			}
+			return await this.loginUser.generateVerificationUser(command.body)
 		} catch (error) {
 			this.logger.error(error.message)
 			throw new AuthException(error.message, 'LOGIN_FAILED')
