@@ -20,7 +20,7 @@ export class AuthResponseDto {
 		}
 		return value
 	})
-	user: Omit<UserDto, 'password'>
+	user: Omit<UserDto, 'password' | 'profile' | 'account'>
 
 	@Transform(({ value }) => {
 		if (value && typeof value === 'object' && 'profileId' in value) {

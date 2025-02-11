@@ -52,13 +52,17 @@ export class UserEntity extends BaseEntityWithTimestamps {
 
 	// add plural name for the relation if yo wan to use multiple accounts
 	@OneToMany(()=> AccountEntity, (account: AccountEntity) => account.user, {
-		onDelete: 'CASCADE'
+		cascade: true,
+		onDelete: 'CASCADE',
 	})
 	account!: Relation<AccountEntity[]>
 
-	@OneToOne(()=> ProfileEntity, (profile: ProfileEntity) => profile.user, {
+	/* 
+	* @JoinColumn must be set only on one side of the relation - the side that must have the foreign key in the database table.
+	*/
+	@OneToOne(()=> ProfileEntity, {
 		onDelete: 'CASCADE',
-		lazy: true
+		cascade: true,
 	})
 	@JoinColumn({
 		name: 'profile_id'

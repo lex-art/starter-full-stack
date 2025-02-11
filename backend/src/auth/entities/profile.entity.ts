@@ -36,12 +36,9 @@ export class ProfileEntity extends BaseEntityWithTimestamps {
 	@Column({ type: 'varchar', length: 500 })
 	address: string
 
-	@Column({ type: 'varchar', length: 500, name: 'profile', nullable: true })
+	@Column({ type: 'varchar', length: 500, nullable: true })
 	image: string
 
-	@OneToOne(() => UserEntity, (user) => user.profile
-	//@OneToOne('UserEntity', (user: UserEntity) => user.profile, {
-	)
-	@JoinColumn({ name: 'user_id' })
+	@OneToOne(() => UserEntity, (user) => user.profile)
 	user: Relation<UserEntity>
 }

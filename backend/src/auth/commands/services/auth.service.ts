@@ -5,7 +5,7 @@ import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { configuration } from '@app/config/configuration'
-import { compare } from '@app/lib/utilities'
+import { compare, CryptoUtility } from '@app/lib/utilities'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { plainToClass } from 'class-transformer'
@@ -13,7 +13,7 @@ import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly jwtService: JwtService) {}
+	constructor(private readonly jwtService: JwtService, private readonly _crypto: CryptoUtility) {}
 
 	async loginUser(data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>): Promise<AuthResponseDto> {
 		const payload: CurrentUserDto = {
@@ -32,16 +32,23 @@ export class AuthService {
 			secret: configuration.jwt.secret
 		})
 
+		const {
+			profile,
+			account,
+			...user
+		} = plainToClass(UserDto, data.user)
 		return {
 			accessToken,
 			refreshToken,
-			...data
+			user,
+			profile,
+			auth: account[0] // if you want to use multiple accounts, you should change this
 		}
 	}
 
 	async generateVerificationUser(
-		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>
-	): Promise<AuthResponseDto> {
+		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken' >
+	): Promise<Omit<AuthResponseDto, 'auth'>> {
 		const payload = {
 			userId: data.user.userId,
 			email: data.user.email,
@@ -53,12 +60,17 @@ export class AuthService {
 
 		const refreshToken = ''
 
+		const {
+			profile,
+			account,
+			...user
+		} = plainToClass(UserDto, data.user)
 		return {
 			accessToken,
 			refreshToken,
-			user: plainToClass(UserDto, data),
-			profile: plainToClass(ProfileDto, data.profile),
-			auth: plainToClass(AccountDto, data.auth)
+			user,
+			profile,
+			//auth: account[0] // if you want to use multiple accounts, you should change this
 		}
 	}
 
@@ -74,16 +86,7 @@ export class AuthService {
 		profile: ProfileDto
 		auth: AccountDto
 	}> {
-		const where: FindOptionsWhere<UserEntity> = { email }
-
-		console.log('====================================')
-		console.log({
-			email,
-			password,
-			provider,
-			skipVerification
-		})
-		console.log('====================================')
+		const where: FindOptionsWhere<UserEntity> = { email: this._crypto.encryptData(email) }
 
 		if (provider) {
 			where.account = { provider }
@@ -124,12 +127,6 @@ export class AuthService {
 			}
 		})
 
-		console.log('====================================')
-		console.log({
-			user,
-			skipVerification
-		})
-		console.log('====================================')
 		if (skipVerification) {
 			delete userValidator.user_not_verified
 		}

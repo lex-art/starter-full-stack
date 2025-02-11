@@ -97,22 +97,7 @@ export default function CreateUser({
 				type,
 				permissions
 			} = data.data
-			console.log('====================================')
-			console.log({
-				firstName,
-				lastName,
-				birthDate,
-				phone,
-				address,
-				countryCode,
-				countryCallingCode,
-				email,
-				username,
-				role,
-				type,
-				permissions
-			})
-			console.log('====================================')
+
 			reset({
 				firstName,
 				lastName,

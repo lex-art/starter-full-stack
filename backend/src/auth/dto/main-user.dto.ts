@@ -111,9 +111,6 @@ class AccountDto extends IntersectionType(
 ) {
 	@IsString()
 	accountId!: string
-
-	@ValidateNested()
-	profile!: ProfileDto
 }
 
 class UserDto extends IntersectionType(
@@ -128,6 +125,9 @@ class UserDto extends IntersectionType(
 	// if you want to use a multi-account system, you can use an array of accounts
 	@ValidateNested()
 	account!: AccountDto
+
+	@ValidateNested()
+	profile!: ProfileDto
 }
 
 class CurrentUserDto extends IntersectionType(
