@@ -1,2 +1,5 @@
-# pnpm test # call this if you want to run tests before commit, this need more configuration
-pnpm lint-staged
+# call this if you want to run tests before commit, this need more configuration
+pnpm exec lint-staged
+
+# Realiza commit de los cambios después de que lint-staged los haya arreglado
+git add .

@@ -5,7 +5,7 @@ import { UserEntity } from '@app/auth/entities'
 import { AuthException } from '@app/auth/exceptions'
 import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { configuration } from '@app/config/configuration'
-import { compare, CryptoUtility } from '@app/lib/utilities'
+import { CryptoUtility, compare } from '@app/lib/utilities'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { plainToClass } from 'class-transformer'
@@ -13,7 +13,10 @@ import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly jwtService: JwtService, private readonly _crypto: CryptoUtility) {}
+	constructor(
+		private readonly jwtService: JwtService,
+		private readonly _crypto: CryptoUtility
+	) {}
 
 	async loginUser(data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>): Promise<AuthResponseDto> {
 		const payload: CurrentUserDto = {
@@ -32,11 +35,7 @@ export class AuthService {
 			secret: configuration.jwt.secret
 		})
 
-		const {
-			profile,
-			account,
-			...user
-		} = plainToClass(UserDto, data.user)
+		const { profile, account, ...user } = plainToClass(UserDto, data.user)
 		return {
 			accessToken,
 			refreshToken,
@@ -47,7 +46,7 @@ export class AuthService {
 	}
 
 	async generateVerificationUser(
-		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken' >
+		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>
 	): Promise<Omit<AuthResponseDto, 'auth'>> {
 		const payload = {
 			userId: data.user.userId,
@@ -60,16 +59,13 @@ export class AuthService {
 
 		const refreshToken = ''
 
-		const {
-			profile,
-			account,
-			...user
-		} = plainToClass(UserDto, data.user)
+		const { profile, ...user } = plainToClass(UserDto, data.user)
+		delete user.account
 		return {
 			accessToken,
 			refreshToken,
 			user,
-			profile,
+			profile
 			//auth: account[0] // if you want to use multiple accounts, you should change this
 		}
 	}

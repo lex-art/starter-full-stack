@@ -12,7 +12,6 @@ import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { AccountEntity } from './accounts.entity'
 import { ProfileEntity } from './profile.entity'
 
-
 // in DB, the table name is 'users'
 @Entity('users')
 
@@ -51,18 +50,18 @@ export class UserEntity extends BaseEntityWithTimestamps {
 	timeZone?: string
 
 	// add plural name for the relation if yo wan to use multiple accounts
-	@OneToMany(()=> AccountEntity, (account: AccountEntity) => account.user, {
+	@OneToMany(() => AccountEntity, (account: AccountEntity) => account.user, {
 		cascade: true,
-		onDelete: 'CASCADE',
+		onDelete: 'CASCADE'
 	})
 	account!: Relation<AccountEntity[]>
 
-	/* 
-	* @JoinColumn must be set only on one side of the relation - the side that must have the foreign key in the database table.
-	*/
-	@OneToOne(()=> ProfileEntity, {
+	/*
+	 * @JoinColumn must be set only on one side of the relation - the side that must have the foreign key in the database table.
+	 */
+	@OneToOne(() => ProfileEntity, {
 		onDelete: 'CASCADE',
-		cascade: true,
+		cascade: true
 	})
 	@JoinColumn({
 		name: 'profile_id'

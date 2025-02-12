@@ -48,7 +48,7 @@ export class AccountEntity extends BaseEntityWithTimestamps {
 	})
 	permissions!: USER_PERMISSION[]
 
-	@ManyToOne(()=> UserEntity, (user: UserEntity) => user.account)
+	@ManyToOne(() => UserEntity, (user: UserEntity) => user.account)
 	@JoinColumn({ name: 'user_id' })
 	user!: Relation<UserEntity>
 }

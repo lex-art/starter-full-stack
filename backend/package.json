@@ -27,6 +27,11 @@
 		"typeorm:seed": "pnpm exec typeorm-extension seed:run -d src/database/data-source.ts",
 		"typeorm:seed:dev": "pnpm run build && pnpm exec typeorm-extension seed:run -d src/database/data-source.ts"
 	},
+	"lint-staged": {
+		"**/*.{js,ts}": [
+			"pnpm run lint"
+		]
+	},
 	"jest": {
 		"collectCoverageFrom": [
 			"**/*.(t|j)s"

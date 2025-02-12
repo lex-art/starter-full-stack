@@ -12,13 +12,13 @@
     "lint": "pnpm --stream -r lint",
     "format": "pnpm --stream -r format",
     "test": "pnpm --stream -r test",
-    "prepare": "husky"
+    "prepare": "husky && husky install"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
-    "husky": "^9.1.6",
+    "husky": "^8.0.0",
     "lint-staged": "^15.2.7"
   },
   "lint-staged": {
@@ -26,9 +26,22 @@
       "prettier --write",
       "eslint --fix"
     ],
+    "ui-v2/*.{js,ts,tsx}": [
+      "pnpm run lint"
+    ],
     "backend/*.{js,ts}": [
-      "prettier --write",
-      "eslint --fix"
+      "pnpm run lint"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "bcrypt"
+    ],
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "puppeteer",
+      "sharp"
     ]
   }
 }

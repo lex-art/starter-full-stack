@@ -17,3 +17,7 @@ $ node-gyp install --fallback-to-build
 $ cd .\node_modules\.\bcrypt\
 $ node-pre-gyp install --fallback-to-build
 ```
+
+> [!IMPORTANT]  
+>  `lint-staged` on ui-v2 not working now possibility because nextJs is so new, try to fix later
+

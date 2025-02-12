@@ -1,7 +1,6 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Relation } from 'typeorm'
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn, Relation } from 'typeorm'
 import { BaseEntityWithTimestamps } from '../../common/entity/Base-entity'
 import { UserEntity } from './user.entity'
-
 
 // in DB, the table name is 'profiles'
 @Entity('profiles')
