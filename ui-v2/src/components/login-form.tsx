@@ -1,5 +1,4 @@
 'use client'
-import { authenticate } from '@/actions/authenticate'
 import { Button } from '@/components/ui/button'
 import {
 	Card,
@@ -11,11 +10,12 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useToast } from '@/hooks/use-toast'
-import { redirect } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { signInSchema } from '@/zod/schemas/sign-in'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useTransition } from 'react'
+import { signIn } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import {
@@ -29,11 +29,10 @@ import {
 
 export function LoginForm({
 	className,
-	locale,
 	...props
 }: React.ComponentPropsWithoutRef<'div'> & { locale: string }) {
 	const { toast } = useToast()
-
+	const query = useSearchParams()
 	const [isLoading, transaction] = useTransition()
 	const form = useForm<z.infer<typeof signInSchema>>({
 		resolver: zodResolver(signInSchema),
@@ -42,21 +41,32 @@ export function LoginForm({
 			password: ''
 		}
 	})
+
+	useEffect(() => {
+		if (query.get('error')) {
+			setTimeout(() => {
+				toast({
+					title: 'Error',
+					description: query.get('error') + ' - ' + query.get('code'),
+					variant: 'destructive'
+				})
+			}, 10)
+		}
+	}, [query])
+
 	const onSubmit = async (values: z.infer<typeof signInSchema>) => {
 		transaction(async () => {
-			const result = await authenticate({
+			await signIn('credentials', {
+				redirect: true, // Evita redirecciones automáticas
+				username: values.email,
+				password: values.password,
+				callbackUrl: '/'
+			})
+			/* const result = await authenticate({
 				username: values.email,
 				password: values.password,
 				redirect: false
 			})
-			const NOT_VERIFIED = 'USER_NOT_VERIFIED'
-			if (result?.error?.code === NOT_VERIFIED) {
-				redirect({
-					href: '/auth/verify-account',
-					locale
-				})
-			}
-
 			if (result?.error) {
 				console.error(result.error)
 				toast({
@@ -64,7 +74,9 @@ export function LoginForm({
 					description: result.error.message,
 					variant: 'destructive'
 				})
-			}
+				return
+			} */
+			// redirect({ locale, href: '/dashboard' })
 		})
 	}
 	return (

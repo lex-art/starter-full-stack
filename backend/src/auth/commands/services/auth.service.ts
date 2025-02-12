@@ -6,7 +6,8 @@ import { AuthException } from '@app/auth/exceptions'
 import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { configuration } from '@app/config/configuration'
 import { CryptoUtility, compare } from '@app/lib/utilities'
-import { Injectable } from '@nestjs/common'
+import { GeneralResponse } from '@app/types'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { plainToClass } from 'class-transformer'
 import { FindOptionsWhere } from 'typeorm'
@@ -18,7 +19,9 @@ export class AuthService {
 		private readonly _crypto: CryptoUtility
 	) {}
 
-	async loginUser(data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>): Promise<AuthResponseDto> {
+	async loginUser(
+		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>
+	): Promise<GeneralResponse<AuthResponseDto>> {
 		const payload: CurrentUserDto = {
 			userId: data.user.userId,
 			email: data.user.email,
@@ -37,17 +40,21 @@ export class AuthService {
 
 		const { profile, account, ...user } = plainToClass(UserDto, data.user)
 		return {
-			accessToken,
-			refreshToken,
-			user,
-			profile,
-			auth: account[0] // if you want to use multiple accounts, you should change this
+			message: 'Login successful',
+			status: HttpStatus.OK,
+			data: {
+				accessToken,
+				refreshToken,
+				user,
+				profile,
+				auth: account[0] // if you want to use multiple accounts, you should change this
+			}
 		}
 	}
 
 	async generateVerificationUser(
 		data: Omit<AuthResponseDto, 'accessToken' | 'refreshToken'>
-	): Promise<Omit<AuthResponseDto, 'auth'>> {
+	): Promise<GeneralResponse<Omit<AuthResponseDto, 'auth'>>> {
 		const payload = {
 			userId: data.user.userId,
 			email: data.user.email,
@@ -62,11 +69,15 @@ export class AuthService {
 		const { profile, ...user } = plainToClass(UserDto, data.user)
 		delete user.account
 		return {
-			accessToken,
-			refreshToken,
-			user,
-			profile
-			//auth: account[0] // if you want to use multiple accounts, you should change this
+			message: 'User not verified',
+			status: HttpStatus.OK,
+			data: {
+				accessToken,
+				refreshToken,
+				user,
+				profile
+				//auth: account[0] // if you want to use multiple accounts, you should change this
+			}
 		}
 	}
 

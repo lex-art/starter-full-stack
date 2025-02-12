@@ -1,6 +1,8 @@
 import { FlatCompat } from '@eslint/eslintrc'
+import eslintPluginNext from '@next/eslint-plugin-next'
 import typeScriptEsLintPlugin from 'eslint-config-prettier'
 import eslintPluginPrettier from 'eslint-plugin-prettier'
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import unusedImports from 'eslint-plugin-unused-imports'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -18,13 +20,17 @@ const eslintConfig = [
 		'next/typescript',
 		'plugin:storybook/recommended',
 		'plugin:@typescript-eslint/recommended',
-		'prettier'
+		'prettier',
+		'plugin:react-hooks/recommended',
+		'plugin:@next/next/recommended'
 	),
 	typeScriptEsLintPlugin,
 	{
 		plugins: {
 			prettier: eslintPluginPrettier,
-			'unused-imports': unusedImports
+			'unused-imports': unusedImports,
+			'react-hooks': eslintPluginReactHooks,
+			'@next/next': eslintPluginNext
 		},
 		rules: {
 			...eslintPluginPrettier.configs.recommended.rules,

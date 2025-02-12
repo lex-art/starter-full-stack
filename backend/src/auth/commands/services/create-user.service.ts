@@ -3,8 +3,9 @@ import { ProfileEntity, UserEntity } from '@app/auth/entities'
 import { AccountEntity } from '@app/auth/entities/accounts.entity'
 import { AuthException } from '@app/auth/exceptions'
 import { encrypt, passwordGenerator } from '@app/lib/utilities'
+import { GeneralResponse } from '@app/types'
 import { TYPE_PROVIDER } from '@app/types/enums'
-import { Injectable, Logger } from '@nestjs/common'
+import { HttpStatus, Injectable, Logger } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { plainToClass } from 'class-transformer'
 import { Repository } from 'typeorm'
@@ -15,7 +16,7 @@ export class CreateUserService {
 
 	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
-	async createUser(body: CreateUserDto): Promise<UserDto> {
+	async createUser(body: CreateUserDto): Promise<GeneralResponse<UserDto>> {
 		try {
 			//return await this.userRepository.manager
 			//.transaction(async (transactionalEntityManager: EntityManager) => {
@@ -56,7 +57,11 @@ export class CreateUserService {
 
 			const newUser = plainToClass(UserDto, result)
 
-			return newUser
+			return {
+				message: 'User created successfully',
+				status: HttpStatus.CREATED,
+				data: newUser
+			}
 			//})
 		} catch (error) {
 			this.logger.error(error)

@@ -43,7 +43,6 @@ export default async function middleware(request: NextRequest) {
 
 	// Ejecuta el middleware de Auth.js para verificar la autenticación
 	const session = await authMiddleware()
-
 	// Si el usuario no está autenticado, redirige a la página de inicio de sesión
 	if (!session) {
 		const loginUrl = new URL('/auth/login', newRequest.url)

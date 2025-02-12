@@ -29,6 +29,7 @@ import {
 	SidebarMenuItem,
 	useSidebar
 } from '@/components/ui/sidebar'
+import { signOut } from 'next-auth/react'
 
 const itemsMenu = [
 	{
@@ -132,7 +133,15 @@ export function NavUser({
 							<div key={index}>
 								<DropdownMenuGroup>
 									{item.items.map((item, index) => (
-										<DropdownMenuItem key={index}>
+										<DropdownMenuItem
+											key={index}
+											onClick={() => {
+												if (item.url === '/logout') {
+													// logout()
+													signOut()
+												}
+											}}
+										>
 											<item.icon />
 											{item.title}
 										</DropdownMenuItem>
