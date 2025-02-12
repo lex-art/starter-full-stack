@@ -18,6 +18,7 @@
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
+    "eslint": "^9.20.1",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.7"
   },
