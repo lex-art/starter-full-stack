@@ -7,26 +7,32 @@ import { DefaultSession } from 'next-auth'
 
 declare module 'next-auth' {
   interface User {
-    accessToken?: string | null
-    refreshToken?: string | null
+    accessToken?: string;
+    refreshToken?: string;
     user: IUser | null
-    profile?: IProfile | null
-    auth?: IAuthMethod | null
+    auth: IAuthMethod | null
+    profile: IProfile | null
   }
-  interface Session {
-    accessToken?: string | null
-    refreshToken?: string | null
-    user: User | null
-    profile?: IProfile | null
-    auth?: IAuthMethod | null
+  interface Session extends DefaultSession {
+    data: User | null
+    expires?: string | null
+    user?: {
+      userId?: string | null
+      verified?: boolean | null
+      isActive?: boolean | null
+      email?: string | null
+      username?: string | null
+      timeZone?: string | null
+    }
   }
+
+  interface Profile extends IProfile {}
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    user?: IUser | null
-    profile?: IProfile | null
-    auth?: IAuthMethod| null
-    accessToken?: string| null
+    user: User | null;
+    accessToken?: string | null;
+    refreshToken?: string | null; 
   }
-} 
+}

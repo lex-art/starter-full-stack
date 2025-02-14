@@ -21,6 +21,7 @@ export class PreSignedUrlService {
 			})
 			return {
 				message: 'Pre-signed url generated successfully',
+				code: 'URL_SIGNED_GENERATED',
 				data: {
 					url
 				}

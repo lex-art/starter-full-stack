@@ -7,7 +7,7 @@ import { userValidator } from '@app/auth/lib/validators/user.validator'
 import { configuration } from '@app/config/configuration'
 import { CryptoUtility, compare } from '@app/lib/utilities'
 import { GeneralResponse } from '@app/types'
-import { HttpStatus, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { plainToClass } from 'class-transformer'
 import { FindOptionsWhere } from 'typeorm'
@@ -41,7 +41,7 @@ export class AuthService {
 		const { profile, account, ...user } = plainToClass(UserDto, data.user)
 		return {
 			message: 'Login successful',
-			status: HttpStatus.OK,
+			code: 'LOGIN_SUCCESS',
 			data: {
 				accessToken,
 				refreshToken,
@@ -70,7 +70,7 @@ export class AuthService {
 		delete user.account
 		return {
 			message: 'User not verified',
-			status: HttpStatus.OK,
+			code: 'USER_NOT_VERIFIED',
 			data: {
 				accessToken,
 				refreshToken,

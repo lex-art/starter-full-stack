@@ -23,33 +23,35 @@ export class CreateAccountHandler implements ICommandHandler<CreateAccountComman
 	async execute(command: CreateAccountCommand) {
 		try {
 			return await this.createUserService.createUser(command.body).then(async (response) => {
-				if (response.account.provider === TYPE_PROVIDER.LOCAL) {
+				if (response.data.account.provider === TYPE_PROVIDER.LOCAL) {
 					await this.eventBus.publish(
-						new UserCreatedEvent(response.email, {
-							username: response.username,
-							password: response.password,
+						new UserCreatedEvent(response.data.email, {
+							username: response.data.username,
+							password: response.data.password,
 							url: envs.URL_FRONTEND
 						})
 					)
-				} else if (response.account.provider === TYPE_PROVIDER.CREDENTIALS) {
+				} else if (response.data.account.provider === TYPE_PROVIDER.CREDENTIALS) {
 					// This flag would be in another place or method of flagMethodVerify
 					const flagMethodVerify = configuration.flags.methodVerify
 					if (flagMethodVerify === 'OTP') {
-						const generateOtp = await this.tokenVerificationService.generateOTP(response.email)
+						const generateOtp = await this.tokenVerificationService.generateOTP(
+							response.data.email
+						)
 						await this.eventBus.publish(
-							new NotificationEmailOTPEvent(response.email, {
-								username: response.username,
+							new NotificationEmailOTPEvent(response.data.email, {
+								username: response.data.username,
 								otp: generateOtp.otp
 							})
 						)
 					} else {
 						const token = await this.tokenVerificationService.generateVerificationEmail(
-							response.email
+							response.data.email
 						)
 						const url = `${envs.URL_FRONTEND}/auth/verify-account?token=${token}`
 						await this.eventBus.publish(
-							new VerifyAccountEvent(response.email, {
-								username: response.username,
+							new VerifyAccountEvent(response.data.email, {
+								username: response.data.username,
 								url
 							})
 						)

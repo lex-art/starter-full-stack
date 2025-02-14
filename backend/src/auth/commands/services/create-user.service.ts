@@ -5,7 +5,7 @@ import { AuthException } from '@app/auth/exceptions'
 import { encrypt, passwordGenerator } from '@app/lib/utilities'
 import { GeneralResponse } from '@app/types'
 import { TYPE_PROVIDER } from '@app/types/enums'
-import { HttpStatus, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { plainToClass } from 'class-transformer'
 import { Repository } from 'typeorm'
@@ -59,7 +59,7 @@ export class CreateUserService {
 
 			return {
 				message: 'User created successfully',
-				status: HttpStatus.CREATED,
+				code: 'CREATED',
 				data: newUser
 			}
 			//})

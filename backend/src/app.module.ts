@@ -3,11 +3,12 @@ import { FileCreationModule } from '@app/file-creation'
 import { MailModule } from '@app/mail'
 import { Module, ValidationPipe } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { APP_GUARD, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { ApiModule } from './api/api.module'
 import { AppController } from './app.controller'
 import { AuthModule } from './auth/auth.module'
+import { HttpExceptionFilter } from './common/exceptions/http-exception.filter'
 import { DatabaseModule } from './database/database.module'
 import { CustomThrottlerGuard } from './lib/Guard/throttler.guard'
 
@@ -59,6 +60,10 @@ import { CustomThrottlerGuard } from './lib/Guard/throttler.guard'
 		{
 			provide: APP_GUARD,
 			useClass: CustomThrottlerGuard // or => ThrottlerGuard
+		},
+		{
+			provide: APP_FILTER,
+			useClass: HttpExceptionFilter
 		}
 	]
 })

@@ -6,7 +6,7 @@ export interface IProfile {
 	birthDate: Date
 	phone: string
 	address: string
-	imgProfile?: string
+	image?: string
 	countryCode?: string
 	countryCallingCode?: string
 }

@@ -1,7 +1,7 @@
 export interface GeneralResponse<T = Record<string, unknown>> {
 	message: string
-	status: number
+	code: string
 	error?: string | Record<string, unknown>
-	data: T
+	data?: T
 	[key: string]: T | string | number | boolean | Record<string, unknown>
 }

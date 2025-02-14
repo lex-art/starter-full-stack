@@ -4,6 +4,7 @@ export class AuthException extends Error {
 
 	constructor(message: string, code: string) {
 		super(message)
+		this.message = message
 		this.code = code
 	}
 }

@@ -28,6 +28,7 @@ export class PreUploadUrlService {
 			})
 			return {
 				message: 'Pre-upload url generated successfully',
+				code: 'URL_UPLOAD_GENERATED',
 				data: {
 					url
 				}

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common'
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy } from 'passport-local'
 import { AuthService } from '../commands/services/auth.service'
@@ -31,7 +31,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 			if (error instanceof AuthException) {
 				throw new UnauthorizedException({
 					message: error.message,
-					code: error.code
+					code: error.code,
+					status: HttpStatus.UNAUTHORIZED
 				})
 			}
 			throw new UnauthorizedException(error.message)

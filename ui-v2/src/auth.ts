@@ -1,12 +1,18 @@
 import axios, { AxiosResponse } from 'axios'
+import { jwtDecode } from 'jwt-decode'
 import NextAuth, { CredentialsSignin } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 import { ZodError } from 'zod'
+import { refreshAccessToken } from './actions/auth/refreshToken.action'
 import { API_URLS } from './lib/emun'
 import { AuthSession } from './types/Auth/auth-session'
 import { signInSchema } from './zod/schemas/sign-in'
+
+interface DecodedToken {
+	exp: number
+}
 
 class AuthenticateError extends CredentialsSignin {
 	constructor(message: string, code?: string) {
@@ -103,5 +109,77 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		signOut: '/auth/login',
 		error: '/auth/login',
 		verifyRequest: '/auth/verify-request'
+	},
+	callbacks: {
+		jwt: async ({ token, user, account }) => {
+			if (user && account?.provider === 'credentials') {
+				// if into here, user is first time logged
+				const decodedToken: DecodedToken = jwtDecode(
+					user.accessToken ?? ''
+				)
+				return {
+					...token,
+					name: user.user?.username,
+					email: user.user?.email,
+					picture: user.profile?.image,
+					...user,
+					accessToken: user.accessToken,
+					refreshToken: user.refreshToken,
+					exp: decodedToken.exp
+				}
+			}
+			// Validating the token if it has expired
+			const now = Math.floor(Date.now() / 1000)
+			const decodedToken: DecodedToken = jwtDecode(token.accessToken ?? '')
+
+			if (decodedToken.exp < now) {
+				// token has expired
+				const { accessToken, error } = await refreshAccessToken(token)
+				if (error) {
+					console.error('Error: =>', error)
+					return { ...token, accessToken: null, refreshToken: null }
+				}
+				return {
+					...token,
+					accessToken
+				}
+			}
+			return token
+		},
+		session: async ({ session, token }) => {
+			// this executes in each request
+			/**
+			 * If the token is not present, the user is not authenticated
+			 */
+			if (!token.accessToken && !token.refreshToken) {
+				await signOut()
+				return {
+					...session,
+					user: null
+				}
+			}
+
+			return {
+				...session,
+				user: token?.user,
+				data: {
+					id: token?.user?.id,
+					name: token?.user?.name,
+					email: token?.user?.email,
+					accessToken: token?.accessToken,
+					refreshToken: token?.refreshToken,
+					...token.user
+				}
+			}
+		},
+		async signIn({ account, profile }) {
+			if (account?.provider === 'google') {
+				return !profile?.email?.endsWith('@example.com')
+			}
+			return true // Do different verification for other providers that don't have `email_verified`
+		}
+	},
+	session: {
+		strategy: 'jwt'
 	}
 })

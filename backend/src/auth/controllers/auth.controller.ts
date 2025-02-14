@@ -1,3 +1,4 @@
+import { CustomHttpException } from '@app/common/exceptions/custom-http.exception'
 import { envs } from '@app/config/env/envs'
 import { CurrentUser, Public } from '@app/decorator'
 import { AllowUnverified } from '@app/decorator/allow-unverified.decorator'
@@ -7,6 +8,7 @@ import {
 	Controller,
 	Delete,
 	Get,
+	HttpCode,
 	HttpException,
 	HttpStatus,
 	Logger,
@@ -50,15 +52,18 @@ export class AuthController {
 	handleGeneralException(error: any): HttpException {
 		this.logger.error(error)
 		if (error instanceof AuthException) {
-			return new HttpException(
-				{
-					message: error.message,
-					code: error.code
-				},
-				HttpStatus.BAD_REQUEST
-			)
+			throw new CustomHttpException({
+				message: error.message,
+				code: error.code,
+				status: HttpStatus.UNAUTHORIZED
+			})
 		}
-		return new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
+
+		throw new CustomHttpException({
+			message: error.message,
+			code: 'UNKNOWN_ERROR',
+			status: HttpStatus.INTERNAL_SERVER_ERROR
+		})
 	}
 
 	@Throttle({
@@ -74,6 +79,7 @@ export class AuthController {
 		}
 	})
 	@Post('login')
+	@HttpCode(HttpStatus.OK)
 	@Public()
 	@UseGuards(LocalAuthGuard)
 	async login(
@@ -99,6 +105,7 @@ export class AuthController {
 		description: 'This is the method to register a new user without an admin'
 	})
 	@Post('register')
+	@HttpCode(HttpStatus.CREATED)
 	@Public()
 	//@UseGuards(AuthGuard('jwt')) // this is an example of how to use jwt guard
 	async register(@Body() body: CreateUserDto): Promise<{
@@ -124,6 +131,7 @@ export class AuthController {
 
 	@SkipThrottle()
 	@Post('refresh-token')
+	@HttpCode(HttpStatus.CREATED)
 	@Public()
 	@UseGuards(JwtRefreshAuthGuard)
 	async refreshToken(@CurrentUser() user: CurrentUserDto): Promise<{
@@ -151,6 +159,7 @@ export class AuthController {
 		}
 	})
 	@Post('forgot-password')
+	@HttpCode(HttpStatus.OK)
 	@Public()
 	async forgotPassword(@Body() body: EmailDto): Promise<{
 		message: string
@@ -165,6 +174,7 @@ export class AuthController {
 	}
 
 	@Post('reset-password')
+	@HttpCode(HttpStatus.OK)
 	@Public()
 	async resetPassword(@Body() body: ResetPasswordDto): Promise<{
 		message: string
@@ -259,10 +269,12 @@ export class AuthController {
 			const verified = await this.commandBus.execute(command)
 			if (verified) {
 				return {
+					code: 'VERIFIED',
 					message: 'OTP verified successfully'
 				}
 			}
 			return {
+				code: 'NOT_VERIFIED',
 				message: 'OTP verification failed'
 			}
 		} catch (error) {
