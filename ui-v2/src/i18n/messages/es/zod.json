@@ -1,140 +1,113 @@
 {
-    "errors": {
-        "invalid_type": "Se esperaba {expected}, se recibió {received}",
-        "invalid_type_received_undefined": "Requerido",
-        "invalid_literal": "Valor literal inválido, se esperaba {expected}",
-        "unrecognized_keys": "Clave(s) no reconocida(s) en el objeto: {keys}",
-        "invalid_union": "Entrada inválida",
-        "invalid_union_discriminator": "Valor de discriminador inválido. Se esperaba {options}",
-        "invalid_enum_value": "Valor de enumeración inválido. Se esperaba {options}, se recibió {received}",
-        "invalid_arguments": "Argumentos de función inválidos",
-        "invalid_return_type": "Tipo de retorno de función inválido",
-        "invalid_date": "Fecha inválida",
-        "custom": "Entrada inválida",
-        "invalid_intersection_types": "No se pudieron fusionar los resultados de la intersección",
-        "not_multiple_of": "El número debe ser múltiplo de {multipleOf}",
-        "not_finite": "El número debe ser finito",
-        "invalid_string": {
-            "email": "{validation} inválido",
-            "emoji": "{validation} inválido",
-            "url": "{validation} inválido",
-            "uuid": "{validation} inválido",
-            "ulid": "{validation} inválido",
-            "ip": "{validation} inválido",
-            "cuid": "{validation} inválido",
-            "cuid2": "{validation} inválido",
-            "regex": "Inválido",
-            "datetime": "{validation} inválido",
-            "startsWith": "Entrada inválida: debe comenzar con \"{startsWith}\"",
-            "endsWith": "Entrada inválida: debe terminar con \"{endsWith}\"",
-            "nanoid": "{validation} inválido",
-            "date": "{validation} inválido",
-            "time" : "{validation} inválido",
-            "duration" : "{validation} inválido",
-            "base64" : "{validation} inválido"
-        },
-        "too_small": {
-            "array": {
-                "exact": "{path, select, missingTranslation {Array} other {{path}}} debe contener exactamente {minimum} elemento(s)",
-                "inclusive": "{path, select, missingTranslation {Array} other {{path}}} debe contener al menos {minimum} elemento(s)",
-                "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} debe contener más de {minimum} elemento(s)"
-            },
-            "string": {
-                "exact": "{path, select, missingTranslation {String} other {{path}}} debe contener exactamente {minimum} carácter(es)",
-                "inclusive": "{path, select, missingTranslation {String} other {{path}}} debe contener al menos {minimum} carácter(es)",
-                "not_inclusive": "{path, select, missingTranslation {String} other {{path}}} debe contener más de {minimum} carácter(es)"
-            },
-            "number": {
-                "exact": "{path, select, missingTranslation {Number} other {{path}}} debe ser exactamente {minimum}",
-                "inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser mayor o igual a {minimum}",
-                "not_inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser mayor que {minimum}"
-            },
-            "bigint": {
-                "exact": "{path, select, missingTranslation {Number} other {{path}}} debe ser exactamente {minimum}",
-                "inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser mayor o igual a {minimum}",
-                "not_inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser mayor que {minimum}"
-            },
-            "set": {
-                "exact": "Entrada inválida",
-                "inclusive": "Entrada inválida",
-                "not_inclusive": "Entrada inválida"
-            },
-            "date": {
-                "exact": "La fecha debe ser exactamente {minimum, date, short}",
-                "inclusive": "La fecha debe ser mayor o igual a {minimum, date, short}",
-                "not_inclusive": "La fecha debe ser mayor que {minimum, date, short}"
-            }
-        },
-        "too_big": {
-            "array": {
-                "exact": "{path, select, missingTranslation {Array} other {{path}}} debe contener exactamente {maximum} elemento(s)",
-                "inclusive": "{path, select, missingTranslation {Array} other {{path}}} debe contener como máximo {maximum} elemento(s)",
-                "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} debe contener menos de {maximum} elemento(s)"
-            },
-            "string": {
-                "exact": "{path, select, missingTranslation {String} other {{path}}} debe contener exactamente {maximum} carácter(es)",
-                "inclusive": "{path, select, missingTranslation {String} other {{path}}} debe contener como máximo {maximum} carácter(es)",
-                "not_inclusive": "{path, select, missingTranslation {String} other {{path}}} debe contener menos de {maximum} carácter(es)"
-            },
-            "number": {
-                "exact": "{path, select, missingTranslation {Number} other {{path}}} debe ser exactamente {maximum}",
-                "inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser menor o igual a {maximum}",
-                "not_inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser menor que {maximum}"
-            },
-            "bigint": {
-                "exact": "{path, select, missingTranslation {Number} other {{path}}} debe ser exactamente {maximum}",
-                "inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser menor o igual a {maximum}",
-                "not_inclusive": "{path, select, missingTranslation {Number} other {{path}}} debe ser menor que {maximum}"
-            },
-            "set": {
-                "exact": "Entrada inválida",
-                "inclusive": "Entrada inválida",
-                "not_inclusive": "Entrada inválida"
-            },
-            "date": {
-                "exact": "La fecha debe ser exactamente {maximum, date, short}",
-                "inclusive": "La fecha debe ser menor o igual a {maximum, date, short}",
-                "not_inclusive": "La fecha debe ser menor que {maximum, date, short}"
-            }
-        }
+  "errors": {
+    "invalid_type": "Se esperaba {{expected}}, se recibió {{received}}",
+    "invalid_type_received_undefined": "Requerido",
+    "invalid_type_received_null": "Requerido",
+    "invalid_literal": "Valor literal inválido, se esperaba {{expected}}",
+    "unrecognized_keys": "Llave(s) no reconocida(s) en el objeto: {{- keys}}",
+    "invalid_union": "Entrada inválida",
+    "invalid_union_discriminator": "Valor discriminador inválido. Se esperaba {{- options}}",
+    "invalid_enum_value": "Valor inválido. Se esperaba {{- options}}, se recibió '{{received}}'",
+    "invalid_arguments": "Argumentos de función inválidos",
+    "invalid_return_type": "Tipo de retorno de función inválido",
+    "invalid_date": "Fecha inválida",
+    "custom": "Entrada inválida",
+    "invalid_intersection_types": "Valores de intersección no pudieron ser mezclados",
+    "not_multiple_of": "Número debe ser múltiplo de {{multipleOf}}",
+    "not_finite": "Número no puede ser infinito",
+    "invalid_string": {
+      "email": "{{validation}} inválido",
+      "url": "{{validation}} inválido",
+      "uuid": "{{validation}} inválido",
+      "cuid": "{{validation}} inválido",
+      "regex": "Inválido",
+      "datetime": "{{validation}} inválida",
+      "startsWith": "Entrada inválida: debe comenzar con \"{{startsWith}}\"",
+      "endsWith": "Entrada inválida: debe finalizar con \"{{endsWith}}\""
     },
-    "validations": {
-        "email": "correo electrónico",
-        "emoji": "emoji",
-        "url": "url",
-        "uuid": "uuid",
-        "ulid": "ulid",
-        "ip": "ip",
-        "cuid": "cuid",
-        "cuid2": "cuid2",
-        "regex": "regex",
-        "datetime": "fecha y hora",
-        "nanoid": "nanoid",
-        "date": "fecha",
-        "time" : "hora",
-        "duration" : "duración",
-        "base64" : "base64"
+    "too_small": {
+      "array": {
+        "exact": "La lista debe contener exactamente {{minimum}} elemento(s)",
+        "inclusive": "La lista debe contener al menos {{minimum}} elemento(s)",
+        "not_inclusive": "La lista debe contener más de {{minimum}} elemento(s)"
+      },
+      "string": {
+        "exact": "El texto debe contener exactamente {{minimum}} carácter(es)",
+        "inclusive": "El texto debe contener al menos {{minimum}} carácter(es)",
+        "not_inclusive": "El texto debe contener más de {{minimum}} carácter(es)"
+      },
+      "number": {
+        "exact": "El número debe ser exactamente {{minimum}}",
+        "inclusive": "El número debe ser mayor o igual a {{minimum}}",
+        "not_inclusive": "El número debe ser mayor que {{minimum}}"
+      },
+      "set": {
+        "exact": "Entrada inválida",
+        "inclusive": "Entrada inválida",
+        "not_inclusive": "Entrada inválida"
+      },
+      "date": {
+        "exact": "La fecha debe ser exactamente {{- minimum, datetime}}",
+        "inclusive": "La fecha debe ser mayor o igual al {{- minimum, datetime}}",
+        "not_inclusive": "La fecha debe ser mayor que el {{- minimum, datetime}}"
+      }
     },
-    "types": {
-        "function": "función",
-        "number": "número",
-        "string": "cadena",
-        "nan": "NaN",
-        "integer": "entero",
-        "float": "flotante",
-        "boolean": "booleano",
-        "date": "fecha",
-        "bigint": "bigint",
-        "undefined": "indefinido",
-        "symbol": "símbolo",
-        "null": "nulo",
-        "array": "arreglo",
-        "object": "objeto",
-        "unknown": "desconocido",
-        "promise": "promesa",
-        "void": "void",
-        "never": "nunca",
-        "map": "mapa",
-        "set": "conjunto"
+    "too_big": {
+      "array": {
+        "exact": "La lista debe contener exactamente {{maximum}} elemento(s)",
+        "inclusive": "La lista debe contener como máximo {{maximum}} elemento(s)",
+        "not_inclusive": "La lista debe contener menos que {{maximum}} elemento(s)"
+      },
+      "string": {
+        "exact": "El texto debe contener exactamente {{maximum}} carácter(es)",
+        "inclusive": "El texto debe contener como máximo {{maximum}} carácter(es)",
+        "not_inclusive": "El texto debe contener menos de {{maximum}} carácter(es)"
+      },
+      "number": {
+        "exact": "El número debe ser exactamente {{maximum}}",
+        "inclusive": "El número debe ser menor o igual a {{maximum}}",
+        "not_inclusive": "El número debe ser menor que {{maximum}}"
+      },
+      "set": {
+        "exact": "Entrada inválida",
+        "inclusive": "Entrada inválida",
+        "not_inclusive": "Entrada inválida"
+      },
+      "date": {
+        "exact": "La fecha debe ser exactamente {{- maximum, datetime}}",
+        "inclusive": "La fecha debe ser menor o igual al {{- maximum, datetime}}",
+        "not_inclusive": "La fecha debe ser menor que el {{- maximum, datetime}}"
+      }
     }
+  },
+  "validations": {
+    "email": "correo",
+    "url": "enlace",
+    "uuid": "uuid",
+    "cuid": "cuid",
+    "regex": "expresión regular",
+    "datetime": "fecha"
+  },
+  "types": {
+    "function": "función",
+    "number": "número",
+    "string": "texto",
+    "nan": "valor no númerico",
+    "integer": "entero",
+    "float": "decimal",
+    "boolean": "booleano",
+    "date": "fecha",
+    "bigint": "entero grande",
+    "undefined": "indefinido",
+    "symbol": "símbolo",
+    "null": "nulo",
+    "array": "lista",
+    "object": "objeto",
+    "unknown": "desconocido",
+    "promise": "promesa",
+    "void": "void",
+    "never": "nunca",
+    "map": "mapa",
+    "set": "conjunto"
+  }
 }
