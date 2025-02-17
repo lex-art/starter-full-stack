@@ -56,11 +56,13 @@ export class CreateUserService {
 			const result = await this.userRepository.manager.save(user)
 
 			const newUser = plainToClass(UserDto, result)
-
 			return {
 				message: 'User created successfully',
 				code: 'CREATED',
-				data: newUser
+				data: {
+					...newUser,
+					account: newUser.account[0]
+				}
 			}
 			//})
 		} catch (error) {

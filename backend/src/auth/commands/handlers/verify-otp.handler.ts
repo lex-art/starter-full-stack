@@ -25,6 +25,7 @@ export class VerifyOtpHandler implements ICommandHandler<VerifyOtpCommand> {
 		await user.save()
 		return {
 			message: 'OTP verification failed',
+			code: 'OTP_VERIFIED_FAILED',
 			verified: false
 		}
 	}

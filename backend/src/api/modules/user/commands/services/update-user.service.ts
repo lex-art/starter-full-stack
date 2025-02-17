@@ -32,6 +32,7 @@ export class UpdateUserService {
 		await user.save()
 		return {
 			message: 'User updated successfully',
+			code: 'USER_UPDATED',
 			data: {
 				user: user.email
 			}

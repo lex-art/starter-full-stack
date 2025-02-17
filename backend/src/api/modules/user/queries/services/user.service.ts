@@ -74,6 +74,7 @@ export class UserQueryService {
 		await user.save()
 		return {
 			message: 'User updated',
+			code: 'USER_UPDATED',
 			data: {
 				user: user.email
 			}

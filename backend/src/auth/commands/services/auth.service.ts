@@ -1,4 +1,4 @@
-import { AuthResponseDto } from '@app/auth/dto/auth-response.dto'
+import { AuthResponseDto, UserResponseDto } from '@app/auth/dto/auth-response.dto'
 import { LoginFormDto } from '@app/auth/dto/login.dto'
 import { AccountDto, CurrentUserDto, ProfileDto, UserDto } from '@app/auth/dto/main-user.dto'
 import { UserEntity } from '@app/auth/entities'
@@ -9,7 +9,7 @@ import { CryptoUtility, compare } from '@app/lib/utilities'
 import { GeneralResponse } from '@app/types'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { plainToClass } from 'class-transformer'
+import { instanceToPlain, plainToClass } from 'class-transformer'
 import { FindOptionsWhere } from 'typeorm'
 
 @Injectable()
@@ -65,17 +65,21 @@ export class AuthService {
 		})
 
 		const refreshToken = ''
+		const instanceUser = instanceToPlain(data)
 
-		const { profile, ...user } = plainToClass(UserDto, data.user)
-		delete user.account
+		const userResponse = instanceToPlain(data.user)
+		instanceUser.user = plainToClass(UserResponseDto, userResponse)
+
+		const authData = plainToClass(AuthResponseDto, instanceUser)
+
 		return {
 			message: 'User not verified',
 			code: 'USER_NOT_VERIFIED',
 			data: {
 				accessToken,
 				refreshToken,
-				user,
-				profile
+				user: authData.user,
+				profile: authData.profile
 				//auth: account[0] // if you want to use multiple accounts, you should change this
 			}
 		}

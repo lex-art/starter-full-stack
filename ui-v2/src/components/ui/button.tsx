@@ -362,7 +362,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					buttonVariants({ variant, size, color, disabled, className })
 				)}
 				ref={ref}
-				disabled={disabled ?? false}
+				disabled={isLoading ?? disabled ?? false}
 				{...props}
 			>
 				{children}

@@ -5,6 +5,8 @@ import { AccountDto, ProfileDto, UserDto } from './main-user.dto'
 
 class AuthDto extends PickType(AccountDto, ['accountId', 'role', 'type', 'permissions']) {}
 
+export class UserResponseDto extends PickType(UserDto, ['email', 'username', 'userId', 'verified']) {}
+
 export class AuthResponseDto {
 	@IsString()
 	@IsNotEmpty()
@@ -16,11 +18,11 @@ export class AuthResponseDto {
 
 	@Transform(({ value }) => {
 		if (value && typeof value === 'object' && 'userId' in value) {
-			return { ...value, id: value.userId, userId: undefined }
+			return { ...value, id: value.userId, userId: undefined, profile: undefined, account: undefined }
 		}
 		return value
 	})
-	user: Omit<UserDto, 'password' | 'profile' | 'account'>
+	user: UserResponseDto
 
 	@Transform(({ value }) => {
 		if (value && typeof value === 'object' && 'profileId' in value) {

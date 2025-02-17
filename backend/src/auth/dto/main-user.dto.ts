@@ -20,7 +20,9 @@ class CreateUserDto {
 	@IsEmail()
 	email!: string
 
-	@Exclude() // when use plainToClass, this field will be excluded
+	@Exclude({
+		toPlainOnly: true
+	}) // when use plainToClass, this field will be excluded
 	@IsString()
 	@MaxLength(72) // bcrypt max length is 72, if you change this, you need to change the bcrypt hash because it will fail
 	password!: string

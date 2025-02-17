@@ -41,7 +41,8 @@ export class ResendOtpHandler implements ICommandHandler<ResendOtpCommand> {
 			template: 'user/verify-otp.template.hbs'
 		})
 		return {
-			message: 'OTP sent successfully'
+			message: 'OTP sent successfully',
+			code: 'OTP_SENT'
 		}
 	}
 }

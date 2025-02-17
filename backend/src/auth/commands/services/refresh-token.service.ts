@@ -40,6 +40,7 @@ export class RefreshTokenService {
 
 			return {
 				message: 'Token refreshed successfully',
+				code: 'REFRESH_TOKEN_SUCCESS',
 				accessToken: token
 			}
 		} catch (error) {

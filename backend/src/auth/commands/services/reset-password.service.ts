@@ -57,6 +57,7 @@ export class ResetPasswordService {
 
 		return {
 			message: 'Password reset successfully',
+			code: 'PASSWORD_RESET_SUCCESS',
 			email: user.email
 		}
 	}
