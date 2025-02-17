@@ -17,7 +17,9 @@ export default async function MainLayout({
 	const header = await headers()
 	const currentPath = header.get('x-url') || ''
 	const isExcludeLayout = RegExp(
-		`^(/(${locales.join('|')}))?(${excludePaths.map((p) => p.replace(/\*/g, '.*')).join('|')})$`,
+		`^(/(${locales.join('|')}))?(${excludePaths
+			.map((p) => p.replace(/\*/g, '.*'))
+			.join('|')})$`,
 		'i'
 	).test(currentPath)
 

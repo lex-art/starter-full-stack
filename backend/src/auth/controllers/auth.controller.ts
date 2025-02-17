@@ -285,7 +285,7 @@ export class AuthController {
 	@Throttle({
 		default: {
 			limit: 1,
-			ttl: 60
+			ttl: 60 * 15 // 15 minutes
 		}
 	})
 	@Post('resend-otp')

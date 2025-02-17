@@ -101,5 +101,15 @@
 	"spanish": "Spanish",
 	"english": "English",
 	"badge": "Badge",
-	"toast": "Toast"
+	"toast": "Toast",
+	"welcome": "Welcome",
+	"code": "Code",
+	"verifyAccount": "Enter the code sent to your email",
+	"placeholderOtp": "Enter the code",
+	"resend": "Resend",
+	"codeIsRequired": "Code is required",
+	"didNotReceiveCode": "Didn't receive the code?",
+	"resendCode": "Resend code",
+	"sessionExpired": "Session Expired",
+	"otpSent": "Code sent"
 }

@@ -28,7 +28,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> => {
 	if (typeof value !== 'object' || value === null) return false
 
 	for (const key in value) {
-		if (!Object.prototype.hasOwnProperty.call(value, key)) return false
+		if (!Object.hasOwn(value, key)) return false
 	}
 
 	return true
@@ -166,14 +166,11 @@ export const makeZodI18nMap: MakeZodI18nMap =
 					issue.type === 'date'
 						? new Date(issue.minimum as number)
 						: (issue.minimum as number)
+				const isInclusive = issue.inclusive ? 'inclusive' : 'not_inclusive'
 				message = t(
 					`errors.too_small.${issue.type}.${
-						issue.exact
-							? 'exact'
-							: issue.inclusive
-								? 'inclusive'
-								: 'not_inclusive'
-					}`,
+						issue.exact ? 'exact' : isInclusive
+					}` as any,
 					{
 						minimum,
 						count: typeof minimum === 'number' ? minimum : undefined,
@@ -187,14 +184,11 @@ export const makeZodI18nMap: MakeZodI18nMap =
 					issue.type === 'date'
 						? new Date(issue.maximum as number)
 						: (issue.maximum as number)
+				const isInclusive = issue.inclusive ? 'inclusive' : 'not_inclusive'
 				message = t(
 					`errors.too_big.${issue.type}.${
-						issue.exact
-							? 'exact'
-							: issue.inclusive
-								? 'inclusive'
-								: 'not_inclusive'
-					}`,
+						issue.exact ? 'exact' : isInclusive
+					}` as any,
 					{
 						maximum,
 						count: typeof maximum === 'number' ? maximum : undefined,

@@ -19,7 +19,7 @@ export async function refreshAccessToken(
 		}
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
-			console.error('Error:', error.response?.data)
+			console.error('Error update refresh token:', error.response?.data)
 		}
 		return {
 			accessToken: '',
