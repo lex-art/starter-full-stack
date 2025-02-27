@@ -15,7 +15,14 @@ interface IApi<T = any> {
 export interface IResponse<T = any> {
 	message: string
 	code: string
-	error?: string | Record<string, unknown>
+	error?:
+		| {
+				message: string
+				code: string
+		  }
+		| Record<string, unknown>
+		| string
+
 	data?: T
 	[key: string]:
 		| T
@@ -62,7 +69,14 @@ class ApiService {
 			(response) => response,
 			async (error) => {
 				const originalRequest = error.config
-				if (error.response?.status === 401 && !originalRequest._retry) {
+				const currentURL = originalRequest.url
+				const excludeRefresh = [API_URLS.RESEND_OTP, API_URLS.VERIFY_USER]
+				const UNAUTHORIZED_CODE = 401
+				if (
+					error.response?.status === UNAUTHORIZED_CODE &&
+					!originalRequest._retry &&
+					!excludeRefresh.includes(currentURL)
+				) {
 					originalRequest._retry = true
 					const session = await auth()
 					const token: JWT = {
@@ -84,7 +98,7 @@ class ApiService {
 						originalRequest.headers.Authorization = `Bearer ${refresh.accessToken}`
 						return this.apiClient(originalRequest)
 					} else {
-						console.error('Error:', refresh.error)
+						console.error('Error: =>', refresh.error)
 						//cookies().delete('next-auth.session-token')
 						const locale = await getLocale()
 						redirect({
@@ -93,7 +107,7 @@ class ApiService {
 						})
 					}
 				}
-				return Promise.reject(new Error(error.message))
+				return Promise.reject(error)
 			}
 		)
 	}
@@ -101,8 +115,9 @@ class ApiService {
 	private handleError(error: unknown): IResponse {
 		if (axios.isAxiosError(error)) {
 			return {
-				message: 'Error',
-				code: '500',
+				message: error.response?.data?.message ?? 'Error desconocido',
+				code: error.response?.data?.code ?? 'UNKNOWN_ERROR',
+				status: error.response?.status,
 				error: error.response?.data
 			}
 		}

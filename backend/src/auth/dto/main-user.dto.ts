@@ -136,4 +136,15 @@ class CurrentUserDto extends IntersectionType(
 	PickType(ProfileDto, ['profileId'])
 ) {}
 
-export { AccountDto, CreateUserDto, CurrentUserDto, ProfileDto, UpdateUserDto, UserDto }
+class CurrentUserNotVerifiedDto extends IntersectionType(
+	PickType(UserDto, ['userId', 'email', 'verified'])
+) {}
+export {
+	AccountDto,
+	CreateUserDto,
+	CurrentUserDto,
+	CurrentUserNotVerifiedDto,
+	ProfileDto,
+	UpdateUserDto,
+	UserDto
+}

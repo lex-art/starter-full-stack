@@ -112,5 +112,7 @@
 	"didNotReceiveCode": "¿No recibiste el código?",
 	"resendCode": "Reenviar código",
 	"sessionsExpired": "Sesiones expiradas",
-	"otpSent": "Código enviado"
+	"otpSent": "Código enviado",
+	"codeMustBe6Digits": "El código debe tener 6 dígitos",
+	"accountVerified": "Cuenta verificada"
 }

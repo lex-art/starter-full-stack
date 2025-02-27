@@ -111,5 +111,8 @@
 	"didNotReceiveCode": "Didn't receive the code?",
 	"resendCode": "Resend code",
 	"sessionExpired": "Session Expired",
-	"otpSent": "Code sent"
+	"otpSent": "Code sent",
+	"codeMustBe6Digits": "Code must be 6 digits",
+	"codeInvalid": "Invalid code",
+	"accountVerified": "Account verified"
 }

@@ -275,7 +275,11 @@ export class AuthController {
 			}
 			return {
 				code: 'NOT_VERIFIED',
-				message: 'OTP verification failed'
+				message: 'OTP verification failed',
+				error: {
+					message: 'OTP verification failed',
+					code: 'OTP_VERIFICATION_FAILED'
+				}
 			}
 		} catch (error) {
 			throw this.handleGeneralException(error)
@@ -289,7 +293,7 @@ export class AuthController {
 		}
 	})
 	@Post('resend-otp')
-	@Public()
+	@AllowUnverified()
 	async resendOtp(@Body() body: EmailDto): Promise<GeneralResponse> {
 		try {
 			const command = new ResendOtpCommand(body)

@@ -8,7 +8,7 @@ import { plainToClass } from 'class-transformer'
 import { validate } from 'class-validator'
 import { Request } from 'express'
 import { IS_PUBLIC_KEY } from 'src/decorator'
-import { CurrentUserDto } from '../dto'
+import { CurrentUserDto, CurrentUserNotVerifiedDto } from '../dto'
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -39,12 +39,16 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 			const payload: CurrentUserDto = await this.jwtService.verifyAsync(token, {
 				secret: configuration.jwt.secret
 			})
-			const dtoUserInstance = plainToClass(CurrentUserDto, payload)
+			const dtoUserInstance = plainToClass(
+				payload.verified ? CurrentUserDto : CurrentUserNotVerifiedDto,
+				payload
+			)
 			const errors = await validate(dtoUserInstance)
 			if (errors.length > 0) {
 				throw new UnauthorizedException({
 					message: 'Invalid token payload',
-					code: 'JWT_ERROR'
+					code: 'JWT_ERROR',
+					errors: errors
 				})
 			}
 
